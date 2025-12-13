@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Security Early Warning System - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-green-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-leaf text-2xl"></i>
+                    <span class="font-bold text-xl">AgriPredict</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="index.html" class="hover:text-green-200 transition">Home</a>
+                    <a href="dashboard.html" class="hover:text-green-200 transition">Dashboard</a>
+                    <a href="food-security-dashboard.html" class="bg-green-600 px-4 py-2 rounded-lg">Food Security</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="bg-gradient-to-r from-red-600 to-orange-600 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">Food Security Early Warning System</h1>
+                    <p class="text-red-100 text-lg">Real-time monitoring and prediction of food insecurity across Sierra Leone</p>
+                </div>
+                <div class="bg-white/20 backdrop-blur-lg rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold">127,450</div>
+                    <div class="text-sm text-red-100">People at Risk</div>
+                    <div class="text-xs text-red-200 mt-1">Last updated: 2 hours ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Banner -->
+    <div class="bg-red-50 border-l-4 border-red-500 p-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-exclamation-triangle text-red-500 text-xl"></i>
+                <div>
+                    <p class="font-semibold text-red-800">URGENT: Bo District - Food Shortage Predicted</p>
+                    <p class="text-sm text-red-600">AI models predict 5,000 bag rice deficit in 45 days. Immediate action required.</p>
+                </div>
+                <button class="ml-auto bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                    View Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- National Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-sm text-gray-600">Food Secure</div>
+                    <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold text-gray-800">68%</div>
+                <div class="text-xs text-green-600 mt-1">↑ 5% from last month</div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-yellow-500">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-sm text-gray-600">Moderately Insecure</div>
+                    <i class="fas fa-exclamation-circle text-yellow-500 text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold text-gray-800">22%</div>
+                <div class="text-xs text-yellow-600 mt-1">→ No change</div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-orange-500">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-sm text-gray-600">Severely Insecure</div>
+                    <i class="fas fa-exclamation-triangle text-orange-500 text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold text-gray-800">8%</div>
+                <div class="text-xs text-orange-600 mt-1">↑ 2% from last month</div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-red-500">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="text-sm text-gray-600">Critical Emergency</div>
+                    <i class="fas fa-skull-crossbones text-red-500 text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold text-gray-800">2%</div>
+                <div class="text-xs text-red-600 mt-1">↑ 1% from last month</div>
+            </div>
+        </div>
+
+        <!-- Interactive Map and Timeline -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            <!-- District Hunger Hotspot Map -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <i class="fas fa-map-marked-alt text-red-500"></i>
+                    District-Level Food Security Map
+                </h2>
+                <div class="mb-4 flex gap-2">
+                    <button class="px-4 py-2 bg-green-600 text-white rounded-lg text-sm">Current</button>
+                    <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300">30 Days</button>
+                    <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300">60 Days</button>
+                    <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300">90 Days</button>
+                </div>
+                
+                <!-- Map Visualization -->
+                <div class="relative bg-gray-100 rounded-lg p-8 h-96 overflow-y-auto">
+                    <div class="space-y-3">
+                        <!-- Western Area -->
+                        <div class="bg-green-100 border-l-4 border-green-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Western Area Urban</div>
+                                    <div class="text-sm text-gray-600">Food Secure • Population: 1.2M</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-green-600">85%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-100 border-l-4 border-green-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Western Area Rural</div>
+                                    <div class="text-sm text-gray-600">Food Secure • Population: 442K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-green-600">78%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bo District - Warning -->
+                        <div class="bg-orange-100 border-l-4 border-orange-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800 flex items-center gap-2">
+                                        Bo District
+                                        <span class="bg-orange-500 text-white text-xs px-2 py-1 rounded">WARNING</span>
+                                    </div>
+                                    <div class="text-sm text-gray-600">Moderately Insecure • Population: 575K</div>
+                                    <div class="text-xs text-orange-600 mt-1">
+                                        <i class="fas fa-exclamation-triangle"></i> Rice deficit predicted in 45 days
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-orange-600">52%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kailahun - Critical -->
+                        <div class="bg-red-100 border-l-4 border-red-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800 flex items-center gap-2">
+                                        Kailahun District
+                                        <span class="bg-red-500 text-white text-xs px-2 py-1 rounded animate-pulse">CRITICAL</span>
+                                    </div>
+                                    <div class="text-sm text-gray-600">Severely Insecure • Population: 525K</div>
+                                    <div class="text-xs text-red-600 mt-1">
+                                        <i class="fas fa-skull-crossbones"></i> Immediate intervention required
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-red-600">28%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kenema -->
+                        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Kenema District</div>
+                                    <div class="text-sm text-gray-600">Moderately Insecure • Population: 609K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-yellow-600">64%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kono -->
+                        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Kono District</div>
+                                    <div class="text-sm text-gray-600">Moderately Insecure • Population: 506K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-yellow-600">58%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other Districts -->
+                        <div class="bg-green-100 border-l-4 border-green-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Port Loko District</div>
+                                    <div class="text-sm text-gray-600">Food Secure • Population: 614K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-green-600">72%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-100 border-l-4 border-green-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Bombali District</div>
+                                    <div class="text-sm text-gray-600">Food Secure • Population: 606K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-green-600">70%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Kambia District</div>
+                                    <div class="text-sm text-gray-600">Moderately Insecure • Population: 345K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-yellow-600">61%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-100 border-l-4 border-green-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Tonkolili District</div>
+                                    <div class="text-sm text-gray-600">Food Secure • Population: 531K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-green-600">74%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Moyamba District</div>
+                                    <div class="text-sm text-gray-600">Moderately Insecure • Population: 318K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-yellow-600">63%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-100 border-l-4 border-green-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Pujehun District</div>
+                                    <div class="text-sm text-gray-600">Food Secure • Population: 346K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-green-600">69%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded hover:shadow-md transition cursor-pointer">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-bold text-gray-800">Bonthe District</div>
+                                    <div class="text-sm text-gray-600">Moderately Insecure • Population: 200K</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-yellow-600">59%</div>
+                                    <div class="text-xs text-gray-500">Security Score</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="mt-4 flex items-center gap-6 text-sm">
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 bg-green-500 rounded"></div>
+                        <span>Secure (70%+)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 bg-yellow-500 rounded"></div>
+                        <span>Moderate (50-69%)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 bg-orange-500 rounded"></div>
+                        <span>Severe (30-49%)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 bg-red-500 rounded"></div>
+                        <span>Critical (&lt;30%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Predictions Panel -->
+            <div class="space-y-6">
+                <!-- AI Prediction Card -->
+                <div class="bg-gradient-to-br from-purple-600 to-indigo-600 text-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fas fa-brain text-2xl"></i>
+                        <h3 class="text-xl font-bold">AI Predictions</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="bg-white/20 backdrop-blur-lg rounded-lg p-3">
+                            <div class="text-sm mb-1">Next 30 Days</div>
+                            <div class="text-2xl font-bold">94% Accurate</div>
+                            <div class="text-xs opacity-80">Based on 15,000+ data points</div>
+                        </div>
+                        <div class="bg-white/20 backdrop-blur-lg rounded-lg p-3">
+                            <div class="text-sm mb-1">Confidence Level</div>
+                            <div class="w-full bg-white/30 rounded-full h-2 mb-1">
+                                <div class="bg-white h-2 rounded-full" style="width: 94%"></div>
+                            </div>
+                            <div class="text-xs opacity-80">High Confidence Prediction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Quick Actions</h3>
+                    <div class="space-y-2">
+                        <button class="w-full bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-bell"></i>
+                            Send Emergency Alert
+                        </button>
+                        <button class="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-truck"></i>
+                            Coordinate Food Distribution
+                        </button>
+                        <button class="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-download"></i>
+                            Export Report (PDF)
+                        </button>
+                        <button class="w-full bg-purple-500 text-white py-3 rounded-lg hover:bg-purple-600 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-users"></i>
+                            Contact NGO Partners
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Data Sources -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">Data Sources</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Market Prices</span>
+                            <span class="text-green-600"><i class="fas fa-check-circle"></i> Live</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Weather Data</span>
+                            <span class="text-green-600"><i class="fas fa-check-circle"></i> Live</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Harvest Reports</span>
+                            <span class="text-green-600"><i class="fas fa-check-circle"></i> Live</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Transport Data</span>
+                            <span class="text-green-600"><i class="fas fa-check-circle"></i> Live</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Population Data</span>
+                            <span class="text-blue-600"><i class="fas fa-sync-alt"></i> Updated Daily</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Food Stockpile Tracker -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-warehouse text-blue-500"></i>
+                Community Food Stockpile Tracker
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-sm text-gray-600">Rice Reserves</div>
+                        <i class="fas fa-seedling text-amber-600 text-xl"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800">45,230 bags</div>
+                    <div class="text-xs text-gray-500 mt-1">Across 13 districts</div>
+                    <div class="mt-3 flex items-center gap-2">
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-amber-600 h-2 rounded-full" style="width: 68%"></div>
+                        </div>
+                        <span class="text-xs text-gray-600">68%</span>
+                    </div>
+                    <div class="text-xs text-amber-600 mt-2">
+                        <i class="fas fa-exclamation-triangle"></i> 45 days supply remaining
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-sm text-gray-600">Cassava Stockpile</div>
+                        <i class="fas fa-leaf text-green-600 text-xl"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800">128,450 kg</div>
+                    <div class="text-xs text-gray-500 mt-1">Across 13 districts</div>
+                    <div class="mt-3 flex items-center gap-2">
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-600 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <span class="text-xs text-gray-600">85%</span>
+                    </div>
+                    <div class="text-xs text-green-600 mt-2">
+                        <i class="fas fa-check-circle"></i> 67 days supply remaining
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-sm text-gray-600">Cooking Oil</div>
+                        <i class="fas fa-oil-can text-yellow-600 text-xl"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800">8,750 liters</div>
+                    <div class="text-xs text-gray-500 mt-1">Across 13 districts</div>
+                    <div class="mt-3 flex items-center gap-2">
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-red-600 h-2 rounded-full" style="width: 32%"></div>
+                        </div>
+                        <span class="text-xs text-gray-600">32%</span>
+                    </div>
+                    <div class="text-xs text-red-600 mt-2">
+                        <i class="fas fa-exclamation-circle"></i> 18 days supply remaining
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-sm text-gray-600">Dried Fish</div>
+                        <i class="fas fa-fish text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-800">15,230 kg</div>
+                    <div class="text-xs text-gray-500 mt-1">Across 13 districts</div>
+                    <div class="mt-3 flex items-center gap-2">
+                        <div class="flex-1 bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 72%"></div>
+                        </div>
+                        <span class="text-xs text-gray-600">72%</span>
+                    </div>
+                    <div class="text-xs text-blue-600 mt-2">
+                        <i class="fas fa-info-circle"></i> 52 days supply remaining
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Stockpile Button -->
+            <div class="mt-6">
+                <button onclick="showAddStockpileModal()" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center gap-2">
+                    <i class="fas fa-plus"></i>
+                    Report Community Stockpile
+                </button>
+            </div>
+        </div>
+
+        <!-- Emergency Food Distribution Coordinator -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-hands-helping text-red-500"></i>
+                Emergency Food Distribution Coordinator
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Districts Needing Food -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                        <i class="fas fa-hand-paper text-red-500"></i>
+                        Districts Needing Emergency Food
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="border-l-4 border-red-500 bg-red-50 p-4 rounded">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-bold text-gray-800">Kailahun District</div>
+                                <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">CRITICAL</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mb-2">12,450 people affected</div>
+                            <div class="text-sm text-gray-700 mb-3">
+                                <strong>Needs:</strong> 2,000 bags rice, 500kg dried fish, 800L oil
+                            </div>
+                            <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition text-sm">
+                                <i class="fas fa-truck"></i> Coordinate Delivery
+                            </button>
+                        </div>
+
+                        <div class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-bold text-gray-800">Bo District</div>
+                                <span class="bg-orange-500 text-white text-xs px-2 py-1 rounded">URGENT</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mb-2">8,720 people affected</div>
+                            <div class="text-sm text-gray-700 mb-3">
+                                <strong>Needs:</strong> 1,500 bags rice, 300kg dried fish
+                            </div>
+                            <button class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition text-sm">
+                                <i class="fas fa-truck"></i> Coordinate Delivery
+                            </button>
+                        </div>
+
+                        <div class="border-l-4 border-yellow-500 bg-yellow-50 p-4 rounded">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-bold text-gray-800">Bonthe District</div>
+                                <span class="bg-yellow-500 text-white text-xs px-2 py-1 rounded">MODERATE</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mb-2">4,350 people affected</div>
+                            <div class="text-sm text-gray-700 mb-3">
+                                <strong>Needs:</strong> 800 bags rice, 200kg dried fish
+                            </div>
+                            <button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition text-sm">
+                                <i class="fas fa-truck"></i> Coordinate Delivery
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Districts with Surplus -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                        <i class="fas fa-hand-holding-heart text-green-500"></i>
+                        Districts with Surplus Food
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="border-l-4 border-green-500 bg-green-50 p-4 rounded">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-bold text-gray-800">Port Loko District</div>
+                                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">AVAILABLE</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mb-2">Surplus available for distribution</div>
+                            <div class="text-sm text-gray-700 mb-3">
+                                <strong>Available:</strong> 3,200 bags rice, 850kg cassava, 400L oil
+                            </div>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition text-sm">
+                                <i class="fas fa-link"></i> Match with Need
+                            </button>
+                        </div>
+
+                        <div class="border-l-4 border-green-500 bg-green-50 p-4 rounded">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-bold text-gray-800">Bombali District</div>
+                                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">AVAILABLE</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mb-2">Surplus available for distribution</div>
+                            <div class="text-sm text-gray-700 mb-3">
+                                <strong>Available:</strong> 2,100 bags rice, 600kg dried fish
+                            </div>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition text-sm">
+                                <i class="fas fa-link"></i> Match with Need
+                            </button>
+                        </div>
+
+                        <div class="border-l-4 border-green-500 bg-green-50 p-4 rounded">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-bold text-gray-800">Tonkolili District</div>
+                                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">AVAILABLE</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mb-2">Surplus available for distribution</div>
+                            <div class="text-sm text-gray-700 mb-3">
+                                <strong>Available:</strong> 1,800 bags rice, 450kg cassava
+                            </div>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition text-sm">
+                                <i class="fas fa-link"></i> Match with Need
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Matching System -->
+            <div class="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <i class="fas fa-magic text-2xl text-purple-600"></i>
+                    <h3 class="text-lg font-bold text-gray-800">AI-Powered Distribution Matching</h3>
+                </div>
+                <p class="text-gray-700 mb-4">Our AI automatically matches surplus food with districts in need, optimizing for transport distance, urgency, and food type compatibility.</p>
+                <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition">
+                    <i class="fas fa-robot"></i> Run AI Optimization Now
+                </button>
+            </div>
+        </div>
+
+        <!-- Nutrition Crisis Monitoring -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-heartbeat text-pink-500"></i>
+                Nutrition Crisis Monitoring
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-gradient-to-br from-pink-50 to-red-50 rounded-lg p-6 border border-pink-200">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-sm text-gray-600">Child Malnutrition Rate</div>
+                        <i class="fas fa-baby text-pink-500 text-xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-800">18.2%</div>
+                    <div class="text-xs text-pink-600 mt-1">↑ 1.2% from last quarter</div>
+                    <div class="mt-3 text-xs text-gray-600">
+                        <strong>Hotspots:</strong> Kailahun, Kono, Bonthe
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg p-6 border border-yellow-200">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-sm text-gray-600">Stunting Prevalence</div>
+                        <i class="fas fa-child text-yellow-500 text-xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-800">28.5%</div>
+                    <div class="text-xs text-yellow-600 mt-1">→ Stable</div>
+                    <div class="mt-3 text-xs text-gray-600">
+                        <strong>Hotspots:</strong> Kailahun, Moyamba, Pujehun
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg p-6 border border-purple-200">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-sm text-gray-600">Wasting Cases</div>
+                        <i class="fas fa-weight text-purple-500 text-xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-800">5.8%</div>
+                    <div class="text-xs text-red-600 mt-1">↑ 0.8% from last quarter</div>
+                    <div class="mt-3 text-xs text-gray-600">
+                        <strong>Hotspots:</strong> Kailahun, Bo
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alert System -->
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded mb-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-xl"></i>
+                    <div>
+                        <div class="font-bold text-red-800">Malnutrition Alert - Kailahun District</div>
+                        <div class="text-sm text-red-600">142 new cases reported in past 7 days. Health workers and NGOs have been notified.</div>
+                    </div>
+                    <button class="ml-auto bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition text-sm whitespace-nowrap">
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Partner Coordination -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button class="bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-hospital"></i>
+                    Notify Health Workers
+                </button>
+                <button class="bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-hands-helping"></i>
+                    Alert NGO Partners (WFP, UNICEF)
+                </button>
+            </div>
+        </div>
+
+        <!-- Historical Trends Chart -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-chart-line text-green-500"></i>
+                Food Security Trends - Last 12 Months
+            </h2>
+            <canvas id="trendsChart" height="80"></canvas>
+        </div>
+    </div>
+
+    <!-- Add Stockpile Modal -->
+    <div id="addStockpileModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+                <h3 class="text-2xl font-bold text-gray-800">Report Community Stockpile</h3>
+                <button onclick="closeAddStockpileModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="p-6">
+                <form class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">District</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option>Select District</option>
+                                <option>Western Area Urban</option>
+                                <option>Western Area Rural</option>
+                                <option>Bo District</option>
+                                <option>Kenema District</option>
+                                <option>Kailahun District</option>
+                                <option>Port Loko District</option>
+                                <option>Bombali District</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Chiefdom</label>
+                            <input type="text" placeholder="Enter chiefdom name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Food Type</label>
+                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            <option>Select Food Type</option>
+                            <option>Rice</option>
+                            <option>Cassava</option>
+                            <option>Cooking Oil</option>
+                            <option>Dried Fish</option>
+                            <option>Palm Oil</option>
+                            <option>Groundnuts</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Quantity</label>
+                            <input type="number" placeholder="Enter quantity" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Unit</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option>Bags (50kg)</option>
+                                <option>Kilograms (kg)</option>
+                                <option>Liters (L)</option>
+                                <option>Tons</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Storage Location</label>
+                        <input type="text" placeholder="Enter storage facility name or address" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Contact Person</label>
+                        <input type="text" placeholder="Name of person managing stockpile" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                        <input type="tel" placeholder="+232 XX XXX XXXX" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Additional Notes</label>
+                        <textarea rows="3" placeholder="Any additional information about the stockpile" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                    </div>
+
+                    <div class="flex gap-3 pt-4">
+                        <button type="button" onclick="closeAddStockpileModal()" class="flex-1 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                            Cancel
+                        </button>
+                        <button type="submit" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
+                            Submit Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functions
+        function showAddStockpileModal() {
+            document.getElementById('addStockpileModal').classList.remove('hidden');
+        }
+
+        function closeAddStockpileModal() {
+            document.getElementById('addStockpileModal').classList.add('hidden');
+        }
+
+        // Close modal on outside click
+        document.getElementById('addStockpileModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAddStockpileModal();
+            }
+        });
+
+        // Initialize Chart
+        const ctx = document.getElementById('trendsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'Food Secure',
+                        data: [62, 63, 65, 66, 67, 68, 69, 70, 69, 68, 67, 68],
+                        borderColor: 'rgb(34, 197, 94)',
+                        backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Moderately Insecure',
+                        data: [25, 24, 23, 23, 22, 22, 21, 21, 22, 22, 23, 22],
+                        borderColor: 'rgb(234, 179, 8)',
+                        backgroundColor: 'rgba(234, 179, 8, 0.1)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Severely Insecure',
+                        data: [10, 10, 9, 8, 8, 7, 7, 6, 6, 7, 8, 8],
+                        borderColor: 'rgb(249, 115, 22)',
+                        backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Critical Emergency',
+                        data: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2],
+                        borderColor: 'rgb(239, 68, 68)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        console.log('[v0] Food Security Early Warning System initialized successfully');
+    </script>
+</body>
+</html>

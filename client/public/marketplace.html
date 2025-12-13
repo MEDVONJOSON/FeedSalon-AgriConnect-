@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Marketplace - AgriPredict</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-8">
+          <a href="index.html" class="text-2xl font-bold text-green-700 flex items-center gap-2 hover:scale-105 transition-transform">
+            <i class="fas fa-wheat text-green-600"></i> AgriPredict
+          </a>
+          <div class="hidden md:flex gap-6">
+            <a href="index.html" class="text-gray-700 hover:text-green-700 transition-colors">Home</a>
+            <a href="marketplace.html" class="text-green-700 font-bold border-b-2 border-green-700">Marketplace</a>
+            <a href="forum.html" class="text-gray-700 hover:text-green-700 transition-colors">Forum</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="dashboard.html" class="text-gray-700 hover:text-green-700 font-medium transition-colors">Dashboard</a>
+          <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors shadow-md hover:shadow-lg flex items-center gap-2" onclick="scrollToElement('postListing')">
+            <i class="fas fa-plus"></i> Post Listing
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-green-800 via-green-700 to-green-600 text-white py-20 overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+    <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-yellow-400 opacity-5 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <h1 class="text-5xl font-bold mb-6 fade-in">🏪 Farmer Marketplace</h1>
+      <p class="text-xl text-green-100 mb-8 max-w-2xl mx-auto fade-in stagger-1">Buy and sell directly with fellow farmers across Sierra Leone. No middlemen, better prices.</p>
+      
+      <!-- Search Bar -->
+      <div class="max-w-2xl mx-auto bg-white rounded-full p-2 shadow-xl flex items-center fade-in stagger-2 transform hover:scale-[1.02] transition-transform duration-300">
+        <i class="fas fa-search text-gray-400 ml-4 text-xl"></i>
+        <input type="text" id="searchInput" placeholder="Search for seeds, equipment, produce..." class="flex-1 px-4 py-3 outline-none text-gray-700 rounded-full">
+        <button class="bg-green-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-700 transition-colors shadow-md">
+          Search
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="py-12 bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Browse Categories</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <button class="category-btn group bg-green-50 p-6 rounded-xl hover:bg-green-100 transition-all duration-300 text-center border border-green-100 hover:border-green-300 hover:shadow-lg transform hover:-translate-y-1 fade-in stagger-1">
+          <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <span class="text-3xl">🌱</span>
+          </div>
+          <div class="font-bold text-gray-900 text-lg mb-1">Seeds & Plants</div>
+          <div class="text-sm text-gray-600">Quality seeds and saplings</div>
+        </button>
+
+        <button class="category-btn group bg-yellow-50 p-6 rounded-xl hover:bg-yellow-100 transition-all duration-300 text-center border border-yellow-100 hover:border-yellow-300 hover:shadow-lg transform hover:-translate-y-1 fade-in stagger-2">
+          <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <span class="text-3xl">⚙️</span>
+          </div>
+          <div class="font-bold text-gray-900 text-lg mb-1">Equipment</div>
+          <div class="text-sm text-gray-600">Farming tools and machinery</div>
+        </button>
+
+        <button class="category-btn group bg-blue-50 p-6 rounded-xl hover:bg-blue-100 transition-all duration-300 text-center border border-blue-100 hover:border-blue-300 hover:shadow-lg transform hover:-translate-y-1 fade-in stagger-3">
+          <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <span class="text-3xl">🍎</span>
+          </div>
+          <div class="font-bold text-gray-900 text-lg mb-1">Fresh Produce</div>
+          <div class="text-sm text-gray-600">Fruits and vegetables</div>
+        </button>
+
+        <button class="category-btn group bg-purple-50 p-6 rounded-xl hover:bg-purple-100 transition-all duration-300 text-center border border-purple-100 hover:border-purple-300 hover:shadow-lg transform hover:-translate-y-1 fade-in stagger-4">
+          <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
+            <span class="text-3xl">🧪</span>
+          </div>
+          <div class="font-bold text-gray-900 text-lg mb-1">Fertilizers</div>
+          <div class="text-sm text-gray-600">Organic and chemical</div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Listings -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-end mb-8">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-2">Recent Listings</h2>
+          <p class="text-gray-600">Fresh opportunities from farmers near you</p>
+        </div>
+        <div class="flex gap-2">
+          <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-green-500 outline-none">
+            <option>Sort by: Newest</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8" id="listingsContainer">
+        <!-- Listing 1 -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group animate-on-scroll">
+          <div class="relative h-48 bg-gray-200 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wheat Seeds" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <div class="absolute top-4 left-4">
+              <span class="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">For Sale</span>
+            </div>
+            <div class="absolute top-4 right-4">
+              <button class="bg-white p-2 rounded-full shadow-md hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-bold text-gray-900 group-hover:text-green-700 transition-colors">Organic Wheat Seeds</h3>
+              <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">2h ago</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-4 line-clamp-2">High quality certified organic wheat seeds. Yield: 45-50 qtl/acre. Drought resistant variety.</p>
+            
+            <div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+              <i class="fas fa-map-marker-alt text-green-600"></i> Freetown, Western Area
+            </div>
+            
+            <div class="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
+              <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-bold text-xs">RS</div>
+              <span class="text-sm font-medium text-gray-700">Ramesh Sharma</span>
+              <div class="flex text-yellow-400 text-xs">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-green-700">Le 35,000<span class="text-sm text-gray-500 font-normal">/kg</span></span>
+              <button class="bg-green-50 text-green-700 hover:bg-green-600 hover:text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 text-sm border border-green-200 hover:border-green-600">
+                Contact Seller
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Listing 2 -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group animate-on-scroll stagger-1">
+          <div class="relative h-48 bg-gray-200 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c18?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tractor" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <div class="absolute top-4 left-4">
+              <span class="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">For Rent</span>
+            </div>
+            <div class="absolute top-4 right-4">
+              <button class="bg-white p-2 rounded-full shadow-md hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-bold text-gray-900 group-hover:text-green-700 transition-colors">Harvester Combine</h3>
+              <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">5h ago</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-4 line-clamp-2">Well maintained New Holland combine harvester available for rent. Includes operator.</p>
+            
+            <div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+              <i class="fas fa-map-marker-alt text-green-600"></i> Bo District, Southern Province
+            </div>
+            
+            <div class="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
+              <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold text-xs">SP</div>
+              <span class="text-sm font-medium text-gray-700">Sunil Patel</span>
+              <div class="flex text-yellow-400 text-xs">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-green-700">Le 120k<span class="text-sm text-gray-500 font-normal">/hr</span></span>
+              <button class="bg-green-50 text-green-700 hover:bg-green-600 hover:text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 text-sm border border-green-200 hover:border-green-600">
+                Contact Owner
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Listing 3 -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden group animate-on-scroll stagger-2">
+          <div class="relative h-48 bg-gray-200 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Tomatoes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <div class="absolute top-4 left-4">
+              <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">Looking to Buy</span>
+            </div>
+            <div class="absolute top-4 right-4">
+              <button class="bg-white p-2 rounded-full shadow-md hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors">
+                <i class="far fa-heart"></i>
+              </button>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-bold text-gray-900 group-hover:text-green-700 transition-colors">Fresh Tomatoes</h3>
+              <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">1d ago</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-4 line-clamp-2">Looking for bulk supply of fresh tomatoes for wholesale market. Need 500kg weekly.</p>
+            
+            <div class="flex items-center gap-2 mb-4 text-sm text-gray-500">
+              <i class="fas fa-map-marker-alt text-green-600"></i> Makeni, Northern Province
+            </div>
+            
+            <div class="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
+              <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-700 font-bold text-xs">VC</div>
+              <span class="text-sm font-medium text-gray-700">Vendor Company</span>
+              <div class="flex text-yellow-400 text-xs">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <span class="text-xl font-bold text-green-700">Le 20k<span class="text-sm text-gray-500 font-normal">/kg</span></span>
+              <button class="bg-green-50 text-green-700 hover:bg-green-600 hover:text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 text-sm border border-green-200 hover:border-green-600">
+                Contact Buyer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-12">
+        <button class="bg-white border border-gray-300 text-gray-700 px-8 py-3 rounded-full font-semibold hover:bg-gray-50 transition-colors shadow-sm hover:shadow-md flex items-center gap-2 mx-auto">
+          Load More Listings <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Post New Listing Section -->
+  <section id="postListing" class="py-16 bg-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-5 bg-[url('https://www.transparenttextures.com/patterns/diagonal-stripes.png')]"></div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 transform transition-all hover:shadow-3xl">
+        <div class="bg-gradient-to-r from-green-700 to-green-600 text-white px-8 py-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+              <i class="fas fa-plus text-2xl"></i>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold">Post New Listing</h2>
+              <p class="text-green-100 text-sm">Reach thousands of farmers and buyers instantly</p>
+            </div>
+          </div>
+        </div>
+        
+        <form id="listingForm" class="p-8 grid md:grid-cols-2 gap-6">
+          <div class="group">
+            <label class="block text-sm font-medium text-gray-700 mb-2 group-hover:text-green-700 transition-colors">
+              Your Name <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="fas fa-user absolute left-4 top-3.5 text-gray-400 group-hover:text-green-500 transition-colors"></i>
+              <input type="text" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all bg-gray-50 focus:bg-white hover:bg-white">
+            </div>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-medium text-gray-700 mb-2 group-hover:text-green-700 transition-colors">
+              Contact Number <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="fas fa-phone absolute left-4 top-3.5 text-gray-400 group-hover:text-green-500 transition-colors"></i>
+              <input type="tel" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all bg-gray-50 focus:bg-white hover:bg-white">
+            </div>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-medium text-gray-700 mb-2 group-hover:text-green-700 transition-colors">
+              Location <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="fas fa-map-marker-alt absolute left-4 top-3.5 text-gray-400 group-hover:text-green-500 transition-colors"></i>
+              <input type="text" placeholder="City, District" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all bg-gray-50 focus:bg-white hover:bg-white">
+            </div>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-medium text-gray-700 mb-2 group-hover:text-green-700 transition-colors">
+              Listing Type <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="fas fa-tag absolute left-4 top-3.5 text-gray-400 group-hover:text-green-500 transition-colors"></i>
+              <select required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all bg-gray-50 focus:bg-white hover:bg-white appearance-none">
+                <option value="">Select Type</option>
+                <option value="sale">For Sale</option>
+                <option value="rent">For Rent</option>
+                <option value="buy">Looking to Buy</option>
+              </select>
+              <i class="fas fa-chevron-down absolute right-4 top-3.5 text-gray-400 pointer-events-none"></i>
+            </div>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-medium text-gray-700 mb-2 group-hover:text-green-700 transition-colors">
+              Item/Product Name <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="fas fa-box absolute left-4 top-3.5 text-gray-400 group-hover:text-green-500 transition-colors"></i>
+              <input type="text" placeholder="e.g., Wheat Seeds, Tractor" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all bg-gray-50 focus:bg-white hover:bg-white">
+            </div>
+          </div>
+
+          <div class="group">
+            <label class="block text-sm font-medium text-gray-700 mb-2 group-hover:text-green-700 transition-colors">
+              Quantity
+            </label>
+            <div class="relative">
+              <i class="fas fa-balance-scale absolute left-4 top-3.5 text-gray-400 group-hover:text-green-500 transition-colors"></i>
+              <input type="text" placeholder="e.g., 50 kg, 1 unit" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all bg-gray-50 focus:bg-white hover:bg-white">
+            </div>
+          </div>
+
+          <div class="md:col-span-2 group">
+            <label class="block text-sm font-medium text-gray-700 mb-2 group-hover:text-green-700 transition-colors">
+              Price
+            </label>
+            <div class="relative">
+              <i class="fas fa-money-bill-wave absolute left-4 top-3.5 text-gray-400 group-hover:text-green-500 transition-colors"></i>
+              <input type="text" placeholder="e.g., Le 35,000/kg, Le 500,000" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all bg-gray-50 focus:bg-white hover:bg-white">
+            </div>
+          </div>
+
+          <div class="md:col-span-2 group">
+            <label class="block text-sm font-medium text-gray-700 mb-2 group-hover:text-green-700 transition-colors">
+              Description <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="fas fa-align-left absolute left-4 top-3.5 text-gray-400 group-hover:text-green-500 transition-colors"></i>
+              <textarea required rows="4" placeholder="Provide details about the item..." class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all bg-gray-50 focus:bg-white hover:bg-white"></textarea>
+            </div>
+          </div>
+
+          <div class="md:col-span-2 pt-4">
+            <button type="submit" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-4 rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2 btn-ripple">
+              <i class="fas fa-paper-plane"></i> Post Listing Now
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="text-white text-lg font-bold mb-4 flex items-center gap-2">
+            <i class="fas fa-wheat text-green-500"></i> AgriPredict
+          </h3>
+          <p class="text-sm text-gray-400">Empowering Sierra Leonean farmers with AI technology and direct market access.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Marketplace</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-green-400 transition-colors">Browse All</a></li>
+            <li><a href="#" class="hover:text-green-400 transition-colors">Seeds & Plants</a></li>
+            <li><a href="#" class="hover:text-green-400 transition-colors">Equipment</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Support</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-green-400 transition-colors">Safety Tips</a></li>
+            <li><a href="#" class="hover:text-green-400 transition-colors">Selling Guide</a></li>
+            <li><a href="#" class="hover:text-green-400 transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-green-400 transition-colors">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-green-400 transition-colors">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+        <p>&copy; 2025 AgriPredict. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Enhanced form handling with toast notifications
+    document.getElementById('listingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Simulate loading state
+      const btn = this.querySelector('button[type="submit"]');
+      const originalContent = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting...';
+      btn.disabled = true;
+      
+      setTimeout(() => {
+        showToast('Listing posted successfully! It will appear shortly.', 'success');
+        this.reset();
+        btn.innerHTML = originalContent;
+        btn.disabled = false;
+        
+        // Scroll to top of listings
+        scrollToElement('listingsContainer');
+      }, 1500);
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', debounce(function(e) {
+      const term = e.target.value.toLowerCase();
+      const listings = document.querySelectorAll('#listingsContainer > div');
+      
+      listings.forEach(listing => {
+        const title = listing.querySelector('h3').textContent.toLowerCase();
+        const desc = listing.querySelector('p').textContent.toLowerCase();
+        
+        if (title.includes(term) || desc.includes(term)) {
+          listing.style.display = 'block';
+          listing.classList.add('fade-in');
+        } else {
+          listing.style.display = 'none';
+        }
+      });
+    }, 300));
+  </script>
+</body>
+</html>

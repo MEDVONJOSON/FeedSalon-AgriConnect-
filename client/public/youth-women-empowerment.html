@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youth & Women Empowerment - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-green-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-leaf text-2xl"></i>
+                    <span class="font-bold text-xl">AgriPredict</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="index.html" class="hover:text-green-200 transition">Home</a>
+                    <a href="dashboard.html" class="hover:text-green-200 transition">Dashboard</a>
+                    <a href="youth-women-empowerment.html" class="bg-green-600 px-4 py-2 rounded-lg">Empowerment</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-gradient-to-r from-pink-600 to-purple-600 text-white py-12">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold mb-3">Youth & Women Empowerment Programs</h1>
+            <p class="text-pink-100 text-lg mb-4">Dedicated support, training, and opportunities for young farmers and women in agriculture across Sierra Leone.</p>
+            <div class="flex gap-4">
+                <div class="bg-white/20 backdrop-blur-lg rounded-lg px-6 py-3">
+                    <div class="text-2xl font-bold">28,450</div>
+                    <div class="text-sm text-pink-100">Youth Farmers</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-lg rounded-lg px-6 py-3">
+                    <div class="text-2xl font-bold">35,230</div>
+                    <div class="text-sm text-pink-100">Women Farmers</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-lg rounded-lg px-6 py-3">
+                    <div class="text-2xl font-bold">12,800</div>
+                    <div class="text-sm text-pink-100">Jobs Created</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Tab Navigation -->
+        <div class="bg-white rounded-xl shadow-lg mb-8">
+            <div class="border-b border-gray-200">
+                <div class="flex overflow-x-auto">
+                    <button onclick="showTab('youth')" id="tab-youth" class="tab-btn px-6 py-4 font-semibold border-b-2 border-purple-600 text-purple-600">
+                        <i class="fas fa-user-graduate mr-2"></i>Youth Programs
+                    </button>
+                    <button onclick="showTab('women')" id="tab-women" class="tab-btn px-6 py-4 font-semibold text-gray-600 hover:text-pink-600">
+                        <i class="fas fa-venus mr-2"></i>Women's Programs
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Youth Programs Tab -->
+        <div id="content-youth" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Agri-Youth Jobs Board -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-blue-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-briefcase text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-800">Agri-Youth Jobs Board</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Farm labor, transport, packaging, marketing jobs specifically for youth aged 18-35.</p>
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                        <div class="text-sm text-gray-700 mb-2"><strong>Available jobs:</strong> 845 openings</div>
+                        <div class="text-sm text-gray-700 mb-2"><strong>Average pay:</strong> Le 35,000/day</div>
+                        <div class="text-sm text-gray-700"><strong>Popular:</strong> Harvesting, spraying, delivery</div>
+                    </div>
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-bold">
+                        <i class="fas fa-search mr-2"></i>Browse Jobs
+                    </button>
+                </div>
+
+                <!-- Training Pipeline -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-green-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-green-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-800">Training-to-Employment</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Complete courses, get certified, matched with farm jobs. Guaranteed placement for top graduates.</p>
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                        <div class="text-sm text-gray-700 mb-2"><strong>Courses:</strong> 24 certification programs</div>
+                        <div class="text-sm text-gray-700 mb-2"><strong>Duration:</strong> 2-8 weeks</div>
+                        <div class="text-sm text-gray-700"><strong>Placement rate:</strong> 87%</div>
+                    </div>
+                    <button class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-bold">
+                        <i class="fas fa-book-open mr-2"></i>Enroll Now
+                    </button>
+                </div>
+
+                <!-- Youth Agripreneurs -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-purple-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-rocket text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-800">Youth Agripreneurs</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Start your own agribusiness. Get mentorship, seed funding, and market connections.</p>
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+                        <div class="text-sm text-gray-700 mb-2"><strong>Seed funding:</strong> Le 500K - Le 5M</div>
+                        <div class="text-sm text-gray-700 mb-2"><strong>Mentorship:</strong> 6 months 1-on-1</div>
+                        <div class="text-sm text-gray-700"><strong>Success rate:</strong> 72% still operating</div>
+                    </div>
+                    <button class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition font-bold">
+                        <i class="fas fa-lightbulb mr-2"></i>Apply for Funding
+                    </button>
+                </div>
+            </div>
+
+            <!-- Current Job Listings -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Featured Youth Job Opportunities</h2>
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Farm Manager Assistant</h3>
+                                <div class="text-sm text-gray-600">Freetown Farms Cooperative • Western Area</div>
+                            </div>
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">Full Time</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-3">Help manage 50-acre vegetable farm. Learn modern farming techniques, supervise workers, manage inventory.</p>
+                        <div class="flex items-center gap-4 text-sm text-gray-600 mb-3">
+                            <div><i class="fas fa-money-bill-wave text-green-500 mr-1"></i> Le 850,000/month</div>
+                            <div><i class="fas fa-clock text-blue-500 mr-1"></i> 8am - 4pm</div>
+                            <div><i class="fas fa-calendar text-purple-500 mr-1"></i> Start: Feb 1</div>
+                        </div>
+                        <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Apply Now
+                        </button>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800">Drone Operator for Crop Spraying</h3>
+                                <div class="text-sm text-gray-600">AgriTech Services SL • Multiple Districts</div>
+                            </div>
+                            <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-semibold">Contract</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-3">Operate agricultural drones for pesticide/fertilizer spraying. Training provided. Tech-savvy youth preferred.</p>
+                        <div class="flex items-center gap-4 text-sm text-gray-600 mb-3">
+                            <div><i class="fas fa-money-bill-wave text-green-500 mr-1"></i> Le 75,000/day</div>
+                            <div><i class="fas fa-graduation-cap text-blue-500 mr-1"></i> Free training included</div>
+                            <div><i class="fas fa-tools text-purple-500 mr-1"></i> Equipment provided</div>
+                        </div>
+                        <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Stories -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold mb-6">Youth Success Stories</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white/10 backdrop-blur-lg rounded-lg p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Aminata Koroma, 24</h3>
+                                <div class="text-sm text-blue-100">Vegetable Farmer, Bo District</div>
+                            </div>
+                        </div>
+                        <p class="text-sm mb-4">"Started with Le 500K seed funding from Youth Agripreneur program. Now I employ 8 people and make Le 4M monthly selling vegetables."</p>
+                        <div class="text-xs text-blue-100">Income increased by 800% in 18 months</div>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-lg rounded-lg p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-3xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Ibrahim Sesay, 27</h3>
+                                <div class="text-sm text-blue-100">Delivery Service Owner, Freetown</div>
+                            </div>
+                        </div>
+                        <p class="text-sm mb-4">"Trained as delivery driver through AgriPredict. Now I own 5 motorbikes and transport produce for 40+ farmers daily."</p>
+                        <div class="text-xs text-blue-100">Created 12 jobs for other youth</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Women's Programs Tab -->
+        <div id="content-women" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <!-- Women Farmers Network -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-pink-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-users text-pink-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-800">Women Farmers Network</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Women-only forums, mentorship circles, bulk buying groups, and market access support.</p>
+                    <div class="bg-pink-50 border border-pink-200 rounded-lg p-4 mb-4">
+                        <div class="text-sm text-gray-700 mb-2"><strong>Members:</strong> 35,230 women farmers</div>
+                        <div class="text-sm text-gray-700 mb-2"><strong>Local groups:</strong> 245 communities</div>
+                        <div class="text-sm text-gray-700"><strong>Savings pools:</strong> Le 8.5B managed</div>
+                    </div>
+                    <button class="w-full bg-pink-600 text-white py-3 rounded-lg hover:bg-pink-700 transition font-bold">
+                        <i class="fas fa-user-plus mr-2"></i>Join Network
+                    </button>
+                </div>
+
+                <!-- Gender-Lens Financing -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-purple-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-hand-holding-usd text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-800">Women-Focused Loans</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Preferential loan terms for women farmers. Lower interest, longer repayment, no male guarantor required.</p>
+                    <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
+                        <div class="text-sm text-gray-700 mb-2"><strong>Interest:</strong> 5-10% (vs 8-15% standard)</div>
+                        <div class="text-sm text-gray-700 mb-2"><strong>Max loan:</strong> Le 10M</div>
+                        <div class="text-sm text-gray-700"><strong>Repayment:</strong> Up to 18 months</div>
+                    </div>
+                    <button class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition font-bold">
+                        <i class="fas fa-money-check-alt mr-2"></i>Apply for Loan
+                    </button>
+                </div>
+
+                <!-- Safety Features -->
+                <div class="bg-white rounded-xl shadow-lg p-6 border-t-4 border-orange-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-orange-600 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-gray-800">Women's Safety Features</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Women-verified safe transport, trusted buyers list, emergency contacts, harassment reporting.</p>
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+                        <div class="text-sm text-gray-700 mb-2"><strong>Verified drivers:</strong> 450 women-safe transport</div>
+                        <div class="text-sm text-gray-700 mb-2"><strong>Trusted buyers:</strong> 1,200+ verified safe</div>
+                        <div class="text-sm text-gray-700"><strong>Emergency hotline:</strong> 24/7 support</div>
+                    </div>
+                    <button class="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition font-bold">
+                        <i class="fas fa-user-shield mr-2"></i>View Safety Guide
+                    </button>
+                </div>
+            </div>
+
+            <!-- Childcare Coordination -->
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                    <i class="fas fa-baby text-blue-500"></i>
+                    Community Childcare Coordination
+                </h2>
+                <p class="text-gray-600 mb-6">Arrange shared childcare during peak farming seasons so women can work without worry.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">How It Works</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="font-bold text-pink-600">1</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-800">Post Your Need</div>
+                                    <div class="text-sm text-gray-600">List dates you need childcare during planting/harvesting</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="font-bold text-pink-600">2</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-800">Match with Others</div>
+                                    <div class="text-sm text-gray-600">Find other women in your village with same schedule</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="font-bold text-pink-600">3</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-800">Share Costs</div>
+                                    <div class="text-sm text-gray-600">Pool money to hire trusted caregiver or take turns</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-pink-50 border border-pink-200 rounded-lg p-6">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4">Current Childcare Groups</h3>
+                        <div class="space-y-3">
+                            <div class="bg-white rounded-lg p-3">
+                                <div class="font-semibold text-gray-800">Makeni Rice Farmers</div>
+                                <div class="text-sm text-gray-600 mb-2">12 women • Ages 1-8 years • Le 15,000/day each</div>
+                                <button class="text-sm text-pink-600 hover:text-pink-700 font-semibold">Join Group</button>
+                            </div>
+                            <div class="bg-white rounded-lg p-3">
+                                <div class="font-semibold text-gray-800">Bo Vegetable Cooperative</div>
+                                <div class="text-sm text-gray-600 mb-2">8 women • Ages 2-10 years • Le 12,000/day each</div>
+                                <button class="text-sm text-pink-600 hover:text-pink-700 font-semibold">Join Group</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women's Success Impact -->
+            <div class="bg-gradient-to-r from-pink-600 to-purple-600 text-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold mb-6">Women's Empowerment Impact</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">35,230</div>
+                        <div class="text-sm text-pink-100">Women Farmers Registered</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">Le 18B</div>
+                        <div class="text-sm text-pink-100">Loans to Women (2024)</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">99.2%</div>
+                        <div class="text-sm text-pink-100">Women's Loan Repayment</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">245</div>
+                        <div class="text-sm text-pink-100">Women-Led Cooperatives</div>
+                    </div>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-lg rounded-lg p-6">
+                    <h3 class="font-bold text-xl mb-4">Featured Woman Farmer of the Month</h3>
+                    <div class="flex items-start gap-4">
+                        <div class="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-5xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-2xl mb-2">Fatu Bangura</h4>
+                            <div class="text-sm text-pink-100 mb-3">Cassava Farmer & Processor • Kenema District • 42 years old</div>
+                            <p class="text-sm mb-3">"I borrowed Le 2M through the women's loan program to buy a cassava processing machine. Now I process gari for 50 other women farmers and make Le 6M monthly. My daughters are all in secondary school now."</p>
+                            <div class="flex gap-4 text-sm">
+                                <div><i class="fas fa-users mr-1"></i> Employs 15 women</div>
+                                <div><i class="fas fa-chart-line mr-1"></i> 400% income increase</div>
+                                <div><i class="fas fa-graduation-cap mr-1"></i> 4 daughters in school</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-b-2', 'border-purple-600', 'text-purple-600', 'border-pink-600', 'text-pink-600');
+                btn.classList.add('text-gray-600');
+            });
+            
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+            
+            const activeTab = document.getElementById('tab-' + tabName);
+            if (tabName === 'youth') {
+                activeTab.classList.add('border-b-2', 'border-purple-600', 'text-purple-600');
+            } else {
+                activeTab.classList.add('border-b-2', 'border-pink-600', 'text-pink-600');
+            }
+            activeTab.classList.remove('text-gray-600');
+        }
+
+        console.log('[v0] Youth & Women Empowerment platform initialized successfully');
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Insurance - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold flex items-center gap-2">
+                    <span>🌱</span> AgriPredict
+                </a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="financial-services.html" class="hover:text-green-200">← Back to Financial Services</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">Crop Insurance</h1>
+            <p class="text-xl">Protect your harvest from natural disasters and unexpected losses</p>
+        </div>
+    </section>
+
+    <!-- Insurance Plans -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Choose Your Coverage</h2>
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <!-- Basic Plan -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-2">Basic Coverage</h3>
+                    <p class="text-3xl font-bold text-green-600 mb-4">Le 500,000<span class="text-lg text-gray-600">/year</span></p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Coverage up to Le 5,000,000</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Flood & drought protection</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Fire damage coverage</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Claims processed in 7 days</span>
+                        </li>
+                    </ul>
+                    <button onclick="selectPlan('basic')" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+                        Select Plan
+                    </button>
+                </div>
+
+                <!-- Standard Plan -->
+                <div class="bg-white rounded-lg shadow-xl p-6 border-4 border-green-600 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-1 rounded-full text-sm font-bold">
+                        POPULAR
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Standard Coverage</h3>
+                    <p class="text-3xl font-bold text-green-600 mb-4">Le 1,200,000<span class="text-lg text-gray-600">/year</span></p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Coverage up to Le 15,000,000</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>All Basic plan features</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Pest & disease coverage</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Claims processed in 5 days</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Free farm inspection</span>
+                        </li>
+                    </ul>
+                    <button onclick="selectPlan('standard')" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+                        Select Plan
+                    </button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-2">Premium Coverage</h3>
+                    <p class="text-3xl font-bold text-green-600 mb-4">Le 2,500,000<span class="text-lg text-gray-600">/year</span></p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Coverage up to Le 50,000,000</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>All Standard plan features</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Equipment damage coverage</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Claims processed in 3 days</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>24/7 support hotline</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-600">✓</span>
+                            <span>Replanting assistance</span>
+                        </li>
+                    </ul>
+                    <button onclick="selectPlan('premium')" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+                        Select Plan
+                    </button>
+                </div>
+            </div>
+
+            <!-- File a Claim Section -->
+            <div class="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-lg p-8 text-center">
+                <h2 class="text-2xl font-bold mb-4">Already Insured? File a Claim</h2>
+                <p class="text-gray-700 mb-6">If you've experienced crop loss or damage, file a claim to receive compensation</p>
+                <button onclick="window.location.href='file-claim.html'" class="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 font-bold">
+                    File Insurance Claim
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function selectPlan(plan) {
+            localStorage.setItem('selectedInsurancePlan', plan);
+            window.location.href = 'insurance-registration.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Feed Salon - Sierra Leone inspired color scheme */
+  /* Green (agriculture/growth), White (purity), Blue (sky/water) */
+  --background: oklch(0.99 0.002 140);
+  /* Sierra Leone Flag Colors */
+  --sl-green: oklch(0.50 0.18 145);
+  /* Vibrant Green */
+  --sl-white: oklch(1 0 0);
+  /* Pure White */
+  --sl-blue: oklch(0.50 0.18 250);
+  /* Vibrant Blue */
+
+  --foreground: oklch(0.20 0.03 145);
+
+  --card: oklch(1 0 0 / 0.9);
+  --card-foreground: oklch(0.20 0.03 145);
+
+  --popover: oklch(1 0 0 / 0.95);
+  --popover-foreground: oklch(0.20 0.03 145);
+
+  --primary: var(--sl-green);
+  --primary-foreground: var(--sl-white);
+
+  --secondary: var(--sl-blue);
+  --secondary-foreground: var(--sl-white);
+
+  --muted: oklch(0.96 0.01 200 / 0.5);
+  --muted-foreground: oklch(0.45 0.04 145);
+
+  --accent: var(--sl-blue);
+  --accent-foreground: var(--sl-white);
+
+  --success: var(--sl-green);
+  --success-foreground: var(--sl-white);
+
+  --warning: oklch(0.80 0.15 85);
+  --warning-foreground: oklch(0.2 0.02 85);
+
+  --info: var(--sl-blue);
+  --info-foreground: var(--sl-white);
+
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: var(--sl-white);
+
+  --border: var(--sl-green);
+  --input: oklch(0.9 0 0 / 0.5);
+  --ring: var(--sl-blue);
+  /* Primary green for focus rings */
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  /* Added warning color tokens */
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      linear-gradient(135deg,
+        oklch(0.99 0.01 140 / 0.15) 0%,
+        oklch(0.98 0.005 0 / 0.20) 35%,
+        oklch(0.97 0.02 220 / 0.15) 100%),
+      url('/ai-farming-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  /* Glass morphism effect for cards */
+  .glass-card {
+    background: oklch(1 0 0 / 0.45);
+    backdrop-filter: blur(8px);
+    border: 1px solid oklch(1 0 0 / 0.3);
+  }
+}
+
+@layer utilities {
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes float-delayed {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 3s ease-in-out infinite 0.5s;
+  }
+}

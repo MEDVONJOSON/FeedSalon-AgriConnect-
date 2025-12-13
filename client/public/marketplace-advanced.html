@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Marketplace - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-seedling text-green-600 text-2xl"></i>
+                    <span class="text-2xl font-bold text-green-600">AgriPredict</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600">Home</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-600">Basic Marketplace</a>
+                    <a href="dashboard.html" class="text-gray-700 hover:text-green-600">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-green-600 to-green-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">Advanced Marketplace Features</h1>
+            <p class="text-xl mb-6">Powerful trading tools for farmers and buyers in Sierra Leone</p>
+        </div>
+    </section>
+
+    <!-- Feature Navigation -->
+    <section class="py-8 bg-white shadow-sm sticky top-16 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap gap-4 justify-center">
+                <button onclick="showSection('auctions')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                    <i class="fas fa-gavel mr-2"></i>Live Auctions
+                </button>
+                <button onclick="showSection('preorders')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    <i class="fas fa-calendar-check mr-2"></i>Pre-Orders
+                </button>
+                <button onclick="showSection('escrow')" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                    <i class="fas fa-shield-alt mr-2"></i>Escrow Payments
+                </button>
+                <button onclick="showSection('quality')" class="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition">
+                    <i class="fas fa-certificate mr-2"></i>Quality Verification
+                </button>
+                <button onclick="showSection('comparison')" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    <i class="fas fa-balance-scale mr-2"></i>Compare Products
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Auctions Section -->
+    <section id="auctions" class="py-12 section-content">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Live Auctions</h2>
+                <p class="text-gray-600">Bid on bulk produce and get the best deals</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Auction Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-orange-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 bg-red-500 text-white text-sm rounded-full animate-pulse">LIVE NOW</span>
+                        <span class="text-gray-500 text-sm">Ends in: <span class="font-bold text-red-600" id="timer1">00:45:23</span></span>
+                    </div>
+                    <img src="/placeholder.svg?height=200&width=400" alt="Rice" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-bold mb-2">Premium Rice - 50 Bags</h3>
+                    <p class="text-gray-600 mb-2">Location: Freetown, Western Area</p>
+                    <p class="text-gray-600 mb-4">Quality: Grade A</p>
+                    
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-600 mb-1">Current Bid</p>
+                        <p class="text-3xl font-bold text-green-600 mb-3">Le 15,500,000</p>
+                        <p class="text-sm text-gray-500 mb-4">23 bids • Starting: Le 12,000,000</p>
+                        
+                        <div class="flex gap-2 mb-3">
+                            <input type="number" placeholder="Your bid amount" class="flex-1 px-3 py-2 border rounded-lg" id="bidAmount1">
+                            <button onclick="placeBid('Rice', 1)" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                                Place Bid
+                            </button>
+                        </div>
+                        <button onclick="setAutoBid(1)" class="w-full py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                            <i class="fas fa-robot mr-2"></i>Set Auto-Bid
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Auction Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-orange-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 bg-red-500 text-white text-sm rounded-full animate-pulse">LIVE NOW</span>
+                        <span class="text-gray-500 text-sm">Ends in: <span class="font-bold text-red-600" id="timer2">02:15:40</span></span>
+                    </div>
+                    <img src="/placeholder.svg?height=200&width=400" alt="Cassava" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-bold mb-2">Fresh Cassava - 2 Tons</h3>
+                    <p class="text-gray-600 mb-2">Location: Bo District</p>
+                    <p class="text-gray-600 mb-4">Quality: Grade A</p>
+                    
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-600 mb-1">Current Bid</p>
+                        <p class="text-3xl font-bold text-green-600 mb-3">Le 4,800,000</p>
+                        <p class="text-sm text-gray-500 mb-4">15 bids • Starting: Le 3,500,000</p>
+                        
+                        <div class="flex gap-2 mb-3">
+                            <input type="number" placeholder="Your bid amount" class="flex-1 px-3 py-2 border rounded-lg" id="bidAmount2">
+                            <button onclick="placeBid('Cassava', 2)" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                                Place Bid
+                            </button>
+                        </div>
+                        <button onclick="setAutoBid(2)" class="w-full py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                            <i class="fas fa-robot mr-2"></i>Set Auto-Bid
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Auction Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6 border-2 border-orange-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 bg-red-500 text-white text-sm rounded-full animate-pulse">LIVE NOW</span>
+                        <span class="text-gray-500 text-sm">Ends in: <span class="font-bold text-red-600" id="timer3">01:30:12</span></span>
+                    </div>
+                    <img src="/placeholder.svg?height=200&width=400" alt="Cocoa" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-bold mb-2">Premium Cocoa Beans - 500 kg</h3>
+                    <p class="text-gray-600 mb-2">Location: Kenema, Eastern Province</p>
+                    <p class="text-gray-600 mb-4">Quality: Export Grade</p>
+                    
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-600 mb-1">Current Bid</p>
+                        <p class="text-3xl font-bold text-green-600 mb-3">Le 8,200,000</p>
+                        <p class="text-sm text-gray-500 mb-4">31 bids • Starting: Le 6,000,000</p>
+                        
+                        <div class="flex gap-2 mb-3">
+                            <input type="number" placeholder="Your bid amount" class="flex-1 px-3 py-2 border rounded-lg" id="bidAmount3">
+                            <button onclick="placeBid('Cocoa', 3)" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                                Place Bid
+                            </button>
+                        </div>
+                        <button onclick="setAutoBid(3)" class="w-full py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                            <i class="fas fa-robot mr-2"></i>Set Auto-Bid
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Auction Button -->
+            <div class="text-center mt-8">
+                <button onclick="showModal('createAuctionModal')" class="px-8 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-lg">
+                    <i class="fas fa-plus mr-2"></i>Create New Auction
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-Orders Section -->
+    <section id="preorders" class="py-12 section-content hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Forward Contracts & Pre-Orders</h2>
+                <p class="text-gray-600">Reserve crops before harvest at locked-in prices</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <!-- Pre-Order Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded-full">Available for Pre-Order</span>
+                        <span class="text-gray-500 text-sm">Harvest: March 2026</span>
+                    </div>
+                    <img src="/placeholder.svg?height=200&width=400" alt="Palm Oil" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-bold mb-2">Red Palm Oil - 1000 Liters</h3>
+                    <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-green-600 mr-2"></i>Pujehun District, Southern Province</p>
+                    <p class="text-gray-600 mb-2"><i class="fas fa-user text-green-600 mr-2"></i>Farmer: Ibrahim Kamara</p>
+                    
+                    <div class="border-t pt-4 mt-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-gray-600">Pre-Order Price:</span>
+                            <span class="text-2xl font-bold text-green-600">Le 25,000/liter</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-gray-600">Market Price Estimate:</span>
+                            <span class="text-lg text-gray-500 line-through">Le 30,000/liter</span>
+                        </div>
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+                            <p class="text-sm text-green-800"><i class="fas fa-info-circle mr-2"></i>Save Le 5,000,000 by pre-ordering now!</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Quantity (Liters)</label>
+                            <input type="number" placeholder="Enter quantity" class="w-full px-3 py-2 border rounded-lg" id="preorderQty1">
+                        </div>
+                        
+                        <button onclick="placePreOrder('Palm Oil', 1)" class="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-calendar-check mr-2"></i>Reserve Now (20% Deposit)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pre-Order Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded-full">Available for Pre-Order</span>
+                        <span class="text-gray-500 text-sm">Harvest: April 2026</span>
+                    </div>
+                    <img src="/placeholder.svg?height=200&width=400" alt="Coffee" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-bold mb-2">Arabica Coffee Beans - 2 Tons</h3>
+                    <p class="text-gray-600 mb-2"><i class="fas fa-map-marker-alt text-green-600 mr-2"></i>Kailahun, Eastern Province</p>
+                    <p class="text-gray-600 mb-2"><i class="fas fa-user text-green-600 mr-2"></i>Farmer: Fatmata Sesay</p>
+                    
+                    <div class="border-t pt-4 mt-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-gray-600">Pre-Order Price:</span>
+                            <span class="text-2xl font-bold text-green-600">Le 18,000,000/ton</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-gray-600">Market Price Estimate:</span>
+                            <span class="text-lg text-gray-500 line-through">Le 22,000,000/ton</span>
+                        </div>
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+                            <p class="text-sm text-green-800"><i class="fas fa-info-circle mr-2"></i>Save Le 8,000,000 by pre-ordering 2 tons!</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Quantity (Tons)</label>
+                            <input type="number" placeholder="Enter quantity" class="w-full px-3 py-2 border rounded-lg" id="preorderQty2">
+                        </div>
+                        
+                        <button onclick="placePreOrder('Coffee', 2)" class="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-calendar-check mr-2"></i>Reserve Now (20% Deposit)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contract Farming -->
+            <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Become a Contract Farmer</h3>
+                <p class="text-gray-700 mb-6">Get guaranteed buyers and stable income through forward contracts</p>
+                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white rounded-lg p-4 shadow">
+                        <i class="fas fa-handshake text-blue-600 text-3xl mb-3"></i>
+                        <h4 class="font-bold mb-2">Guaranteed Sales</h4>
+                        <p class="text-sm text-gray-600">Buyers commit before you plant</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 shadow">
+                        <i class="fas fa-lock text-blue-600 text-3xl mb-3"></i>
+                        <h4 class="font-bold mb-2">Fixed Prices</h4>
+                        <p class="text-sm text-gray-600">No market volatility risk</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 shadow">
+                        <i class="fas fa-coins text-blue-600 text-3xl mb-3"></i>
+                        <h4 class="font-bold mb-2">Advance Payment</h4>
+                        <p class="text-sm text-gray-600">Get deposit for inputs</p>
+                    </div>
+                </div>
+                <button onclick="showModal('contractFarmingModal')" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    <i class="fas fa-file-contract mr-2"></i>Apply for Contract Farming
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Escrow Payments Section -->
+    <section id="escrow" class="py-12 section-content hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Secure Escrow Payments</h2>
+                <p class="text-gray-600">Your payments are protected until delivery is confirmed</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-tie text-purple-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">For Buyers</h3>
+                        <p class="text-gray-600">Pay with confidence</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center flex-shrink-0 mr-3">1</div>
+                            <div>
+                                <h4 class="font-bold">Place Order & Pay</h4>
+                                <p class="text-sm text-gray-600">Your payment is held securely in escrow</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center flex-shrink-0 mr-3">2</div>
+                            <div>
+                                <h4 class="font-bold">Farmer Ships Product</h4>
+                                <p class="text-sm text-gray-600">Track delivery in real-time</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center flex-shrink-0 mr-3">3</div>
+                            <div>
+                                <h4 class="font-bold">Confirm Receipt</h4>
+                                <p class="text-sm text-gray-600">Inspect quality and approve</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center flex-shrink-0 mr-3">4</div>
+                            <div>
+                                <h4 class="font-bold">Funds Released</h4>
+                                <p class="text-sm text-gray-600">Payment goes to farmer automatically</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-purple-50 rounded-lg p-4">
+                        <p class="text-sm text-purple-800"><i class="fas fa-shield-alt mr-2"></i>Your money is safe until you confirm delivery</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-tractor text-green-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">For Farmers</h3>
+                        <p class="text-gray-600">Get paid guaranteed</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center flex-shrink-0 mr-3">1</div>
+                            <div>
+                                <h4 class="font-bold">Receive Order</h4>
+                                <p class="text-sm text-gray-600">Payment already secured in escrow</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center flex-shrink-0 mr-3">2</div>
+                            <div>
+                                <h4 class="font-bold">Prepare & Ship</h4>
+                                <p class="text-sm text-gray-600">Package and send to buyer</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center flex-shrink-0 mr-3">3</div>
+                            <div>
+                                <h4 class="font-bold">Buyer Confirms</h4>
+                                <p class="text-sm text-gray-600">They inspect and approve quality</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center flex-shrink-0 mr-3">4</div>
+                            <div>
+                                <h4 class="font-bold">Receive Payment</h4>
+                                <p class="text-sm text-gray-600">Funds transfer to your mobile money</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-green-50 rounded-lg p-4">
+                        <p class="text-sm text-green-800"><i class="fas fa-check-circle mr-2"></i>Payment guaranteed once buyer confirms</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Escrow Transactions -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Your Escrow Transactions</h3>
+                <div class="space-y-4">
+                    <div class="border rounded-lg p-4 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold">Organic Tomatoes - 500 kg</h4>
+                            <p class="text-sm text-gray-600">Order #ESC-2023-045</p>
+                            <p class="text-sm text-gray-600">To: Fresh Produce Ltd, Freetown</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-purple-600">Le 2,500,000</p>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full">In Transit</span>
+                        </div>
+                    </div>
+                    <div class="border rounded-lg p-4 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold">Premium Rice - 20 Bags</h4>
+                            <p class="text-sm text-gray-600">Order #ESC-2023-042</p>
+                            <p class="text-sm text-gray-600">To: Market Vendors Co-op, Bo</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-green-600">Le 6,200,000</p>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Delivered - Pending Confirmation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Verification Section -->
+    <section id="quality" class="py-12 section-content hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Quality Verification Service</h2>
+                <p class="text-gray-600">Third-party inspection ensures product quality</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-microscope text-orange-600 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Lab Testing</h3>
+                    <p class="text-gray-600 mb-4">Scientific analysis of produce quality, pesticide residue, moisture content</p>
+                    <button onclick="showModal('requestLabTestModal')" class="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition">
+                        Request Test
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-user-check text-orange-600 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Field Inspection</h3>
+                    <p class="text-gray-600 mb-4">Inspector visits farm to verify quality before harvest or delivery</p>
+                    <button onclick="showModal('requestInspectionModal')" class="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition">
+                        Book Inspector
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-certificate text-orange-600 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Certification</h3>
+                    <p class="text-gray-600 mb-4">Official quality certificate for export and premium buyers</p>
+                    <button onclick="showModal('requestCertificationModal')" class="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition">
+                        Apply Now
+                    </button>
+                </div>
+            </div>
+
+            <!-- Verified Products -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Quality-Verified Products Available Now</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full flex items-center">
+                                <i class="fas fa-check-circle mr-1"></i>Lab Verified
+                            </span>
+                            <span class="text-gray-500 text-sm">Tested: 2 days ago</span>
+                        </div>
+                        <img src="/placeholder.svg?height=150&width=300" alt="Vegetables" class="w-full h-32 object-cover rounded-lg mb-3">
+                        <h4 class="font-bold text-lg mb-2">Organic Mixed Vegetables</h4>
+                        <p class="text-sm text-gray-600 mb-2">Farmer: Aminata Bangura, Makeni</p>
+                        <div class="bg-gray-50 rounded p-3 mb-3">
+                            <p class="text-sm"><strong>Quality Score:</strong> 95/100</p>
+                            <p class="text-sm"><strong>Pesticide:</strong> None detected</p>
+                            <p class="text-sm"><strong>Freshness:</strong> Excellent</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">Le 45,000/kg</span>
+                            <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Order Now</button>
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full flex items-center">
+                                <i class="fas fa-check-circle mr-1"></i>Field Inspected
+                            </span>
+                            <span class="text-gray-500 text-sm">Inspected: 5 days ago</span>
+                        </div>
+                        <img src="/placeholder.svg?height=150&width=300" alt="Pineapples" class="w-full h-32 object-cover rounded-lg mb-3">
+                        <h4 class="font-bold text-lg mb-2">Fresh Pineapples - 1000 units</h4>
+                        <p class="text-sm text-gray-600 mb-2">Farmer: Mohamed Kamara, Kenema</p>
+                        <div class="bg-gray-50 rounded p-3 mb-3">
+                            <p class="text-sm"><strong>Quality Grade:</strong> Premium A</p>
+                            <p class="text-sm"><strong>Size:</strong> Uniform large</p>
+                            <p class="text-sm"><strong>Ripeness:</strong> Perfect for export</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-green-600">Le 15,000/unit</span>
+                            <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Comparison Section -->
+    <section id="comparison" class="py-12 section-content hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Compare Products</h2>
+                <p class="text-gray-600">Find the best deals by comparing prices, quality, and sellers</p>
+            </div>
+
+            <!-- Comparison Tool -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold mb-4">Build Your Comparison</h3>
+                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Product Type</label>
+                        <select class="w-full px-3 py-2 border rounded-lg">
+                            <option>Rice</option>
+                            <option>Cassava</option>
+                            <option>Tomatoes</option>
+                            <option>Palm Oil</option>
+                            <option>Coffee</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                        <select class="w-full px-3 py-2 border rounded-lg">
+                            <option>All Locations</option>
+                            <option>Freetown</option>
+                            <option>Bo District</option>
+                            <option>Kenema</option>
+                            <option>Makeni</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Quantity</label>
+                        <input type="number" placeholder="e.g., 100 kg" class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                </div>
+                <button class="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                    <i class="fas fa-search mr-2"></i>Find & Compare
+                </button>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Seller</th>
+                                <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Price</th>
+                                <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Quality</th>
+                                <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Location</th>
+                                <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Rating</th>
+                                <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Delivery</th>
+                                <th class="px-6 py-3 text-left text-sm font-bold text-gray-700">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <img src="/placeholder.svg?height=40&width=40" alt="Seller" class="w-10 h-10 rounded-full mr-3">
+                                        <div>
+                                            <p class="font-bold">Ibrahim Kamara</p>
+                                            <p class="text-sm text-gray-600">Verified Seller</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <p class="text-xl font-bold text-green-600">Le 8,500/kg</p>
+                                    <p class="text-sm text-gray-500">Best Price</p>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Grade A</span>
+                                </td>
+                                <td class="px-6 py-4">Bo District</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <span class="ml-1 font-bold">4.8</span>
+                                        <span class="ml-1 text-gray-500 text-sm">(120)</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">2-3 days</td>
+                                <td class="px-6 py-4">
+                                    <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm">
+                                        Select
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <img src="/placeholder.svg?height=40&width=40" alt="Seller" class="w-10 h-10 rounded-full mr-3">
+                                        <div>
+                                            <p class="font-bold">Fatmata Sesay</p>
+                                            <p class="text-sm text-gray-600">Premium Seller</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <p class="text-xl font-bold text-green-600">Le 9,200/kg</p>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Premium</span>
+                                </td>
+                                <td class="px-6 py-4">Kenema</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <span class="ml-1 font-bold">4.9</span>
+                                        <span class="ml-1 text-gray-500 text-sm">(85)</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">1-2 days</td>
+                                <td class="px-6 py-4">
+                                    <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm">
+                                        Select
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <img src="/placeholder.svg?height=40&width=40" alt="Seller" class="w-10 h-10 rounded-full mr-3">
+                                        <div>
+                                            <p class="font-bold">Mohamed Bangura</p>
+                                            <p class="text-sm text-gray-600">Organic Certified</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <p class="text-xl font-bold text-green-600">Le 10,500/kg</p>
+                                    <p class="text-sm text-gray-500">Highest Quality</p>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">Organic A+</span>
+                                </td>
+                                <td class="px-6 py-4">Makeni</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <span class="ml-1 font-bold">5.0</span>
+                                        <span class="ml-1 text-gray-500 text-sm">(42)</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">3-4 days</td>
+                                <td class="px-6 py-4">
+                                    <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm">
+                                        Select
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <!-- Create Auction Modal -->
+    <div id="createAuctionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Create New Auction</h3>
+                <button onclick="closeModal('createAuctionModal')" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Product Name</label>
+                    <input type="text" placeholder="e.g., Premium Rice" class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
+                        <input type="text" placeholder="e.g., 50 bags" class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Starting Price (Le)</label>
+                        <input type="number" placeholder="e.g., 10000000" class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Auction Duration</label>
+                        <select class="w-full px-3 py-2 border rounded-lg">
+                            <option>1 hour</option>
+                            <option>3 hours</option>
+                            <option>6 hours</option>
+                            <option>12 hours</option>
+                            <option>24 hours</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Quality Grade</label>
+                        <select class="w-full px-3 py-2 border rounded-lg">
+                            <option>Grade A</option>
+                            <option>Grade B</option>
+                            <option>Premium</option>
+                            <option>Export Quality</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                    <input type="text" placeholder="e.g., Freetown, Western Area" class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                    <textarea rows="4" placeholder="Describe your product..." class="w-full px-3 py-2 border rounded-lg"></textarea>
+                </div>
+                <div class="flex gap-4">
+                    <button type="button" onclick="closeModal('createAuctionModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">
+                        Cancel
+                    </button>
+                    <button type="button" onclick="createAuction()" class="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                        Start Auction
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Similar modals for other features would go here -->
+
+    <script src="script.js"></script>
+    <script>
+        // Section Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.section-content').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        // Modal Functions
+        function showModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.getElementById(modalId).classList.add('flex');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.getElementById(modalId).classList.remove('flex');
+        }
+
+        // Auction Timer
+        function updateTimer(timerId) {
+            const timerElement = document.getElementById(timerId);
+            if (!timerElement) return;
+            
+            const parts = timerElement.textContent.split(':');
+            let hours = parseInt(parts[0]);
+            let minutes = parseInt(parts[1]);
+            let seconds = parseInt(parts[2]);
+            
+            seconds--;
+            if (seconds < 0) {
+                seconds = 59;
+                minutes--;
+            }
+            if (minutes < 0) {
+                minutes = 59;
+                hours--;
+            }
+            
+            if (hours >= 0) {
+                timerElement.textContent = 
+                    String(hours).padStart(2, '0') + ':' +
+                    String(minutes).padStart(2, '0') + ':' +
+                    String(seconds).padStart(2, '0');
+            }
+        }
+
+        // Update all timers every second
+        setInterval(() => {
+            updateTimer('timer1');
+            updateTimer('timer2');
+            updateTimer('timer3');
+        }, 1000);
+
+        // Bid Functions
+        function placeBid(product, auctionId) {
+            const bidAmount = document.getElementById('bidAmount' + auctionId).value;
+            if (!bidAmount) {
+                alert('Please enter a bid amount');
+                return;
+            }
+            alert(`Bid of Le ${parseInt(bidAmount).toLocaleString()} placed for ${product}!`);
+            console.log('[v0] Bid placed:', product, bidAmount);
+        }
+
+        function setAutoBid(auctionId) {
+            const maxBid = prompt('Enter your maximum bid amount (Le):');
+            if (maxBid) {
+                alert(`Auto-bid enabled with maximum of Le ${parseInt(maxBid).toLocaleString()}`);
+                console.log('[v0] Auto-bid set:', auctionId, maxBid);
+            }
+        }
+
+        // Pre-order Functions
+        function placePreOrder(product, orderId) {
+            const quantity = document.getElementById('preorderQty' + orderId).value;
+            if (!quantity) {
+                alert('Please enter quantity');
+                return;
+            }
+            alert(`Pre-order placed for ${quantity} of ${product}!\n20% deposit required.`);
+            console.log('[v0] Pre-order placed:', product, quantity);
+        }
+
+        // Auction Creation
+        function createAuction() {
+            alert('Auction created successfully! It will go live shortly.');
+            closeModal('createAuctionModal');
+        }
+    </script>
+</body>
+</html>

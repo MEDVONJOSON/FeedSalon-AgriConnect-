@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Signup - AgriPredict</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+  <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+      <div class="text-center mb-8">
+        <a href="index.html" class="text-3xl font-bold text-green-700">🌾 AgriPredict</a>
+        <h2 class="mt-6 text-3xl font-bold text-gray-900">Create Buyer Account</h2>
+        <p class="mt-2 text-gray-600">Access marketplace and connect with farmers</p>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <form id="buyerSignupForm" class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+            <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter your full name">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+            <input type="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your@email.com">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+            <input type="tel" name="phone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+232 XX XXX XXXX">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Business Name *</label>
+            <input type="text" name="businessName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., Fresh Produce Co.">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Business Type *</label>
+            <select name="businessType" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option value="">Select business type</option>
+              <option value="retailer">Retailer</option>
+              <option value="wholesaler">Wholesaler</option>
+              <option value="distributor">Distributor</option>
+              <option value="restaurant">Restaurant/Hotel</option>
+              <option value="processor">Food Processor</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Location *</label>
+            <input type="text" name="location" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="City, District">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Password *</label>
+            <input type="password" name="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Create a strong password">
+          </div>
+
+          <div class="flex items-center">
+            <input type="checkbox" id="terms" required class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+            <label for="terms" class="ml-2 text-sm text-gray-600">
+              I agree to the Terms of Service and Privacy Policy
+            </label>
+          </div>
+
+          <button type="submit" class="w-full bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition font-semibold">
+            Create Account & Access Dashboard
+          </button>
+        </form>
+
+        <div class="mt-6 text-center">
+          <p class="text-sm text-gray-600">
+            Already have an account? 
+            <a href="buyer-login.html" class="text-blue-700 hover:text-blue-600 font-semibold">Login</a>
+          </p>
+          <p class="text-sm text-gray-600 mt-2">
+            Are you a farmer? 
+            <a href="signup.html" class="text-green-700 hover:text-green-600 font-semibold">Create Farmer Account</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('buyerSignupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        name: this.name.value,
+        email: this.email.value,
+        phone: this.phone.value,
+        businessName: this.businessName.value,
+        businessType: this.businessType.value,
+        location: this.location.value
+      };
+      
+      // Save to localStorage
+      localStorage.setItem('buyerData', JSON.stringify(formData));
+      localStorage.setItem('userType', 'buyer');
+      
+      // Redirect to buyer dashboard
+      window.location.href = 'buyer-dashboard.html';
+    });
+  </script>
+</body>
+</html>

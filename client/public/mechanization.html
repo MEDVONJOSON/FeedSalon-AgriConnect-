@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanized Farming - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="glass fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="bg-green-600 text-white p-2 rounded-lg group-hover:rotate-12 transition-transform">
+                    <i class="fas fa-leaf text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold gradient-text">AgriPredict</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="hover:text-green-600 transition-colors">Home</a>
+                <a href="dashboard.html" class="hover:text-green-600 transition-colors">Dashboard</a>
+                <a href="marketplace.html" class="hover:text-green-600 transition-colors">Marketplace</a>
+                <div class="relative group">
+                    <button class="flex items-center gap-1 hover:text-green-600 transition-colors">
+                        Services <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 hidden group-hover:block fade-in">
+                        <a href="mechanization.html" class="block px-4 py-2 hover:bg-green-50 text-green-600">Mechanization</a>
+                        <a href="agri-industry.html" class="block px-4 py-2 hover:bg-green-50">Agri-Industry</a>
+                        <a href="extension-hub.html" class="block px-4 py-2 hover:bg-green-50">Extension Hub</a>
+                    </div>
+                </div>
+            </div>
+            <button class="md:hidden text-2xl text-gray-600" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center"></div>
+        </div>
+        <div class="container mx-auto relative z-10 text-center">
+            <div class="inline-block bg-green-600/20 backdrop-blur-sm border border-green-500/30 rounded-full px-4 py-1 mb-6 fade-in">
+                <i class="fas fa-tractor mr-2 text-green-400"></i> Agricultural Engineering
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 slide-in-up">Mechanized Farming</h1>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8 slide-in-up stagger-1">
+                Access modern equipment to boost productivity. Rent tractors, drones, and harvesters on-demand.
+            </p>
+            <div class="flex justify-center gap-4 slide-in-up stagger-2">
+                <button onclick="scrollToElement('equipment-list')" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg shadow-green-600/30">
+                    Rent Equipment
+                </button>
+                <button onclick="openModal('list-equipment-modal')" class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-3 rounded-xl font-semibold transition-all">
+                    List Your Tractor
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-white relative -mt-10 z-20 container mx-auto px-6 rounded-2xl shadow-xl">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+            <div class="p-4 animate-on-scroll">
+                <div class="text-4xl font-bold text-green-600 mb-2" data-counter="150">0</div>
+                <div class="text-gray-600">Tractors Available</div>
+            </div>
+            <div class="p-4 animate-on-scroll stagger-1">
+                <div class="text-4xl font-bold text-green-600 mb-2" data-counter="45">0</div>
+                <div class="text-gray-600">Drones for Spraying</div>
+            </div>
+            <div class="p-4 animate-on-scroll stagger-2">
+                <div class="text-4xl font-bold text-green-600 mb-2" data-counter="1200">0</div>
+                <div class="text-gray-600">Acres Mechanized</div>
+            </div>
+            <div class="p-4 animate-on-scroll stagger-3">
+                <div class="text-4xl font-bold text-green-600 mb-2" data-counter="85">0</div>
+                <div class="text-gray-600">Service Providers</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipment Listings -->
+    <section id="equipment-list" class="py-20 px-6">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-end mb-12 animate-on-scroll">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">Available Equipment</h2>
+                    <p class="text-gray-600">Find the right machinery for your farm tasks.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 bg-green-100 text-green-700 rounded-lg font-medium">All</button>
+                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50">Tractors</button>
+                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50">Harvesters</button>
+                    <button class="px-4 py-2 bg-white border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50">Drones</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll stagger-1 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1530267981375-f0de93fe1e91?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tractor" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                            Le 500k/day
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">John Deere 5050D</h3>
+                                <p class="text-gray-500 text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Bo District</p>
+                            </div>
+                            <div class="bg-green-100 text-green-700 p-2 rounded-lg">
+                                <i class="fas fa-tractor"></i>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 mb-6 text-sm text-gray-600">
+                            <span class="bg-gray-100 px-2 py-1 rounded"><i class="fas fa-horse-head mr-1"></i> 50 HP</span>
+                            <span class="bg-gray-100 px-2 py-1 rounded"><i class="fas fa-cog mr-1"></i> 4WD</span>
+                        </div>
+                        <button onclick="openBookingModal('John Deere 5050D', '500000')" class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll stagger-2 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Drone" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                            Le 200k/acre
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">DJI Agras T30</h3>
+                                <p class="text-gray-500 text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Kenema</p>
+                            </div>
+                            <div class="bg-blue-100 text-blue-700 p-2 rounded-lg">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 mb-6 text-sm text-gray-600">
+                            <span class="bg-gray-100 px-2 py-1 rounded"><i class="fas fa-spray-can mr-1"></i> Spraying</span>
+                            <span class="bg-gray-100 px-2 py-1 rounded"><i class="fas fa-camera mr-1"></i> Mapping</span>
+                        </div>
+                        <button onclick="openBookingModal('DJI Agras T30', '200000')" class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll stagger-3 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Harvester" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                            Le 800k/day
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">Kubota Harvester</h3>
+                                <p class="text-gray-500 text-sm"><i class="fas fa-map-marker-alt mr-1"></i> Makeni</p>
+                            </div>
+                            <div class="bg-orange-100 text-orange-700 p-2 rounded-lg">
+                                <i class="fas fa-truck-monster"></i>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 mb-6 text-sm text-gray-600">
+                            <span class="bg-gray-100 px-2 py-1 rounded"><i class="fas fa-seedling mr-1"></i> Rice</span>
+                            <span class="bg-gray-100 px-2 py-1 rounded"><i class="fas fa-clock mr-1"></i> Fast</span>
+                        </div>
+                        <button onclick="openBookingModal('Kubota Harvester', '800000')" class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden modal-container">
+        <div class="absolute inset-0 modal-backdrop"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Book Equipment</h3>
+                <button onclick="closeModal('booking-modal')" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="booking-form" class="space-y-4">
+                <input type="hidden" id="equipment-name">
+                <input type="hidden" id="equipment-price">
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Equipment</label>
+                    <div id="display-equipment-name" class="text-lg font-bold text-green-600"></div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                    <input type="date" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Duration (Days)</label>
+                    <input type="number" min="1" value="1" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Delivery Location</label>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option>Bo District</option>
+                        <option>Kenema</option>
+                        <option>Makeni</option>
+                        <option>Freetown Rural</option>
+                    </select>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mt-4">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span>Rate per day</span>
+                        <span id="display-rate">Le 0</span>
+                    </div>
+                    <div class="flex justify-between font-bold text-lg border-t pt-2">
+                        <span>Total</span>
+                        <span id="display-total">Le 0</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition-colors btn-ripple">
+                    Confirm Booking
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function openBookingModal(name, price) {
+            document.getElementById('equipment-name').value = name;
+            document.getElementById('equipment-price').value = price;
+            document.getElementById('display-equipment-name').textContent = name;
+            document.getElementById('display-rate').textContent = `Le ${parseInt(price).toLocaleString()}`;
+            document.getElementById('display-total').textContent = `Le ${parseInt(price).toLocaleString()}`;
+            openModal('booking-modal');
+        }
+    </script>
+</body>
+</html>

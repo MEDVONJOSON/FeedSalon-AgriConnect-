@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather & Climate Intelligence - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-seedling text-green-600 text-2xl"></i>
+                    <span class="text-2xl font-bold text-green-600">AgriPredict</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600">Home</a>
+                    <a href="dashboard.html" class="text-gray-700 hover:text-green-600">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">Weather & Climate Intelligence</h1>
+            <p class="text-xl mb-6">Advanced weather forecasting for smarter farming decisions</p>
+        </div>
+    </section>
+
+    <!-- Current Weather Dashboard -->
+    <section class="py-8 bg-white shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-sm opacity-90">Current Weather</p>
+                            <p class="text-lg font-bold">Freetown</p>
+                        </div>
+                        <i class="fas fa-cloud-sun text-4xl opacity-90"></i>
+                    </div>
+                    <div class="text-5xl font-bold mb-2">28°C</div>
+                    <p class="text-sm opacity-90">Partly Cloudy</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-cyan-500 to-cyan-600 text-white rounded-lg p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-sm opacity-90">Humidity</p>
+                        </div>
+                        <i class="fas fa-tint text-3xl opacity-90"></i>
+                    </div>
+                    <div class="text-4xl font-bold mb-2">75%</div>
+                    <p class="text-sm opacity-90">High moisture</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-sm opacity-90">Wind Speed</p>
+                        </div>
+                        <i class="fas fa-wind text-3xl opacity-90"></i>
+                    </div>
+                    <div class="text-4xl font-bold mb-2">15 km/h</div>
+                    <p class="text-sm opacity-90">Moderate</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-lg p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-sm opacity-90">Rain Chance</p>
+                        </div>
+                        <i class="fas fa-cloud-rain text-3xl opacity-90"></i>
+                    </div>
+                    <div class="text-4xl font-bold mb-2">60%</div>
+                    <p class="text-sm opacity-90">Afternoon showers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Navigation Tabs -->
+    <section class="py-6 bg-white border-b sticky top-16 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap gap-3 justify-center">
+                <button onclick="showWeatherSection('hyperlocal')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    <i class="fas fa-map-marker-alt mr-2"></i>Hyperlocal Forecast
+                </button>
+                <button onclick="showWeatherSection('rainfall')" class="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition">
+                    <i class="fas fa-cloud-showers-heavy mr-2"></i>Rainfall Tracker
+                </button>
+                <button onclick="showWeatherSection('drought')" class="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>Drought Alerts
+                </button>
+                <button onclick="showWeatherSection('flood')" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                    <i class="fas fa-water mr-2"></i>Flood Risk
+                </button>
+                <button onclick="showWeatherSection('planting')" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                    <i class="fas fa-calendar-check mr-2"></i>Planting Windows
+                </button>
+                <button onclick="showWeatherSection('climate')" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                    <i class="fas fa-chart-line mr-2"></i>Climate Trends
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hyperlocal Forecast Section -->
+    <section id="hyperlocal" class="py-12 weather-section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Hyperlocal Weather Forecast</h2>
+                <p class="text-gray-600">Precise forecasts for your exact farm location</p>
+            </div>
+
+            <!-- Location Selector -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Province</label>
+                        <select class="w-full px-3 py-2 border rounded-lg">
+                            <option>Western Area</option>
+                            <option>Northern Province</option>
+                            <option>Southern Province</option>
+                            <option>Eastern Province</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">District</label>
+                        <select class="w-full px-3 py-2 border rounded-lg">
+                            <option>Freetown</option>
+                            <option>Bo District</option>
+                            <option>Kenema</option>
+                            <option>Makeni</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Village/Area</label>
+                        <input type="text" placeholder="Enter your village" class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7-Day Forecast -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold mb-6">7-Day Detailed Forecast - Freetown, Western Area</h3>
+                <div class="grid md:grid-cols-7 gap-4">
+                    <div class="text-center p-4 border rounded-lg hover:shadow-lg transition">
+                        <p class="font-bold mb-2">Today</p>
+                        <i class="fas fa-cloud-sun text-4xl text-blue-500 mb-3"></i>
+                        <p class="text-2xl font-bold mb-1">28°C</p>
+                        <p class="text-sm text-gray-600 mb-2">22°C</p>
+                        <p class="text-sm text-blue-600 font-bold">60% rain</p>
+                    </div>
+                    <div class="text-center p-4 border rounded-lg hover:shadow-lg transition">
+                        <p class="font-bold mb-2">Tomorrow</p>
+                        <i class="fas fa-cloud-rain text-4xl text-gray-500 mb-3"></i>
+                        <p class="text-2xl font-bold mb-1">26°C</p>
+                        <p class="text-sm text-gray-600 mb-2">21°C</p>
+                        <p class="text-sm text-blue-600 font-bold">80% rain</p>
+                    </div>
+                    <div class="text-center p-4 border rounded-lg hover:shadow-lg transition">
+                        <p class="font-bold mb-2">Wed</p>
+                        <i class="fas fa-cloud text-4xl text-gray-400 mb-3"></i>
+                        <p class="text-2xl font-bold mb-1">27°C</p>
+                        <p class="text-sm text-gray-600 mb-2">22°C</p>
+                        <p class="text-sm text-blue-600 font-bold">40% rain</p>
+                    </div>
+                    <div class="text-center p-4 border rounded-lg hover:shadow-lg transition">
+                        <p class="font-bold mb-2">Thu</p>
+                        <i class="fas fa-sun text-4xl text-yellow-500 mb-3"></i>
+                        <p class="text-2xl font-bold mb-1">30°C</p>
+                        <p class="text-sm text-gray-600 mb-2">23°C</p>
+                        <p class="text-sm text-blue-600 font-bold">10% rain</p>
+                    </div>
+                    <div class="text-center p-4 border rounded-lg hover:shadow-lg transition">
+                        <p class="font-bold mb-2">Fri</p>
+                        <i class="fas fa-sun text-4xl text-yellow-500 mb-3"></i>
+                        <p class="text-2xl font-bold mb-1">31°C</p>
+                        <p class="text-sm text-gray-600 mb-2">24°C</p>
+                        <p class="text-sm text-blue-600 font-bold">5% rain</p>
+                    </div>
+                    <div class="text-center p-4 border rounded-lg hover:shadow-lg transition">
+                        <p class="font-bold mb-2">Sat</p>
+                        <i class="fas fa-cloud-sun text-4xl text-blue-500 mb-3"></i>
+                        <p class="text-2xl font-bold mb-1">29°C</p>
+                        <p class="text-sm text-gray-600 mb-2">23°C</p>
+                        <p class="text-sm text-blue-600 font-bold">30% rain</p>
+                    </div>
+                    <div class="text-center p-4 border rounded-lg hover:shadow-lg transition">
+                        <p class="font-bold mb-2">Sun</p>
+                        <i class="fas fa-cloud-rain text-4xl text-gray-500 mb-3"></i>
+                        <p class="text-2xl font-bold mb-1">27°C</p>
+                        <p class="text-sm text-gray-600 mb-2">22°C</p>
+                        <p class="text-sm text-blue-600 font-bold">70% rain</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hourly Forecast -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-6">Hourly Forecast - Today</h3>
+                <div class="overflow-x-auto">
+                    <div class="flex gap-4 pb-2">
+                        <div class="text-center p-3 border rounded-lg min-w-[100px]">
+                            <p class="font-bold mb-2">Now</p>
+                            <i class="fas fa-cloud-sun text-3xl text-blue-500 mb-2"></i>
+                            <p class="text-xl font-bold">28°C</p>
+                            <p class="text-sm text-blue-600">60%</p>
+                        </div>
+                        <div class="text-center p-3 border rounded-lg min-w-[100px]">
+                            <p class="font-bold mb-2">1 PM</p>
+                            <i class="fas fa-cloud text-3xl text-gray-400 mb-2"></i>
+                            <p class="text-xl font-bold">29°C</p>
+                            <p class="text-sm text-blue-600">55%</p>
+                        </div>
+                        <div class="text-center p-3 border rounded-lg min-w-[100px]">
+                            <p class="font-bold mb-2">2 PM</p>
+                            <i class="fas fa-cloud-rain text-3xl text-gray-500 mb-2"></i>
+                            <p class="text-xl font-bold">27°C</p>
+                            <p class="text-sm text-blue-600">75%</p>
+                        </div>
+                        <div class="text-center p-3 border rounded-lg min-w-[100px]">
+                            <p class="font-bold mb-2">3 PM</p>
+                            <i class="fas fa-cloud-showers-heavy text-3xl text-blue-600 mb-2"></i>
+                            <p class="text-xl font-bold">26°C</p>
+                            <p class="text-sm text-blue-600">90%</p>
+                        </div>
+                        <div class="text-center p-3 border rounded-lg min-w-[100px]">
+                            <p class="font-bold mb-2">4 PM</p>
+                            <i class="fas fa-cloud-rain text-3xl text-gray-500 mb-2"></i>
+                            <p class="text-xl font-bold">25°C</p>
+                            <p class="text-sm text-blue-600">70%</p>
+                        </div>
+                        <div class="text-center p-3 border rounded-lg min-w-[100px]">
+                            <p class="font-bold mb-2">5 PM</p>
+                            <i class="fas fa-cloud text-3xl text-gray-400 mb-2"></i>
+                            <p class="text-xl font-bold">25°C</p>
+                            <p class="text-sm text-blue-600">45%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rainfall Tracker Section -->
+    <section id="rainfall" class="py-12 weather-section hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Rainfall Tracker & History</h2>
+                <p class="text-gray-600">Monitor rainfall patterns for better crop planning</p>
+            </div>
+
+            <!-- Current Season Summary -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-tint text-4xl text-blue-600 mb-3"></i>
+                    <p class="text-sm text-gray-600 mb-2">This Month</p>
+                    <p class="text-3xl font-bold text-blue-600">245 mm</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-calendar text-4xl text-green-600 mb-3"></i>
+                    <p class="text-sm text-gray-600 mb-2">Season Total</p>
+                    <p class="text-3xl font-bold text-green-600">1,850 mm</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-chart-line text-4xl text-purple-600 mb-3"></i>
+                    <p class="text-sm text-gray-600 mb-2">vs Last Year</p>
+                    <p class="text-3xl font-bold text-purple-600">+12%</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-cloud-rain text-4xl text-cyan-600 mb-3"></i>
+                    <p class="text-sm text-gray-600 mb-2">Rainy Days</p>
+                    <p class="text-3xl font-bold text-cyan-600">18</p>
+                </div>
+            </div>
+
+            <!-- Monthly Rainfall Chart -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold mb-6">Monthly Rainfall - Last 12 Months</h3>
+                <div class="flex items-end justify-between h-64 gap-2">
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-500 rounded-t" style="height: 45%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Jan</p>
+                        <p class="text-xs font-bold">120mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-500 rounded-t" style="height: 35%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Feb</p>
+                        <p class="text-xs font-bold">95mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-500 rounded-t" style="height: 55%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Mar</p>
+                        <p class="text-xs font-bold">145mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-600 rounded-t" style="height: 75%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Apr</p>
+                        <p class="text-xs font-bold">210mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-600 rounded-t" style="height: 95%"></div>
+                        <p class="text-xs mt-2 text-gray-600">May</p>
+                        <p class="text-xs font-bold">285mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-700 rounded-t" style="height: 100%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Jun</p>
+                        <p class="text-xs font-bold">320mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-700 rounded-t" style="height: 98%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Jul</p>
+                        <p class="text-xs font-bold">315mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-700 rounded-t" style="height: 90%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Aug</p>
+                        <p class="text-xs font-bold">280mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-600 rounded-t" style="height: 80%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Sep</p>
+                        <p class="text-xs font-bold">245mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-500 rounded-t" style="height: 65%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Oct</p>
+                        <p class="text-xs font-bold">185mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-500 rounded-t" style="height: 40%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Nov</p>
+                        <p class="text-xs font-bold">105mm</p>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center">
+                        <div class="w-full bg-blue-400 rounded-t" style="height: 25%"></div>
+                        <p class="text-xs mt-2 text-gray-600">Dec</p>
+                        <p class="text-xs font-bold">65mm</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rainfall Predictions -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-6">Next 30 Days Rainfall Prediction</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-day text-2xl text-blue-600 mr-4"></i>
+                            <div>
+                                <p class="font-bold">Week 1 (Next 7 days)</p>
+                                <p class="text-sm text-gray-600">Heavy rainfall expected</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-blue-600">125-150mm</p>
+                            <p class="text-sm text-gray-600">Above average</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-week text-2xl text-green-600 mr-4"></i>
+                            <div>
+                                <p class="font-bold">Week 2 (Days 8-14)</p>
+                                <p class="text-sm text-gray-600">Moderate rainfall</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-green-600">75-90mm</p>
+                            <p class="text-sm text-gray-600">Normal range</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-alt text-2xl text-yellow-600 mr-4"></i>
+                            <div>
+                                <p class="font-bold">Week 3-4 (Days 15-30)</p>
+                                <p class="text-sm text-gray-600">Light rainfall</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-yellow-600">40-60mm</p>
+                            <p class="text-sm text-gray-600">Below average</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Drought Alerts Section -->
+    <section id="drought" class="py-12 weather-section hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Drought Early Warning System</h2>
+                <p class="text-gray-600">Stay ahead of water stress conditions</p>
+            </div>
+
+            <!-- Alert Banner -->
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 p-6 rounded-lg mb-8">
+                <div class="flex items-start">
+                    <i class="fas fa-exclamation-triangle text-3xl text-yellow-600 mr-4 mt-1"></i>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-yellow-800 mb-2">Moderate Drought Risk - Bo District</h3>
+                        <p class="text-yellow-700 mb-3">Rainfall 25% below normal for the past 3 weeks. Water conservation measures recommended.</p>
+                        <div class="flex gap-3">
+                            <button class="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 transition text-sm">
+                                View Recommendations
+                            </button>
+                            <button class="px-4 py-2 bg-white text-yellow-700 border border-yellow-600 rounded-lg hover:bg-yellow-50 transition text-sm">
+                                Set Alert for My Farm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- District Drought Status -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold mb-6">Drought Status by District</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="border-l-4 border-green-500 bg-green-50 p-4 rounded">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-lg">Freetown & Western Area</h4>
+                            <span class="px-3 py-1 bg-green-500 text-white text-sm rounded-full">Normal</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Rainfall: 245mm (Normal range)</p>
+                        <p class="text-sm text-gray-700">Soil Moisture: Adequate</p>
+                    </div>
+
+                    <div class="border-l-4 border-yellow-500 bg-yellow-50 p-4 rounded">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-lg">Bo District</h4>
+                            <span class="px-3 py-1 bg-yellow-500 text-white text-sm rounded-full">Watch</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Rainfall: 165mm (25% below normal)</p>
+                        <p class="text-sm text-gray-700">Soil Moisture: Declining</p>
+                    </div>
+
+                    <div class="border-l-4 border-green-500 bg-green-50 p-4 rounded">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-lg">Kenema District</h4>
+                            <span class="px-3 py-1 bg-green-500 text-white text-sm rounded-full">Normal</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Rainfall: 280mm (Above normal)</p>
+                        <p class="text-sm text-gray-700">Soil Moisture: Optimal</p>
+                    </div>
+
+                    <div class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-lg">Makeni & Northern</h4>
+                            <span class="px-3 py-1 bg-orange-500 text-white text-sm rounded-full">Advisory</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Rainfall: 190mm (15% below normal)</p>
+                        <p class="text-sm text-gray-700">Soil Moisture: Moderate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mitigation Strategies -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-6">Drought Mitigation Strategies</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="border rounded-lg p-6 hover:shadow-lg transition">
+                        <i class="fas fa-tint text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="font-bold text-lg mb-3">Water Conservation</h4>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• Mulch to retain moisture</li>
+                            <li>• Drip irrigation systems</li>
+                            <li>• Water early morning/evening</li>
+                            <li>• Harvest rainwater</li>
+                        </ul>
+                    </div>
+                    <div class="border rounded-lg p-6 hover:shadow-lg transition">
+                        <i class="fas fa-seedling text-4xl text-green-600 mb-4"></i>
+                        <h4 class="font-bold text-lg mb-3">Crop Selection</h4>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• Plant drought-resistant varieties</li>
+                            <li>• Adjust planting dates</li>
+                            <li>• Intercropping techniques</li>
+                            <li>• Short-season crops</li>
+                        </ul>
+                    </div>
+                    <div class="border rounded-lg p-6 hover:shadow-lg transition">
+                        <i class="fas fa-mountain text-4xl text-orange-600 mb-4"></i>
+                        <h4 class="font-bold text-lg mb-3">Soil Management</h4>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• Improve soil organic matter</li>
+                            <li>• Reduce tillage</li>
+                            <li>• Cover crops</li>
+                            <li>• Contour plowing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flood Risk Section -->
+    <section id="flood" class="py-12 weather-section hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Flood Risk Maps & Alerts</h2>
+                <p class="text-gray-600">Identify and prepare for flood-prone areas</p>
+            </div>
+
+            <!-- Critical Alert -->
+            <div class="bg-red-100 border-l-4 border-red-500 p-6 rounded-lg mb-8">
+                <div class="flex items-start">
+                    <i class="fas fa-water text-3xl text-red-600 mr-4 mt-1"></i>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-red-800 mb-2">Flood Warning - Western Area Rural</h3>
+                        <p class="text-red-700 mb-3">Heavy rainfall expected in next 48 hours. River levels rising. Evacuate low-lying farms if necessary.</p>
+                        <div class="flex gap-3">
+                            <button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-sm">
+                                View Emergency Contacts
+                            </button>
+                            <button class="px-4 py-2 bg-white text-red-700 border border-red-600 rounded-lg hover:bg-red-50 transition text-sm">
+                                Flood Preparation Checklist
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flood Risk Map -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold mb-6">Flood Risk Map - Sierra Leone</h3>
+                <div class="bg-gray-100 rounded-lg p-8 mb-4 relative" style="height: 400px;">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-map text-6xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-600">Interactive flood risk map would be displayed here</p>
+                            <p class="text-sm text-gray-500">Showing flood zones by district and river basins</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-red-600 rounded mr-2"></div>
+                        <span class="text-sm">High Risk</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-orange-500 rounded mr-2"></div>
+                        <span class="text-sm">Moderate Risk</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-yellow-400 rounded mr-2"></div>
+                        <span class="text-sm">Low Risk</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-green-500 rounded mr-2"></div>
+                        <span class="text-sm">Safe Zone</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historical Flood Data -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-6">Historical Flood Events</h3>
+                <div class="space-y-4">
+                    <div class="border-l-4 border-red-500 bg-red-50 p-4 rounded">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-lg">August 2024 Flooding</h4>
+                            <span class="text-sm text-gray-600">Freetown</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Affected area: 2,500 hectares | Rainfall: 380mm in 24 hours</p>
+                        <p class="text-sm text-gray-700">Impact: 450 farms flooded, 30% crop loss</p>
+                    </div>
+                    <div class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded">
+                        <div class="flex justify-between items-start mb-2">
+                            <h4 class="font-bold text-lg">July 2023 Flash Floods</h4>
+                            <span class="text-sm text-gray-600">Bo District</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Affected area: 1,200 hectares | Rainfall: 250mm in 12 hours</p>
+                        <p class="text-sm text-gray-700">Impact: 180 farms affected, 15% crop loss</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planting Windows Section -->
+    <section id="planting" class="py-12 weather-section hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Optimal Planting Windows</h2>
+                <p class="text-gray-600">Data-driven recommendations for best planting dates</p>
+            </div>
+
+            <!-- Crop Selector -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Select Crop</label>
+                        <select class="w-full px-3 py-2 border rounded-lg" onchange="updatePlantingWindow(this.value)">
+                            <option>Rice</option>
+                            <option>Cassava</option>
+                            <option>Maize</option>
+                            <option>Groundnuts</option>
+                            <option>Sweet Potato</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Your Location</label>
+                        <select class="w-full px-3 py-2 border rounded-lg">
+                            <option>Freetown, Western Area</option>
+                            <option>Bo District</option>
+                            <option>Kenema</option>
+                            <option>Makeni</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planting Calendar -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold mb-6">Rice Planting Calendar - Freetown Area</h3>
+                <div class="space-y-4">
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-bold text-lg text-green-800">Best Planting Window - PRIMARY</h4>
+                                <p class="text-green-700">April 15 - May 15, 2026</p>
+                            </div>
+                            <span class="px-3 py-1 bg-green-500 text-white text-sm rounded-full">Optimal</span>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <p class="text-gray-600 mb-1">Expected Rainfall</p>
+                                <p class="font-bold">280-320mm</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Temperature Range</p>
+                                <p class="font-bold">24-29°C</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Expected Harvest</p>
+                                <p class="font-bold">August-September</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-bold text-lg text-blue-800">Alternative Window - SECONDARY</h4>
+                                <p class="text-blue-700">September 1 - October 15, 2026</p>
+                            </div>
+                            <span class="px-3 py-1 bg-blue-500 text-white text-sm rounded-full">Good</span>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <p class="text-gray-600 mb-1">Expected Rainfall</p>
+                                <p class="font-bold">200-250mm</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Temperature Range</p>
+                                <p class="font-bold">23-28°C</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Expected Harvest</p>
+                                <p class="font-bold">December-January</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-bold text-lg text-yellow-800">Avoid Planting</h4>
+                                <p class="text-yellow-700">November - March</p>
+                            </div>
+                            <span class="px-3 py-1 bg-yellow-500 text-white text-sm rounded-full">Not Recommended</span>
+                        </div>
+                        <p class="text-sm text-gray-700">Insufficient rainfall during critical growth stages. High risk of crop failure.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Rate Prediction -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-6">Success Rate Prediction</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
+                        <div class="text-6xl font-bold text-green-600 mb-2">94%</div>
+                        <p class="text-lg font-bold text-gray-800 mb-2">Success Rate</p>
+                        <p class="text-sm text-gray-600">If planted in optimal window (April 15 - May 15)</p>
+                    </div>
+                    <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                        <div class="text-6xl font-bold text-blue-600 mb-2">78%</div>
+                        <p class="text-lg font-bold text-gray-800 mb-2">Success Rate</p>
+                        <p class="text-sm text-gray-600">If planted in secondary window (Sept 1 - Oct 15)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Climate Trends Section -->
+    <section id="climate" class="py-12 weather-section hidden">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Climate Change Impact Reports</h2>
+                <p class="text-gray-600">Long-term trends affecting agriculture in Sierra Leone</p>
+            </div>
+
+            <!-- Key Indicators -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-temperature-high text-4xl text-red-600 mb-3"></i>
+                    <p class="text-sm text-gray-600 mb-2">Avg. Temperature Rise</p>
+                    <p class="text-3xl font-bold text-red-600">+1.2°C</p>
+                    <p class="text-xs text-gray-500">Since 2000</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-cloud-rain text-4xl text-blue-600 mb-3"></i>
+                    <p class="text-sm text-gray-600 mb-2">Rainfall Pattern</p>
+                    <p class="text-3xl font-bold text-blue-600">-8%</p>
+                    <p class="text-xs text-gray-500">Decreased overall</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-bolt text-4xl text-yellow-600 mb-3"></i>
+                    <p class="text-sm text-gray-600 mb-2">Extreme Events</p>
+                    <p class="text-3xl font-bold text-yellow-600">+35%</p>
+                    <p class="text-xs text-gray-500">More frequent</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                    <i class="fas fa-seedling text-4xl text-green-600 mb-3"></i>
+                    <p class="text-sm text-gray-600 mb-2">Growing Season</p>
+                    <p class="text-3xl font-bold text-green-600">-12 days</p>
+                    <p class="text-xs text-gray-500">Shorter duration</p>
+                </div>
+            </div>
+
+            <!-- Temperature Trends -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-xl font-bold mb-6">Temperature Trends - Last 25 Years</h3>
+                <div class="bg-gray-100 rounded-lg p-8 mb-4" style="height: 300px;">
+                    <div class="flex items-center justify-center h-full">
+                        <div class="text-center">
+                            <i class="fas fa-chart-line text-6xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-600">Temperature trend chart would be displayed here</p>
+                            <p class="text-sm text-gray-500">Showing gradual increase over time</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                    <p class="text-sm text-red-800">
+                        <strong>Impact:</strong> Higher temperatures increase crop water needs by 15-20% and reduce 
+                        yields for heat-sensitive crops like cocoa and coffee.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Crop-Specific Impacts -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-6">Climate Impact by Crop</h3>
+                <div class="space-y-4">
+                    <div class="border rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-bold text-lg">Rice</h4>
+                                <p class="text-sm text-gray-600">Most affected staple crop</p>
+                            </div>
+                            <span class="px-3 py-1 bg-orange-100 text-orange-800 text-sm rounded-full">High Risk</span>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <p class="text-gray-600 mb-1">Yield Impact</p>
+                                <p class="font-bold text-red-600">-15% to -25%</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Main Challenge</p>
+                                <p class="font-bold">Water stress</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Adaptation</p>
+                                <p class="font-bold text-blue-600">Drought-resistant varieties</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-bold text-lg">Cocoa</h4>
+                                <p class="text-sm text-gray-600">Premium export crop</p>
+                            </div>
+                            <span class="px-3 py-1 bg-red-100 text-red-800 text-sm rounded-full">Critical Risk</span>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <p class="text-gray-600 mb-1">Yield Impact</p>
+                                <p class="font-bold text-red-600">-20% to -30%</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Main Challenge</p>
+                                <p class="font-bold">Heat + Pest pressure</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Adaptation</p>
+                                <p class="font-bold text-blue-600">Shade trees + irrigation</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded-lg p-4">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h4 class="font-bold text-lg">Cassava</h4>
+                                <p class="text-sm text-gray-600">Resilient food security crop</p>
+                            </div>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Low Risk</span>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm">
+                            <div>
+                                <p class="text-gray-600 mb-1">Yield Impact</p>
+                                <p class="font-bold text-green-600">-5% to -10%</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Main Challenge</p>
+                                <p class="font-bold">Pest diseases</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-600 mb-1">Adaptation</p>
+                                <p class="font-bold text-blue-600">Good natural resilience</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // Section Navigation
+        function showWeatherSection(sectionId) {
+            document.querySelectorAll('.weather-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
+
+        // Planting Window Update
+        function updatePlantingWindow(crop) {
+            console.log('[v0] Updating planting window for:', crop);
+            // This would update the planting window information based on selected crop
+        }
+    </script>
+</body>
+</html>

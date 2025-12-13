@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews & Ratings - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-seedling text-green-600 text-2xl"></i>
+                    <span class="text-2xl font-bold text-green-600">AgriPredict</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-green-600">Home</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-600">Marketplace</a>
+                    <a href="dashboard.html" class="text-gray-700 hover:text-green-600">Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">Reviews & Ratings</h1>
+            <p class="text-xl mb-6">Build trust through transparent feedback</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Sidebar -->
+                <div class="md:col-span-1">
+                    <div class="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+                        <h3 class="text-xl font-bold mb-4">Your Rating Overview</h3>
+                        <div class="text-center mb-6">
+                            <div class="text-5xl font-bold text-yellow-500 mb-2">4.8</div>
+                            <div class="flex justify-center mb-2">
+                                <i class="fas fa-star text-yellow-400 text-xl"></i>
+                                <i class="fas fa-star text-yellow-400 text-xl"></i>
+                                <i class="fas fa-star text-yellow-400 text-xl"></i>
+                                <i class="fas fa-star text-yellow-400 text-xl"></i>
+                                <i class="fas fa-star-half-alt text-yellow-400 text-xl"></i>
+                            </div>
+                            <p class="text-gray-600">Based on 127 reviews</p>
+                        </div>
+
+                        <div class="space-y-2 mb-6">
+                            <div class="flex items-center">
+                                <span class="text-sm w-12">5 star</span>
+                                <div class="flex-1 mx-2 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-400 h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <span class="text-sm w-12 text-right">95</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-sm w-12">4 star</span>
+                                <div class="flex-1 mx-2 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-400 h-2 rounded-full" style="width: 15%"></div>
+                                </div>
+                                <span class="text-sm w-12 text-right">19</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-sm w-12">3 star</span>
+                                <div class="flex-1 mx-2 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-400 h-2 rounded-full" style="width: 8%"></div>
+                                </div>
+                                <span class="text-sm w-12 text-right">10</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-sm w-12">2 star</span>
+                                <div class="flex-1 mx-2 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-400 h-2 rounded-full" style="width: 2%"></div>
+                                </div>
+                                <span class="text-sm w-12 text-right">2</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-sm w-12">1 star</span>
+                                <div class="flex-1 mx-2 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-400 h-2 rounded-full" style="width: 1%"></div>
+                                </div>
+                                <span class="text-sm w-12 text-right">1</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 text-center">
+                            <div class="bg-green-50 rounded p-2">
+                                <p class="text-2xl font-bold text-green-600">98%</p>
+                                <p class="text-xs text-gray-600">Quality</p>
+                            </div>
+                            <div class="bg-blue-50 rounded p-2">
+                                <p class="text-2xl font-bold text-blue-600">96%</p>
+                                <p class="text-xs text-gray-600">Delivery</p>
+                            </div>
+                            <div class="bg-purple-50 rounded p-2">
+                                <p class="text-2xl font-bold text-purple-600">100%</p>
+                                <p class="text-xs text-gray-600">Trust</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews List -->
+                <div class="md:col-span-2">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold">Customer Reviews</h3>
+                        <select class="px-3 py-2 border rounded-lg">
+                            <option>Most Recent</option>
+                            <option>Highest Rated</option>
+                            <option>Lowest Rated</option>
+                            <option>Most Helpful</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Review Card 1 -->
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center">
+                                    <img src="/placeholder.svg?height=50&width=50" alt="Buyer" class="w-12 h-12 rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-bold">Fresh Market Co-op</h4>
+                                        <div class="flex items-center text-sm text-gray-600">
+                                            <i class="fas fa-check-circle text-green-600 mr-1"></i>
+                                            <span>Verified Buyer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-sm text-gray-500">2 days ago</span>
+                            </div>
+
+                            <div class="flex items-center mb-3">
+                                <div class="flex mr-3">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                                <span class="font-bold">Excellent Quality!</span>
+                            </div>
+
+                            <p class="text-gray-700 mb-3">
+                                Ordered 500 kg of organic tomatoes. Quality was exceptional, packaging was perfect, 
+                                and delivery was on time. Ibrahim is a reliable supplier. Will definitely order again!
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Quality: 5/5</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Delivery: 5/5</span>
+                                <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">Communication: 5/5</span>
+                            </div>
+
+                            <div class="flex items-center justify-between border-t pt-3">
+                                <div class="text-sm text-gray-600">
+                                    <i class="fas fa-shopping-bag mr-1"></i>
+                                    Product: Organic Tomatoes - 500 kg
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="px-3 py-1 text-sm text-gray-600 hover:text-green-600">
+                                        <i class="far fa-thumbs-up mr-1"></i>Helpful (24)
+                                    </button>
+                                    <button class="px-3 py-1 text-sm text-gray-600 hover:text-blue-600">
+                                        <i class="far fa-comment mr-1"></i>Reply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review Card 2 -->
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center">
+                                    <img src="/placeholder.svg?height=50&width=50" alt="Buyer" class="w-12 h-12 rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-bold">Riverside Restaurant</h4>
+                                        <div class="flex items-center text-sm text-gray-600">
+                                            <i class="fas fa-check-circle text-green-600 mr-1"></i>
+                                            <span>Verified Buyer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-sm text-gray-500">1 week ago</span>
+                            </div>
+
+                            <div class="flex items-center mb-3">
+                                <div class="flex mr-3">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                </div>
+                                <span class="font-bold">Perfect for our restaurant</span>
+                            </div>
+
+                            <p class="text-gray-700 mb-3">
+                                We've been sourcing vegetables from this farm for 3 months now. Consistent quality, 
+                                always fresh, and great customer service. The produce lasts longer than from other suppliers.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Quality: 5/5</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Delivery: 5/5</span>
+                                <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">Communication: 5/5</span>
+                            </div>
+
+                            <div class="flex items-center justify-between border-t pt-3">
+                                <div class="text-sm text-gray-600">
+                                    <i class="fas fa-shopping-bag mr-1"></i>
+                                    Product: Mixed Vegetables - Weekly Supply
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="px-3 py-1 text-sm text-gray-600 hover:text-green-600">
+                                        <i class="far fa-thumbs-up mr-1"></i>Helpful (18)
+                                    </button>
+                                    <button class="px-3 py-1 text-sm text-gray-600 hover:text-blue-600">
+                                        <i class="far fa-comment mr-1"></i>Reply
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Seller Response -->
+                            <div class="mt-4 ml-8 bg-gray-50 rounded-lg p-4 border-l-4 border-green-600">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-user-circle text-green-600 text-xl mr-2"></i>
+                                    <span class="font-bold">Response from Seller</span>
+                                </div>
+                                <p class="text-sm text-gray-700">
+                                    Thank you for the wonderful review! We're committed to providing the freshest 
+                                    produce for your restaurant. Looking forward to continuing our partnership!
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Review Card 3 -->
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="flex items-center">
+                                    <img src="/placeholder.svg?height=50&width=50" alt="Buyer" class="w-12 h-12 rounded-full mr-3">
+                                    <div>
+                                        <h4 class="font-bold">Sierra Export Ltd</h4>
+                                        <div class="flex items-center text-sm text-gray-600">
+                                            <i class="fas fa-check-circle text-green-600 mr-1"></i>
+                                            <span>Verified Buyer</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-sm text-gray-500">2 weeks ago</span>
+                            </div>
+
+                            <div class="flex items-center mb-3">
+                                <div class="flex mr-3">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="far fa-star text-gray-300"></i>
+                                </div>
+                                <span class="font-bold">Good quality, minor packaging issue</span>
+                            </div>
+
+                            <p class="text-gray-700 mb-3">
+                                Overall satisfied with the cocoa beans quality. Met export standards. Only issue was 
+                                some bags had minor tears, but product inside was fine. Quick resolution from farmer.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Quality: 5/5</span>
+                                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Delivery: 4/5</span>
+                                <span class="px-3 py-1 bg-purple-100 text-purple-800 text-sm rounded-full">Communication: 4/5</span>
+                            </div>
+
+                            <div class="flex items-center justify-between border-t pt-3">
+                                <div class="text-sm text-gray-600">
+                                    <i class="fas fa-shopping-bag mr-1"></i>
+                                    Product: Premium Cocoa Beans - 1 Ton
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="px-3 py-1 text-sm text-gray-600 hover:text-green-600">
+                                        <i class="far fa-thumbs-up mr-1"></i>Helpful (12)
+                                    </button>
+                                    <button class="px-3 py-1 text-sm text-gray-600 hover:text-blue-600">
+                                        <i class="far fa-comment mr-1"></i>Reply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex justify-center mt-8">
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 border rounded-lg hover:bg-gray-50">Previous</button>
+                            <button class="px-4 py-2 bg-green-600 text-white rounded-lg">1</button>
+                            <button class="px-4 py-2 border rounded-lg hover:bg-gray-50">2</button>
+                            <button class="px-4 py-2 border rounded-lg hover:bg-gray-50">3</button>
+                            <button class="px-4 py-2 border rounded-lg hover:bg-gray-50">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

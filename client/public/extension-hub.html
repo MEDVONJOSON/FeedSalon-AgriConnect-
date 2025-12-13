@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extension Hub - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="glass fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="bg-green-600 text-white p-2 rounded-lg group-hover:rotate-12 transition-transform">
+                    <i class="fas fa-leaf text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold gradient-text">AgriPredict</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html" class="hover:text-green-600 transition-colors">Home</a>
+                <a href="dashboard.html" class="hover:text-green-600 transition-colors">Dashboard</a>
+                <a href="marketplace.html" class="hover:text-green-600 transition-colors">Marketplace</a>
+                <div class="relative group">
+                    <button class="flex items-center gap-1 hover:text-green-600 transition-colors">
+                        Services <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 hidden group-hover:block fade-in">
+                        <a href="mechanization.html" class="block px-4 py-2 hover:bg-green-50">Mechanization</a>
+                        <a href="agri-industry.html" class="block px-4 py-2 hover:bg-green-50">Agri-Industry</a>
+                        <a href="extension-hub.html" class="block px-4 py-2 hover:bg-green-50 text-green-600">Extension Hub</a>
+                    </div>
+                </div>
+            </div>
+            <button class="md:hidden text-2xl text-gray-600" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-6 bg-gradient-to-br from-purple-900 to-gray-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center"></div>
+        </div>
+        <div class="container mx-auto relative z-10 text-center">
+            <div class="inline-block bg-purple-600/20 backdrop-blur-sm border border-purple-500/30 rounded-full px-4 py-1 mb-6 fade-in">
+                <i class="fas fa-graduation-cap mr-2 text-purple-400"></i> Agricultural Extension & Education
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 slide-in-up">Extension Hub</h1>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8 slide-in-up stagger-1">
+                Expert knowledge at your fingertips. Chat with agronomists, watch tutorials, and get real-time pest alerts.
+            </p>
+            <div class="flex justify-center gap-4 slide-in-up stagger-2">
+                <button onclick="scrollToElement('chat-section')" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg shadow-purple-600/30">
+                    Ask an Expert
+                </button>
+                <button onclick="scrollToElement('video-library')" class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-3 rounded-xl font-semibold transition-all">
+                    Video Library
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Chat Section -->
+    <section id="chat-section" class="py-20 px-6 bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h2 class="text-3xl font-bold mb-4">Digital Extension Officer</h2>
+                <p class="text-gray-600">Get instant answers to your farming questions.</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl shadow-xl overflow-hidden border border-gray-200 animate-on-scroll stagger-1">
+                <div class="bg-purple-600 p-4 text-white flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold">AgriBot Assistant</h3>
+                        <p class="text-xs text-purple-200">Online • Replies instantly</p>
+                    </div>
+                </div>
+                
+                <div id="chat-messages" class="h-96 overflow-y-auto p-6 space-y-4">
+                    <!-- Bot Message -->
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 flex-shrink-0">
+                            <i class="fas fa-robot text-sm"></i>
+                        </div>
+                        <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 max-w-[80%]">
+                            <p class="text-gray-800">Hello! I'm your digital extension officer. How can I help you today? You can ask about pest control, planting seasons, or fertilizer application.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white border-t border-gray-200">
+                    <form id="chat-form" class="flex gap-2">
+                        <input type="text" id="chat-input" placeholder="Type your question here..." class="flex-1 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <button type="submit" class="bg-purple-600 text-white px-6 py-2 rounded-xl hover:bg-purple-700 transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Library -->
+    <section id="video-library" class="py-20 px-6 bg-gray-50">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-end mb-12 animate-on-scroll">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">Knowledge Library</h2>
+                    <p class="text-gray-600">Watch tutorials and learn best practices.</p>
+                </div>
+                <button class="text-purple-600 font-semibold hover:underline">View All Videos</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Video 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll stagger-1">
+                    <div class="relative h-48 bg-gray-900 group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video Thumbnail" class="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                            12:45
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold mb-2">Modern Rice Planting Techniques</h3>
+                        <p class="text-sm text-gray-500">Learn how to increase yield with the SRI method.</p>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll stagger-2">
+                    <div class="relative h-48 bg-gray-900 group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video Thumbnail" class="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                            08:30
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold mb-2">Tractor Maintenance 101</h3>
+                        <p class="text-sm text-gray-500">Basic maintenance tips to keep your tractor running.</p>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-on-scroll stagger-3">
+                    <div class="relative h-48 bg-gray-900 group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video Thumbnail" class="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                            15:20
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold mb-2">Pest Control Without Chemicals</h3>
+                        <p class="text-sm text-gray-500">Organic methods to protect your crops.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // Chat functionality
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        if (chatForm) {
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const message = chatInput.value.trim();
+                if (!message) return;
+
+                // Add user message
+                addMessage(message, 'user');
+                chatInput.value = '';
+
+                // Simulate bot typing
+                setTimeout(() => {
+                    const typingIndicator = document.createElement('div');
+                    typingIndicator.id = 'typing-indicator';
+                    typingIndicator.className = 'flex gap-3 fade-in';
+                    typingIndicator.innerHTML = `
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 flex-shrink-0">
+                            <i class="fas fa-robot text-sm"></i>
+                        </div>
+                        <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100">
+                            <div class="flex gap-1">
+                                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                            </div>
+                        </div>
+                    `;
+                    chatMessages.appendChild(typingIndicator);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                    // Bot response
+                    setTimeout(() => {
+                        document.getElementById('typing-indicator').remove();
+                        const responses = [
+                            "That's a great question! For best results, ensure your soil pH is between 6.0 and 7.0.",
+                            "I recommend checking for pests early in the morning when they are most active.",
+                            "Watering should be done in the evening to minimize evaporation.",
+                            "Have you considered crop rotation? It helps maintain soil health."
+                        ];
+                        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                        addMessage(randomResponse, 'bot');
+                    }, 1500);
+                }, 500);
+            });
+        }
+
+        function addMessage(text, sender) {
+            const div = document.createElement('div');
+            div.className = `flex gap-3 fade-in ${sender === 'user' ? 'flex-row-reverse' : ''}`;
+            
+            const icon = sender === 'user' 
+                ? `<div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 flex-shrink-0"><i class="fas fa-user text-sm"></i></div>`
+                : `<div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 flex-shrink-0"><i class="fas fa-robot text-sm"></i></div>`;
+            
+            const bubble = sender === 'user'
+                ? `<div class="bg-green-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm max-w-[80%]"><p>${text}</p></div>`
+                : `<div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 max-w-[80%]"><p class="text-gray-800">${text}</p></div>`;
+
+            div.innerHTML = icon + bubble;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+</body>
+</html>

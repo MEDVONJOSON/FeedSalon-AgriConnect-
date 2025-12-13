@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crop Doctor - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-green-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-leaf text-2xl"></i>
+                    <span class="font-bold text-xl">AgriPredict</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="index.html" class="hover:text-green-200 transition">Home</a>
+                    <a href="dashboard.html" class="hover:text-green-200 transition">Dashboard</a>
+                    <a href="ai-crop-doctor.html" class="bg-green-600 px-4 py-2 rounded-lg">AI Crop Doctor</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="max-w-2xl">
+                    <h1 class="text-4xl font-bold mb-3">AI-Powered Crop Doctor</h1>
+                    <p class="text-purple-100 text-lg mb-4">Snap a photo of your plant and get instant AI diagnosis with treatment recommendations in seconds.</p>
+                    <div class="flex gap-4">
+                        <div class="bg-white/20 backdrop-blur-lg rounded-lg px-6 py-3">
+                            <div class="text-2xl font-bold">98.7%</div>
+                            <div class="text-sm text-purple-100">Diagnosis Accuracy</div>
+                        </div>
+                        <div class="bg-white/20 backdrop-blur-lg rounded-lg px-6 py-3">
+                            <div class="text-2xl font-bold">145,000+</div>
+                            <div class="text-sm text-purple-100">Plants Diagnosed</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden lg:block">
+                    <i class="fas fa-microscope text-9xl opacity-30"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Photo Upload Section -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                    <i class="fas fa-camera text-purple-500"></i>
+                    Upload Plant Photo for Diagnosis
+                </h2>
+                
+                <div class="border-4 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-purple-500 transition cursor-pointer mb-6">
+                    <i class="fas fa-cloud-upload-alt text-6xl text-gray-400 mb-4"></i>
+                    <p class="text-lg text-gray-700 mb-2">Click to upload or drag photo here</p>
+                    <p class="text-sm text-gray-500 mb-4">Take a clear photo of affected leaves, stems, or fruits</p>
+                    <button class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition">
+                        <i class="fas fa-camera mr-2"></i>Take Photo / Upload
+                    </button>
+                </div>
+
+                <!-- Tips for Best Results -->
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                        <i class="fas fa-lightbulb text-yellow-500"></i>
+                        Tips for Best Results
+                    </h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Take photo in good natural lighting</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Focus on affected area (close-up)</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Include healthy parts for comparison</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Avoid blurry or dark photos</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Show multiple angles if possible</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- AI Analysis Results -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                    <i class="fas fa-robot text-pink-500"></i>
+                    AI Diagnosis Results
+                </h2>
+
+                <!-- Sample Result -->
+                <div class="space-y-6">
+                    <div class="border-l-4 border-red-500 bg-red-50 rounded-lg p-4">
+                        <div class="flex items-start gap-3 mb-3">
+                            <i class="fas fa-exclamation-triangle text-red-500 text-2xl"></i>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800 mb-1">Late Blight Detected</h3>
+                                <p class="text-sm text-gray-600">Phytophthora infestans • Fungal Disease</p>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-sm text-gray-600">Confidence Level</span>
+                                <span class="font-bold text-red-600">96.8%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-red-500 h-2 rounded-full" style="width: 96.8%"></div>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-700 mb-3">
+                            <strong>Symptoms Match:</strong> Dark brown spots on leaves, white fuzzy growth on undersides, rapid spreading pattern
+                        </div>
+                        <div class="bg-white rounded-lg p-3 mb-3">
+                            <div class="font-bold text-gray-800 mb-2">Severity Assessment:</div>
+                            <div class="flex items-center gap-2">
+                                <div class="flex-1 bg-gray-200 rounded-full h-3">
+                                    <div class="bg-red-500 h-3 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <span class="text-sm font-bold text-red-600">HIGH RISK</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1">Requires immediate treatment to prevent total crop loss</p>
+                        </div>
+                    </div>
+
+                    <!-- Treatment Recommendations -->
+                    <div class="bg-gradient-to-br from-green-50 to-teal-50 border border-green-200 rounded-lg p-5">
+                        <h3 class="font-bold text-lg text-gray-800 mb-4 flex items-center gap-2">
+                            <i class="fas fa-pills text-green-600"></i>
+                            Treatment Recommendations
+                        </h3>
+
+                        <!-- Chemical Treatment -->
+                        <div class="bg-white rounded-lg p-4 mb-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="fas fa-flask text-blue-500"></i>
+                                <h4 class="font-bold text-gray-800">Chemical Treatment (Fast-Acting)</h4>
+                            </div>
+                            <div class="text-sm text-gray-700 mb-2">
+                                <strong>Fungicide:</strong> Mancozeb 80% WP or Metalaxyl
+                            </div>
+                            <div class="text-sm text-gray-700 mb-2">
+                                <strong>Application:</strong> Mix 30g per 10L water, spray thoroughly every 7 days for 3 weeks
+                            </div>
+                            <div class="text-sm text-gray-700 mb-3">
+                                <strong>Cost:</strong> Le 45,000 - Le 65,000 per treatment cycle
+                            </div>
+                            <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition text-sm">
+                                <i class="fas fa-shopping-cart mr-2"></i>Buy Treatment Products
+                            </button>
+                        </div>
+
+                        <!-- Organic Treatment -->
+                        <div class="bg-white rounded-lg p-4 mb-3">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="fas fa-leaf text-green-500"></i>
+                                <h4 class="font-bold text-gray-800">Organic Treatment (Natural)</h4>
+                            </div>
+                            <div class="text-sm text-gray-700 mb-2">
+                                <strong>Solution:</strong> Neem oil + Baking soda mixture
+                            </div>
+                            <div class="text-sm text-gray-700 mb-2">
+                                <strong>Recipe:</strong> 2 tbsp neem oil + 1 tbsp baking soda + 1 tsp liquid soap per 4L water
+                            </div>
+                            <div class="text-sm text-gray-700 mb-3">
+                                <strong>Application:</strong> Spray in early morning, repeat every 3 days
+                            </div>
+                            <button class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition text-sm">
+                                <i class="fas fa-info-circle mr-2"></i>View Organic Recipe
+                            </button>
+                        </div>
+
+                        <!-- Traditional Remedy -->
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="fas fa-mortar-pestle text-amber-600"></i>
+                                <h4 class="font-bold text-gray-800">Traditional Sierra Leone Remedy</h4>
+                            </div>
+                            <div class="text-sm text-gray-700 mb-2">
+                                <strong>Local Solution:</strong> Crushed mahogany leaves + wood ash spray
+                            </div>
+                            <div class="text-sm text-gray-700 mb-2">
+                                <strong>Preparation:</strong> Boil mahogany leaves for 20 mins, add wood ash, strain, spray
+                            </div>
+                            <div class="text-sm text-gray-700 mb-3">
+                                <strong>Effectiveness:</strong> Moderate - Best as preventive measure
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prevention Tips -->
+                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                            <i class="fas fa-shield-alt text-yellow-600"></i>
+                            Prevention for Future
+                        </h3>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Plant resistant varieties (e.g., Tolaka, Sierra Leone variety)</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Improve air circulation between plants</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Water at base, avoid wetting leaves</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Remove and destroy infected plant material immediately</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Apply preventive copper spray during rainy season</li>
+                        </ul>
+                    </div>
+
+                    <!-- Alert Nearby Farmers -->
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                            <i class="fas fa-bell text-red-600"></i>
+                            Disease Outbreak Alert
+                        </h3>
+                        <p class="text-sm text-gray-700 mb-3">Late blight spreads rapidly. Alert nearby farmers to check their crops and take preventive measures.</p>
+                        <button class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition text-sm">
+                            <i class="fas fa-bullhorn mr-2"></i>Send Alert to Nearby Farmers
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disease Outbreak Map -->
+        <div class="mt-8 bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-map-marked-alt text-orange-500"></i>
+                Live Disease Outbreak Map - Sierra Leone
+            </h2>
+            <div class="bg-gray-100 rounded-lg p-8 h-96 flex items-center justify-center">
+                <div class="text-center">
+                    <i class="fas fa-map text-6xl text-gray-400 mb-4"></i>
+                    <p class="text-gray-600">Interactive map showing recent disease detections across districts</p>
+                    <p class="text-sm text-gray-500 mt-2">Real-time data from farmer reports and AI diagnoses</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

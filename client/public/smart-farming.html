@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Farming Tools - AgriPredict</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-8">
+          <a href="index.html" class="text-2xl font-bold text-green-700">🌾 AgriPredict</a>
+          <div class="hidden md:flex gap-6">
+            <a href="index.html" class="text-gray-700 hover:text-green-700">Home</a>
+            <a href="about.html" class="text-gray-700 hover:text-green-700">About</a>
+            <a href="marketplace.html" class="text-gray-700 hover:text-green-700">Marketplace</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="login.html" class="text-green-700 hover:text-green-800 font-semibold">Login</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-yellow-600 to-yellow-500 text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Smart Farming Tools</h1>
+      <p class="text-xl text-yellow-100">Advanced agricultural technology for Sierra Leonean farmers</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Soil Health Monitoring -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+              <span class="text-2xl">🌱</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Soil Health Monitoring</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Track soil test results and get improvement recommendations for optimal crop growth</p>
+          <button onclick="openSoilMonitoring()" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition">
+            Check Soil Health
+          </button>
+        </div>
+
+        <!-- Pest & Disease Alerts -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+              <span class="text-2xl">🐛</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Pest & Disease Alerts</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Real-time outbreak warnings by district with map visualization</p>
+          <button onclick="viewPestAlerts()" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">
+            View Alerts
+          </button>
+        </div>
+
+        <!-- Harvest Calendar -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+              <span class="text-2xl">📅</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Harvest Calendar</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Optimal planting and harvesting schedules based on weather and location</p>
+          <button onclick="viewHarvestCalendar()" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+            View Calendar
+          </button>
+        </div>
+
+        <!-- Water Management -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center mr-4">
+              <span class="text-2xl">💧</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Water Management</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Irrigation scheduling based on crop needs and rainfall predictions</p>
+          <button onclick="openWaterManagement()" class="w-full bg-cyan-600 text-white py-2 rounded-lg hover:bg-cyan-700 transition">
+            Get Schedule
+          </button>
+        </div>
+
+        <!-- Equipment Rental -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+              <span class="text-2xl">🚜</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Equipment Rental</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Rent tractors, harvesters, and irrigation equipment from nearby farmers</p>
+          <button onclick="browseEquipment()" class="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition">
+            Browse Equipment
+          </button>
+        </div>
+
+        <!-- Drone Services -->
+        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+              <span class="text-2xl">🚁</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Drone Services</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Book aerial crop monitoring and spraying services</p>
+          <button onclick="bookDrone()" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">
+            Book Service
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Soil Health Modal -->
+  <div id="soilModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-gray-900">Soil Health Monitoring</h2>
+          <button onclick="closeSoilMonitoring()" class="text-gray-500 hover:text-gray-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <form class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Farm Location</label>
+            <input type="text" placeholder="e.g., Freetown, Western Area" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Soil pH Level</label>
+            <input type="number" step="0.1" placeholder="e.g., 6.5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Nitrogen Content (ppm)</label>
+            <input type="number" placeholder="e.g., 45" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Phosphorus Content (ppm)</label>
+            <input type="number" placeholder="e.g., 30" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Potassium Content (ppm)</label>
+            <input type="number" placeholder="e.g., 40" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+          </div>
+
+          <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-semibold">
+            Get Soil Analysis
+          </button>
+        </form>
+
+        <div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+          <h3 class="font-semibold text-green-900 mb-2">💡 Recommendations</h3>
+          <p class="text-sm text-green-800">Enter your soil test results to receive personalized improvement recommendations for optimal crop growth.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 2025 AgriPredict. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function openSoilMonitoring() {
+      document.getElementById('soilModal').classList.remove('hidden');
+    }
+
+    function closeSoilMonitoring() {
+      document.getElementById('soilModal').classList.add('hidden');
+    }
+
+    function viewPestAlerts() {
+      alert('Pest & Disease Alerts\n\nCurrent Alerts:\n• Fall Armyworm outbreak reported in Bo District\n• Late Blight detected in Kenema (potato farms)\n• Aphid infestation warning for Western Area');
+    }
+
+    function viewHarvestCalendar() {
+      alert('Harvest Calendar feature will show planting and harvesting schedules based on your location and crops.');
+    }
+
+    function openWaterManagement() {
+      alert('Water Management Advisor\n\nIrrigation recommendations based on:\n• Current rainfall data\n• Crop water requirements\n• Soil moisture levels\n• Weather forecasts');
+    }
+
+    function browseEquipment() {
+      window.location.href = 'marketplace.html';
+    }
+
+    function bookDrone() {
+      alert('Drone Services\n\nAvailable Services:\n• Aerial crop monitoring: Le 150,000/hectare\n• Precision spraying: Le 200,000/hectare\n• Farm mapping: Le 100,000/hectare\n\nContact us to schedule a service.');
+    }
+  </script>
+</body>
+</html>

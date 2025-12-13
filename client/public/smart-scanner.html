@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed Salone Smart Scanner | AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .scanner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.1);
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+            animation: scanMove 2s infinite linear;
+            display: none;
+        }
+
+        @keyframes scanMove {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .camera-container {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            background: #000;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        #camera-feed {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hud-corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            z-index: 20;
+        }
+
+        .hud-tl { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
+        .hud-tr { top: 20px; right: 20px; border-left: 0; border-bottom: 0; }
+        .hud-bl { bottom: 20px; left: 20px; border-right: 0; border-top: 0; }
+        .hud-br { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
+
+        .analysis-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+            z-index: 100;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .analysis-panel.active {
+            transform: translateY(0);
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            white-space: nowrap;
+            border: 1px solid rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: #16a34a;
+            border-color: #16a34a;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 h-screen overflow-hidden">
+
+    <!-- Top Bar -->
+    <div class="absolute top-0 left-0 w-full p-4 z-50 flex justify-between items-center text-white bg-gradient-to-b from-black/70 to-transparent">
+        <a href="index.html" class="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="text-center">
+            <h1 class="font-bold text-lg">Smart Scanner</h1>
+            <p class="text-xs opacity-80" id="location-tag"><i class="fas fa-location-dot mr-1"></i>Detecting Location...</p>
+        </div>
+        <button onclick="toggleFlash()" class="w-10 h-10 rounded-full bg-white/20 backdrop-blur flex items-center justify-center">
+            <i class="fas fa-bolt" id="flash-icon"></i>
+        </button>
+    </div>
+
+    <!-- Camera Viewport -->
+    <div class="camera-container">
+        <video id="camera-feed" autoplay playsinline></video>
+        <canvas id="capture-canvas" class="hidden"></canvas>
+        
+        <!-- HUD Overlay -->
+        <div class="scanner-overlay">
+            <div class="scan-line" id="scan-line"></div>
+            <div class="hud-corner hud-tl"></div>
+            <div class="hud-corner hud-tr"></div>
+            <div class="hud-corner hud-bl"></div>
+            <div class="hud-corner hud-br"></div>
+            
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white/80 text-center pointer-events-none">
+                <i class="fas fa-crop-simple text-4xl mb-2 opacity-50"></i>
+                <p class="text-sm font-mono" id="instruction-text">Align Soil in Frame</p>
+            </div>
+        </div>
+
+        <!-- Mode Selector (Floating) -->
+        <div class="absolute bottom-24 left-0 w-full px-4 z-30">
+            <div class="mode-selector no-scrollbar">
+                <button class="mode-btn active" onclick="setMode('soil')"><i class="fas fa-layer-group mr-2"></i>Soil Analysis</button>
+                <button class="mode-btn" onclick="setMode('crop')"><i class="fas fa-leaf mr-2"></i>Crop Doctor</button>
+                <button class="mode-btn" onclick="setMode('rice')"><i class="fas fa-bowl-rice mr-2"></i>Rice Yield</button>
+            </div>
+        </div>
+
+        <!-- Capture Button -->
+        <div class="absolute bottom-6 left-0 w-full flex justify-center z-30">
+            <button onclick="captureAndAnalyze()" class="w-16 h-16 rounded-full border-4 border-white flex items-center justify-center bg-white/20 backdrop-blur active:scale-95 transition-transform">
+                <div class="w-12 h-12 bg-white rounded-full"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Analysis Result Panel -->
+    <div class="analysis-panel" id="result-panel">
+        <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-4"></div>
+        
+        <div id="loading-state" class="text-center py-8 hidden">
+            <div class="animate-spin w-10 h-10 border-4 border-green-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+            <h3 class="text-lg font-bold text-gray-800">Analyzing Sample...</h3>
+            <p class="text-gray-500 text-sm">Processing visual data with AI</p>
+        </div>
+
+        <div id="result-content">
+            <!-- Dynamic Content will be injected here -->
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'soil';
+        const video = document.getElementById('camera-feed');
+        const canvas = document.getElementById('capture-canvas');
+        const resultPanel = document.getElementById('result-panel');
+        const resultContent = document.getElementById('result-content');
+        const loadingState = document.getElementById('loading-state');
+        const scanLine = document.getElementById('scan-line');
+
+        // Initialize Camera
+        async function initCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'environment' } 
+                });
+                video.srcObject = stream;
+            } catch (err) {
+                console.error("Camera Error:", err);
+                alert("Please allow camera access to use the Smart Scanner.");
+            }
+        }
+
+        // Initialize Location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                // Mock reverse geocoding for demo
+                document.getElementById('location-tag').innerHTML = `<i class="fas fa-location-dot mr-1"></i>Bo District, Sierra Leone`;
+            }, () => {
+                document.getElementById('location-tag').innerHTML = `<i class="fas fa-location-slash mr-1"></i>Location Unavailable`;
+            });
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            const instructions = {
+                'soil': 'Align Soil in Frame',
+                'crop': 'Focus on Leaf/Fruit',
+                'rice': 'Scan Rice Paddy Field'
+            };
+            document.getElementById('instruction-text').innerText = instructions[mode];
+        }
+
+        function captureAndAnalyze() {
+            // 1. UI Feedback
+            scanLine.style.display = 'block';
+            resultPanel.classList.add('active');
+            resultContent.classList.add('hidden');
+            loadingState.classList.remove('hidden');
+
+            // 2. Capture Image
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+
+            // 3. Simulate Analysis (Wait 2 seconds)
+            setTimeout(() => {
+                scanLine.style.display = 'none';
+                loadingState.classList.add('hidden');
+                resultContent.classList.remove('hidden');
+                showResults();
+            }, 2000);
+        }
+
+        function showResults() {
+            let html = '';
+            
+            if (currentMode === 'soil') {
+                html = `
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">Soil Analysis</h2>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-bold">Good Potential</span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="bg-orange-50 p-3 rounded-xl border border-orange-100">
+                            <p class="text-xs text-gray-500">Soil Type</p>
+                            <p class="font-bold text-orange-800">Loamy Clay</p>
+                        </div>
+                        <div class="bg-blue-50 p-3 rounded-xl border border-blue-100">
+                            <p class="text-xs text-gray-500">Moisture</p>
+                            <p class="font-bold text-blue-800">High (65%)</p>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-xl border border-purple-100">
+                            <p class="text-xs text-gray-500">Est. pH</p>
+                            <p class="font-bold text-purple-800">6.2 (Acidic)</p>
+                        </div>
+                        <div class="bg-yellow-50 p-3 rounded-xl border border-yellow-100">
+                            <p class="text-xs text-gray-500">Organic Matter</p>
+                            <p class="font-bold text-yellow-800">Medium</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 p-4 rounded-xl border border-green-200 mb-4">
+                        <h3 class="font-bold text-green-900 mb-2"><i class="fas fa-seedling mr-2"></i>Feed Salone Recommendation</h3>
+                        <p class="text-sm text-green-800 mb-2">This soil is excellent for <strong>NERICA L-19 Rice</strong> or <strong>Cassava</strong>.</p>
+                        <button class="w-full bg-green-600 text-white py-2 rounded-lg text-sm font-bold shadow-sm">View Recommended Seeds</button>
+                    </div>
+                `;
+            } else if (currentMode === 'crop') {
+                html = `
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">Crop Doctor</h2>
+                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-bold">Attention Needed</span>
+                    </div>
+
+                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 mb-4 flex items-start gap-3">
+                        <div class="bg-red-100 p-2 rounded-full text-red-600"><i class="fas fa-triangle-exclamation"></i></div>
+                        <div>
+                            <h3 class="font-bold text-red-900">Nitrogen Deficiency Detected</h3>
+                            <p class="text-sm text-red-700 mt-1">Yellowing leaves indicate lack of nitrogen. This reduces yield by up to 40%.</p>
+                        </div>
+                    </div>
+
+                    <h3 class="font-bold text-gray-800 mb-2">Recommended Treatment</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-white border rounded-lg shadow-sm">
+                            <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3"><i class="fas fa-flask text-blue-500"></i></div>
+                            <div>
+                                <p class="font-bold text-sm">Apply NPK 15-15-15</p>
+                                <p class="text-xs text-gray-500">Chemical Option • Fast Acting</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-3 bg-white border rounded-lg shadow-sm">
+                            <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mr-3"><i class="fas fa-leaf text-green-500"></i></div>
+                            <div>
+                                <p class="font-bold text-sm">Add Poultry Manure</p>
+                                <p class="text-xs text-gray-500">Organic Option • Sustainable</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">Rice Yield Estimator</h2>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold">Analysis Complete</span>
+                    </div>
+
+                    <div class="text-center mb-6">
+                        <p class="text-gray-500 text-sm">Estimated Yield per Hectare</p>
+                        <h1 class="text-4xl font-bold text-gray-900 mt-1">2.4 Tons</h1>
+                        <p class="text-green-600 text-sm font-bold"><i class="fas fa-arrow-up"></i> 12% above national average</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-xl mb-4">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-gray-600">Plant Density</span>
+                            <span class="font-bold">High (25 hills/m²)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                        
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-gray-600">Health Index</span>
+                            <span class="font-bold">92/100</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+
+                    <button class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold shadow-lg">Save to Farm Record</button>
+                `;
+            }
+
+            resultContent.innerHTML = html;
+        }
+
+        // Start camera on load
+        initCamera();
+    </script>
+</body>
+</html>

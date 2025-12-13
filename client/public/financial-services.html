@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Services - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold flex items-center gap-2">
+                    <span>🌱</span> AgriPredict
+                </a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="index.html" class="hover:text-green-200">Home</a>
+                    <a href="dashboard.html" class="hover:text-green-200">Dashboard</a>
+                    <a href="financial-services.html" class="text-green-200">Financial Services</a>
+                    <a href="marketplace.html" class="hover:text-green-200">Marketplace</a>
+                    <a href="about.html" class="hover:text-green-200">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-green-600 to-green-800 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Financial Services</h1>
+            <p class="text-xl text-green-100">Complete financial solutions for Sierra Leonean farmers</p>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Mobile Money Integration -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">💳</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Mobile Money</h3>
+                    <p class="text-gray-600 mb-4">Pay and receive payments via Orange Money & Africell Money</p>
+                    <button onclick="openMobileMoneyModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 w-full">
+                        Link Account
+                    </button>
+                </div>
+
+                <!-- Microfinance Portal -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🏦</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Agricultural Loans</h3>
+                    <p class="text-gray-600 mb-4">Apply for loans up to Le 50,000,000 with low interest</p>
+                    <button onclick="window.location.href='loan-application.html'" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 w-full">
+                        Apply for Loan
+                    </button>
+                </div>
+
+                <!-- Crop Insurance -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🛡️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Crop Insurance</h3>
+                    <p class="text-gray-600 mb-4">Protect your crops from natural disasters and pests</p>
+                    <button onclick="window.location.href='crop-insurance.html'" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 w-full">
+                        Get Insured
+                    </button>
+                </div>
+
+                <!-- Financial Dashboard -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">📊</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Farm Financial Dashboard</h3>
+                    <p class="text-gray-600 mb-4">Track income, expenses, and profitability</p>
+                    <button onclick="window.location.href='farm-finances.html'" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 w-full">
+                        View Dashboard
+                    </button>
+                </div>
+
+                <!-- Price Alerts -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-2xl">🔔</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Price Alerts</h3>
+                    <p class="text-gray-600 mb-4">Get notified when crop prices reach your target</p>
+                    <button onclick="openPriceAlertModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 w-full">
+                        Set Alert
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Money Modal -->
+    <div id="mobileMoneyModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h2 class="text-2xl font-bold mb-4">Link Mobile Money Account</h2>
+            <form onsubmit="linkMobileMoney(event)">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Provider</label>
+                    <select class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        <option value="">Select Provider</option>
+                        <option value="orange">Orange Money</option>
+                        <option value="africell">Africell Money</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Phone Number</label>
+                    <input type="tel" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="076/077/078 XXX XXXX" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">PIN</label>
+                    <input type="password" class="w-full p-3 border border-gray-300 rounded-lg" maxlength="4" required>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeMobileMoneyModal()" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                        Link Account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Price Alert Modal -->
+    <div id="priceAlertModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h2 class="text-2xl font-bold mb-4">Set Price Alert</h2>
+            <form onsubmit="setPriceAlert(event)">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Crop Type</label>
+                    <select class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        <option value="">Select Crop</option>
+                        <option value="rice">Rice</option>
+                        <option value="cassava">Cassava</option>
+                        <option value="cocoa">Cocoa</option>
+                        <option value="coffee">Coffee</option>
+                        <option value="palm_oil">Palm Oil</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Target Price (Le/kg)</label>
+                    <input type="number" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g., 15000" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">Alert Type</label>
+                    <select class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        <option value="above">When price goes above</option>
+                        <option value="below">When price goes below</option>
+                    </select>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closePriceAlertModal()" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                        Set Alert
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function openMobileMoneyModal() {
+            document.getElementById('mobileMoneyModal').classList.remove('hidden');
+        }
+
+        function closeMobileMoneyModal() {
+            document.getElementById('mobileMoneyModal').classList.add('hidden');
+        }
+
+        function linkMobileMoney(e) {
+            e.preventDefault();
+            alert('Mobile money account linked successfully!');
+            closeMobileMoneyModal();
+        }
+
+        function openPriceAlertModal() {
+            document.getElementById('priceAlertModal').classList.remove('hidden');
+        }
+
+        function closePriceAlertModal() {
+            document.getElementById('priceAlertModal').classList.add('hidden');
+        }
+
+        function setPriceAlert(e) {
+            e.preventDefault();
+            alert('Price alert set successfully! You will be notified via SMS.');
+            closePriceAlertModal();
+        }
+    </script>
+</body>
+</html>

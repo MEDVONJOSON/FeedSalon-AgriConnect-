@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriPredict - AI-Powered Agricultural Intelligence for Sierra Leone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/serviceWorker.js')
+          .then(reg => console.log('Service Worker registered'))
+          .catch(err => console.log('Service Worker registration failed', err));
+      });
+    }
+  </script>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-8">
+          <a href="index.html" class="text-2xl font-bold text-green-700">🌾 AgriPredict</a>
+          <div class="hidden md:flex gap-6">
+            <a href="index.html" class="text-gray-700 hover:text-green-700">Home</a>
+            <a href="features.html" class="text-green-700 font-bold hover:text-green-800">All Features</a>
+            <a href="about.html" class="text-gray-700 hover:text-green-700">About</a>
+            <a href="marketplace.html" class="text-gray-700 hover:text-green-700">Marketplace</a>
+            <a href="forum.html" class="text-gray-700 hover:text-green-700">Forum</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+
+          <div class="relative">
+            <button onclick="toggleAccountMenu()" class="text-gray-700 hover:text-green-700 flex items-center gap-2">
+              Account
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="accountMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border">
+              <a href="signup.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Farmer Signup</a>
+              <a href="buyer-signup.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Buyer
+                Signup</a>
+              <a href="login.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <!-- Hero Section -->
+  <section class="relative text-white py-32 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="hero-background.jpg" alt="Smart Farming"
+        class="hero-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
+      <img src="hero-background-2.jpg" alt="Smart Farming"
+        class="hero-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
+      <div class="absolute inset-0 bg-gradient-to-r from-green-900/60 to-green-800/40"></div>
+    </div>
+    <script>
+      const slides = document.querySelectorAll('.hero-slide');
+      let currentSlide = 0;
+      setInterval(() => {
+        slides[currentSlide].classList.remove('opacity-100');
+        slides[currentSlide].classList.add('opacity-0');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.remove('opacity-0');
+        slides[currentSlide].classList.add('opacity-100');
+      }, 5000);
+    </script>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          Smart Farming with AI
+        </h1>
+        <p class="text-xl md:text-2xl mb-10 text-green-50 font-light">
+          Empowering Sierra Leonean farmers with cutting-edge technology for better crop yields and sustainable growth.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="signup.html"
+            class="bg-green-500 text-white px-8 py-4 rounded-full font-bold hover:bg-green-400 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            Get Started Free
+          </a>
+          <a href="feed-salone-strategy.html"
+            class="bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-full font-bold hover:bg-white/20 transition border border-white/30 flex items-center justify-center gap-2">
+            <i class="fas fa-rocket"></i> Feed Salone Strategy
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW: Feed Salone Initiatives Section -->
+  <section class="py-16 bg-gray-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-12">
+        <span class="bg-green-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">New
+          Initiatives</span>
+        <h2 class="text-4xl font-bold mt-4 mb-4">Feed Salone Game-Changers</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Revolutionary tools designed specifically to solve hunger and boost
+          the economy in Sierra Leone.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Impact Command Center -->
+        <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-green-500 transition group">
+          <div
+            class="w-16 h-16 bg-gray-700 rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-900 transition">
+            <i class="fas fa-chart-pie text-3xl text-green-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Impact Command Center</h3>
+          <p class="text-gray-400 mb-6">Real-time national dashboard tracking food security, waste reduction, and school
+            feeding impact across all districts.</p>
+          <a href="impact-center.html" class="text-green-400 font-bold hover:text-green-300 flex items-center gap-2">
+            View Live Data <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Diaspora Connect -->
+        <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-pink-500 transition group">
+          <div
+            class="w-16 h-16 bg-gray-700 rounded-xl flex items-center justify-center mb-6 group-hover:bg-pink-900 transition">
+            <i class="fas fa-plane-arrival text-3xl text-pink-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Diaspora Investment</h3>
+          <p class="text-gray-400 mb-6">Direct investment portal for Sierra Leoneans abroad to fund farms, track
+            progress via video, and earn returns.</p>
+          <a href="diaspora-invest.html" class="text-pink-400 font-bold hover:text-pink-300 flex items-center gap-2">
+            Start Investing <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Smart Logistics -->
+        <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-blue-500 transition group">
+          <div
+            class="w-16 h-16 bg-gray-700 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-900 transition">
+            <i class="fas fa-truck-fast text-3xl text-blue-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Smart Logistics Hub</h3>
+          <p class="text-gray-400 mb-6">AI-optimized cold chain and transport network reducing post-harvest losses from
+            40% to under 5%.</p>
+          <a href="smart-logistics.html" class="text-blue-400 font-bold hover:text-blue-300 flex items-center gap-2">
+            Manage Fleet <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Smart Scanner -->
+        <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-purple-500 transition group">
+          <div
+            class="w-16 h-16 bg-gray-700 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-900 transition">
+            <i class="fas fa-camera text-3xl text-purple-500"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Smart Scanner</h3>
+          <p class="text-gray-400 mb-6">Instant soil analysis and crop disease diagnosis using your phone's camera. No
+            internet required.</p>
+          <a href="smart-scanner.html" class="text-purple-400 font-bold hover:text-purple-300 flex items-center gap-2">
+            Open Scanner <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complete Platform Services -->
+  <section class="py-20 bg-gradient-to-br from-green-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-bold text-center mb-4 text-gray-900">Complete Agricultural Platform</h2>
+      <p class="text-center text-gray-600 text-lg mb-12">Everything you need for modern farming in Sierra Leone</p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <a href="financial-services.html"
+          class="bg-white p-8 rounded-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 text-center border-2 border-green-200 hover:border-green-400">
+          <div class="text-5xl mb-4">💳</div>
+          <h3 class="font-bold text-lg mb-3 text-green-800">Financial Services</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">Mobile money, loans, insurance, price alerts</p>
+        </a>
+        <a href="logistics.html"
+          class="bg-white p-8 rounded-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 text-center border-2 border-blue-200 hover:border-blue-400">
+          <div class="text-5xl mb-4">🚚</div>
+          <h3 class="font-bold text-lg mb-3 text-blue-800">Logistics</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">Transport, cold storage, tracking</p>
+        </a>
+        <a href="education.html"
+          class="bg-white p-8 rounded-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 text-center border-2 border-indigo-200 hover:border-indigo-400">
+          <div class="text-5xl mb-4">🎓</div>
+          <h3 class="font-bold text-lg mb-3 text-indigo-800">Education</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">Video courses, workshops, certifications</p>
+        </a>
+        <a href="smart-farming.html"
+          class="bg-white p-8 rounded-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 text-center border-2 border-yellow-200 hover:border-yellow-400">
+          <div class="text-5xl mb-4">🌾</div>
+          <h3 class="font-bold text-lg mb-3 text-yellow-800">Smart Farming</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">Soil health, pest alerts, equipment rental</p>
+        </a>
+        <a href="government.html"
+          class="bg-white p-8 rounded-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 text-center border-2 border-purple-200 hover:border-purple-400">
+          <div class="text-5xl mb-4">🏛️</div>
+          <h3 class="font-bold text-lg mb-3 text-purple-800">Government</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">Subsidies, certifications, regulations</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI-Powered Agricultural Solutions -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center mb-12 text-gray-900">AI-Powered Agricultural Solutions</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Yield Prediction -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Yield Prediction</h3>
+          <p class="text-gray-600">Predict crop yields with 95% accuracy using machine learning</p>
+        </div>
+
+        <!-- Disease Detection -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Disease Detection</h3>
+          <p class="text-gray-600">Early detection of crop diseases to prevent losses</p>
+        </div>
+
+        <!-- Crop Recommendation -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Crop Recommendation</h3>
+          <p class="text-gray-600">Get personalized crop suggestions based on soil conditions</p>
+        </div>
+
+        <!-- Weather Forecast -->
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+          <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Weather Forecast</h3>
+          <p class="text-gray-600">Real-time weather data for better farming decisions</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="bg-green-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-4xl font-bold text-green-700 mb-2">10K+</div>
+          <div class="text-gray-600">Happy Farmers</div>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-green-700 mb-2">95%</div>
+          <div class="text-gray-600">Accuracy Rate</div>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-green-700 mb-2">50+</div>
+          <div class="text-gray-600">Crop Types</div>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-green-700 mb-2">24/7</div>
+          <div class="text-gray-600">Support</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marketplace Preview -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Farmer Marketplace</h2>
+        <p class="text-gray-600">Buy and sell directly with fellow farmers</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full inline-block mb-3">For
+            Sale</div>
+          <h3 class="text-lg font-semibold mb-2">Organic Wheat Seeds</h3>
+          <p class="text-sm text-gray-600 mb-3">📍 Freetown, Western Area</p>
+          <div class="flex justify-between items-center">
+            <span class="text-xl font-bold text-green-700">Le 35,000/kg</span>
+            <button class="text-blue-600 hover:text-blue-700 text-sm font-semibold">Contact</button>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full inline-block mb-3">For
+            Rent</div>
+          <h3 class="text-lg font-semibold mb-2">Harvester Combine</h3>
+          <p class="text-sm text-gray-600 mb-3">📍 Bo District, Southern Province</p>
+          <div class="flex justify-between items-center">
+            <span class="text-xl font-bold text-green-700">Le 120,000/hour</span>
+            <button class="text-blue-600 hover:text-blue-700 text-sm font-semibold">Contact</button>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full inline-block mb-3">Looking
+            to Buy</div>
+          <h3 class="text-lg font-semibold mb-2">Fresh Tomatoes</h3>
+          <p class="text-sm text-gray-600 mb-3">📍 Makeni, Northern Province</p>
+          <div class="flex justify-between items-center">
+            <span class="text-xl font-bold text-green-700">Le 15,000-20,000/kg</span>
+            <button class="text-blue-600 hover:text-blue-700 text-sm font-semibold">Contact</button>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-8">
+        <a href="marketplace.html"
+          class="bg-green-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition">
+          View All Listings
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-green-700 text-white py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Farm?</h2>
+      <p class="text-xl mb-8 text-green-100">Join thousands of Sierra Leonean farmers using AI for better yields</p>
+      <a href="signup.html"
+        class="bg-white text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">
+        Create Free Account
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12 pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-white text-lg font-semibold mb-4">AgriPredict</h3>
+          <p class="text-sm">Empowering Sierra Leonean farmers with AI technology</p>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Features</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-white">Yield Prediction</a></li>
+            <li><a href="#" class="hover:text-white">Disease Detection</a></li>
+            <li><a href="#" class="hover:text-white">Crop Recommendation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="about.html" class="hover:text-white">About</a></li>
+            <li><a href="#" class="hover:text-white">Contact</a></li>
+            <li><a href="#" class="hover:text-white">Privacy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-semibold mb-4">Connect</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="marketplace.html" class="hover:text-white">Marketplace</a></li>
+            <li><a href="forum.html" class="hover:text-white">Forum</a></li>
+            <li><a href="#" class="hover:text-white">Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
+        <p>&copy; 2025 AgriPredict. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Quick Access Bar -->
+  <div
+    class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-2 z-50 md:hidden flex justify-around items-center shadow-lg">
+    <a href="index.html" class="flex flex-col items-center text-green-700">
+      <i class="fas fa-home text-xl"></i>
+      <span class="text-xs mt-1">Home</span>
+    </a>
+    <a href="marketplace.html" class="flex flex-col items-center text-gray-500 hover:text-green-700">
+      <i class="fas fa-store text-xl"></i>
+      <span class="text-xs mt-1">Market</span>
+    </a>
+    <a href="smart-scanner.html" class="flex flex-col items-center justify-center -mt-8">
+      <div class="w-14 h-14 bg-green-600 rounded-full flex items-center justify-center shadow-lg border-4 border-white">
+        <i class="fas fa-camera text-white text-2xl"></i>
+      </div>
+      <span class="text-xs mt-1 font-bold text-green-700">Scan</span>
+    </a>
+    <a href="dashboard.html" class="flex flex-col items-center text-gray-500 hover:text-green-700">
+      <i class="fas fa-chart-line text-xl"></i>
+      <span class="text-xs mt-1">Dash</span>
+    </a>
+    <a href="features.html" class="flex flex-col items-center text-gray-500 hover:text-green-700">
+      <i class="fas fa-th text-xl"></i>
+      <span class="text-xs mt-1">Menu</span>
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

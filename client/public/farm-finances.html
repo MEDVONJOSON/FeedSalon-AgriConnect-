@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Financial Dashboard - AgriPredict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold flex items-center gap-2">
+                    <span>🌱</span> AgriPredict
+                </a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="dashboard.html" class="hover:text-green-200">Dashboard</a>
+                    <a href="financial-services.html" class="hover:text-green-200">Financial Services</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="bg-white border-b py-6">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold mb-2">Farm Financial Dashboard</h1>
+            <p class="text-gray-600">Track your income, expenses, and profitability</p>
+        </div>
+    </section>
+
+    <!-- Financial Overview -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <!-- Summary Cards -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <p class="text-gray-600 mb-2">Total Income</p>
+                    <p class="text-3xl font-bold text-green-600">Le 45,000,000</p>
+                    <p class="text-sm text-green-600 mt-2">↑ 12% from last month</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <p class="text-gray-600 mb-2">Total Expenses</p>
+                    <p class="text-3xl font-bold text-red-600">Le 28,000,000</p>
+                    <p class="text-sm text-red-600 mt-2">↑ 5% from last month</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <p class="text-gray-600 mb-2">Net Profit</p>
+                    <p class="text-3xl font-bold text-blue-600">Le 17,000,000</p>
+                    <p class="text-sm text-green-600 mt-2">↑ 23% from last month</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <p class="text-gray-600 mb-2">Profit Margin</p>
+                    <p class="text-3xl font-bold text-purple-600">37.8%</p>
+                    <p class="text-sm text-green-600 mt-2">↑ 4.2% from last month</p>
+                </div>
+            </div>
+
+            <!-- Income & Expense Tables -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <!-- Recent Income -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">Recent Income</h2>
+                        <button onclick="openIncomeModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 text-sm">
+                            + Add Income
+                        </button>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                            <div>
+                                <p class="font-bold">Rice Harvest Sale</p>
+                                <p class="text-sm text-gray-600">Jan 15, 2025</p>
+                            </div>
+                            <p class="font-bold text-green-600">Le 12,000,000</p>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                            <div>
+                                <p class="font-bold">Cassava Sale</p>
+                                <p class="text-sm text-gray-600">Jan 10, 2025</p>
+                            </div>
+                            <p class="font-bold text-green-600">Le 8,500,000</p>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                            <div>
+                                <p class="font-bold">Palm Oil Sale</p>
+                                <p class="text-sm text-gray-600">Jan 5, 2025</p>
+                            </div>
+                            <p class="font-bold text-green-600">Le 15,000,000</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Expenses -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">Recent Expenses</h2>
+                        <button onclick="openExpenseModal()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm">
+                            + Add Expense
+                        </button>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-red-50 rounded">
+                            <div>
+                                <p class="font-bold">Fertilizer Purchase</p>
+                                <p class="text-sm text-gray-600">Jan 12, 2025</p>
+                            </div>
+                            <p class="font-bold text-red-600">Le 4,500,000</p>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-red-50 rounded">
+                            <div>
+                                <p class="font-bold">Labor Costs</p>
+                                <p class="text-sm text-gray-600">Jan 8, 2025</p>
+                            </div>
+                            <p class="font-bold text-red-600">Le 12,000,000</p>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-red-50 rounded">
+                            <div>
+                                <p class="font-bold">Seeds & Planting</p>
+                                <p class="text-sm text-gray-600">Jan 3, 2025</p>
+                            </div>
+                            <p class="font-bold text-red-600">Le 6,500,000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expense Breakdown -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-bold mb-4">Expense Breakdown</h2>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700">Labor</span>
+                            <span class="font-bold">Le 12,000,000 (43%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-blue-600 h-3 rounded-full" style="width: 43%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700">Seeds & Planting Materials</span>
+                            <span class="font-bold">Le 6,500,000 (23%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-green-600 h-3 rounded-full" style="width: 23%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700">Fertilizer & Chemicals</span>
+                            <span class="font-bold">Le 4,500,000 (16%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-yellow-600 h-3 rounded-full" style="width: 16%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700">Equipment & Maintenance</span>
+                            <span class="font-bold">Le 3,000,000 (11%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-purple-600 h-3 rounded-full" style="width: 11%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-700">Other</span>
+                            <span class="font-bold">Le 2,000,000 (7%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="bg-gray-600 h-3 rounded-full" style="width: 7%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Income Modal -->
+    <div id="incomeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h2 class="text-2xl font-bold mb-4">Add Income</h2>
+            <form onsubmit="addIncome(event)">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Description</label>
+                    <input type="text" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g., Rice Sale" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Amount (Leones)</label>
+                    <input type="number" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g., 5000000" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">Date</label>
+                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeIncomeModal()" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                        Add Income
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Expense Modal -->
+    <div id="expenseModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h2 class="text-2xl font-bold mb-4">Add Expense</h2>
+            <form onsubmit="addExpense(event)">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Category</label>
+                    <select class="w-full p-3 border border-gray-300 rounded-lg" required>
+                        <option value="">Select Category</option>
+                        <option value="labor">Labor</option>
+                        <option value="seeds">Seeds & Planting</option>
+                        <option value="fertilizer">Fertilizer & Chemicals</option>
+                        <option value="equipment">Equipment & Maintenance</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Description</label>
+                    <input type="text" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g., Fertilizer Purchase" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Amount (Leones)</label>
+                    <input type="number" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="e.g., 2000000" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">Date</label>
+                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg" required>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closeExpenseModal()" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Add Expense
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openIncomeModal() {
+            document.getElementById('incomeModal').classList.remove('hidden');
+        }
+
+        function closeIncomeModal() {
+            document.getElementById('incomeModal').classList.add('hidden');
+        }
+
+        function addIncome(e) {
+            e.preventDefault();
+            alert('Income added successfully!');
+            closeIncomeModal();
+            location.reload();
+        }
+
+        function openExpenseModal() {
+            document.getElementById('expenseModal').classList.remove('hidden');
+        }
+
+        function closeExpenseModal() {
+            document.getElementById('expenseModal').classList.add('hidden');
+        }
+
+        function addExpense(e) {
+            e.preventDefault();
+            alert('Expense added successfully!');
+            closeExpenseModal();
+            location.reload();
+        }
+    </script>
+</body>
+</html>

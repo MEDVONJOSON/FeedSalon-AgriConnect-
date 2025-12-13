@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed Salone Strategic Initiatives | AgriPredict</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .strategy-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .strategy-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .batch-verified {
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .aggregator-map {
+            background-image: url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%239C92AC" fill-opacity="0.1" fill-rule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3"/%3E%3Ccircle cx="13" cy="13" r="3"/%3E%3C/g%3E%3C/svg%3E');
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-green-600 text-white p-2 rounded-lg">
+                        <i class="fas fa-leaf text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-800">AgriPredict <span class="text-green-600">Pro</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Home</a>
+                    <a href="dashboard.html" class="text-gray-600 hover:text-green-600 font-medium transition-colors">Dashboard</a>
+                    <a href="features.html" class="text-gray-600 hover:text-green-600 font-medium transition-colors">All Features</a>
+                    <div class="flex items-center space-x-2 bg-green-50 px-3 py-1 rounded-full border border-green-200">
+                        <img src="https://flagcdn.com/w20/sl.png" alt="Sierra Leone" class="rounded-sm">
+                        <span class="text-sm font-semibold text-green-800">Feed Salone Edition</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pattern-grid-lg"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block bg-green-500 bg-opacity-20 backdrop-filter backdrop-blur-lg px-4 py-1 rounded-full border border-green-400 mb-6 animate-fade-in-down">
+                    <span class="text-green-300 font-bold tracking-wider uppercase text-sm">Official Strategy Alignment</span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight animate-slide-up">
+                    Feed Salone <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-green-400">Strategic Engine</span>
+                </h1>
+                <p class="text-xl text-green-100 mb-10 animate-slide-up delay-100">
+                    Advanced digital infrastructure powering the Government's "Big 5" Game Changer. 
+                    Connecting Inputs, Aggregation, and Youth Employment.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-16 -mt-20 relative z-20">
+        
+        <!-- Module 1: Digital Seed Vault -->
+        <section class="mb-24 animate-scale-in">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+                <div class="grid md:grid-cols-2">
+                    <div class="p-10 flex flex-col justify-center bg-gradient-to-br from-emerald-50 to-white">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="p-3 bg-emerald-100 rounded-xl text-emerald-600">
+                                <i class="fas fa-dna text-2xl"></i>
+                            </div>
+                            <h2 class="text-3xl font-bold text-gray-800">Digital Seed Vault</h2>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-lg">
+                            Combating fake seeds with blockchain-verified traceability. Every bag of seed is tracked from SLARI research centers to the agro-dealer network.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                                <i class="fas fa-check-circle text-green-500 text-xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">SLARI Certified</h4>
+                                    <p class="text-sm text-gray-500">Only high-yield varieties approved</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                                <i class="fas fa-qrcode text-blue-500 text-xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Batch Traceability</h4>
+                                    <p class="text-sm text-gray-500">Scan to see origin & germination rate</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="openSeedScanner()" class="mt-8 bg-emerald-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-emerald-700 transition-all transform hover:scale-105 flex items-center justify-center">
+                            <i class="fas fa-qrcode mr-2"></i> Verify Seed Batch
+                        </button>
+                    </div>
+                    <div class="p-10 bg-gray-900 text-white relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-20 aggregator-map"></div>
+                        <h3 class="text-xl font-bold mb-6 border-b border-gray-700 pb-4">Live Input Inventory (National)</h3>
+                        <div class="space-y-4" id="seed-inventory-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 2: Virtual Aggregator -->
+        <section class="mb-24 animate-scale-in delay-100">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+                <div class="grid md:grid-cols-2">
+                    <div class="p-10 bg-indigo-900 text-white order-2 md:order-1 relative">
+                        <div class="absolute top-0 right-0 p-4">
+                            <span class="bg-yellow-400 text-indigo-900 text-xs font-bold px-2 py-1 rounded">Pillar 3: Aggregation</span>
+                        </div>
+                        <div class="flex flex-col h-full justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Active Bulk Contracts</h3>
+                                <p class="text-indigo-200 text-sm mb-6">Processors looking for bulk supply</p>
+                                <div class="space-y-3" id="contract-list">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                            <div class="mt-8 p-4 bg-indigo-800 rounded-xl border border-indigo-700">
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <p class="text-indigo-300 text-xs uppercase">Your Contribution</p>
+                                        <p class="text-2xl font-bold">12 Bags</p>
+                                    </div>
+                                    <button class="bg-white text-indigo-900 px-4 py-2 rounded-lg text-sm font-bold hover:bg-indigo-50">
+                                        Join Pool
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-10 flex flex-col justify-center bg-gradient-to-br from-indigo-50 to-white order-1 md:order-2">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="p-3 bg-indigo-100 rounded-xl text-indigo-600">
+                                <i class="fas fa-layer-group text-2xl"></i>
+                            </div>
+                            <h2 class="text-3xl font-bold text-gray-800">Virtual Aggregator Engine</h2>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-lg">
+                            Solving the "Volume Problem". Our algorithm groups smallholder farmers into "Virtual Commercial Farms" to fulfill large contracts for factories and exporters.
+                        </p>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span><strong>Guaranteed Market:</strong> Contracts are signed before harvest.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span><strong>Standardized Quality:</strong> All pooled farmers follow the same protocol.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                                <span><strong>Bulk Logistics:</strong> One truck picks up from the village hub.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module 3: Youth Agri-Service Corps -->
+        <section class="animate-scale-in delay-200">
+            <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-3xl shadow-xl overflow-hidden text-white relative">
+                <div class="absolute inset-0 opacity-10 pattern-dots"></div>
+                <div class="p-10 md:p-16 text-center relative z-10">
+                    <div class="inline-block bg-white bg-opacity-20 backdrop-filter backdrop-blur px-4 py-1 rounded-full border border-white border-opacity-30 mb-6">
+                        <span class="font-bold tracking-wider uppercase text-sm">Youth Employment Initiative</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Agri-Service Corps</h2>
+                    <p class="text-xl text-orange-100 max-w-2xl mx-auto mb-10">
+                        Dignified, tech-enabled jobs for Sierra Leone's youth. Book trained professionals for specialized farm tasks.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto text-left">
+                        <!-- Service Card 1 -->
+                        <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-lg transform hover:-translate-y-2 transition-transform">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="p-3 bg-orange-100 rounded-xl text-orange-600">
+                                    <i class="fas fa-plane-departure text-xl"></i>
+                                </div>
+                                <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">Available</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Drone Spraying</h4>
+                            <p class="text-gray-500 text-sm mb-4">Precision application of inputs. Saves time and reduces waste.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-orange-600">Le 250k/acre</span>
+                                <button class="text-gray-400 hover:text-orange-600"><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Service Card 2 -->
+                        <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-lg transform hover:-translate-y-2 transition-transform">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="p-3 bg-blue-100 rounded-xl text-blue-600">
+                                    <i class="fas fa-tractor text-xl"></i>
+                                </div>
+                                <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">Available</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Mechanized Harvest</h4>
+                            <p class="text-gray-500 text-sm mb-4">Combine harvester rental with trained operator.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-blue-600">Le 800k/day</span>
+                                <button class="text-gray-400 hover:text-blue-600"><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Service Card 3 -->
+                        <div class="bg-white text-gray-800 p-6 rounded-2xl shadow-lg transform hover:-translate-y-2 transition-transform">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="p-3 bg-purple-100 rounded-xl text-purple-600">
+                                    <i class="fas fa-flask text-xl"></i>
+                                </div>
+                                <span class="bg-yellow-100 text-yellow-700 text-xs font-bold px-2 py-1 rounded">Busy</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Soil Testing Lab</h4>
+                            <p class="text-gray-500 text-sm mb-4">Mobile soil analysis unit. Results in 2 hours.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-purple-600">Le 150k/test</span>
+                                <button class="text-gray-400 hover:text-purple-600"><i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Seed Scanner Modal -->
+    <div id="seed-modal" class="fixed inset-0 bg-black bg-opacity-80 hidden z-50 flex items-center justify-center p-4 backdrop-filter backdrop-blur-sm">
+        <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="seed-modal-content">
+            <div class="p-6 text-center">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+                    <i class="fas fa-check text-3xl text-green-600"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Verified Authentic</h3>
+                <p class="text-gray-500 mb-6">Batch #SL-2024-RICE-NERICA-L19 verified in SLARI Database.</p>
+                
+                <div class="bg-gray-50 rounded-xl p-4 text-left mb-6 border border-gray-100">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-500 text-sm">Variety:</span>
+                        <span class="font-bold text-gray-800">NERICA L-19 (Rice)</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-500 text-sm">Germination Rate:</span>
+                        <span class="font-bold text-green-600">98.5%</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-500 text-sm">Dealer:</span>
+                        <span class="font-bold text-gray-800">Bo Agro Services Ltd</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500 text-sm">Expiry:</span>
+                        <span class="font-bold text-gray-800">Dec 2025</span>
+                    </div>
+                </div>
+
+                <button onclick="closeSeedScanner()" class="w-full bg-gray-800 text-white py-3 rounded-xl font-bold hover:bg-gray-900 transition-colors">
+                    Close Verification
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock Data for Seed Inventory
+        const seedInventory = [
+            { type: 'Rice (NERICA L-19)', location: 'Bo District', qty: '450 Bags', status: 'High Stock' },
+            { type: 'Cassava Cuttings', location: 'Kenema', qty: '1,200 Bundles', status: 'Medium Stock' },
+            { type: 'Maize (Hybrid)', location: 'Makeni', qty: '80 Bags', status: 'Low Stock' },
+            { type: 'Vegetable Mix', location: 'Freetown', qty: '200 Packs', status: 'High Stock' }
+        ];
+
+        // Mock Data for Contracts
+        const contracts = [
+            { company: 'Lion Mountain Food Processing', crop: 'Cassava Tubers', need: '50 Tons', filled: '32 Tons', deadline: '15 Aug' },
+            { company: 'Salone Export Co.', crop: 'Cocoa Beans', need: '10 Tons', filled: '2 Tons', deadline: '30 Sept' },
+            { company: 'School Feeding Prog.', crop: 'Local Rice', need: '100 Bags', filled: '85 Bags', deadline: '01 Sept' }
+        ];
+
+        // Populate Seed Inventory
+        const seedList = document.getElementById('seed-inventory-list');
+        seedInventory.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'flex items-center justify-between p-3 bg-gray-800 rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors cursor-pointer';
+            let statusColor = item.status === 'High Stock' ? 'text-green-400' : (item.status === 'Low Stock' ? 'text-red-400' : 'text-yellow-400');
+            div.innerHTML = `
+                <div>
+                    <h4 class="font-bold text-sm">${item.type}</h4>
+                    <p class="text-xs text-gray-400"><i class="fas fa-map-marker-alt mr-1"></i> ${item.location}</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-sm">${item.qty}</p>
+                    <p class="text-xs ${statusColor}">${item.status}</p>
+                </div>
+            `;
+            seedList.appendChild(div);
+        });
+
+        // Populate Contracts
+        const contractList = document.getElementById('contract-list');
+        contracts.forEach(item => {
+            const percent = Math.round((parseInt(item.filled) / parseInt(item.need)) * 100);
+            const div = document.createElement('div');
+            div.className = 'bg-indigo-800 p-4 rounded-xl border border-indigo-700';
+            div.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                    <h4 class="font-bold text-sm">${item.company}</h4>
+                    <span class="text-xs bg-indigo-900 px-2 py-1 rounded text-indigo-200">${item.deadline}</span>
+                </div>
+                <p class="text-xs text-indigo-300 mb-3">Needs: ${item.need} ${item.crop}</p>
+                <div class="w-full bg-indigo-900 rounded-full h-2 mb-1">
+                    <div class="bg-yellow-400 h-2 rounded-full" style="width: ${percent}%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-indigo-300">
+                    <span>${item.filled} filled</span>
+                    <span>${percent}%</span>
+                </div>
+            `;
+            contractList.appendChild(div);
+        });
+
+        // Modal Logic
+        function openSeedScanner() {
+            const modal = document.getElementById('seed-modal');
+            const content = document.getElementById('seed-modal-content');
+            modal.classList.remove('hidden');
+            // Small delay for animation
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeSeedScanner() {
+            const modal = document.getElementById('seed-modal');
+            const content = document.getElementById('seed-modal-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
