@@ -63,7 +63,7 @@ export default function CooperationPage() {
                         <Card>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
-                                    <Globe className="w-5 h-5 text-success" />
+                                    <Globe className="w-5 h-5 text-primary" />
                                     Sustainable Irrigation Project
                                 </CardTitle>
                                 <CardDescription>Funded by World Bank • Status: Recruiting</CardDescription>
@@ -79,7 +79,7 @@ export default function CooperationPage() {
                         <Card>
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
-                                    <TrendingUp className="w-5 h-5 text-success" />
+                                    <TrendingUp className="w-5 h-5 text-primary" />
                                     Youth Agri-Entrepreneurship
                                 </CardTitle>
                                 <CardDescription>Government Initiative • Status: Open</CardDescription>

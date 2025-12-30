@@ -83,7 +83,7 @@ export default function LandPreparationPage() {
                         </div>
 
                         {/* Title Banner */}
-                        <div className="bg-cyan-100 border border-cyan-200 rounded-lg px-4 py-3 mb-6">
+                        <div className="bg-secondary/10 border border-secondary/20 rounded-lg px-4 py-3 mb-6">
                             <h3 className="font-semibold text-slate-800">
                                 Land Preparation for {targetCrop} on {soilType}
                             </h3>
@@ -102,7 +102,7 @@ export default function LandPreparationPage() {
                         </div>
 
                         {/* Additional Info */}
-                        <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div className="mt-8 p-4 bg-secondary/5 border border-secondary/20 rounded-lg">
                             <p className="text-sm text-slate-700">
                                 <strong>Note:</strong> These steps are general guidelines for {targetCrop} cultivation on {soilType}.
                                 Adjust based on local climate conditions and specific crop variety requirements.

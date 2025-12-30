@@ -20,7 +20,7 @@ export default function ExportReadinessPage() {
             </div>
             <h1 className="text-4xl font-bold mb-4 text-foreground">Export Readiness Program</h1>
             <p className="text-lg text-muted-foreground mb-6">
-              Unlock international markets for your agricultural products. 
+              Unlock international markets for your agricultural products.
               Get certified, understand global standards, and connect with international buyers to boost Sierra Leone's export earnings.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -41,9 +41,9 @@ export default function ExportReadinessPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-8">Priority Export Commodities</h2>
-          
+
           <div className="grid md:grid-cols-3 gap-6">
-            <Card className="p-6 border-l-4 border-l-amber-600 hover:shadow-md transition-shadow">
+            <Card className="p-6 border-l-4 border-l-primary hover:shadow-md transition-shadow">
               <div className="flex justify-between items-start mb-4">
                 <h3 className="font-bold text-xl">Cocoa</h3>
                 <Badge variant="outline">High Demand</Badge>
@@ -64,7 +64,7 @@ export default function ExportReadinessPage() {
               <Button variant="outline" className="w-full">View Export Guide</Button>
             </Card>
 
-            <Card className="p-6 border-l-4 border-l-orange-600 hover:shadow-md transition-shadow">
+            <Card className="p-6 border-l-4 border-l-secondary hover:shadow-md transition-shadow">
               <div className="flex justify-between items-start mb-4">
                 <h3 className="font-bold text-xl">Cashew</h3>
                 <Badge variant="outline">Growing Market</Badge>
@@ -85,7 +85,7 @@ export default function ExportReadinessPage() {
               <Button variant="outline" className="w-full">View Export Guide</Button>
             </Card>
 
-            <Card className="p-6 border-l-4 border-l-yellow-600 hover:shadow-md transition-shadow">
+            <Card className="p-6 border-l-4 border-l-warning hover:shadow-md transition-shadow">
               <div className="flex justify-between items-start mb-4">
                 <h3 className="font-bold text-xl">Coffee</h3>
                 <Badge variant="outline">Niche Market</Badge>
@@ -113,7 +113,7 @@ export default function ExportReadinessPage() {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-12 text-center">Your Path to Export Success</h2>
-          
+
           <div className="relative">
             {/* Connecting Line (Desktop) */}
             <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-muted-foreground/20 -translate-y-1/2 z-0"></div>

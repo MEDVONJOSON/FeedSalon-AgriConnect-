@@ -50,12 +50,11 @@ export default function EcommercePage() {
                             <CardContent className="pt-4">
                                 <h3 className="font-semibold mb-1">Organic Fertilizer 50kg</h3>
                                 <div className="flex items-baseline gap-2 mb-2">
-                                    <span className="text-lg font-bold">$24.99</span>
-                                    <span className="text-sm text-muted-foreground line-through">$32.00</span>
+                                    <span className="text-lg font-bold">Le 24.99</span>
+                                    <span className="text-sm text-muted-foreground line-through">Le 32.00</span>
                                 </div>
                                 <p className="text-xs text-muted-foreground mb-4">High nitrogen content for leafy growth.</p>
-                                <Button size="sm" className="w-full">Add to Cart</Button>
-                            </CardContent>
+                                <Button size="sm" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">Add to Cart</Button>                           </CardContent>
                         </Card>
                     ))}
                 </div>

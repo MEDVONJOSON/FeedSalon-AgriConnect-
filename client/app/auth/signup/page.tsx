@@ -4,16 +4,16 @@ import { Navigation } from '@/components/navigation'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Field, FieldLabel } from '@/components/ui/field'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Sprout, User as UserIcon, Mail, Lock, MapPin, Phone, Building2, Briefcase } from 'lucide-react'
+import { Sprout, User as UserIcon, Mail, Lock, MapPin, Phone, Building2, Briefcase, ArrowRight, UserPlus } from 'lucide-react'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import { auth, User } from '@/lib/auth'
+import { Badge } from '@/components/ui/badge'
 
 export default function SignupPage() {
   const router = useRouter()
@@ -44,137 +44,152 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-white">
       <Navigation />
 
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-md mx-auto">
-          <div className="text-center mb-8">
-            <div className="bg-primary/10 p-4 rounded-full w-fit mx-auto mb-4">
-              <Sprout className="w-12 h-12 text-primary" />
-            </div>
-            <h1 className="text-3xl font-bold mb-2">Create Your Account</h1>
-            <p className="text-muted-foreground">
-              Get instant access to your personalized {role} dashboard
-            </p>
+      {/* Premium National Gradient Header */}
+      <div className="bg-gradient-to-r from-[#1EB53A] to-[#0072C6] pt-32 pb-48 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-white/10 blur-[100px] rounded-full translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-white/5 blur-[80px] rounded-full -translate-x-1/4"></div>
+
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <div className="w-24 h-24 bg-white/10 backdrop-blur-md rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 border border-white/10 shadow-2xl relative group">
+            <div className="absolute inset-0 bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity rounded-full"></div>
+            <Sprout className="w-12 h-12 text-white relative z-10" />
           </div>
+          <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-md px-6 py-2 mb-6 inline-flex items-center gap-2 font-black uppercase tracking-widest text-[10px]">
+            <UserPlus className="w-3 h-3" />
+            Network Registration
+          </Badge>
+          <h1 className="text-5xl md:text-7xl font-black text-white mb-4 leading-[1.1] tracking-tighter">
+            Join the <span className="text-white/50">Ledger</span>
+          </h1>
+        </div>
+      </div>
 
-          <Tabs defaultValue="farmer" className="w-full mb-6" onValueChange={(val) => setRole(val as User['role'])}>
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="farmer">Farmer</TabsTrigger>
-              <TabsTrigger value="buyer">Buyer</TabsTrigger>
-              <TabsTrigger value="admin">Admin</TabsTrigger>
-            </TabsList>
-          </Tabs>
+      <div className="container relative z-20 mx-auto px-4 -mt-32 pb-24 flex justify-center">
+        <div className="max-w-2xl w-full">
 
-          <Card className="p-6">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <Field>
-                <FieldLabel htmlFor="name">Full Name</FieldLabel>
-                <div className="relative">
-                  <UserIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    className="pl-10"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    required
-                  />
-                </div>
-              </Field>
+          <Card className="p-12 border-none shadow-3xl rounded-[3rem] bg-white relative overflow-hidden">
 
-              <Field>
-                <FieldLabel htmlFor="email">Email Address</FieldLabel>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Enter your email"
-                    className="pl-10"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    required
-                  />
-                </div>
-              </Field>
+            {/* Role Selector */}
+            <div className="mb-10">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Select Entity Type</p>
+              <Tabs defaultValue="farmer" className="w-full" onValueChange={(val) => setRole(val as User['role'])}>
+                <TabsList className="grid w-full grid-cols-3 h-16 p-2 bg-slate-50 rounded-[2rem] border border-slate-100">
+                  <TabsTrigger value="farmer" className="rounded-[1.5rem] font-black uppercase tracking-widest text-[10px] h-full data-[state=active]:bg-[#1EB53A] data-[state=active]:text-white data-[state=active]:shadow-lg transition-all">Farmer</TabsTrigger>
+                  <TabsTrigger value="buyer" className="rounded-[1.5rem] font-black uppercase tracking-widest text-[10px] h-full data-[state=active]:bg-[#0072C6] data-[state=active]:text-white data-[state=active]:shadow-lg transition-all">Buyer</TabsTrigger>
+                  <TabsTrigger value="admin" className="rounded-[1.5rem] font-black uppercase tracking-widest text-[10px] h-full data-[state=active]:bg-[#0072C6] data-[state=active]:text-white data-[state=active]:shadow-lg transition-all">Admin</TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
 
-              <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Create a password"
-                    className="pl-10"
-                    value={formData.password}
-                    onChange={(e) =>
-                      setFormData({ ...formData, password: e.target.value })
-                    }
-                    required
-                  />
-                </div>
-              </Field>
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid md:grid-cols-2 gap-8">
+                <Field>
+                  <div className="flex justify-between items-center mb-3 px-2">
+                    <FieldLabel htmlFor="name" className="font-black uppercase tracking-widest text-[10px] text-slate-400">Full Legal Name</FieldLabel>
+                  </div>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none transition-colors group-focus-within:text-[#1EB53A]">
+                      <UserIcon className="w-5 h-5 text-slate-300 transition-colors group-focus-within:text-[#1EB53A]" />
+                    </div>
+                    <Input
+                      id="name"
+                      type="text"
+                      placeholder="Ex: Mohamed Kallon"
+                      className="pl-14 h-16 bg-slate-50 border-slate-100 rounded-[2rem] focus:ring-[#1EB53A] focus:border-[#1EB53A] font-bold text-slate-900 transition-all hover:bg-slate-100 focus:bg-white"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData({ ...formData, name: e.target.value })
+                      }
+                      required
+                    />
+                  </div>
+                </Field>
+
+                <Field>
+                  <div className="flex justify-between items-center mb-3 px-2">
+                    <FieldLabel htmlFor="email" className="font-black uppercase tracking-widest text-[10px] text-slate-400">Digital Identity (Email)</FieldLabel>
+                  </div>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none transition-colors group-focus-within:text-[#1EB53A]">
+                      <Mail className="w-5 h-5 text-slate-300 transition-colors group-focus-within:text-[#1EB53A]" />
+                    </div>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Ex: mo@salone.sl"
+                      className="pl-14 h-16 bg-slate-50 border-slate-100 rounded-[2rem] focus:ring-[#1EB53A] focus:border-[#1EB53A] font-bold text-slate-900 transition-all hover:bg-slate-100 focus:bg-white"
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                      required
+                    />
+                  </div>
+                </Field>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <Field>
+                  <div className="flex justify-between items-center mb-3 px-2">
+                    <FieldLabel htmlFor="password" className="font-black uppercase tracking-widest text-[10px] text-slate-400">Security Keyphrase</FieldLabel>
+                  </div>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none transition-colors group-focus-within:text-[#1EB53A]">
+                      <Lock className="w-5 h-5 text-slate-300 transition-colors group-focus-within:text-[#1EB53A]" />
+                    </div>
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="••••••••"
+                      className="pl-14 h-16 bg-slate-50 border-slate-100 rounded-[2rem] focus:ring-[#1EB53A] focus:border-[#1EB53A] font-bold text-slate-900 transition-all hover:bg-slate-100 focus:bg-white"
+                      value={formData.password}
+                      onChange={(e) =>
+                        setFormData({ ...formData, password: e.target.value })
+                      }
+                      required
+                    />
+                  </div>
+                </Field>
+
+                <Field>
+                  <div className="flex justify-between items-center mb-3 px-2">
+                    <FieldLabel htmlFor="phone" className="font-black uppercase tracking-widest text-[10px] text-slate-400">Contact Protocol</FieldLabel>
+                  </div>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none transition-colors group-focus-within:text-[#1EB53A]">
+                      <Phone className="w-5 h-5 text-slate-300 transition-colors group-focus-within:text-[#1EB53A]" />
+                    </div>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="+232 __ _____ ___"
+                      className="pl-14 h-16 bg-slate-50 border-slate-100 rounded-[2rem] focus:ring-[#1EB53A] focus:border-[#1EB53A] font-bold text-slate-900 transition-all hover:bg-slate-100 focus:bg-white"
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData({ ...formData, phone: e.target.value })
+                      }
+                    />
+                  </div>
+                </Field>
+              </div>
 
               {role === 'farmer' && (
                 <Field>
-                  <FieldLabel htmlFor="farmName">Farm Name</FieldLabel>
-                  <div className="relative">
-                    <Sprout className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <div className="flex justify-between items-center mb-3 px-2">
+                    <FieldLabel htmlFor="farmName" className="font-black uppercase tracking-widest text-[10px] text-slate-400">Estate Designation</FieldLabel>
+                  </div>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none transition-colors group-focus-within:text-[#1EB53A]">
+                      <Sprout className="w-5 h-5 text-slate-300 transition-colors group-focus-within:text-[#1EB53A]" />
+                    </div>
                     <Input
                       id="farmName"
                       type="text"
-                      placeholder="Enter your farm name"
-                      className="pl-10"
-                      value={formData.farmName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, farmName: e.target.value })
-                      }
-                      required
-                    />
-                  </div>
-                </Field>
-              )}
-
-              {role === 'buyer' && (
-                <Field>
-                  <FieldLabel htmlFor="organization">Organization / Company</FieldLabel>
-                  <div className="relative">
-                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      id="organization"
-                      type="text"
-                      placeholder="Enter your organization"
-                      className="pl-10"
-                      // Reusing farmName field for simplicity in demo
-                      value={formData.farmName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, farmName: e.target.value })
-                      }
-                      required
-                    />
-                  </div>
-                </Field>
-              )}
-
-              {role === 'admin' && (
-                <Field>
-                  <FieldLabel htmlFor="department">Department</FieldLabel>
-                  <div className="relative">
-                    <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      id="department"
-                      type="text"
-                      placeholder="Enter your department"
-                      className="pl-10"
-                      // Reusing farmName field for simplicity in demo
+                      placeholder="Ex: Gola Forest Coffee Farms"
+                      className="pl-14 h-16 bg-slate-50 border-slate-100 rounded-[2rem] focus:ring-[#1EB53A] focus:border-[#1EB53A] font-bold text-slate-900 transition-all hover:bg-slate-100 focus:bg-white"
                       value={formData.farmName}
                       onChange={(e) =>
                         setFormData({ ...formData, farmName: e.target.value })
@@ -186,14 +201,18 @@ export default function SignupPage() {
               )}
 
               <Field>
-                <FieldLabel htmlFor="location">Location</FieldLabel>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <div className="flex justify-between items-center mb-3 px-2">
+                  <FieldLabel htmlFor="location" className="font-black uppercase tracking-widest text-[10px] text-slate-400">Regional District</FieldLabel>
+                </div>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none transition-colors group-focus-within:text-[#1EB53A]">
+                    <MapPin className="w-5 h-5 text-slate-300 transition-colors group-focus-within:text-[#1EB53A]" />
+                  </div>
                   <Input
                     id="location"
                     type="text"
-                    placeholder="District, Sierra Leone"
-                    className="pl-10"
+                    placeholder="Ex: Kenema, Sierra Leone"
+                    className="pl-14 h-16 bg-slate-50 border-slate-100 rounded-[2rem] focus:ring-[#1EB53A] focus:border-[#1EB53A] font-bold text-slate-900 transition-all hover:bg-slate-100 focus:bg-white"
                     value={formData.location}
                     onChange={(e) =>
                       setFormData({ ...formData, location: e.target.value })
@@ -203,47 +222,30 @@ export default function SignupPage() {
                 </div>
               </Field>
 
-              <Field>
-                <FieldLabel htmlFor="phone">Phone Number</FieldLabel>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="Enter your phone number"
-                    className="pl-10"
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                  />
-                </div>
-              </Field>
-
-              <Button type="submit" className="w-full" size="lg">
-                Create {role.charAt(0).toUpperCase() + role.slice(1)} Account
+              <Button type="submit" className="w-full h-20 bg-[#0072C6] text-white hover:bg-[#1EB53A] rounded-[2rem] font-black uppercase tracking-[0.2em] text-xs shadow-2xl transition-all active:scale-95 group relative overflow-hidden mt-6">
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                <span className="relative z-10 flex items-center gap-4">
+                  Initialize {role} Account <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Button>
             </form>
 
-            <div className="mt-6 text-center">
-              <p className="text-sm text-muted-foreground">
-                Already have an account?{' '}
+            <div className="mt-12 text-center border-t border-slate-100 pt-8">
+              <p className="text-xs font-bold text-slate-400">
+                Already registered?{' '}
                 <Link
                   href="/auth/login"
-                  className="text-primary font-medium hover:underline"
+                  className="text-[#0072C6] font-black uppercase tracking-wider hover:text-[#1EB53A] ml-2 underline decoration-2 underline-offset-4 decoration-[#0072C6]/30"
                 >
-                  Login here
+                  Verify Identity
                 </Link>
               </p>
             </div>
           </Card>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-muted-foreground">
-              By creating an account, you agree to our Terms of Service and
-              Privacy Policy
-            </p>
-          </div>
+          <p className="mt-8 text-center text-[9px] font-black text-slate-300 uppercase tracking-widest leading-relaxed max-w-sm mx-auto">
+            By creating an account, you agree to our Digital Sovereignty Terms and Privacy Protection Policy of Sierra Leone.
+          </p>
         </div>
       </div>
     </div>

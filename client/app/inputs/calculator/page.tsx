@@ -40,21 +40,21 @@ export default function FertilizerGuidePage() {
           <Card className="max-w-4xl mx-auto p-8">
             <div className="text-center mb-8">
               <div className="flex items-center justify-center gap-2 mb-3">
-                <div className="bg-success/10 p-2 rounded-lg">
-                  <Flask className="w-6 h-6 text-success" />
+                <div className="bg-primary/10 p-2 rounded-lg">
+                  <Flask className="w-6 h-6 text-primary" />
                 </div>
-                <h1 className="text-3xl font-bold text-success">Fertilizer Recommendation for {formData.cropType || 'Maize'}</h1>
+                <h1 className="text-3xl font-bold text-primary">Fertilizer Recommendation for {formData.cropType || 'Maize'}</h1>
               </div>
             </div>
 
             {/* NPK Values */}
-            <div className="grid md:grid-cols-3 gap-6 mb-8 bg-gradient-to-br from-success/5 to-success/10 p-8 rounded-lg">
+            <div className="grid md:grid-cols-3 gap-6 mb-8 bg-gradient-to-br from-primary/5 to-primary/10 p-8 rounded-lg">
               <div className="text-center">
-                <div className="bg-success/10 p-3 rounded-full w-fit mx-auto mb-3">
-                  <Leaf className="w-8 h-8 text-success" />
+                <div className="bg-primary/10 p-3 rounded-full w-fit mx-auto mb-3">
+                  <Leaf className="w-8 h-8 text-primary" />
                 </div>
                 <p className="text-sm text-muted-foreground mb-1">Nitrogen (N)</p>
-                <p className="text-4xl font-bold text-success mb-1">120</p>
+                <p className="text-4xl font-bold text-primary mb-1">120</p>
                 <p className="text-sm text-muted-foreground">kg/ha</p>
               </div>
 
@@ -68,18 +68,18 @@ export default function FertilizerGuidePage() {
               </div>
 
               <div className="text-center">
-                <div className="bg-info/10 p-3 rounded-full w-fit mx-auto mb-3">
-                  <Droplets className="w-8 h-8 text-info" />
+                <div className="bg-secondary/10 p-3 rounded-full w-fit mx-auto mb-3">
+                  <Droplets className="w-8 h-8 text-secondary" />
                 </div>
                 <p className="text-sm text-muted-foreground mb-1">Potassium (K)</p>
-                <p className="text-4xl font-bold text-info mb-1">39</p>
+                <p className="text-4xl font-bold text-secondary mb-1">39</p>
                 <p className="text-sm text-muted-foreground">kg/ha</p>
               </div>
             </div>
 
             {/* Application Schedule */}
             <div className="mb-6">
-              <div className="bg-success text-success-foreground p-3 rounded-t-lg flex items-center gap-2">
+              <div className="bg-primary text-primary-foreground p-3 rounded-t-lg flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
                 <h3 className="font-semibold">Application Schedule</h3>
               </div>
@@ -110,7 +110,7 @@ export default function FertilizerGuidePage() {
               <Button onClick={() => setShowResults(false)} variant="outline" className="flex-1">
                 New Recommendation
               </Button>
-              <Button className="flex-1 bg-success hover:bg-success/90">
+              <Button className="flex-1 bg-primary hover:bg-primary/90">
                 Download Report
               </Button>
             </div>
@@ -128,8 +128,8 @@ export default function FertilizerGuidePage() {
         <Card className="max-w-3xl mx-auto p-8">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <div className="bg-success/10 p-2 rounded-lg">
-                <Flask className="w-6 h-6 text-success" />
+              <div className="bg-primary/10 p-2 rounded-lg">
+                <Flask className="w-6 h-6 text-primary" />
               </div>
               <h1 className="text-3xl font-bold">Fertilizer Recommendation</h1>
             </div>
@@ -145,7 +145,7 @@ export default function FertilizerGuidePage() {
                   Crop Type <span className="text-destructive">*</span>
                 </Label>
                 <Select value={formData.cropType} onValueChange={(value) => setFormData({ ...formData, cropType: value })}>
-                  <SelectTrigger id="cropType" className="border-success/30">
+                  <SelectTrigger id="cropType" className="border-primary/30">
                     <SelectValue placeholder="Select Crop Type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -168,7 +168,7 @@ export default function FertilizerGuidePage() {
                   placeholder="e.g., 1200"
                   value={formData.rainfall}
                   onChange={(e) => setFormData({ ...formData, rainfall: e.target.value })}
-                  className="border-success/30"
+                  className="border-primary/30"
                 />
                 <p className="text-xs text-muted-foreground">Enter expected or historical average rainfall</p>
               </div>
@@ -236,17 +236,17 @@ export default function FertilizerGuidePage() {
               </div>
             </div>
 
-            <div className="bg-info/10 border-l-4 border-info p-4 rounded-lg flex gap-3">
-              <Lightbulb className="w-5 h-5 text-info flex-shrink-0 mt-0.5" />
+            <div className="bg-secondary/10 border-l-4 border-secondary/20 p-4 rounded-lg flex gap-3">
+              <Lightbulb className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
               <div className="text-sm">
-                <p className="font-semibold text-info-foreground mb-1">Quick Tip:</p>
-                <p className="text-info-foreground/80">
+                <p className="font-semibold text-secondary/90 mb-1">Quick Tip:</p>
+                <p className="text-secondary/80">
                   For best results, conduct a soil test to determine exact nutrient levels. These recommendations provide general guidelines based on crop requirements and environmental factors.
                 </p>
               </div>
             </div>
 
-            <Button type="submit" size="lg" className="w-full bg-success hover:bg-success/90 text-success-foreground">
+            <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
               <Flask className="w-5 h-5 mr-2" />
               Generate Recommendation
             </Button>

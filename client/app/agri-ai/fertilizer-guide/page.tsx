@@ -63,8 +63,8 @@ export default function FertilizerGuidePage() {
                 <Card className="max-w-5xl mx-auto p-8">
                     <div className="text-center mb-8">
                         <div className="flex items-center justify-center gap-2 mb-3">
-                            <div className="bg-emerald-100 p-3 rounded-lg">
-                                <Sprout className="w-8 h-8 text-emerald-600" />
+                            <div className="bg-primary/10 p-3 rounded-lg">
+                                <Sprout className="w-8 h-8 text-primary" />
                             </div>
                             <h1 className="text-3xl font-bold">AI Fertilizer Guide</h1>
                         </div>
@@ -158,11 +158,11 @@ export default function FertilizerGuidePage() {
                             </div>
                         </div>
 
-                        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg flex gap-3">
-                            <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <div className="bg-secondary/5 border-l-4 border-secondary p-4 rounded-lg flex gap-3">
+                            <Info className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
                             <div className="text-sm">
-                                <p className="font-semibold text-blue-900 mb-1">Smart Fertilizer Planning:</p>
-                                <p className="text-blue-800">
+                                <p className="font-semibold text-secondary/90 mb-1">Smart Fertilizer Planning:</p>
+                                <p className="text-secondary/80">
                                     Our AI calculates optimal fertilizer amounts and timing based on your crop's specific nutrient requirements and current soil levels.
                                 </p>
                             </div>
@@ -177,7 +177,7 @@ export default function FertilizerGuidePage() {
                         <Button
                             type="submit"
                             size="lg"
-                            className="w-full bg-emerald-600 hover:bg-emerald-700"
+                            className="w-full bg-primary hover:bg-primary/90"
                             disabled={loading}
                         >
                             {loading ? (
@@ -201,7 +201,7 @@ export default function FertilizerGuidePage() {
 
                             {/* Crop Requirements vs Soil Status */}
                             <div className="grid md:grid-cols-2 gap-6">
-                                <Card className="p-6 bg-green-50">
+                                <Card className="p-6 bg-primary/5">
                                     <h3 className="font-bold text-lg mb-4">Crop Requirements</h3>
                                     <div className="space-y-2">
                                         <div className="flex justify-between">
@@ -219,33 +219,30 @@ export default function FertilizerGuidePage() {
                                     </div>
                                 </Card>
 
-                                <Card className="p-6 bg-blue-50">
+                                <Card className="p-6 bg-secondary/5">
                                     <h3 className="font-bold text-lg mb-4">Your Soil Status</h3>
                                     <div className="space-y-2">
                                         <div className="flex justify-between">
                                             <span>Nitrogen Need:</span>
                                             <Badge variant="outline" className={
-                                                results.soilStatus.nitrogen === 'High' ? 'border-red-500 text-red-700' :
-                                                    results.soilStatus.nitrogen === 'Medium' ? 'border-yellow-500 text-yellow-700' :
-                                                        'border-green-500 text-green-700'
-                                            }>{results.soilStatus.nitrogen}</Badge>
-                                        </div>
+                                                results.soilStatus.nitrogen === 'High' ? 'border-destructive text-destructive' :
+                                                    results.soilStatus.nitrogen === 'Medium' ? 'border-warning text-warning' :
+                                                        'border-primary/50 text-primary'
+                                            }>{results.soilStatus.nitrogen}</Badge>                                       </div>
                                         <div className="flex justify-between">
                                             <span>Phosphorus Need:</span>
                                             <Badge variant="outline" className={
-                                                results.soilStatus.phosphorus === 'High' ? 'border-red-500 text-red-700' :
-                                                    results.soilStatus.phosphorus === 'Medium' ? 'border-yellow-500 text-yellow-700' :
-                                                        'border-green-500 text-green-700'
-                                            }>{results.soilStatus.phosphorus}</Badge>
-                                        </div>
+                                                results.soilStatus.phosphorus === 'High' ? 'border-destructive text-destructive' :
+                                                    results.soilStatus.phosphorus === 'Medium' ? 'border-warning text-warning' :
+                                                        'border-primary/50 text-primary'
+                                            }>{results.soilStatus.phosphorus}</Badge>                                       </div>
                                         <div className="flex justify-between">
                                             <span>Potassium Need:</span>
                                             <Badge variant="outline" className={
-                                                results.soilStatus.potassium === 'High' ? 'border-red-500 text-red-700' :
-                                                    results.soilStatus.potassium === 'Medium' ? 'border-yellow-500 text-yellow-700' :
-                                                        'border-green-500 text-green-700'
-                                            }>{results.soilStatus.potassium}</Badge>
-                                        </div>
+                                                results.soilStatus.potassium === 'High' ? 'border-destructive text-destructive' :
+                                                    results.soilStatus.potassium === 'Medium' ? 'border-warning text-warning' :
+                                                        'border-primary/50 text-primary'
+                                            }>{results.soilStatus.potassium}</Badge>                                       </div>
                                     </div>
                                 </Card>
                             </div>
@@ -253,14 +250,14 @@ export default function FertilizerGuidePage() {
                             {/* Fertilizer Schedule */}
                             <Card className="p-6">
                                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                                    <Calendar className="w-5 h-5 text-emerald-600" />
+                                    <Calendar className="w-5 h-5 text-primary" />
                                     Application Schedule
                                 </h3>
                                 <div className="space-y-4">
                                     {results.fertilizerSchedule.map((stage: any, i: number) => (
-                                        <div key={i} className="border-l-4 border-emerald-500 pl-4 py-2">
+                                        <div key={i} className="border-l-4 border-primary/50 pl-4 py-2">
                                             <div className="flex items-center justify-between mb-2">
-                                                <h4 className="font-bold text-emerald-900">{stage.stage}</h4>
+                                                <h4 className="font-bold text-primary">{stage.stage}</h4>
                                                 <Badge>{stage.timing}</Badge>
                                             </div>
                                             <div className="grid md:grid-cols-3 gap-4 text-sm">
@@ -283,25 +280,23 @@ export default function FertilizerGuidePage() {
                             </Card>
 
                             {/* Recommendations */}
-                            <Card className="p-6 bg-amber-50">
-                                <h3 className="font-bold text-lg mb-3">Important Recommendations</h3>
+                            <Card className="p-6 bg-warning/10 border-warning/20">
+                                <h3 className="font-bold text-lg mb-3 text-warning">Important Recommendations</h3>
                                 <ul className="space-y-2">
                                     {results.recommendations.map((rec: string, i: number) => (
                                         <li key={i} className="flex items-start gap-2">
-                                            <span className="text-amber-600 mt-1">⚠</span>
-                                            <span className="text-slate-700">{rec}</span>
+                                            <span className="text-warning mt-1">⚠</span>
+                                            <span className="text-foreground">{rec}</span>
                                         </li>
                                     ))}
                                 </ul>
-                            </Card>
-
-                            {/* Organic Alternatives */}
-                            <Card className="p-6 bg-green-50">
+                            </Card>                           {/* Organic Alternatives */}
+                            <Card className="p-6 bg-primary/5">
                                 <h3 className="font-bold text-lg mb-3">Organic Alternatives</h3>
                                 <ul className="space-y-2">
                                     {results.organicAlternatives.map((alt: string, i: number) => (
                                         <li key={i} className="flex items-start gap-2">
-                                            <span className="text-green-600 mt-1">🌱</span>
+                                            <span className="text-primary mt-1">🌱</span>
                                             <span className="text-slate-700">{alt}</span>
                                         </li>
                                     ))}

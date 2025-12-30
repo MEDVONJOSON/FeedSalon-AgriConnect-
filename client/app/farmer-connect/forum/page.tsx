@@ -27,7 +27,7 @@ export default function CommunityForumPage() {
 
           {/* Discussion Categories */}
           <Card className="mb-8 overflow-hidden">
-            <div className="bg-success text-success-foreground p-4">
+            <div className="bg-primary text-primary-foreground p-4">
               <h2 className="text-xl font-semibold">Discussion Categories</h2>
             </div>
             <div className="p-6">
@@ -47,7 +47,7 @@ export default function CommunityForumPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Droplets className="w-6 h-6 text-info mt-1" />
+                  <Droplets className="w-6 h-6 text-secondary mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Irrigation & Water</h3>
                     <p className="text-sm text-muted-foreground">567 discussions</p>
@@ -73,7 +73,7 @@ export default function CommunityForumPage() {
                 <h3 className="text-lg font-semibold flex-1 text-balance">
                   My wheat crop is showing yellow rust symptoms. What immediate action should I take?
                 </h3>
-                <Badge className="bg-success text-success-foreground ml-4">answered</Badge>
+                <Badge className="bg-primary text-primary-foreground ml-4">answered</Badge>
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                 <div className="flex items-center gap-1">
@@ -86,7 +86,7 @@ export default function CommunityForumPage() {
               </div>
               <div className="flex items-center gap-2 mb-3 flex-wrap">
                 <Badge variant="secondary" className="bg-muted">Wheat</Badge>
-                <Badge variant="secondary" className="bg-info/10 text-info">Disease Management</Badge>
+                <Badge variant="secondary" className="bg-secondary/10 text-secondary">Disease Management</Badge>
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
@@ -110,7 +110,7 @@ export default function CommunityForumPage() {
                 <h3 className="text-lg font-semibold flex-1 text-balance">
                   How to control bollworm attack in cotton without using excessive pesticides?
                 </h3>
-                <Badge className="bg-success text-success-foreground ml-4">answered</Badge>
+                <Badge className="bg-primary text-primary-foreground ml-4">answered</Badge>
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                 <div className="flex items-center gap-1">

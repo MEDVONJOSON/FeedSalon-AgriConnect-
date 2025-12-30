@@ -8,6 +8,14 @@ export interface User {
     name: string
     email: string
     role: 'farmer' | 'buyer' | 'admin'
+    phone?: string
+    location?: string
+    farmDetails?: {
+        name: string
+        size: string
+        location: string
+        crops: string[]
+    }
 }
 
 // Mock database to store users across sessions (in localStorage)
@@ -75,6 +83,15 @@ export const auth = {
         } catch {
             return null
         }
+    },
+
+    updateProfile: (updates: Partial<User>) => {
+        const user = auth.getUser()
+        if (!user) return
+        const updatedUser = { ...user, ...updates }
+        saveToMockDb(updatedUser)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedUser))
+        window.dispatchEvent(new Event('auth-change'))
     },
 
     isAuthenticated: (): boolean => {

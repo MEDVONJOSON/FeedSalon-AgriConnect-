@@ -67,8 +67,8 @@ export default function CropRecommendationPage() {
         <Card className="max-w-5xl mx-auto p-8">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <div className="bg-green-100 p-3 rounded-lg">
-                <Sprout className="w-8 h-8 text-green-600" />
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <Sprout className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-3xl font-bold">AI Crop Recommendation</h1>
             </div>
@@ -82,7 +82,7 @@ export default function CropRecommendationPage() {
               {/* NPK Values */}
               <div className="space-y-2">
                 <Label htmlFor="nitrogen">
-                  Nitrogen (N) <span className="text-red-500">*</span>
+                  Nitrogen (N) <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="nitrogen"
@@ -97,7 +97,7 @@ export default function CropRecommendationPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="phosphorus">
-                  Phosphorus (P) <span className="text-red-500">*</span>
+                  Phosphorus (P) <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="phosphorus"
@@ -112,7 +112,7 @@ export default function CropRecommendationPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="potassium">
-                  Potassium (K) <span className="text-red-500">*</span>
+                  Potassium (K) <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="potassium"
@@ -128,7 +128,7 @@ export default function CropRecommendationPage() {
               {/* Climate Data */}
               <div className="space-y-2">
                 <Label htmlFor="temperature">
-                  Temperature (°C) <span className="text-red-500">*</span>
+                  Temperature (°C) <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="temperature"
@@ -143,7 +143,7 @@ export default function CropRecommendationPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="humidity">
-                  Humidity (%) <span className="text-red-500">*</span>
+                  Humidity (%) <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="humidity"
@@ -158,7 +158,7 @@ export default function CropRecommendationPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="ph">
-                  Soil pH <span className="text-red-500">*</span>
+                  Soil pH <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="ph"
@@ -174,7 +174,7 @@ export default function CropRecommendationPage() {
 
               <div className="space-y-2 md:col-span-3">
                 <Label htmlFor="rainfall">
-                  Annual Rainfall (mm) <span className="text-red-500">*</span>
+                  Annual Rainfall (mm) <span className="text-destructive">*</span>
                 </Label>
                 <Input
                   id="rainfall"
@@ -188,26 +188,26 @@ export default function CropRecommendationPage() {
               </div>
             </div>
 
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg flex gap-3">
-              <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div className="bg-secondary/10 border-l-4 border-secondary p-4 rounded-lg flex gap-3">
+              <Info className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
               <div className="text-sm">
-                <p className="font-semibold text-blue-900 mb-1">Knowledge-Based AI:</p>
-                <p className="text-blue-800">
+                <p className="font-semibold text-foreground/80 mb-1">Knowledge-Based AI:</p>
+                <p className="text-muted-foreground">
                   Our system analyzes soil nutrients, climate conditions, and agricultural best practices to recommend the most suitable crops for your farm.
                 </p>
               </div>
             </div>
 
             {error && (
-              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
-                <p className="text-red-800">{error}</p>
+              <div className="bg-destructive/10 border-l-4 border-destructive p-4 rounded-lg">
+                <p className="text-destructive">{error}</p>
               </div>
             )}
 
             <Button
               type="submit"
               size="lg"
-              className="w-full bg-green-600 hover:bg-green-700"
+              className="w-full bg-primary hover:bg-primary/90"
               disabled={loading}
             >
               {loading ? (
@@ -230,7 +230,7 @@ export default function CropRecommendationPage() {
               <h2 className="text-2xl font-bold text-center mb-6">Recommended Crops for Your Farm</h2>
 
               {/* Soil Analysis */}
-              <Card className="p-6 bg-slate-50">
+              <Card className="p-6 bg-muted/30">
                 <h3 className="font-bold text-lg mb-4">Soil Analysis</h3>
                 <div className="grid md:grid-cols-4 gap-4">
                   <div>
@@ -256,13 +256,13 @@ export default function CropRecommendationPage() {
               {/* Crop Recommendations */}
               <div className="grid gap-4">
                 {results.recommendations.map((crop: any, index: number) => (
-                  <Card key={index} className={`p-6 ${index === 0 ? 'border-2 border-green-500 bg-green-50' : ''}`}>
+                  <Card key={index} className={`p-6 ${index === 0 ? 'border-2 border-primary bg-primary/10' : ''}`}>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
                           <h3 className="text-xl font-bold">{crop.crop}</h3>
                           {index === 0 && (
-                            <Badge className="bg-green-600">Best Match</Badge>
+                            <Badge className="bg-primary">Best Match</Badge>
                           )}
                           <Badge variant="outline" className="ml-auto">
                             {crop.suitability}% Match
@@ -271,13 +271,13 @@ export default function CropRecommendationPage() {
                         <p className="text-muted-foreground mb-4">{crop.reason}</p>
                         <div className="grid md:grid-cols-2 gap-4">
                           <div className="flex items-center gap-2">
-                            <TrendingUp className="w-4 h-4 text-green-600" />
+                            <TrendingUp className="w-4 h-4 text-primary" />
                             <span className="text-sm">
                               <strong>Expected Yield:</strong> {crop.expectedYield}
                             </span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-blue-600" />
+                            <Calendar className="w-4 h-4 text-secondary" />
                             <span className="text-sm">
                               <strong>Growth Period:</strong> {crop.growthPeriod}
                             </span>

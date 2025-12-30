@@ -19,8 +19,8 @@ export default function ExpertsPage() {
           {/* Header */}
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <div className="bg-success/10 p-2 rounded-lg">
-                <GraduationCap className="w-8 h-8 text-success" />
+              <div className="bg-primary/10 p-2 rounded-lg">
+                <GraduationCap className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-4xl font-bold">Agricultural Experts</h1>
             </div>
@@ -30,7 +30,7 @@ export default function ExpertsPage() {
           {/* Expert Categories */}
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="bg-success text-success-foreground p-4">
+              <div className="bg-primary text-primary-foreground p-4">
                 <div className="flex items-center justify-center">
                   <TestTube className="w-8 h-8" />
                 </div>
@@ -45,14 +45,14 @@ export default function ExpertsPage() {
                   <Badge variant="secondary">Genetics</Badge>
                   <Badge variant="secondary">Varieties</Badge>
                 </div>
-                <Button className="bg-success hover:bg-success/90 text-success-foreground w-full">
+                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground w-full">
                   Consult Now
                 </Button>
               </div>
             </Card>
 
             <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div className="bg-info text-info-foreground p-4">
+              <div className="bg-secondary text-secondary-foreground p-4">
                 <div className="flex items-center justify-center">
                   <Leaf className="w-8 h-8" />
                 </div>
@@ -110,15 +110,15 @@ export default function ExpertsPage() {
                   25+ years experience in sustainable agriculture and crop management
                 </p>
                 <div className="flex flex-wrap gap-2 justify-center mb-4">
-                  <Badge className="bg-success text-success-foreground">Rice Expert</Badge>
-                  <Badge className="bg-info text-info-foreground">Organic Farming</Badge>
+                  <Badge className="bg-primary text-primary-foreground">Rice Expert</Badge>
+                  <Badge className="bg-secondary text-secondary-foreground">Organic Farming</Badge>
                 </div>
                 <div className="flex items-center justify-center gap-1 mb-4">
                   <Star className="w-5 h-5 fill-warning text-warning" />
                   <span className="font-semibold">4.9</span>
                   <span className="text-sm text-muted-foreground">(156 reviews)</span>
                 </div>
-                <Button variant="outline" className="w-full border-success text-success">
+                <Button variant="outline" className="w-full border-primary text-primary">
                   Book Session
                 </Button>
               </Card>
@@ -141,7 +141,7 @@ export default function ExpertsPage() {
                   <span className="font-semibold">4.8</span>
                   <span className="text-sm text-muted-foreground">(89 reviews)</span>
                 </div>
-                <Button variant="outline" className="w-full border-success text-success">
+                <Button variant="outline" className="w-full border-primary text-primary">
                   Book Session
                 </Button>
               </Card>
@@ -164,7 +164,7 @@ export default function ExpertsPage() {
                   <span className="font-semibold">4.7</span>
                   <span className="text-sm text-muted-foreground">(134 reviews)</span>
                 </div>
-                <Button variant="outline" className="w-full border-success text-success">
+                <Button variant="outline" className="w-full border-primary text-primary">
                   Book Session
                 </Button>
               </Card>
@@ -173,14 +173,14 @@ export default function ExpertsPage() {
 
           {/* Quick Expert Consultation */}
           <Card className="overflow-hidden">
-            <div className="bg-success text-success-foreground p-4">
+            <div className="bg-primary text-primary-foreground p-4">
               <h2 className="text-2xl font-semibold text-center">Quick Expert Consultation</h2>
-              <p className="text-center text-sm mt-1 text-success-foreground/90">Get answers to your urgent farming questions</p>
+              <p className="text-center text-sm mt-1 text-primary-foreground/90">Get answers to your urgent farming questions</p>
             </div>
-            
-            <div className="bg-info/10 p-4">
+
+            <div className="bg-secondary/10 p-4">
               <div className="flex items-center gap-2 justify-center">
-                <Info className="w-5 h-5 text-info" />
+                <Info className="w-5 h-5 text-secondary" />
                 <p className="text-sm">
                   <span className="font-semibold">Response Time:</span> Experts typically respond within 4-6 hours
                 </p>
@@ -240,7 +240,7 @@ export default function ExpertsPage() {
               </div>
 
               <div className="text-center">
-                <Button size="lg" className="bg-success hover:bg-success/90 text-success-foreground">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
                   <Send className="w-5 h-5 mr-2" />
                   Submit for Expert Review
                 </Button>

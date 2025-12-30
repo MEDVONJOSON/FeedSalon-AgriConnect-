@@ -20,7 +20,7 @@ export default function HorticulturePage() {
                     <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2 text-lg">
-                                <Sprout className="w-5 h-5 text-success" />
+                                <Sprout className="w-5 h-5 text-primary" />
                                 Plant Database
                             </CardTitle>
                         </CardHeader>
@@ -59,7 +59,7 @@ export default function HorticulturePage() {
                     <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2 text-lg">
-                                <Droplets className="w-5 h-5 text-info" />
+                                <Droplets className="w-5 h-5 text-secondary" />
                                 Irrigation
                             </CardTitle>
                         </CardHeader>

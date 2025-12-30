@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const db = require('./database_init');
 
 dotenv.config();
 
@@ -9,7 +10,8 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Routes
 app.get('/api/health', (req, res) => {
@@ -171,73 +173,411 @@ app.post('/api/chat', (req, res) => {
 app.get('/api/agri-opp-portal/:category', (req, res) => {
   const { category } = req.params;
 
-  // Mock Data Store
-  const dataStore = {
-    govt: {
-      subsidies: [
-        { title: 'Fertilizer subsidies', description: '50% discount for registered smallholders.' },
-        { title: 'Seed distribution', description: 'Free improved rice and maize seeds.' },
-        { title: 'Farm inputs grants', description: 'Tools and equipment support.' }
-      ],
-      infrastructure: [
-        { title: 'Mechanization support', description: 'Tractor rental vouchers.' },
-        { title: 'Land access', description: 'Leasing programs for youth.' },
-        { title: 'Community farming', description: 'Irrigation scheme access.' }
-      ]
-    },
-    jobs: [
-      { title: 'Government Agricultural Officer', type: 'Full Time', location: 'Bo District', posted: '2 days ago' },
-      { title: 'NGO Field Coordinator', type: 'Contract', location: 'Kenema', posted: '1 week ago' },
-      { title: 'Agribusiness Sales Rep', type: 'Full Time', location: 'Freetown', posted: 'Just now' },
-      { title: 'Seasonal Farm Manager', type: 'Seasonal', location: 'Makeni', posted: '3 days ago' }
-    ],
-    training: [
-      { title: 'Modern Farming Techniques', provider: 'Ministry of Agriculture', type: 'Workshop' },
-      { title: 'Agro-processing Basics', provider: 'UNIDO', type: 'Course' },
-      { title: 'Climate-Smart Agriculture', provider: 'FAO', type: 'online' },
-      { title: 'Digital Farming Tools', provider: 'Feed Salone', type: 'Webinar' }
-    ],
-    grants: [
-      { title: 'Youth Agribusiness Grant', description: 'Start-up funding for farmers under 35.', amount: 'Up to $5,000' },
-      { title: 'Innovation Challenge 2025', description: 'For new tech solutions in agriculture.', amount: 'Up to $10,000' }
-    ],
-    market: {
-      stats: [
-        { label: 'Local Buyers', value: '126', sub: 'Active in your region', color: 'green' },
-        { label: 'Export Demands', value: 'High', sub: 'Cocoa & Coffee', color: 'blue' },
-        { label: 'Bulk Deals', value: '15', sub: 'Available now', color: 'orange' }
-      ],
-      prices: [
-        { item: 'Rice (50kg bag)', price: 'Le 850,000' },
-        { item: 'Cassava (100kg)', price: 'Le 450,000' },
-        { item: 'Palm Oil (5 Gallon)', price: 'Le 600,000' }
-      ]
-    },
-    tools: [
-      'Business Plan Template', 'Cooperative Formation Guide', 'Export Regulations Handbook',
-      'Loan Application Checklist', 'Farm Record Book', 'Tax Guide'
-    ],
-    youth: [
-      { title: 'School Agriculture Competitions', description: 'Win scholarships and funding for your school farm.', icon: 'graduation' },
-      { title: 'Internship Placements', description: '3-month paid internships at top agribusinesses.', icon: 'user-plus' }
-    ],
-    ngo: [
-      { name: 'World Food Programme', type: 'Development Partner', offers: ['Sustainable agriculture training', 'Food for assets', 'Nutrition support'] },
-      { name: 'Save the Children', type: 'Child Focus', offers: ['School feeding programs', 'Family livelihood support'] },
-      { name: 'Care International', type: 'Humanitarian', offers: ['VSLA Village Savings', 'Women empowerment'] }
-    ]
-  };
+  if (category === 'govt') {
+    const response = {};
+    db.all('SELECT id, title, description FROM govt_subsidies', [], (err, subsidies) => {
+      if (err) return res.status(500).json({ error: err.message });
+      response.subsidies = subsidies;
 
-  const data = dataStore[category];
+      db.all('SELECT id, title, description FROM govt_infrastructure', [], (err, infra) => {
+        if (err) return res.status(500).json({ error: err.message });
+        response.infrastructure = infra;
+        res.json(response);
+      });
+    });
+  } else if (category === 'jobs') {
+    db.all('SELECT id, title, type, location, posted FROM jobs', [], (err, rows) => {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json(rows);
+    });
+  } else if (category === 'training') {
+    db.all('SELECT id, title, provider, type FROM trainings', [], (err, rows) => {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json(rows);
+    });
+  } else if (category === 'grants') {
+    db.all('SELECT id, title, description, amount FROM grants', [], (err, rows) => {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json(rows);
+    });
+  } else if (category === 'market') {
+    const response = {};
+    db.all('SELECT label, value, sub, color FROM market_stats', [], (err, stats) => {
+      if (err) return res.status(500).json({ error: err.message });
+      response.stats = stats;
 
-  if (data) {
-    res.json(data);
+      db.all('SELECT item, price FROM market_prices', [], (err, prices) => {
+        if (err) return res.status(500).json({ error: err.message });
+        response.prices = prices;
+        res.json(response);
+      });
+    });
+  } else if (category === 'tools') {
+    db.all('SELECT name FROM business_tools', [], (err, rows) => {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json(rows.map(r => r.name));
+    });
+  } else if (category === 'youth') {
+    db.all('SELECT title, description, icon FROM youth_opportunities', [], (err, rows) => {
+      if (err) res.status(500).json({ error: err.message });
+      else res.json(rows);
+    });
+  } else if (category === 'ngo') {
+    db.all('SELECT name, type, offers FROM ngo_partners', [], (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      const parsedRows = rows.map(row => ({
+        ...row,
+        offers: JSON.parse(row.offers)
+      }));
+      res.json(parsedRows);
+    });
   } else {
     res.status(404).json({ error: 'Category not found' });
   }
 });
 
+
+// Job Application Submission
+app.post('/api/job-applications', (req, res) => {
+  const { job_id, job_title, applicant_name, email, phone, cover_letter } = req.body;
+
+  // Validation
+  if (!job_id || !job_title || !applicant_name || !email || !phone) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  const applied_date = new Date().toISOString();
+
+  db.run(
+    'INSERT INTO job_applications (job_id, job_title, applicant_name, email, phone, cover_letter, applied_date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+    [job_id, job_title, applicant_name, email, phone, cover_letter || '', applied_date, 'pending'],
+    function (err) {
+      if (err) {
+        console.error('Error saving application:', err);
+        return res.status(500).json({ error: 'Failed to submit application' });
+      }
+      res.json({
+        success: true,
+        message: 'Application submitted successfully!',
+        application_id: this.lastID
+      });
+    }
+  );
 });
+
+
+// Government Program Application Submission
+app.post('/api/govt-applications', (req, res) => {
+  const {
+    program_id, program_name, program_type, applicant_name, email, phone,
+    id_number, farm_size, location, crops, is_registered_farmer, additional_info
+  } = req.body;
+
+  // Validation
+  if (!program_id || !program_name || !program_type || !applicant_name || !email || !phone) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  const applied_date = new Date().toISOString();
+
+  db.run(
+    `INSERT INTO govt_applications (
+      program_id, program_name, program_type, applicant_name, email, phone,
+      id_number, farm_size, location, crops, is_registered_farmer, additional_info,
+      applied_date, status
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      program_id, program_name, program_type, applicant_name, email, phone,
+      id_number || '', farm_size || '', location || '', crops || '',
+      is_registered_farmer || '', additional_info || '', applied_date, 'pending'
+    ],
+    function (err) {
+      if (err) {
+        console.error('Error saving government application:', err);
+        return res.status(500).json({ error: 'Failed to submit application' });
+      }
+      res.json({
+        success: true,
+        message: 'Application submitted successfully!',
+        application_id: this.lastID,
+        reference_number: `GOVT-${this.lastID}-${Date.now().toString().slice(-6)}`
+      });
+    }
+  );
+});
+
+
+// Admin: Get all job applications
+app.get('/api/admin/job-applications', (req, res) => {
+  db.all('SELECT * FROM job_applications ORDER BY applied_date DESC', [], (err, rows) => {
+    if (err) {
+      console.error('Error fetching job applications:', err);
+      return res.status(500).json({ error: 'Failed to fetch applications' });
+    }
+    res.json(rows);
+  });
+});
+
+// Admin: Get all government program applications
+app.get('/api/admin/govt-applications', (req, res) => {
+  db.all('SELECT * FROM govt_applications ORDER BY applied_date DESC', [], (err, rows) => {
+    if (err) {
+      console.error('Error fetching government applications:', err);
+      return res.status(500).json({ error: 'Failed to fetch applications' });
+    }
+    res.json(rows);
+  });
+});
+
+// Admin: Update application status
+app.patch('/api/admin/applications/:type/:id/status', (req, res) => {
+  const { type, id } = req.params;
+  const { status } = req.body;
+
+  const table = type === 'job' ? 'job_applications' : 'govt_applications';
+
+  db.run(`UPDATE ${table} SET status = ? WHERE id = ?`, [status, id], function (err) {
+    if (err) {
+      console.error('Error updating status:', err);
+      return res.status(500).json({ error: 'Failed to update status' });
+    }
+    res.json({ success: true, message: 'Status updated', changes: this.changes });
+  });
+});
+
+
+// Training Enrollment Submission
+app.post('/api/training-enrollments', (req, res) => {
+  const {
+    training_id, training_title, training_provider, applicant_name, email, phone,
+    organization, experience_level, reason
+  } = req.body;
+
+  // Validation
+  if (!training_id || !training_title || !training_provider || !applicant_name || !email || !phone) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  const enrolled_date = new Date().toISOString();
+
+  db.run(
+    `INSERT INTO training_enrollments (
+      training_id, training_title, training_provider, applicant_name, email, phone,
+      organization, experience_level, reason, enrolled_date, status
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      training_id, training_title, training_provider, applicant_name, email, phone,
+      organization || '', experience_level || '', reason || '', enrolled_date, 'pending'
+    ],
+    function (err) {
+      if (err) {
+        console.error('Error saving training enrollment:', err);
+        return res.status(500).json({ error: 'Failed to submit enrollment' });
+      }
+      res.json({
+        success: true,
+        message: 'Enrollment submitted successfully!',
+        enrollment_id: this.lastID,
+        reference_number: `TRAIN-${this.lastID}-${Date.now().toString().slice(-6)}`
+      });
+    }
+  );
+});
+
+// Admin: Get all training enrollments
+app.get('/api/admin/training-enrollments', (req, res) => {
+  db.all('SELECT * FROM training_enrollments ORDER BY enrolled_date DESC', [], (err, rows) => {
+    if (err) {
+      console.error('Error fetching training enrollments:', err);
+      return res.status(500).json({ error: 'Failed to fetch enrollments' });
+    }
+    res.json(rows);
+  });
+});
+
+// Grant Application Submission
+app.post('/api/grant-applications', (req, res) => {
+  const {
+    grant_id, grant_title, grant_amount, applicant_name, email, phone,
+    organization, project_description, requested_amount
+  } = req.body;
+
+  // Validation
+  if (!grant_id || !grant_title || !applicant_name || !email || !phone) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  const applied_date = new Date().toISOString();
+
+  db.run(
+    `INSERT INTO grant_applications (
+      grant_id, grant_title, grant_amount, applicant_name, email, phone,
+      organization, project_description, requested_amount, applied_date, status
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      grant_id, grant_title, grant_amount, applicant_name, email, phone,
+      organization || '', project_description || '', requested_amount || '', applied_date, 'pending'
+    ],
+    function (err) {
+      if (err) {
+        console.error('Error saving grant application:', err);
+        return res.status(500).json({ error: 'Failed to submit application' });
+      }
+      res.json({
+        success: true,
+        message: 'Grant application submitted successfully!',
+        application_id: this.lastID,
+        reference_number: `GRANT-${this.lastID}-${Date.now().toString().slice(-6)}`
+      });
+    }
+  );
+});
+
+// Admin: Get all grant applications
+app.get('/api/admin/grant-applications', (req, res) => {
+  db.all('SELECT * FROM grant_applications ORDER BY applied_date DESC', [], (err, rows) => {
+    if (err) {
+      console.error('Error fetching grant applications:', err);
+      return res.status(500).json({ error: 'Failed to fetch applications' });
+    }
+    res.json(rows);
+  });
+});
+
+
+
+
+// ============================================
+// MARKETPLACE ENDPOINTS
+// ============================================
+
+// Get all marketplace products (with optional filters)
+app.get('/api/marketplace/products', (req, res) => {
+  const { category, seller_id } = req.query;
+  let query = 'SELECT * FROM marketplace_products WHERE status = "available"';
+  let params = [];
+
+  if (category && category !== 'All') {
+    query += ' AND category = ?';
+    params.push(category);
+  }
+
+  if (seller_id) {
+    query += ' AND seller_id = ?';
+    params.push(seller_id);
+  }
+
+  query += ' ORDER BY created_date DESC';
+
+  db.all(query, params, (err, rows) => {
+    if (err) {
+      console.error('Error fetching marketplace products:', err);
+      return res.status(500).json({ error: 'Failed to fetch products' });
+    }
+    res.json(rows);
+  });
+});
+
+// Get single product details
+app.get('/api/marketplace/products/:id', (req, res) => {
+  const { id } = req.params;
+  db.get('SELECT * FROM marketplace_products WHERE id = ?', [id], (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (!row) return res.status(404).json({ error: 'Product not found' });
+    res.json(row);
+  });
+});
+
+// Create new product listing
+app.post('/api/marketplace/products', (req, res) => {
+  const { seller_name, seller_phone, seller_location, product_name, category, description, price, unit, quantity_available } = req.body;
+
+  // Basic validation
+  if (!seller_name || !product_name || !price || !category) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  const created_date = new Date().toISOString();
+
+  db.run(
+    `INSERT INTO marketplace_products (
+      seller_name, seller_phone, seller_location, product_name, category, 
+      description, price, unit, quantity_available, status, created_date
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      seller_name, seller_phone, seller_location, product_name, category,
+      description || '', price, unit || 'unit', quantity_available || '1', 'available', created_date
+    ],
+    function (err) {
+      if (err) {
+        console.error('Error creating product listing:', err);
+        return res.status(500).json({ error: 'Failed to create listing' });
+      }
+      res.json({
+        success: true,
+        message: 'Product listed successfully!',
+        product_id: this.lastID
+      });
+    }
+  );
+});
+
+// Submit buyer inquiry
+app.post('/api/marketplace/inquiries', (req, res) => {
+  const { product_id, product_name, buyer_name, buyer_email, buyer_phone, message } = req.body;
+
+  if (!product_id || !buyer_name || !buyer_phone) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  const inquiry_date = new Date().toISOString();
+
+  db.run(
+    `INSERT INTO marketplace_inquiries (
+      product_id, product_name, buyer_name, buyer_email, buyer_phone, message, inquiry_date, status
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [product_id, product_name, buyer_name, buyer_email, buyer_phone, message || '', inquiry_date, 'pending'],
+    function (err) {
+      if (err) {
+        console.error('Error submitting inquiry:', err);
+        return res.status(500).json({ error: 'Failed to submit inquiry' });
+      }
+      res.json({
+        success: true,
+        message: 'Inquiry sent successfully!',
+        inquiry_id: this.lastID
+      });
+    }
+  );
+});
+
+// Admin: Get all marketplace products (including sold/hidden)
+app.get('/api/admin/marketplace/products', (req, res) => {
+  db.all('SELECT * FROM marketplace_products ORDER BY created_date DESC', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
+  });
+});
+
+// Admin: Update product status
+app.patch('/api/admin/marketplace/products/:id/status', (req, res) => {
+  const { status } = req.body;
+  const { id } = req.params;
+
+  db.run('UPDATE marketplace_products SET status = ? WHERE id = ?', [status, id], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true, message: 'Status updated' });
+  });
+});
+
+// Admin: Get all inquiries
+app.get('/api/admin/marketplace/inquiries', (req, res) => {
+  db.all('SELECT * FROM marketplace_inquiries ORDER BY inquiry_date DESC', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
+  });
+});
+
 
 // ============================================
 // AI SERVICES - KNOWLEDGE-BASED ENDPOINTS
@@ -557,6 +897,15 @@ app.post('/api/ai/fertilizer-guide', (req, res) => {
       'Poultry manure: 1.5 tons per hectare',
       'Green manure: Plant legumes before main crop'
     ]
+  });
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    error: 'Something went wrong!',
+    message: err.message
   });
 });
 

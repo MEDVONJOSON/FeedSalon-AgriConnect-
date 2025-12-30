@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Users, MessageCircle, GraduationCap, Handshake, ShoppingBag, ArrowRight, Plus, Info, Search, User, MapPin } from 'lucide-react'
+import { Users, MessageCircle, GraduationCap, Handshake, ShoppingBag, ArrowRight, Plus, Info, Search, User, MapPin, Star, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 
 export default function FarmerConnectPage() {
@@ -16,95 +16,105 @@ export default function FarmerConnectPage() {
   const [cropInterest, setCropInterest] = useState('all')
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navigation />
 
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-4 text-balance">Farmer Connect</h1>
-          <p className="text-xl mb-8 text-primary-foreground/90 max-w-2xl mx-auto text-balance">
-            Join thousands of farmers sharing knowledge, experiences, and growing together
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Button size="lg" variant="secondary" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              <Users className="w-5 h-5 mr-2" />
-              JOIN COMMUNITY
-            </Button>
-            <Button size="lg" variant="outline" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10">
-              <Info className="w-5 h-5 mr-2" />
-              ASK QUESTION
-            </Button>
-          </div>
-        </div>
-      </div>
+      {/* Premium Gradient Header */}
+      <div className="bg-gradient-to-r from-[#1EB53A] to-[#0072C6] pt-32 pb-24 relative overflow-hidden">
+        {/* Dynamic Accents */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-white/10 blur-[100px] rounded-full translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-white/5 blur-[80px] rounded-full -translate-x-1/4"></div>
 
-      {/* Statistics */}
-      <div className="py-12 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <p className="text-4xl font-bold text-success mb-2">25,000+</p>
-              <p className="text-muted-foreground">Active Farmers</p>
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-md px-4 py-1 flex items-center gap-2">
+                <Users className="w-3 h-3" />
+                NATIONAL COOPERATIVE NETWORK
+              </Badge>
             </div>
-            <div>
-              <p className="text-4xl font-bold text-info mb-2">15,000+</p>
-              <p className="text-muted-foreground">Questions Answered</p>
-            </div>
-            <div>
-              <p className="text-4xl font-bold text-warning mb-2">500+</p>
-              <p className="text-muted-foreground">Expert Advisors</p>
-            </div>
-            <div>
-              <p className="text-4xl font-bold text-accent mb-2">50+</p>
-              <p className="text-muted-foreground">States Covered</p>
+            <h1 className="text-6xl md:text-7xl font-black text-white mb-8 leading-tight">Farmer Connect</h1>
+            <p className="text-xl text-white/80 font-medium max-w-2xl mx-auto mb-12">
+              Join thousands of elite farmers sharing <span className="text-white font-black underline decoration-2 underline-offset-4">national expertise</span> and growing the future of Sierra Leone together.
+            </p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <Button className="h-16 px-12 bg-white text-[#0072C6] hover:bg-white/90 rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-2xl active:scale-95 transition-all">
+                Join Community Hub
+              </Button>
+              <Button variant="outline" className="h-16 px-12 border-white/20 text-white hover:bg-white/10 rounded-[2rem] font-black uppercase tracking-widest text-sm backdrop-blur-md active:scale-95 transition-all">
+                Ask Experts
+              </Button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="py-12 bg-background">
+      {/* Institutional Statistics */}
+      <div className="py-16 bg-slate-50 border-y border-slate-100">
         <div className="container mx-auto px-4">
-          <Card className="max-w-4xl mx-auto overflow-hidden">
-            <div className="bg-info text-info-foreground p-4">
-              <div className="flex items-center justify-center gap-2">
-                <Users className="w-6 h-6" />
-                <h2 className="text-2xl font-semibold">Connect with Local Farmers</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 max-w-6xl mx-auto text-center">
+            <div>
+              <p className="text-5xl font-black text-slate-900 mb-2">25K+</p>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Active Farmers</p>
+            </div>
+            <div>
+              <p className="text-5xl font-black text-[#1EB53A] mb-2">15K+</p>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Solutions Verified</p>
+            </div>
+            <div>
+              <p className="text-5xl font-black text-[#0072C6] mb-2">500+</p>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Certified Advisors</p>
+            </div>
+            <div>
+              <p className="text-5xl font-black text-amber-500 mb-2">50+</p>
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Chiefdoms Covered</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="py-24">
+        <div className="container mx-auto px-4">
+          <Card className="max-w-4xl mx-auto border-none shadow-2xl rounded-[3rem] overflow-hidden bg-white">
+            <div className="bg-[#0072C6] text-white p-10 text-center relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#1EB53A]/20 blur-[60px] rounded-full"></div>
+              <div className="flex items-center justify-center gap-4 relative z-10">
+                <MapPin className="w-8 h-8 text-[#1EB53A]" />
+                <h2 className="text-3xl font-black">Regional Directory</h2>
               </div>
+              <p className="text-white/40 text-xs font-bold uppercase tracking-widest mt-2">Find licensed specialists and local peers</p>
             </div>
-            <div className="p-8">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="location" className="text-base mb-2 block">Your Location *</Label>
+            <div className="p-12">
+              <div className="grid md:grid-cols-2 gap-10">
+                <div className="space-y-4">
+                  <Label htmlFor="location" className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Your Provincial District</Label>
                   <Input
                     id="location"
-                    placeholder="District, Sierra Leone"
+                    placeholder="Enter District (e.g., Bo, Kenema)"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    className="h-12"
+                    className="h-16 font-bold bg-slate-50 border-slate-100 rounded-2xl px-6"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="crop-interest" className="text-base mb-2 block">Crop Interest</Label>
+                <div className="space-y-4">
+                  <Label htmlFor="crop-interest" className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Technical Specialization</Label>
                   <Select value={cropInterest} onValueChange={setCropInterest}>
-                    <SelectTrigger className="h-12">
-                      <SelectValue placeholder="All Crops" />
+                    <SelectTrigger className="h-16 font-bold bg-slate-50 border-slate-100 rounded-2xl px-6">
+                      <SelectValue placeholder="All Commodities" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Crops</SelectItem>
-                      <SelectItem value="rice">Rice</SelectItem>
-                      <SelectItem value="wheat">Wheat</SelectItem>
-                      <SelectItem value="cotton">Cotton</SelectItem>
-                      <SelectItem value="sugarcane">Sugarcane</SelectItem>
-                      <SelectItem value="vegetables">Vegetables</SelectItem>
+                      <SelectItem value="all">All Commodities</SelectItem>
+                      <SelectItem value="rice">Rice (NERICA)</SelectItem>
+                      <SelectItem value="cassava">Cassava (High Yield)</SelectItem>
+                      <SelectItem value="cocoa">Cocoa (Export Grade)</SelectItem>
+                      <SelectItem value="palm">Oil Palm</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
-              <div className="text-center mt-6">
-                <Button size="lg" className="bg-accent hover:bg-accent/90">
-                  <Search className="w-5 h-5 mr-2" />
-                  Find Farmers Nearby
+              <div className="text-center mt-12">
+                <Button className="h-16 px-16 bg-[#1EB53A] hover:bg-[#1base-3A]/90 text-white rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-xl active:scale-95 transition-all">
+                  <Search className="w-5 h-5 mr-3" /> Execute Search
                 </Button>
               </div>
             </div>
@@ -112,210 +122,137 @@ export default function FarmerConnectPage() {
         </div>
       </div>
 
-      <div className="py-12 bg-muted/20">
+      <div className="py-24 bg-slate-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold mb-2">Recent Community Activity</h2>
-            <p className="text-muted-foreground">See what farmers are discussing</p>
+          <div className="text-center mb-16">
+            <p className="text-[10px] font-black text-[#0072C6] uppercase tracking-[0.3em] mb-4">Latest Feed</p>
+            <h2 className="text-5xl font-black text-slate-900 mb-4">Community Intelligence</h2>
+            <p className="text-slate-500 font-medium">Real-time data sharing from the provincial fields</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <h3 className="font-semibold mb-3 text-balance leading-snug">
-                My wheat crop is showing yellow rust symptoms. What immediat...
-              </h3>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                <User className="w-4 h-4" />
-                <span>Mohamed Kamara</span>
-                <span>•</span>
-                <MapPin className="w-4 h-4" />
-                <span>Bo District</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <Badge className="bg-success text-success-foreground">answered</Badge>
-                <span className="text-sm text-muted-foreground">3 responses</span>
-              </div>
-            </Card>
-
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <h3 className="font-semibold mb-3 text-balance leading-snug">
-                How to control bollworm attack in cotton without using exces...
-              </h3>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                <User className="w-4 h-4" />
-                <span>Fatmata Bangura</span>
-                <span>•</span>
-                <MapPin className="w-4 h-4" />
-                <span>Kenema District</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <Badge className="bg-success text-success-foreground">answered</Badge>
-                <span className="text-sm text-muted-foreground">7 responses</span>
-              </div>
-            </Card>
-
-            <Card className="p-6 hover:shadow-lg transition-shadow">
-              <h3 className="font-semibold mb-3 text-balance leading-snug">
-                Best organic fertilizers for groundnut cultivation in sandy ...
-              </h3>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                <User className="w-4 h-4" />
-                <span>Ibrahim Sesay</span>
-                <span>•</span>
-                <MapPin className="w-4 h-4" />
-                <span>Makeni District</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <Badge className="bg-success text-success-foreground">answered</Badge>
-                <span className="text-sm text-muted-foreground">5 responses</span>
-              </div>
-            </Card>
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {[
+              { title: "Wheat rust symptoms observed in Bo District...", author: "Mohamed K.", replies: 3, badge: "VERIFIED" },
+              { title: "Organic bollworm control for cotton without...", author: "Fatmata B.", replies: 7, badge: "HOT TOPIC" },
+              { title: "Groundnut fertilization strategies for sandy...", author: "Ibrahim S.", replies: 5, badge: "ADVICE" }
+            ].map((post, i) => (
+              <Card key={i} className="group p-10 border-none shadow-xl hover:shadow-2xl transition-all rounded-[2.5rem] bg-white hover:-translate-y-1">
+                <Badge className="bg-slate-50 text-slate-400 border-none font-black px-3 py-1 rounded-full text-[8px] uppercase tracking-widest mb-6 group-hover:bg-[#1EB53A]/10 group-hover:text-[#1EB53A]">
+                  {post.badge}
+                </Badge>
+                <h3 className="text-2xl font-black mb-6 text-slate-900 leading-tight group-hover:text-branded transition-colors">
+                  {post.title}
+                </h3>
+                <div className="flex items-center gap-4 text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 px-1">
+                  <div className="w-6 h-6 bg-slate-100 rounded-full flex items-center justify-center">
+                    <User className="w-3 h-3" />
+                  </div>
+                  {post.author}
+                </div>
+                <div className="flex items-center justify-between pt-6 border-t border-slate-50">
+                  <span className="text-[10px] font-black text-[#1EB53A] uppercase tracking-widest">{post.replies} RESPONSES</span>
+                  <ArrowRight className="w-5 h-5 text-slate-200 group-hover:text-slate-900 transition-colors" />
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Community Features */}
-      <div className="py-16 bg-background">
+      {/* Feature Ecosystem */}
+      <div className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-3">Community Features</h2>
-            <p className="text-muted-foreground">Connect, learn, and grow with fellow farmers</p>
+          <div className="text-center mb-20">
+            <h2 className="text-5xl font-black text-slate-900 mb-6">Connective Ecosystem</h2>
+            <div className="h-1.5 w-24 bg-gradient-to-r from-[#1EB53A] to-[#0072C6] mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {/* Discussion Forum */}
-            <Card className="p-6 text-center hover:shadow-lg transition-shadow border-2">
-              <div className="bg-primary/10 p-4 rounded-full w-fit mx-auto mb-4">
-                <MessageCircle className="w-12 h-12 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Discussion Forum</h3>
-              <p className="text-sm text-muted-foreground mb-6">
-                Ask questions, share experiences, and get advice from experienced farmers.
-              </p>
-              <Link href="/farmer-connect/forum">
-                <Button className="bg-primary hover:bg-primary/90">
-                  <ArrowRight className="w-4 h-4 mr-2" />
-                  Join Discussion
-                </Button>
-              </Link>
-            </Card>
-
-            {/* Expert Advice */}
-            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="bg-success/10 p-4 rounded-full w-fit mx-auto mb-4">
-                <GraduationCap className="w-12 h-12 text-success" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Expert Advice</h3>
-              <p className="text-sm text-muted-foreground mb-6">
-                Get professional guidance from agricultural experts and extension officers.
-              </p>
-              <Link href="/farmer-connect/experts">
-                <Button variant="outline" className="border-success/30 text-success hover:bg-success/10">
-                  <ArrowRight className="w-4 h-4 mr-2" />
-                  Consult Expert
-                </Button>
-              </Link>
-            </Card>
-
-            {/* Local Connections */}
-            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="bg-warning/10 p-4 rounded-full w-fit mx-auto mb-4">
-                <Handshake className="w-12 h-12 text-warning" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Local Connections</h3>
-              <p className="text-sm text-muted-foreground mb-6">
-                Connect with farmers in your area for knowledge sharing and collaboration.
-              </p>
-              <Button variant="outline" className="border-warning/30 text-warning hover:bg-warning/10">
-                <ArrowRight className="w-4 h-4 mr-2" />
-                Find Farmers
-              </Button>
-            </Card>
-
-            {/* Marketplace */}
-            <Card className="p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="bg-info/10 p-4 rounded-full w-fit mx-auto mb-4">
-                <ShoppingBag className="w-12 h-12 text-info" />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Marketplace</h3>
-              <p className="text-sm text-muted-foreground mb-6">
-                Buy and sell farming equipment, seeds, and produce directly with other farmers.
-              </p>
-              <Link href="/farmer-connect/marketplace">
-                <Button variant="outline" className="border-info/30 text-info hover:bg-info/10">
-                  <ArrowRight className="w-4 h-4 mr-2" />
-                  Visit Market
-                </Button>
-              </Link>
-            </Card>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            {[
+              { icon: MessageCircle, title: "Discussion Forum", desc: "Peer-to-peer knowledge transfer channel.", href: "/farmer-connect/forum", color: "#1EB53A" },
+              { icon: GraduationCap, title: "Expert Academy", desc: "Direct access to research institutional leads.", href: "/farmer-connect/experts", color: "#0072C6" },
+              { icon: Handshake, title: "Cooperatives", desc: "Unified regional farming clusters and unions.", href: "#", color: "#F59E0B" },
+              { icon: ShoppingBag, title: "Trade Hub", desc: "B2B and direct consumer marketplace nodes.", href: "/farmer-connect/marketplace", color: "#1EB53A" }
+            ].map((feat, i) => (
+              <Card key={i} className="p-10 text-center hover:shadow-2xl transition-all border-none rounded-[2.5rem] bg-slate-50 group">
+                <div className="p-6 rounded-[2rem] w-fit mx-auto mb-8 bg-white shadow-xl group-hover:scale-110 transition-transform" style={{ color: feat.color }}>
+                  <feat.icon className="w-10 h-10" />
+                </div>
+                <h3 className="text-xl font-black mb-4 text-slate-900 uppercase tracking-wide">{feat.title}</h3>
+                <p className="text-sm font-medium text-slate-500 mb-8 leading-relaxed">
+                  {feat.desc}
+                </p>
+                <Link href={feat.href}>
+                  <Button variant="link" className="text-slate-900 font-black uppercase tracking-widest text-[10px] flex items-center gap-2 group-hover:text-branded">
+                    Access Portal <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
 
-      <div className="py-16 bg-success/10">
-        <div className="container mx-auto px-4">
-          <Card className="max-w-4xl mx-auto overflow-hidden">
-            <div className="bg-success text-success-foreground p-4">
-              <div className="flex items-center justify-center gap-2">
-                <Info className="w-6 h-6" />
-                <h2 className="text-2xl font-semibold">Ask the Community</h2>
-              </div>
-              <p className="text-center mt-1 text-success-foreground/90">Get answers from experienced farmers and experts</p>
+      {/* Consultation Request */}
+      <div className="py-24 bg-[#0072C6] relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-5"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <Card className="max-w-4xl mx-auto border-none shadow-[0_40px_100px_-15px_rgba(0,0,0,0.5)] rounded-[3rem] overflow-hidden bg-white">
+            <div className="bg-gradient-to-r from-[#1EB53A] to-[#0072C6] p-12 text-center text-white">
+              <ShieldCheck className="w-16 h-16 mx-auto mb-6 text-white" />
+              <h2 className="text-4xl font-black mb-4">Institutional Advisory</h2>
+              <p className="text-white/70 font-medium">Request a dedicated formal review from Departmental Specialists</p>
             </div>
-            <div className="p-8 bg-background">
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <Label htmlFor="name">Your Name *</Label>
-                  <Input id="name" className="mt-2" />
+            <div className="p-12">
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div className="space-y-4">
+                  <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Full Identity</Label>
+                  <Input className="h-14 font-bold bg-slate-50 border-slate-100 rounded-xl" />
                 </div>
-                <div>
-                  <Label htmlFor="ask-location">Location *</Label>
-                  <Input id="ask-location" placeholder="e.g., Freetown, Western Area" className="mt-2" />
+                <div className="space-y-4">
+                  <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Province / District</Label>
+                  <Input placeholder="Verification of location required" className="h-14 font-bold bg-slate-50 border-slate-100 rounded-xl" />
                 </div>
               </div>
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <Label htmlFor="related-crop">Related Crop</Label>
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div className="space-y-4">
+                  <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Agricultural Sector</Label>
                   <Select>
-                    <SelectTrigger className="mt-2">
-                      <SelectValue placeholder="General Farming" />
+                    <SelectTrigger className="h-14 font-bold bg-slate-50 border-slate-100 rounded-xl">
+                      <SelectValue placeholder="Select Sector" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="general">General Farming</SelectItem>
-                      <SelectItem value="rice">Rice</SelectItem>
-                      <SelectItem value="wheat">Wheat</SelectItem>
-                      <SelectItem value="cotton">Cotton</SelectItem>
-                      <SelectItem value="vegetables">Vegetables</SelectItem>
+                      <SelectItem value="crops">Crop Science</SelectItem>
+                      <SelectItem value="livestock">Livestock</SelectItem>
+                      <SelectItem value="aquaculture">Aquaculture</SelectItem>
+                      <SelectItem value="forestry">Agro-Forestry</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-                <div>
-                  <Label htmlFor="category">Question Category *</Label>
+                <div className="space-y-4">
+                  <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Subject Priority</Label>
                   <Select>
-                    <SelectTrigger className="mt-2">
-                      <SelectValue placeholder="Select Category" />
+                    <SelectTrigger className="h-14 font-bold bg-slate-50 border-slate-100 rounded-xl">
+                      <SelectValue placeholder="Standard Inquiry" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="pest">Pest & Disease</SelectItem>
-                      <SelectItem value="fertilizer">Fertilizers</SelectItem>
-                      <SelectItem value="irrigation">Irrigation</SelectItem>
-                      <SelectItem value="general">General Farming</SelectItem>
+                      <SelectItem value="emergency">Emergency (Disease/Pest)</SelectItem>
+                      <SelectItem value="standard">Technical Procedure</SelectItem>
+                      <SelectItem value="funding">Grant & Subsidy</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
-              <div className="mb-6">
-                <Label htmlFor="question">Your Question *</Label>
+              <div className="space-y-4 mb-12">
+                <Label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Incident Report / Technical Query</Label>
                 <textarea
-                  id="question"
-                  className="w-full mt-2 min-h-32 px-3 py-2 rounded-md border border-input bg-background"
-                  placeholder="Describe your problem or question in detail..."
+                  className="w-full h-40 bg-slate-50 border-slate-100 rounded-[2rem] p-8 text-slate-700 font-medium outline-none focus:ring-2 ring-branded/20 transition-all"
+                  placeholder="Provide comprehensive details for accurate specialist assessment..."
                 />
               </div>
               <div className="text-center">
-                <Button size="lg" className="bg-success hover:bg-success/90 text-success-foreground">
-                  <ArrowRight className="w-5 h-5 mr-2" />
-                  Submit for Expert Review
+                <Button className="h-16 px-16 bg-[#0072C6] hover:bg-slate-800 text-white rounded-[2rem] font-black uppercase tracking-widest text-sm shadow-2xl active:scale-95 transition-all">
+                  Submit Institutional Request
                 </Button>
               </div>
             </div>

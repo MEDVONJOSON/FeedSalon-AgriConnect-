@@ -5,14 +5,13 @@ import { Navigation } from '@/components/navigation'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Building2, Search, DollarSign, GraduationCap, Sprout, ExternalLink } from 'lucide-react'
+import { Building2, Search, DollarSign, GraduationCap, Sprout, ExternalLink, Globe, ShieldCheck, Zap, ArrowRight, MapPin } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 
 export default function GovernmentSchemesPage() {
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('all')
 
-    // Sierra Leone government agricultural schemes
     const schemes = [
         {
             id: 1,
@@ -130,137 +129,176 @@ export default function GovernmentSchemesPage() {
     const getCategoryColor = (category: string) => {
         switch (category) {
             case 'loan':
-                return 'bg-blue-100 text-blue-800'
+                return 'bg-[#0072C6]/10 text-[#0072C6]'
             case 'subsidy':
-                return 'bg-green-100 text-green-800'
+                return 'bg-[#1EB53A]/10 text-[#1EB53A]'
             case 'grant':
-                return 'bg-purple-100 text-purple-800'
+                return 'bg-amber-500/10 text-amber-500'
             case 'training':
-                return 'bg-yellow-100 text-yellow-800'
+                return 'bg-indigo-500/10 text-indigo-500'
             default:
-                return 'bg-gray-100 text-gray-800'
+                return 'bg-slate-100 text-slate-500'
         }
     }
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-white">
             <Navigation />
 
-            <div className="container mx-auto px-4 py-12 max-w-7xl">
-                {/* Header */}
-                <div className="flex items-center gap-3 mb-8">
-                    <Building2 className="w-8 h-8 text-primary" />
-                    <h1 className="text-4xl font-bold text-slate-900">Government Schemes</h1>
-                </div>
+            {/* Premium National Gradient Header */}
+            <div className="bg-gradient-to-r from-[#1EB53A] to-[#0072C6] pt-32 pb-24 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-white/10 blur-[100px] rounded-full translate-x-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-white/5 blur-[80px] rounded-full -translate-x-1/4"></div>
 
-                <p className="text-lg text-muted-foreground mb-8">
-                    Browse agricultural government schemes and subsidies available for farmers in Sierra Leone
-                </p>
-
-                {/* Search and Filter */}
-                <Card className="glass-card p-6 mb-8">
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <div className="flex-1 relative">
-                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                            <Input
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Search schemes..."
-                                className="pl-10 bg-white/50"
-                            />
-                        </div>
-                        <div className="flex gap-2 flex-wrap">
-                            {categories.map((cat) => {
-                                const Icon = cat.icon
-                                return (
-                                    <Button
-                                        key={cat.value}
-                                        onClick={() => setSelectedCategory(cat.value)}
-                                        variant={selectedCategory === cat.value ? 'default' : 'outline'}
-                                        className={selectedCategory === cat.value ? 'bg-primary text-white' : ''}
-                                    >
-                                        <Icon className="w-4 h-4 mr-2" />
-                                        {cat.label}
-                                    </Button>
-                                )
-                            })}
-                        </div>
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="max-w-4xl">
+                        <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-md px-4 py-1.5 mb-6 flex items-center gap-2 w-fit font-black uppercase tracking-widest text-[10px]">
+                            <Building2 className="w-3 h-3" />
+                            OFFICIAL STATE DIRECTIVE
+                        </Badge>
+                        <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tighter">
+                            Government <br />
+                            <span className="text-white underline decoration-4 underline-offset-8 decoration-white/30">Schemes</span>
+                        </h1>
+                        <p className="text-xl text-white/80 max-w-2xl font-medium leading-relaxed">
+                            Access strategic <span className="text-white font-bold">National Mandates</span> and institutional support frameworks designed to empower the <span className="text-white font-bold italic underline decoration-white/20">Feed Salone</span> initiative.
+                        </p>
                     </div>
-                </Card>
-
-                {/* Schemes Grid */}
-                <div className="grid gap-6">
-                    {filteredSchemes.length > 0 ? (
-                        filteredSchemes.map((scheme) => (
-                            <Card key={scheme.id} className="glass-card p-6 hover:shadow-xl transition-shadow">
-                                <div className="flex items-start justify-between mb-4">
-                                    <div className="flex-1">
-                                        <div className="flex items-center gap-3 mb-2">
-                                            <h3 className="text-xl font-semibold text-slate-900">{scheme.title}</h3>
-                                            <Badge className={getCategoryColor(scheme.category)}>
-                                                {scheme.category.toUpperCase()}
-                                            </Badge>
-                                        </div>
-                                        <p className="text-muted-foreground mb-4">{scheme.description}</p>
-                                    </div>
-                                </div>
-
-                                <div className="grid md:grid-cols-2 gap-4 mb-4">
-                                    <div>
-                                        <h4 className="text-sm font-semibold text-slate-700 mb-1">Eligibility</h4>
-                                        <p className="text-sm text-slate-600">{scheme.eligibility}</p>
-                                    </div>
-                                    <div>
-                                        <h4 className="text-sm font-semibold text-slate-700 mb-1">Amount/Benefit</h4>
-                                        <p className="text-sm text-primary font-semibold">{scheme.amount}</p>
-                                    </div>
-                                    {scheme.interest !== 'N/A' && (
-                                        <div>
-                                            <h4 className="text-sm font-semibold text-slate-700 mb-1">Interest Rate</h4>
-                                            <p className="text-sm text-slate-600">{scheme.interest}</p>
-                                        </div>
-                                    )}
-                                    <div>
-                                        <h4 className="text-sm font-semibold text-slate-700 mb-1">Duration</h4>
-                                        <p className="text-sm text-slate-600">{scheme.duration}</p>
-                                    </div>
-                                </div>
-
-                                <div className="border-t border-slate-200 pt-4 mt-4">
-                                    <div className="flex items-center justify-between">
-                                        <div>
-                                            <p className="text-sm text-slate-700">
-                                                <strong>Provider:</strong> {scheme.provider}
-                                            </p>
-                                            <p className="text-sm text-slate-600">
-                                                <strong>Contact:</strong> {scheme.contact}
-                                            </p>
-                                        </div>
-                                        <Button className="bg-primary hover:bg-primary/90 text-white">
-                                            Apply Now
-                                            <ExternalLink className="w-4 h-4 ml-2" />
-                                        </Button>
-                                    </div>
-                                </div>
-                            </Card>
-                        ))
-                    ) : (
-                        <Card className="glass-card p-12 text-center">
-                            <p className="text-lg text-muted-foreground">
-                                No schemes found matching your search criteria
-                            </p>
-                        </Card>
-                    )}
                 </div>
+            </div>
 
-                {/* Info Box */}
-                <Card className="glass-card p-6 mt-8 bg-blue-50 border-blue-200">
-                    <p className="text-sm text-slate-700">
-                        <strong>Note:</strong> These schemes are provided by various government agencies and ministries
-                        in Sierra Leone. Requirements and availability may change. Please contact the respective provider
-                        for the most up-to-date information and application procedures.
-                    </p>
-                </Card>
+            <div className="container mx-auto px-4 py-12 -mt-12 relative z-20">
+                <div className="max-w-7xl mx-auto space-y-8">
+
+                    {/* Prestigious Command Bar */}
+                    <Card className="p-8 border-none bg-white rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                        <div className="flex flex-col lg:flex-row gap-6 items-center">
+                            <div className="flex-1 relative w-full group">
+                                <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5 group-focus-within:text-[#1EB53A] transition-colors" />
+                                <Input
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    placeholder="Search the national registry for active schemes..."
+                                    className="h-16 pl-16 pr-6 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white focus:border-[#1EB53A] focus:ring-4 focus:ring-[#1base-3A]/10 transition-all font-bold text-slate-900"
+                                />
+                            </div>
+                            <div className="flex gap-2 p-1.5 bg-slate-100 rounded-[1.5rem] overflow-x-auto w-full lg:w-auto scrollbar-hide">
+                                {categories.map((cat) => {
+                                    const Icon = cat.icon
+                                    const isActive = selectedCategory === cat.value
+                                    return (
+                                        <button
+                                            key={cat.value}
+                                            onClick={() => setSelectedCategory(cat.value)}
+                                            className={`flex items-center gap-2 px-6 h-12 rounded-xl transition-all font-black uppercase tracking-widest text-[10px] whitespace-nowrap
+                                                ${isActive
+                                                    ? 'bg-white text-slate-900 shadow-sm'
+                                                    : 'text-slate-500 hover:text-slate-900'}`}
+                                        >
+                                            <Icon className={`w-4 h-4 ${isActive ? 'text-[#1EB53A]' : ''}`} />
+                                            {cat.label}
+                                        </button>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </Card>
+
+                    {/* Elite Schemes Terminal */}
+                    <div className="grid gap-8">
+                        {filteredSchemes.length > 0 ? (
+                            filteredSchemes.map((scheme) => (
+                                <Card key={scheme.id} className="p-10 border-none bg-white rounded-[3rem] shadow-xl hover:shadow-2xl transition-all group border border-slate-50 hover:border-[#1EB53A]/20">
+                                    <div className="flex flex-col xl:flex-row justify-between items-start gap-12">
+                                        <div className="flex-1 space-y-6">
+                                            <div className="flex flex-wrap items-center gap-4">
+                                                <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tighter group-hover:text-branded transition-all">
+                                                    {scheme.title}
+                                                </h3>
+                                                <Badge className={`${getCategoryColor(scheme.category)} border-none font-black px-4 py-1.5 rounded-full text-[9px] uppercase tracking-widest`}>
+                                                    {scheme.category} DIRECTIVE
+                                                </Badge>
+                                            </div>
+                                            <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-4xl">{scheme.description}</p>
+
+                                            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8 pt-6 border-t border-slate-50">
+                                                <div className="space-y-1">
+                                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">ELIGIBILITY</h4>
+                                                    <p className="text-sm text-slate-900 font-bold">{scheme.eligibility}</p>
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">ALLOCATION</h4>
+                                                    <p className="text-lg text-[#1EB53A] font-black tracking-tight">{scheme.amount}</p>
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">DURATION</h4>
+                                                    <p className="text-sm text-slate-900 font-bold">{scheme.duration}</p>
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">PROVIDER</h4>
+                                                    <p className="text-sm text-slate-900 font-bold">{scheme.provider}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="w-full xl:w-80 space-y-4">
+                                            <div className="p-6 bg-slate-50 rounded-[2rem] border border-slate-100">
+                                                <div className="flex items-center gap-3 mb-4">
+                                                    <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center">
+                                                        <Globe className="w-5 h-5 text-slate-400" />
+                                                    </div>
+                                                    <div className="space-y-0.5">
+                                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">REGISTRY CONTACT</p>
+                                                        <p className="text-xs font-black text-slate-900 lowercase">{scheme.contact}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center">
+                                                        <ShieldCheck className="w-5 h-5 text-[#1EB53A]" />
+                                                    </div>
+                                                    <div className="space-y-0.5">
+                                                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">VERIFICATION</p>
+                                                        <p className="text-[10px] font-bold text-slate-900">Official Gov Channel</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <Button className="h-16 w-full bg-[#0072C6] text-white hover:bg-slate-800 rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-xl group-hover:scale-105 transition-all">
+                                                Initiate Application <ExternalLink className="w-4 h-4 ml-3" />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </Card>
+                            ))
+                        ) : (
+                            <Card className="p-24 text-center border-none bg-slate-50 rounded-[3rem]">
+                                <Search className="w-16 h-16 text-slate-200 mx-auto mb-6" />
+                                <p className="text-slate-400 font-black uppercase tracking-widest text-sm">
+                                    No active mandates found matching your search parameters
+                                </p>
+                            </Card>
+                        )}
+                    </div>
+
+                    {/* Elite Warning Section */}
+                    <Card className="p-10 bg-[#0072C6] text-white rounded-[3rem] shadow-2xl border-none relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-[#1EB53A]/10 blur-[100px] rounded-full"></div>
+                        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                            <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                                <ShieldCheck className="w-10 h-10 text-[#1EB53A]" />
+                            </div>
+                            <div className="flex-1 space-y-2 text-center md:text-left">
+                                <h4 className="text-xl font-black uppercase tracking-widest">Official Policy Advisory</h4>
+                                <p className="text-white/60 font-medium leading-relaxed max-w-4xl">
+                                    All schemes are subject to periodic review by the <span className="text-white font-black underline decoration-[#1EB53A]/50">National Agricultural Board</span>.
+                                    Applicants should verify their farmer registration status before initiating formal requests.
+                                </p>
+                            </div>
+                            <Button variant="outline" className="h-14 px-10 border-white/20 text-white hover:bg-white/10 rounded-2xl font-black uppercase tracking-widest text-[10px] shrink-0">
+                                Technical Standards
+                            </Button>
+                        </div>
+                    </Card>
+                </div>
             </div>
         </div>
     )

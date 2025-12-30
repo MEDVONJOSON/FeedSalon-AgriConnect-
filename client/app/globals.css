@@ -4,24 +4,26 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Feed Salon - Sierra Leone inspired color scheme */
-  /* Green (agriculture/growth), White (purity), Blue (sky/water) */
-  --background: oklch(0.99 0.002 140);
-  /* Sierra Leone Flag Colors */
-  --sl-green: oklch(0.50 0.18 145);
-  /* Vibrant Green */
+  /* Feed Salon - Light Blue and Green Theme */
+  /* Green (Growth/Agriculture), White (Clean), Blue (Sky/Trust) */
+  --background: oklch(0.98 0.005 220);
+  /* Very Light Blue background */
+
+  /* Theme Colors */
+  --sl-green: oklch(0.60 0.18 145);
+  /* Fresh Green */
+  --sl-blue: oklch(0.65 0.15 240);
+  /* Soft Light Blue */
   --sl-white: oklch(1 0 0);
-  /* Pure White */
-  --sl-blue: oklch(0.50 0.18 250);
-  /* Vibrant Blue */
 
-  --foreground: oklch(0.20 0.03 145);
+  --foreground: oklch(0.25 0.05 240);
+  /* Dark Blue text */
 
-  --card: oklch(1 0 0 / 0.9);
-  --card-foreground: oklch(0.20 0.03 145);
+  --card: oklch(1 0 0 / 0.85);
+  --card-foreground: oklch(0.25 0.05 240);
 
   --popover: oklch(1 0 0 / 0.95);
-  --popover-foreground: oklch(0.20 0.03 145);
+  --popover-foreground: oklch(0.25 0.05 240);
 
   --primary: var(--sl-green);
   --primary-foreground: var(--sl-white);
@@ -29,8 +31,8 @@
   --secondary: var(--sl-blue);
   --secondary-foreground: var(--sl-white);
 
-  --muted: oklch(0.96 0.01 200 / 0.5);
-  --muted-foreground: oklch(0.45 0.04 145);
+  --muted: oklch(0.94 0.02 220);
+  --muted-foreground: oklch(0.45 0.10 240);
 
   --accent: var(--sl-blue);
   --accent-foreground: var(--sl-white);
@@ -38,20 +40,19 @@
   --success: var(--sl-green);
   --success-foreground: var(--sl-white);
 
-  --warning: oklch(0.80 0.15 85);
+  --warning: oklch(0.85 0.15 85);
   --warning-foreground: oklch(0.2 0.02 85);
 
   --info: var(--sl-blue);
   --info-foreground: var(--sl-white);
 
-  --destructive: oklch(0.6 0.2 25);
+  --destructive: oklch(0.6 0.18 25);
   --destructive-foreground: var(--sl-white);
 
-  --border: var(--sl-green);
-  --input: oklch(0.9 0 0 / 0.5);
-  --ring: var(--sl-blue);
-  /* Primary green for focus rings */
-  --radius: 0.5rem;
+  --border: oklch(0.85 0.05 220);
+  --input: oklch(1 0 0 / 0.5);
+  --ring: var(--sl-green);
+  --radius: 0.75rem;
 }
 
 @theme inline {
@@ -98,9 +99,9 @@
     @apply bg-background text-foreground;
     background-image:
       linear-gradient(135deg,
-        oklch(0.99 0.01 140 / 0.15) 0%,
-        oklch(0.98 0.005 0 / 0.20) 35%,
-        oklch(0.97 0.02 220 / 0.15) 100%),
+        oklch(0.95 0.05 220 / 0.2) 0%,
+        oklch(0.98 0.02 180 / 0.1) 50%,
+        oklch(0.93 0.08 145 / 0.15) 100%),
       url('/ai-farming-bg.png');
     background-size: cover;
     background-position: center;
@@ -147,5 +148,95 @@
 
   .animate-float-delayed {
     animation: float-delayed 3s ease-in-out infinite 0.5s;
+  }
+
+  /* Scroll animation classes */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-on-scroll.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger animation delays for child elements */
+  .animate-on-scroll:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+
+  .animate-on-scroll:nth-child(2) {
+    transition-delay: 0.2s;
+  }
+
+  .animate-on-scroll:nth-child(3) {
+    transition-delay: 0.3s;
+  }
+
+  .animate-on-scroll:nth-child(4) {
+    transition-delay: 0.4s;
+  }
+
+  .animate-on-scroll:nth-child(5) {
+    transition-delay: 0.5s;
+  }
+
+  .animate-on-scroll:nth-child(6) {
+    transition-delay: 0.6s;
+  }
+
+  /* Agri-Connect Global Branding Utilities */
+  .text-branded {
+    background-image: linear-gradient(to right, #1EB53A, #0072C6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+  }
+
+  .text-patriotic {
+    background-image: linear-gradient(to right, #1EB53A, #94a3b8, #0072C6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-shadow-premium {
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .bg-branding-glow {
+    position: absolute;
+    filter: blur(120px);
+    border-radius: 9999px;
+    pointer-events: none;
+    opacity: 0.25;
+    transition: opacity 1000ms;
+  }
+
+  .bg-branded {
+    background: linear-gradient(135deg, #1EB53A 0%, #0072C6 100%);
+  }
+
+  .bg-patriotic {
+    background: linear-gradient(to right, #1EB53A 0%, #FFFFFF 50%, #0072C6 100%);
+  }
+
+  .border-branded {
+    border-image: linear-gradient(to right, #1EB53A, #0072C6) 1;
+  }
+
+  .heading-flagship {
+    background-image: linear-gradient(135deg, #1EB53A, #0072C6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1.1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
   }
 }

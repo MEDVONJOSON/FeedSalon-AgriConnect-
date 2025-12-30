@@ -63,8 +63,8 @@ export default function YieldPredictionPage() {
                 <Card className="max-w-4xl mx-auto p-8">
                     <div className="text-center mb-8">
                         <div className="flex items-center justify-center gap-2 mb-3">
-                            <div className="bg-blue-100 p-3 rounded-lg">
-                                <TrendingUp className="w-8 h-8 text-blue-600" />
+                            <div className="bg-secondary/10 p-3 rounded-lg">
+                                <TrendingUp className="w-8 h-8 text-secondary" />
                             </div>
                             <h1 className="text-3xl font-bold">AI Yield Prediction</h1>
                         </div>
@@ -161,11 +161,11 @@ export default function YieldPredictionPage() {
                             </div>
                         </div>
 
-                        <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg flex gap-3">
-                            <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <div className="bg-secondary/5 border-l-4 border-secondary p-4 rounded-lg flex gap-3">
+                            <Info className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
                             <div className="text-sm">
-                                <p className="font-semibold text-blue-900 mb-1">Prediction Accuracy:</p>
-                                <p className="text-blue-800">
+                                <p className="font-semibold text-secondary mb-1">Prediction Accuracy:</p>
+                                <p className="text-secondary/80">
                                     Our AI considers multiple factors including weather patterns, soil conditions, and farming practices to provide accurate yield estimates.
                                 </p>
                             </div>
@@ -180,7 +180,7 @@ export default function YieldPredictionPage() {
                         <Button
                             type="submit"
                             size="lg"
-                            className="w-full bg-blue-600 hover:bg-blue-700"
+                            className="w-full bg-primary hover:bg-primary/90"
                             disabled={loading}
                         >
                             {loading ? (
@@ -203,18 +203,18 @@ export default function YieldPredictionPage() {
                             <h2 className="text-2xl font-bold text-center mb-6">Yield Prediction Results</h2>
 
                             {/* Main Prediction */}
-                            <Card className="p-8 bg-gradient-to-br from-blue-50 to-green-50 border-2 border-blue-200">
+                            <Card className="p-8 bg-gradient-to-br from-secondary/5 to-primary/5 border-2 border-secondary/20">
                                 <div className="text-center">
-                                    <BarChart3 className="w-16 h-16 mx-auto mb-4 text-blue-600" />
-                                    <h3 className="text-4xl font-bold text-blue-900 mb-2">
+                                    <BarChart3 className="w-16 h-16 mx-auto mb-4 text-secondary" />
+                                    <h3 className="text-4xl font-bold text-secondary mb-2">
                                         {results.prediction.totalYield}
                                     </h3>
                                     <p className="text-lg text-muted-foreground mb-4">Estimated Total Yield</p>
                                     <div className="flex justify-center gap-4">
-                                        <Badge variant="outline" className="text-base px-4 py-2">
+                                        <Badge variant="outline" className="text-base px-4 py-2 border-secondary text-secondary">
                                             {results.prediction.yieldPerHectare} per hectare
                                         </Badge>
-                                        <Badge className="bg-green-600 text-base px-4 py-2">
+                                        <Badge className="bg-primary text-base px-4 py-2">
                                             {results.prediction.confidence} Confidence
                                         </Badge>
                                     </div>
@@ -222,24 +222,22 @@ export default function YieldPredictionPage() {
                             </Card>
 
                             {/* Harvest Date */}
-                            <Card className="p-6 bg-amber-50">
+                            <Card className="p-6 bg-warning/10 border-warning/20">
                                 <div className="flex items-center gap-3">
-                                    <Calendar className="w-8 h-8 text-amber-600" />
+                                    <Calendar className="w-8 h-8 text-warning" />
                                     <div>
-                                        <p className="font-semibold text-amber-900">Expected Harvest</p>
-                                        <p className="text-amber-800">{results.prediction.harvestDate}</p>
+                                        <p className="font-semibold text-warning">Expected Harvest</p>
+                                        <p className="text-warning/80">{results.prediction.harvestDate}</p>
                                     </div>
                                 </div>
-                            </Card>
-
-                            {/* Factors Affecting Yield */}
+                            </Card>                           {/* Factors Affecting Yield */}
                             <Card className="p-6">
                                 <h3 className="font-bold text-lg mb-4">Factors Affecting Your Yield</h3>
                                 <div className="space-y-3">
                                     {results.factors.map((factor: any, i: number) => (
-                                        <div key={i} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                        <div key={i} className="flex items-center justify-between p-3 bg-muted/40 rounded-lg">
                                             <span className="font-medium">{factor.factor}</span>
-                                            <Badge className={factor.impact >= 0 ? 'bg-green-600' : 'bg-red-600'}>
+                                            <Badge className={factor.impact >= 0 ? 'bg-primary' : 'bg-destructive'}>
                                                 {factor.impact > 0 ? '+' : ''}{factor.impact}%
                                             </Badge>
                                         </div>
@@ -248,19 +246,17 @@ export default function YieldPredictionPage() {
                             </Card>
 
                             {/* Recommendations */}
-                            <Card className="p-6 bg-green-50">
-                                <h3 className="font-bold text-lg mb-3">Recommendations to Maximize Yield</h3>
+                            <Card className="p-6 bg-primary/10 border-primary/20">
+                                <h3 className="font-bold text-lg mb-3 text-primary">Recommendations to Maximize Yield</h3>
                                 <ul className="space-y-2">
                                     {results.recommendations.map((rec: string, i: number) => (
                                         <li key={i} className="flex items-start gap-2">
-                                            <span className="text-green-600 mt-1">✓</span>
-                                            <span className="text-slate-700">{rec}</span>
+                                            <span className="text-primary mt-1">✓</span>
+                                            <span className="text-foreground">{rec}</span>
                                         </li>
                                     ))}
                                 </ul>
-                            </Card>
-
-                            <Button
+                            </Card>                           <Button
                                 onClick={() => {
                                     setResults(null)
                                     setFormData({

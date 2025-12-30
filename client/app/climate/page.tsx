@@ -11,21 +11,21 @@ export default function ClimateResiliencePage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="bg-success/5 py-12 border-b border-success/10">
+      <section className="bg-primary/5 py-12 border-b border-primary/10">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
-              <Badge variant="outline" className="border-success text-success bg-success/10">Sustainability</Badge>
+              <Badge variant="outline" className="border-primary/50 text-primary bg-primary/10">Sustainability</Badge>
               <span className="text-sm font-medium text-muted-foreground">Feed Salone Strategy</span>
             </div>
             <h1 className="text-4xl font-bold mb-4 text-foreground">Climate Resilience Tools</h1>
             <p className="text-lg text-muted-foreground mb-6">
-              Adapt to changing weather patterns with climate-smart agriculture. 
+              Adapt to changing weather patterns with climate-smart agriculture.
               Access tools for water management, soil conservation, and resilient farming practices.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/climate/forecast">
-                <Button className="bg-success hover:bg-success/90">
+                <Button className="bg-primary hover:bg-primary/90">
                   <CloudRain className="w-4 h-4 mr-2" />
                   Weather Forecast
                 </Button>
@@ -43,39 +43,39 @@ export default function ClimateResiliencePage() {
       <section className="py-12">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-8">Agro-Climatic Conditions</h2>
-          
+
           <div className="grid md:grid-cols-4 gap-6">
-            <Card className="p-6 bg-blue-50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900">
+            <Card className="p-6 bg-secondary/5 dark:bg-secondary/10 border-secondary/20">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-blue-700 dark:text-blue-400">Rainfall</h3>
-                <CloudRain className="w-5 h-5 text-blue-500" />
+                <h3 className="font-semibold text-secondary">Rainfall</h3>
+                <CloudRain className="w-5 h-5 text-secondary/80" />
               </div>
               <div className="text-3xl font-bold mb-1">120mm</div>
               <p className="text-xs text-muted-foreground">Last 30 days (Above Average)</p>
             </Card>
 
-            <Card className="p-6 bg-orange-50 dark:bg-orange-950/20 border-orange-100 dark:border-orange-900">
+            <Card className="p-6 bg-amber-50 dark:bg-amber-950/20 border-amber-100 dark:border-amber-900">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-orange-700 dark:text-orange-400">Temperature</h3>
-                <Thermometer className="w-5 h-5 text-orange-500" />
+                <h3 className="font-semibold text-amber-700 dark:text-amber-400">Temperature</h3>
+                <Thermometer className="w-5 h-5 text-amber-500" />
               </div>
               <div className="text-3xl font-bold mb-1">28°C</div>
               <p className="text-xs text-muted-foreground">Daily Average (Normal)</p>
             </Card>
 
-            <Card className="p-6 bg-cyan-50 dark:bg-cyan-950/20 border-cyan-100 dark:border-cyan-900">
+            <Card className="p-6 bg-secondary/5 dark:bg-secondary/10 border-secondary/20">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-cyan-700 dark:text-cyan-400">Humidity</h3>
-                <Droplets className="w-5 h-5 text-cyan-500" />
+                <h3 className="font-semibold text-secondary">Humidity</h3>
+                <Droplets className="w-5 h-5 text-secondary/80" />
               </div>
               <div className="text-3xl font-bold mb-1">75%</div>
               <p className="text-xs text-muted-foreground">High Moisture Levels</p>
             </Card>
 
-            <Card className="p-6 bg-slate-50 dark:bg-slate-900/50 border-slate-100 dark:border-slate-800">
+            <Card className="p-6 bg-muted border-border">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-slate-700 dark:text-slate-400">Wind Speed</h3>
-                <Wind className="w-5 h-5 text-slate-500" />
+                <h3 className="font-semibold text-foreground">Wind Speed</h3>
+                <Wind className="w-5 h-5 text-muted-foreground" />
               </div>
               <div className="text-3xl font-bold mb-1">12 km/h</div>
               <p className="text-xs text-muted-foreground">Moderate Breeze</p>
@@ -88,11 +88,11 @@ export default function ClimateResiliencePage() {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-8 text-center">Climate-Smart Agriculture (CSA)</h2>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="overflow-hidden group cursor-pointer hover:shadow-lg transition-all">
-              <div className="h-48 bg-green-100 flex items-center justify-center">
-                <Sprout className="w-16 h-16 text-green-600" />
+              <div className="h-48 bg-primary/10 flex items-center justify-center">
+                <Sprout className="w-16 h-16 text-primary" />
               </div>
               <div className="p-6">
                 <h3 className="font-bold text-xl mb-2 group-hover:text-primary transition-colors">Conservation Agriculture</h3>
@@ -118,8 +118,8 @@ export default function ClimateResiliencePage() {
             </Card>
 
             <Card className="overflow-hidden group cursor-pointer hover:shadow-lg transition-all">
-              <div className="h-48 bg-blue-100 flex items-center justify-center">
-                <Droplets className="w-16 h-16 text-blue-600" />
+              <div className="h-48 bg-secondary/10 flex items-center justify-center">
+                <Droplets className="w-16 h-16 text-secondary" />
               </div>
               <div className="p-6">
                 <h3 className="font-bold text-xl mb-2 group-hover:text-primary transition-colors">Water Management</h3>
@@ -145,8 +145,8 @@ export default function ClimateResiliencePage() {
             </Card>
 
             <Card className="overflow-hidden group cursor-pointer hover:shadow-lg transition-all">
-              <div className="h-48 bg-amber-100 flex items-center justify-center">
-                <Sun className="w-16 h-16 text-amber-600" />
+              <div className="h-48 bg-warning/10 flex items-center justify-center">
+                <Sun className="w-16 h-16 text-warning" />
               </div>
               <div className="p-6">
                 <h3 className="font-bold text-xl mb-2 group-hover:text-primary transition-colors">Agroforestry</h3>
@@ -190,7 +190,7 @@ export default function ClimateResiliencePage() {
                   <Badge>Planting Season</Badge>
                 </div>
                 <div className="h-4 bg-muted rounded-full overflow-hidden relative">
-                  <div className="absolute left-[33%] w-[25%] h-full bg-success/50 rounded-full" title="Optimal Planting Window"></div>
+                  <div className="absolute left-[33%] w-[25%] h-full bg-primary/50 rounded-full" title="Optimal Planting Window"></div>
                   <div className="absolute left-[40%] w-1 h-full bg-primary z-10"></div> {/* Current Time Indicator */}
                 </div>
                 <div className="flex justify-between text-xs text-muted-foreground mt-1">

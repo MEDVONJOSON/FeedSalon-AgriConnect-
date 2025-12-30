@@ -9,22 +9,22 @@ import {
   Sprout, TrendingUp, Bug, FileText, Cloud, MapPin, Calendar, BarChart3,
   AlertTriangle, CheckCircle2, Plus, Settings, Users, ShoppingBag, Bell,
   Droplets, Thermometer, Wind, Factory, ShieldCheck, Globe, GraduationCap,
-  Radio, DollarSign, ClipboardList, Target, Banknote, PieChart, ArrowRight
+  Radio, DollarSign, ClipboardList, Target, Banknote, PieChart, ArrowRight,
+  Building2, User, Zap, LayoutDashboard, Search
 } from 'lucide-react'
 
 import { useState, useEffect } from 'react'
-import { auth, User } from '@/lib/auth'
+import { auth, type User as AuthUser } from '@/lib/auth'
 
 export default function DashboardPage() {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<AuthUser | null>(null)
 
   useEffect(() => {
     setUser(auth.getUser())
   }, [])
 
-  // Mock data - in real app this would come from user's account
   const farmerData = {
-    name: user?.name || 'Farmer',
+    name: user?.name || 'User',
     farmName: 'Green Valley Farm',
     location: 'Bo District, Sierra Leone',
     totalArea: '25 acres',
@@ -61,324 +61,338 @@ export default function DashboardPage() {
       label: 'Active Fields',
       value: '3',
       icon: MapPin,
-      color: 'text-green-600',
-      bgColor: 'bg-green-100',
+      color: 'text-[#1EB53A]',
+      bgColor: 'bg-[#1EB53A]/10',
     },
     {
       label: 'Predicted Yield',
       value: '95%',
       icon: TrendingUp,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-100',
+      color: 'text-[#0072C6]',
+      bgColor: 'bg-[#0072C6]/10',
     },
     {
       label: 'Farm Health',
       value: 'Good',
       icon: CheckCircle2,
-      color: 'text-green-600',
-      bgColor: 'bg-green-100',
+      color: 'text-[#1EB53A]',
+      bgColor: 'bg-[#1EB53A]/10',
     },
     {
-      label: 'Alerts',
+      label: 'Security Alerts',
       value: '2',
       icon: AlertTriangle,
-      color: 'text-yellow-600',
-      bgColor: 'bg-yellow-100',
+      color: 'text-amber-500',
+      bgColor: 'bg-amber-500/10',
     },
   ]
 
   const agriPlatformFeatures = [
-    { label: 'Agri Industry', icon: Factory, href: '/agri-industry', color: 'text-orange-600', bgColor: 'bg-orange-100', desc: 'Industrial processing' },
-    { label: 'Crop Insurance', icon: ShieldCheck, href: '/financial-services', color: 'text-blue-600', bgColor: 'bg-blue-100', desc: 'Protect your crops' },
-    { label: 'Diaspora Invest', icon: Globe, href: '/diaspora-invest', color: 'text-indigo-600', bgColor: 'bg-indigo-100', desc: 'Investment opportunities' },
-    { label: 'Education', icon: GraduationCap, href: '/education', color: 'text-yellow-600', bgColor: 'bg-yellow-100', desc: 'Learn modern farming' },
-    { label: 'Extension Hub', icon: Radio, href: '/extension-hub', color: 'text-purple-600', bgColor: 'bg-purple-100', desc: 'Expert advice' },
-    { label: 'Farm Finances', icon: DollarSign, href: '/financial-services', color: 'text-green-600', bgColor: 'bg-green-100', desc: 'Track earnings' },
-    { label: 'Farm Management', icon: ClipboardList, href: '/farm-management', color: 'text-teal-600', bgColor: 'bg-teal-100', desc: 'Manage operations' },
-    { label: 'Feed Salone', icon: Target, href: '/feed-salone', color: 'text-red-600', bgColor: 'bg-red-100', desc: 'National strategy' },
-    { label: 'Financial Services', icon: Banknote, href: '/financial-services', color: 'text-emerald-600', bgColor: 'bg-emerald-100', desc: 'Loans & Banking' },
-    { label: 'Food Security', icon: PieChart, href: '/food-security', color: 'text-cyan-600', bgColor: 'bg-cyan-100', desc: 'National stats' },
+    { label: 'Agri Industry', icon: Factory, href: '/agri-industry', color: 'text-amber-500', bgColor: 'bg-amber-500/10', desc: 'Processing' },
+    { label: 'Crop Insurance', icon: ShieldCheck, href: '/financial-services', color: 'text-[#0072C6]', bgColor: 'bg-[#0072C6]/10', desc: 'Secure Assets' },
+    { label: 'Diaspora Invest', icon: Globe, href: '/diaspora-invest', color: 'text-[#1EB53A]', bgColor: 'bg-[#1EB53A]/10', desc: 'Capital' },
+    { label: 'Education', icon: GraduationCap, href: '/education', color: 'text-amber-500', bgColor: 'bg-amber-500/10', desc: 'Training' },
+    { label: 'Extension Hub', icon: Radio, href: '/extension-hub', color: 'text-[#0072C6]', bgColor: 'bg-[#0072C6]/10', desc: 'Assistance' },
+    { label: 'Farm Finances', icon: DollarSign, href: '/financial-services', color: 'text-[#1EB53A]', bgColor: 'bg-[#1EB53A]/10', desc: 'Revenue' },
+    { label: 'Farm Management', icon: ClipboardList, href: '/farm-management', color: 'text-[#1EB53A]', bgColor: 'bg-[#1EB53A]/10', desc: 'Operations' },
+    { label: 'Feed Salone', icon: Target, href: '/feed-salone', color: 'text-rose-500', bgColor: 'bg-rose-500/10', desc: 'Mandate' },
+    { label: 'Financial Services', icon: Banknote, href: '/financial-services', color: 'text-[#1EB53A]', bgColor: 'bg-[#1EB53A]/10', desc: 'Loans' },
+    { label: 'Food Security', icon: PieChart, href: '/food-security', color: 'text-[#0072C6]', bgColor: 'bg-[#0072C6]/10', desc: 'Statistics' },
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       <Navigation />
 
-      <div className="container mx-auto px-4 py-8">
-        {/* Welcome Header */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Welcome back, {farmerData.name}
-              </h1>
-              <div className="flex items-center gap-4 text-gray-600">
-                <div className="flex items-center gap-2">
-                  <Sprout className="w-4 h-4" />
-                  <span>{farmerData.farmName}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  <span>{farmerData.location}</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <Button variant="outline" size="sm" className="bg-white">
-                <Settings className="w-4 h-4 mr-2" />
-                Settings
-              </Button>
-              <Button variant="outline" size="sm" className="bg-white">
-                <Bell className="w-4 h-4 mr-2" />
-                Notifications
-              </Button>
-            </div>
-          </div>
-        </div>
+      {/* Premium Gradient Command Header */}
+      <div className="bg-gradient-to-r from-[#1EB53A] to-[#0072C6] pt-32 pb-24 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-white/10 blur-[100px] rounded-full translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-1/4 h-1/2 bg-white/5 blur-[80px] rounded-full -translate-x-1/4"></div>
 
-        {/* Quick Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {quickStats.map((stat) => {
-            const Icon = stat.icon
-            return (
-              <Card key={stat.label} className="p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-500 mb-1">
-                      {stat.label}
-                    </p>
-                    <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+              <div className="space-y-4">
+                <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-md px-4 py-1 flex items-center gap-2">
+                  <LayoutDashboard className="w-3 h-3" />
+                  INSTITUTIONAL COMMAND CENTER
+                </Badge>
+                <h1 className="text-5xl md:text-6xl font-black text-white leading-tight">
+                  Welcome, <span className="text-white underline decoration-4 underline-offset-8 decoration-white/30">{user?.name || 'Explorer'}</span>
+                </h1>
+                <div className="flex items-center gap-6 text-white/70 font-bold uppercase tracking-widest text-[10px]">
+                  <div className="flex items-center gap-2">
+                    <Sprout className="w-4 h-4 text-[#1EB53A]" />
+                    {user?.farmDetails?.name || 'UNREGISTERED NODE'}
                   </div>
-                  <div className={`${stat.bgColor} p-3 rounded-lg`}>
-                    <Icon className={`w-6 h-6 ${stat.color}`} />
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-white" />
+                    {user?.location || 'SIERRA LEONE NETWORK'}
                   </div>
                 </div>
-              </Card>
-            )
-          })}
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-6 mb-8">
-          {/* Weather Widget */}
-          <Card className="p-6 lg:col-span-1 bg-gradient-to-br from-blue-500 to-blue-600 text-white border-none">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-lg">Current Weather</h3>
-              <Cloud className="w-6 h-6 text-blue-100" />
-            </div>
-            <div className="space-y-6">
-              <div className="text-center py-2">
-                <p className="text-5xl font-bold mb-2">{weatherData.temp}</p>
-                <p className="text-blue-100 text-lg">{weatherData.condition}</p>
               </div>
-              <div className="grid grid-cols-3 gap-4 pt-4 border-t border-blue-400/30">
-                <div className="text-center">
-                  <Droplets className="w-5 h-5 text-blue-100 mx-auto mb-1" />
-                  <p className="text-sm font-medium">{weatherData.humidity}</p>
-                  <p className="text-xs text-blue-200">Humidity</p>
-                </div>
-                <div className="text-center">
-                  <Wind className="w-5 h-5 text-blue-100 mx-auto mb-1" />
-                  <p className="text-sm font-medium">{weatherData.wind}</p>
-                  <p className="text-xs text-blue-200">Wind</p>
-                </div>
-                <div className="text-center">
-                  <Thermometer className="w-5 h-5 text-blue-100 mx-auto mb-1" />
-                  <p className="text-sm font-medium">{weatherData.temp}</p>
-                  <p className="text-xs text-blue-200">Temp</p>
-                </div>
+              <div className="flex gap-4">
+                <Button className="h-14 px-8 bg-white text-[#0072C6] hover:bg-white/90 rounded-2xl font-black uppercase tracking-widest text-xs shadow-2xl transition-all" asChild>
+                  <Link href="/profile">
+                    <User className="w-4 h-4 mr-2" /> Account Profile
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-14 px-8 border-white/30 text-white hover:bg-white/10 rounded-2xl font-black uppercase tracking-widest text-xs backdrop-blur-md transition-all">
+                  <Bell className="w-4 h-4 mr-2" />
+                  <span className="relative">
+                    Alerts
+                    <span className="absolute -top-1 -right-2 w-2 h-2 bg-rose-500 rounded-full"></span>
+                  </span>
+                </Button>
               </div>
             </div>
-          </Card>
-
-          {/* Recent Alerts */}
-          <Card className="p-6 lg:col-span-2">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-lg text-gray-900">Recent Alerts</h3>
-              <Badge variant="outline" className="bg-gray-100">{recentAlerts.length} Active</Badge>
-            </div>
-            <div className="space-y-3">
-              {recentAlerts.map((alert) => (
-                <div
-                  key={alert.id}
-                  className={`p-4 rounded-lg border flex items-start gap-3 ${alert.type === 'warning'
-                    ? 'bg-yellow-50 border-yellow-200'
-                    : 'bg-blue-50 border-blue-200'
-                    }`}
-                >
-                  {alert.type === 'warning' ? (
-                    <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5" />
-                  ) : (
-                    <CheckCircle2 className="w-5 h-5 text-blue-600 mt-0.5" />
-                  )}
-                  <div className="flex-1">
-                    <p className="font-medium text-gray-900 mb-1">{alert.title}</p>
-                    <p className="text-sm text-gray-600 mb-2">
-                      {alert.message}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {alert.time}
-                    </p>
-                  </div>
-                </div>
-              ))}
-              <Button variant="ghost" className="w-full text-green-600 hover:text-green-700 hover:bg-green-50" size="sm">
-                View All Alerts <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
-          </Card>
-        </div>
-
-        {/* AI Services Section */}
-        <div className="mb-10">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900">AI-Powered Services</h2>
-              <p className="text-gray-600">Advanced tools to optimize your farming</p>
-            </div>
-            <Button variant="outline">View All Services</Button>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Link href="/crop-recommendation">
-              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer group border-l-4 border-l-green-500 h-full">
-                <div className="bg-green-100 p-3 rounded-full w-fit mb-4 group-hover:scale-110 transition-transform">
-                  <Sprout className="w-6 h-6 text-green-600" />
-                </div>
-                <h4 className="font-bold text-lg mb-2 group-hover:text-green-700 transition-colors">Crop Recommendation</h4>
-                <p className="text-sm text-gray-600">
-                  AI-driven analysis to find the best crops for your specific soil conditions.
-                </p>
-              </Card>
-            </Link>
-
-            <Link href="/yield-prediction">
-              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer group border-l-4 border-l-blue-500 h-full">
-                <div className="bg-blue-100 p-3 rounded-full w-fit mb-4 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="w-6 h-6 text-blue-600" />
-                </div>
-                <h4 className="font-bold text-lg mb-2 group-hover:text-blue-700 transition-colors">Yield Prediction</h4>
-                <p className="text-sm text-gray-600">
-                  Accurate harvest estimates based on weather patterns and crop health.
-                </p>
-              </Card>
-            </Link>
-
-            <Link href="/disease-prediction">
-              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer group border-l-4 border-l-red-500 h-full">
-                <div className="bg-red-100 p-3 rounded-full w-fit mb-4 group-hover:scale-110 transition-transform">
-                  <Bug className="w-6 h-6 text-red-600" />
-                </div>
-                <h4 className="font-bold text-lg mb-2 group-hover:text-red-700 transition-colors">Disease Detection</h4>
-                <p className="text-sm text-gray-600">
-                  Early detection of crop diseases using image recognition technology.
-                </p>
-              </Card>
-            </Link>
-
-            <Link href="/fertilizer-guide">
-              <Card className="p-6 hover:shadow-lg transition-all cursor-pointer group border-l-4 border-l-purple-500 h-full">
-                <div className="bg-purple-100 p-3 rounded-full w-fit mb-4 group-hover:scale-110 transition-transform">
-                  <FileText className="w-6 h-6 text-purple-600" />
-                </div>
-                <h4 className="font-bold text-lg mb-2 group-hover:text-purple-700 transition-colors">Fertilizer Guide</h4>
-                <p className="text-sm text-gray-600">
-                  Optimized fertilizer application schedules for maximum yield.
-                </p>
-              </Card>
-            </Link>
           </div>
         </div>
+      </div>
 
-        {/* Agri Platform Section */}
-        <div className="mb-10" id="agri-platform">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900">Agri Platform</h2>
-              <p className="text-gray-600">Essential tools and resources for your farm business</p>
-            </div>
+      <div className="container mx-auto px-4 py-12 -mt-12 relative z-20">
+        <div className="max-w-7xl mx-auto space-y-12">
+
+          {/* Quick Action Hub */}
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            <Button className="h-14 px-10 bg-[#0072C6] border-none hover:bg-slate-800 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-xl transition-all shrink-0" asChild>
+              <Link href="/government-schemes">
+                <Building2 className="w-4 h-4 mr-3" /> Agri-Opp Portal
+              </Link>
+            </Button>
+            {user?.role === 'farmer' && (
+              <>
+                <Button className="h-14 px-10 bg-[#1EB53A] border-none hover:bg-[#1base-3A]/90 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-xl transition-all shrink-0" asChild>
+                  <Link href="/profile?edit=farm">
+                    <Plus className="w-4 h-4 mr-3" /> Manage Estate
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-14 px-10 border-slate-200 text-slate-900 hover:bg-slate-50 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all shrink-0" asChild>
+                  <Link href="/marketplace/sell">
+                    <ArrowRight className="w-4 h-4 mr-3" /> Post Listing
+                  </Link>
+                </Button>
+              </>
+            )}
+            <Button variant="outline" className="h-14 px-10 border-slate-200 text-slate-900 hover:bg-slate-50 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all shrink-0" asChild>
+              <Link href="/marketplace">
+                <ShoppingBag className="w-4 h-4 mr-3" /> Marketplace
+              </Link>
+            </Button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {agriPlatformFeatures.map((feature, index) => {
-              const Icon = feature.icon
+          {/* Statistics Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {quickStats.map((stat, i) => {
+              const Icon = stat.icon
               return (
-                <Link href={feature.href} key={index}>
-                  <Card className="p-4 hover:shadow-md transition-all cursor-pointer h-full border hover:border-green-200">
-                    <div className={`${feature.bgColor} p-3 rounded-lg w-fit mb-3`}>
-                      <Icon className={`w-6 h-6 ${feature.color}`} />
+                <Card key={i} className="p-8 border-none shadow-xl rounded-[2rem] bg-white group hover:-translate-y-1 transition-all">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-1">
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</p>
+                      <p className="text-3xl font-black text-slate-900">{stat.value}</p>
                     </div>
-                    <h4 className="font-semibold text-gray-900 mb-1">{feature.label}</h4>
-                    <p className="text-xs text-gray-500 line-clamp-2">
-                      {feature.desc}
-                    </p>
-                  </Card>
-                </Link>
+                    <div className={`${stat.bgColor} p-4 rounded-2xl group-hover:scale-110 transition-transform`}>
+                      <Icon className={`w-8 h-8 ${stat.color}`} />
+                    </div>
+                  </div>
+                </Card>
               )
             })}
           </div>
-        </div>
 
-        {/* My Fields & Community */}
-        <div className="grid lg:grid-cols-3 gap-6">
-          {/* My Fields */}
-          <Card className="p-6 lg:col-span-2">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-semibold text-lg">My Fields</h3>
-              <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                <Plus className="w-4 h-4 mr-2" />
-                Add Field
-              </Button>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              {farmerData.currentCrops.map((crop, index) => (
-                <div key={index} className="p-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Field {index + 1}</h4>
-                      <p className="text-sm text-gray-500">{(25 / 3).toFixed(1)} acres</p>
-                    </div>
-                    <Badge className="bg-green-100 text-green-700 hover:bg-green-200">Active</Badge>
-                  </div>
-                  <div className="flex items-center justify-between text-sm mt-3">
-                    <span className="text-gray-600">Crop: <span className="font-medium text-gray-900">{crop}</span></span>
-                    <span className="text-green-600 font-medium">Good Health</span>
-                  </div>
+          {/* Command Modules */}
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Weather Intelligence Module */}
+            <Card className="p-10 lg:col-span-1 bg-[#0072C6] text-white border-none rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0072C6]/20 blur-[60px] rounded-full"></div>
+              <div className="flex items-center justify-between mb-10 relative z-10">
+                <div className="space-y-1">
+                  <Badge className="bg-white/10 text-white border-white/20 text-[8px] font-black uppercase tracking-widest px-3 py-0.5">METEOROLOGICAL NODE</Badge>
+                  <h3 className="text-2xl font-black">Climate Intel</h3>
                 </div>
+                <Cloud className="w-10 h-10 text-[#0072C6]" />
+              </div>
+              <div className="text-center py-6 relative z-10">
+                <p className="text-7xl font-black mb-4 group-hover:scale-110 transition-transform">{weatherData.temp}</p>
+                <p className="text-[#0072C6] text-sm font-black uppercase tracking-[0.3em]">{weatherData.condition}</p>
+              </div>
+              <div className="grid grid-cols-3 gap-4 mt-12 pt-8 border-t border-white/5 relative z-10">
+                <div className="text-center">
+                  <Droplets className="w-5 h-5 text-slate-500 mx-auto mb-2" />
+                  <p className="text-sm font-black">{weatherData.humidity}</p>
+                  <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Humidity</p>
+                </div>
+                <div className="text-center">
+                  <Wind className="w-5 h-5 text-slate-500 mx-auto mb-2" />
+                  <p className="text-sm font-black">{weatherData.wind}</p>
+                  <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Wind</p>
+                </div>
+                <div className="text-center">
+                  <Zap className="w-5 h-5 text-slate-500 mx-auto mb-2" />
+                  <p className="text-sm font-black">Low</p>
+                  <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Risk</p>
+                </div>
+              </div>
+            </Card>
+
+            {/* Secure Alerts Module */}
+            <Card className="p-10 lg:col-span-2 border-none shadow-xl rounded-[2.5rem] bg-white">
+              <div className="flex items-center justify-between mb-10">
+                <div>
+                  <h3 className="text-2xl font-black text-slate-900">Network Security Alerts</h3>
+                  <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Real-time system monitoring</p>
+                </div>
+                <Badge className="bg-emerald-50 text-[#1EB53A] border-none font-black px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest">
+                  {recentAlerts.length} Active Feeds
+                </Badge>
+              </div>
+              <div className="space-y-4">
+                {recentAlerts.map((alert) => (
+                  <div key={alert.id} className="p-6 rounded-3xl border border-slate-50 bg-slate-50/50 flex items-start gap-4 hover:bg-white hover:shadow-lg transition-all group">
+                    <div className={`p-4 rounded-2xl ${alert.type === 'warning' ? 'bg-amber-100/50 text-amber-600' : 'bg-[#0072C6]/10 text-[#0072C6]'}`}>
+                      {alert.type === 'warning' ? <AlertTriangle className="w-6 h-6" /> : <ShieldCheck className="w-6 h-6" />}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <p className="text-lg font-black text-slate-900 group-hover:text-branded transition-colors">{alert.title}</p>
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{alert.time}</p>
+                      </div>
+                      <p className="text-sm text-slate-500 font-medium leading-relaxed">{alert.message}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Button variant="link" className="w-full mt-8 text-slate-900 font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 group-hover:text-branded">
+                Access Full Registry <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Card>
+          </div>
+
+          {/* AI Core Intelligence Section */}
+          <div>
+            <div className="flex items-center justify-between mb-10">
+              <div>
+                <h2 className="text-3xl font-black text-slate-900">AI Core Intelligence</h2>
+                <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Advanced machine learning directives</p>
+              </div>
+              <Button variant="outline" className="border-slate-200 text-slate-900 rounded-xl font-black uppercase tracking-widest text-[10px] h-12 px-6">System Overview</Button>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { title: 'Crop Selector', icon: Sprout, color: '#1EB53A', desc: 'Soil-to-commodity optimization models.', href: '/crop-recommendation' },
+                { title: 'Yield Oracle', icon: TrendingUp, color: '#0072C6', desc: 'Probabilistic harvest outcome estimation.', href: '#' },
+                { title: 'Pathogen Scanner', icon: Bug, color: '#F43F5E', desc: 'Computer vision diagnostics in the field.', href: '/disease-detection' },
+                { title: 'Nutrient Matrix', icon: FileText, color: '#8B5CF6', desc: 'Synthetic fertilizer application schedules.', href: '#' }
+              ].map((ai, i) => (
+                <Link href={ai.href} key={i}>
+                  <Card className="p-10 border-none shadow-xl hover:shadow-2xl transition-all rounded-[2.5rem] bg-white group hover:-translate-y-1">
+                    <div className="p-5 rounded-2xl w-fit mb-8 group-hover:scale-110 transition-transform" style={{ backgroundColor: `${ai.color}10`, color: ai.color }}>
+                      <ai.icon className="w-8 h-8" />
+                    </div>
+                    <h4 className="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight group-hover:text-branded transition-colors">{ai.title}</h4>
+                    <p className="text-sm text-slate-500 font-medium leading-relaxed mb-6">{ai.desc}</p>
+                    <div className="h-1 w-12 bg-slate-50 group-hover:bg-branded group-hover:w-full transition-all duration-500"></div>
+                  </Card>
+                </Link>
               ))}
             </div>
-          </Card>
+          </div>
 
-          {/* Quick Links */}
-          <div className="space-y-6">
-            <Card className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-green-100">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-white p-2 rounded-lg shadow-sm">
-                  <Users className="w-6 h-6 text-green-600" />
+          {/* National Platform Ecosystem */}
+          <div id="agri-platform">
+            <div className="flex items-center gap-4 mb-10">
+              <div className="h-1 w-12 bg-[#1EB53A]"></div>
+              <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Agricultural Platform Ecosystem</h2>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+              {agriPlatformFeatures.map((feature, i) => {
+                const Icon = feature.icon
+                return (
+                  <Link href={feature.href} key={i}>
+                    <Card className="p-6 border-none shadow-sm hover:shadow-xl transition-all rounded-[2rem] bg-white group border border-slate-50 hover:border-[#1EB53A]/20">
+                      <div className={`${feature.bgColor} p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform`}>
+                        <Icon className={`w-6 h-6 ${feature.color}`} />
+                      </div>
+                      <h4 className="font-extrabold text-slate-900 text-sm mb-1">{feature.label}</h4>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{feature.desc}</p>
+                    </Card>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Estate Management & Communal Intelligence */}
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Physical Estate Management */}
+            <Card className="p-10 lg:col-span-2 border-none shadow-xl rounded-[3rem] bg-white">
+              <div className="flex items-center justify-between mb-10">
+                <div>
+                  <h3 className="text-2xl font-black text-slate-900">Physical Estate Inventory</h3>
+                  <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Satellite-verified land assets</p>
                 </div>
-                <h3 className="font-semibold text-lg text-green-900">Community</h3>
+                <Button className="h-12 px-6 bg-[#1EB53A] text-white rounded-xl font-black uppercase tracking-widest text-[10px] shadow-lg">
+                  <Plus className="w-4 h-4 mr-2" /> Register Asset
+                </Button>
               </div>
-              <p className="text-sm text-green-800 mb-4">
-                Connect with 500+ farmers in your district. Share tips and get advice.
-              </p>
-              <Button className="w-full bg-green-600 hover:bg-green-700" asChild>
-                <Link href="/forum">Join Discussion</Link>
-              </Button>
+              <div className="grid md:grid-cols-2 gap-6">
+                {farmerData.currentCrops.map((crop, i) => (
+                  <div key={i} className="p-8 border border-slate-50 bg-slate-50/50 rounded-[2rem] hover:bg-white hover:shadow-xl transition-all group">
+                    <div className="flex items-start justify-between mb-6">
+                      <div>
+                        <h4 className="text-xl font-black text-slate-900 uppercase tracking-tight">Division {i + 1}</h4>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{(25 / 3).toFixed(1)} Dedicated Acres</p>
+                      </div>
+                      <Badge className="bg-[#1EB53A]/10 text-[#1EB53A] border-none font-black px-4 py-1 rounded-full text-[8px] uppercase tracking-widest">VERIFIED ACTIVE</Badge>
+                    </div>
+                    <div className="flex items-center justify-between text-[11px] font-bold">
+                      <span className="text-slate-400 uppercase tracking-widest">Crop: <span className="text-slate-900 font-black">{crop}</span></span>
+                      <span className="text-[#1EB53A] uppercase tracking-widest flex items-center gap-2">
+                        <CheckCircle2 className="w-3 h-3" /> Optimal Health
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </Card>
 
-            <Card className="p-6 bg-gradient-to-br from-orange-50 to-amber-50 border-orange-100">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="bg-white p-2 rounded-lg shadow-sm">
-                  <ShoppingBag className="w-6 h-6 text-orange-600" />
+            {/* Communal Intelligence & Trade */}
+            <div className="space-y-8">
+              <Card className="p-10 bg-gradient-to-br from-[#1EB53A] to-[#1EB53A]/80 text-white rounded-[2.5rem] shadow-2xl border-none relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 blur-[60px] rounded-full"></div>
+                <div className="flex items-center gap-4 mb-8 relative z-10">
+                  <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md">
+                    <Users className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-black">Communal Intel</h3>
                 </div>
-                <h3 className="font-semibold text-lg text-orange-900">Marketplace</h3>
-              </div>
-              <p className="text-sm text-orange-800 mb-4">
-                Sell your produce directly to buyers. Best prices guaranteed.
-              </p>
-              <Button className="w-full bg-orange-600 hover:bg-orange-700" asChild>
-                <Link href="/marketplace">Visit Marketplace</Link>
-              </Button>
-            </Card>
+                <p className="text-white/80 font-medium mb-8 leading-relaxed relative z-10">
+                  Connect with <span className="text-white font-black underline decoration-white/30 underline-offset-4">500+ professionals</span> in your district Hub.
+                </p>
+                <Button className="w-full h-14 bg-white text-[#1EB53A] hover:bg-white/90 rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-2xl active:scale-95 transition-all relative z-10" asChild>
+                  <Link href="/forum">Access Comm Network</Link>
+                </Button>
+              </Card>
+
+              <Card className="p-10 bg-[#0072C6] text-white rounded-[2.5rem] shadow-2xl border-none relative overflow-hidden group">
+                <div className="absolute bottom-0 right-0 w-32 h-32 bg-amber-500/20 blur-[60px] rounded-full"></div>
+                <div className="flex items-center gap-4 mb-8 relative z-10">
+                  <div className="bg-amber-500/20 p-3 rounded-2xl">
+                    <ShoppingBag className="w-8 h-8 text-amber-500" />
+                  </div>
+                  <h3 className="text-2xl font-black">Trade Node</h3>
+                </div>
+                <p className="text-white/50 font-medium mb-8 leading-relaxed relative z-10">
+                  Direct market access terminal. Guaranteed institutional commodity pricing.
+                </p>
+                <Button className="w-full h-14 bg-amber-500 hover:bg-amber-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-2xl active:scale-95 transition-all relative z-10" asChild>
+                  <Link href="/marketplace">Enter Trade Hub</Link>
+                </Button>
+              </Card>
+            </div>
           </div>
         </div>
       </div>

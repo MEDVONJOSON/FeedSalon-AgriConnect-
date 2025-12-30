@@ -40,7 +40,7 @@ export default function EquipmentSupplyPage() {
                             <CardDescription>Versatile tractor for small to medium farms.</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-2xl font-bold text-primary">$15,000</p>
+                            <p className="text-2xl font-bold text-primary">Le 15,000</p>
                             <p className="text-sm text-muted-foreground mt-1">Available for Rent or Buy</p>
                         </CardContent>
                         <CardFooter className="flex gap-2">
@@ -59,7 +59,7 @@ export default function EquipmentSupplyPage() {
                             <CardDescription>High-efficiency solar water pump.</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-2xl font-bold text-primary">$850</p>
+                            <p className="text-2xl font-bold text-primary">Le 850</p>
                             <p className="text-sm text-muted-foreground mt-1">In Stock</p>
                         </CardContent>
                         <CardFooter>
@@ -77,7 +77,7 @@ export default function EquipmentSupplyPage() {
                             <CardDescription>Compatible with most standard tractors.</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-2xl font-bold text-primary">$3,200</p>
+                            <p className="text-2xl font-bold text-primary">Le 3,200</p>
                             <p className="text-sm text-muted-foreground mt-1">Pre-order</p>
                         </CardContent>
                         <CardFooter>

@@ -50,23 +50,24 @@ export default function LandManagementPage() {
     const totalLand = parcels.reduce((sum, parcel) => sum + parcel.area, 0)
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-background">
             <Navigation />
 
             <div className="container mx-auto px-4 py-12 max-w-7xl">
                 {/* Header */}
-                <div className="flex items-center gap-3 mb-8">
-                    <MapPin className="w-8 h-8 text-primary" />
-                    <h1 className="text-4xl font-bold text-slate-900">Land Information Management</h1>
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="bg-[#1EB53A]/10 p-3 rounded-2xl">
+                        <MapPin className="w-8 h-8 text-[#1EB53A]" />
+                    </div>
+                    <h1 className="text-4xl md:text-5xl heading-flagship">Land Management</h1>
                 </div>
 
                 <div className="grid lg:grid-cols-[380px_1fr] gap-8">
                     {/* Left Panel - Add New Land */}
-                    <Card className="glass-card p-6 h-fit">
-                        <div className="bg-primary text-white px-4 py-3 -mx-6 -mt-6 mb-6 rounded-t-lg">
-                            <h2 className="text-lg font-semibold">Add New Land Parcel</h2>
+                    <Card className="glass-card p-6 h-fit border-none shadow-xl">
+                        <div className="bg-branded text-white px-6 py-4 -mx-6 -mt-6 mb-8 rounded-t-xl shadow-lg border-b border-white/10">
+                            <h2 className="text-xl font-black uppercase tracking-tight">Add New Land Parcel</h2>
                         </div>
-
                         <div className="space-y-5">
                             <div>
                                 <Label htmlFor="landName" className="text-sm font-medium text-slate-700 mb-2 block">
@@ -129,7 +130,7 @@ export default function LandManagementPage() {
                             </div>
 
                             <div>
-                                <Label htmlFor="currentCrop" className="text-sm font-medium text-slate-700 mb-2 block">
+                                <Label htmlFor="currentCrop" className="text-sm font-medium text-muted-foreground mb-2 block">
                                     Current Crop
                                 </Label>
                                 <Input
@@ -143,7 +144,7 @@ export default function LandManagementPage() {
 
                             <Button
                                 onClick={handleAddLand}
-                                className="w-full bg-primary hover:bg-primary/90 text-white"
+                                className="w-full bg-primary hover:bg-primary/90"
                             >
                                 Add Land
                             </Button>
@@ -151,32 +152,31 @@ export default function LandManagementPage() {
                     </Card>
 
                     {/* Right Panel - Your Land Parcels */}
-                    <Card className="glass-card p-6">
-                        <div className="bg-primary text-white px-4 py-3 -mx-6 -mt-6 mb-6 rounded-t-lg">
-                            <h2 className="text-lg font-semibold">Your Land Parcels</h2>
+                    <Card className="glass-card p-6 border-none shadow-xl">
+                        <div className="bg-branded text-white px-6 py-4 -mx-6 -mt-6 mb-8 rounded-t-xl shadow-lg border-b border-white/10">
+                            <h2 className="text-xl font-black uppercase tracking-tight">Your Land Parcels</h2>
                         </div>
-
                         {/* Table */}
                         <div className="overflow-x-auto">
                             <table className="w-full">
                                 <thead>
-                                    <tr className="border-b border-slate-200">
-                                        <th className="text-left py-3 px-4 font-semibold text-slate-700">Name</th>
-                                        <th className="text-left py-3 px-4 font-semibold text-slate-700">Location</th>
-                                        <th className="text-left py-3 px-4 font-semibold text-slate-700">Area (acres)</th>
-                                        <th className="text-left py-3 px-4 font-semibold text-slate-700">Soil Type</th>
-                                        <th className="text-left py-3 px-4 font-semibold text-slate-700">Current Crop</th>
-                                        <th className="text-left py-3 px-4 font-semibold text-slate-700">Added On</th>
+                                    <tr className="border-b border-border">
+                                        <th className="text-left py-3 px-4 font-semibold text-muted-foreground">Name</th>
+                                        <th className="text-left py-3 px-4 font-semibold text-muted-foreground">Location</th>
+                                        <th className="text-left py-3 px-4 font-semibold text-muted-foreground">Area (acres)</th>
+                                        <th className="text-left py-3 px-4 font-semibold text-muted-foreground">Soil Type</th>
+                                        <th className="text-left py-3 px-4 font-semibold text-muted-foreground">Current Crop</th>
+                                        <th className="text-left py-3 px-4 font-semibold text-muted-foreground">Added On</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {parcels.map((parcel) => (
-                                        <tr key={parcel.id} className="border-b border-slate-100 hover:bg-slate-50/50">
-                                            <td className="py-3 px-4 text-slate-700">{parcel.name}</td>
+                                        <tr key={parcel.id} className="border-b border-border hover:bg-muted/50">
+                                            <td className="py-3 px-4 text-foreground">{parcel.name}</td>
                                             <td className="py-3 px-4 text-slate-700">{parcel.location}</td>
                                             <td className="py-3 px-4 text-slate-700">{parcel.area}</td>
                                             <td className="py-3 px-4">
-                                                <Badge variant="secondary" className="bg-slate-500 text-white">
+                                                <Badge variant="secondary" className="bg-secondary/20 text-secondary border-none text-xs">
                                                     {parcel.soilType}
                                                 </Badge>
                                             </td>
@@ -189,8 +189,8 @@ export default function LandManagementPage() {
                         </div>
 
                         {/* Total Land Summary */}
-                        <div className="mt-6 bg-cyan-100 border border-cyan-200 rounded-lg px-4 py-3">
-                            <p className="text-slate-700 font-medium">
+                        <div className="mt-6 bg-secondary/10 border border-secondary/20 rounded-lg px-4 py-3">
+                            <p className="text-foreground/80 font-medium">
                                 Total Land: <span className="font-bold">{totalLand.toFixed(1)} acres</span> across{' '}
                                 <span className="font-bold">{parcels.length}</span> parcel{parcels.length !== 1 ? 's' : ''}
                             </p>

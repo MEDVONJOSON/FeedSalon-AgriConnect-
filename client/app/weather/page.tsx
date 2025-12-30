@@ -5,43 +5,43 @@ import { Navigation } from '@/components/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Cloud, CloudRain, Sun, Wind, Droplets, Search } from 'lucide-react'
+import { Cloud, CloudRain, Sun, Wind, Droplets, Search, Info } from 'lucide-react'
 
 export default function WeatherPage() {
-    const [location, setLocation] = useState('New Delhi')
+    const [location, setLocation] = useState('Freetown')
     const [weatherData, setWeatherData] = useState({
         current: {
-            city: 'New Delhi',
-            temp: 27,
-            condition: 'Smoke',
+            city: 'Freetown',
+            temp: 31,
+            condition: 'Partly Cloudy',
             icon: 'sun-cloud',
-            humidity: 51,
-            windSpeed: 6
+            humidity: 82,
+            windSpeed: 12
         },
         forecast: [
-            { day: 'Today', temp: 27, condition: 'Clear', icon: 'sun' },
-            { day: 'Tomorrow', temp: 27, condition: 'Clear', icon: 'sun' },
-            { day: 'Day 2', temp: 28, condition: 'Clear', icon: 'sun' }
+            { day: 'Today', temp: 31, condition: 'Tropical Sun', icon: 'sun' },
+            { day: 'Tomorrow', temp: 29, condition: 'Light Rain', icon: 'rain' },
+            { day: 'Day 2', temp: 30, condition: 'Cloudy', icon: 'cloud' }
         ]
     })
 
     const getWeatherIcon = (iconType: string) => {
         switch (iconType) {
             case 'sun':
-                return <Sun className="w-16 h-16 text-yellow-500" />
+                return <Sun className="w-16 h-16 text-warning" />
             case 'sun-cloud':
                 return (
                     <div className="relative">
-                        <Sun className="w-16 h-16 text-yellow-500" />
-                        <Cloud className="w-10 h-10 text-yellow-600 absolute bottom-0 right-0" />
+                        <Sun className="w-16 h-16 text-warning" />
+                        <Cloud className="w-10 h-10 text-[#0072C6]/80 absolute bottom-0 right-0" />
                     </div>
                 )
             case 'cloud':
-                return <Cloud className="w-16 h-16 text-slate-400" />
+                return <Cloud className="w-16 h-16 text-muted-foreground" />
             case 'rain':
-                return <CloudRain className="w-16 h-16 text-blue-500" />
+                return <CloudRain className="w-16 h-16 text-[#0072C6]" />
             default:
-                return <Sun className="w-16 h-16 text-yellow-500" />
+                return <Sun className="w-16 h-16 text-warning" />
         }
     }
 
@@ -51,78 +51,94 @@ export default function WeatherPage() {
 
             <div className="container mx-auto px-4 py-12 max-w-6xl">
                 {/* Header */}
-                <div className="flex items-center gap-3 mb-8">
-                    <Cloud className="w-8 h-8 text-primary" />
-                    <h1 className="text-4xl font-bold text-slate-900">Weather Information</h1>
+                <div className="flex items-center gap-4 mb-8">
+                    <Cloud className="w-10 h-10 text-[#0072C6]" />
+                    <h1 className="text-4xl md:text-5xl heading-flagship">Weather Information</h1>
                 </div>
 
+                <p className="text-xl text-muted-foreground mb-8 font-medium">
+                    Monitor <span className="text-branded font-bold">micro-climates</span> and plan your <span className="text-branded font-bold italic">agricultural activities</span> with precision in Sierra Leone.
+                </p>
+
                 {/* Location Search */}
-                <div className="flex gap-3 mb-8 max-w-md">
+                <div className="flex gap-3 mb-12 max-w-md">
                     <Input
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
-                        placeholder="Enter location"
-                        className="glass-card"
+                        placeholder="Enter location (e.g. Bo, Makeni, Kenema)..."
+                        className="glass-card h-12"
                     />
-                    <Button className="bg-primary hover:bg-primary/90 text-white">
+                    <Button className="bg-[#1EB53A] hover:bg-[#1EB53A]/90 text-white h-12 px-6">
                         <Search className="w-4 h-4 mr-2" />
-                        Get Weather
+                        Search
                     </Button>
                 </div>
 
-                <div className="grid lg:grid-cols-[350px_1fr] gap-6">
+                <div className="grid lg:grid-cols-[400px_1fr] gap-8">
                     {/* Current Weather */}
-                    <Card className="glass-card p-6">
-                        <div className="bg-secondary text-white px-4 py-3 -mx-6 -mt-6 mb-6 rounded-t-lg">
-                            <h2 className="text-lg font-semibold">Current Weather</h2>
+                    <Card className="glass-card p-8 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-[#1EB53A]/10 blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
+                        <div className="bg-[#0072C6] text-white px-6 py-3 -mx-8 -mt-8 mb-8 rounded-t-xl font-bold tracking-wider uppercase text-sm">
+                            Real-time Atmosphere
                         </div>
 
                         <div className="text-center">
-                            <h3 className="text-3xl font-bold text-slate-900 mb-6">{weatherData.current.city}</h3>
+                            <h3 className="text-4xl font-black text-slate-800 mb-8 tracking-tight">{weatherData.current.city}</h3>
 
-                            <div className="flex justify-center mb-6">
+                            <div className="flex justify-center mb-8 transform group-hover:scale-110 transition-transform duration-500">
                                 {getWeatherIcon(weatherData.current.icon)}
                             </div>
 
-                            <div className="text-6xl font-bold text-slate-900 mb-2">
+                            <div className="text-7xl font-black text-slate-900 mb-2 tracking-tighter">
                                 {weatherData.current.temp}°C
                             </div>
-                            <p className="text-slate-600 text-lg mb-8">{weatherData.current.condition}</p>
+                            <p className="text-muted-foreground text-xl mb-10 font-medium italic">{weatherData.current.condition}</p>
 
-                            <div className="space-y-3 text-left">
-                                <div className="flex items-center gap-3 text-slate-700">
-                                    <Droplets className="w-5 h-5 text-secondary" />
-                                    <span className="font-medium">Humidity:</span>
-                                    <span>{weatherData.current.humidity}%</span>
+                            <div className="grid grid-cols-2 gap-4 text-left border-t border-slate-100 pt-8">
+                                <div className="space-y-1">
+                                    <div className="flex items-center gap-2 text-slate-500 text-sm font-bold uppercase">
+                                        <Droplets className="w-4 h-4 text-[#0072C6]" /> Humidity
+                                    </div>
+                                    <div className="text-2xl font-black text-slate-800">{weatherData.current.humidity}%</div>
                                 </div>
-                                <div className="flex items-center gap-3 text-slate-700">
-                                    <Wind className="w-5 h-5 text-secondary" />
-                                    <span className="font-medium">Wind Speed:</span>
-                                    <span>{weatherData.current.windSpeed} km/h</span>
+                                <div className="space-y-1">
+                                    <div className="flex items-center gap-2 text-slate-500 text-sm font-bold uppercase">
+                                        <Wind className="w-4 h-4 text-[#1EB53A]" /> Wind
+                                    </div>
+                                    <div className="text-2xl font-black text-slate-800">{weatherData.current.windSpeed} <span className="text-sm font-normal text-slate-400">km/h</span></div>
                                 </div>
                             </div>
                         </div>
                     </Card>
 
                     {/* 5-Day Forecast */}
-                    <Card className="glass-card p-6">
-                        <div className="bg-primary text-white px-4 py-3 -mx-6 -mt-6 mb-6 rounded-t-lg">
-                            <h2 className="text-lg font-semibold">5-Day Forecast</h2>
+                    <Card className="glass-card p-8">
+                        <div className="bg-[#1EB53A] text-white px-6 py-3 -mx-8 -mt-8 mb-8 rounded-t-xl font-bold tracking-wider uppercase text-sm">
+                            Agricultural Forecast (3-Day Precision)
                         </div>
 
-                        <div className="grid grid-cols-3 gap-6">
+                        <div className="grid md:grid-cols-3 gap-6">
                             {weatherData.forecast.map((day, index) => (
-                                <Card key={index} className="bg-white/50 p-6 text-center border border-slate-200">
-                                    <h3 className="font-semibold text-slate-700 mb-4">{day.day}</h3>
-                                    <div className="flex justify-center mb-4">
+                                <Card key={index} className="bg-white/50 p-8 text-center border-slate-100 hover:shadow-xl transition-all duration-300 group">
+                                    <h3 className="font-black text-slate-400 uppercase tracking-widest text-xs mb-6">{day.day}</h3>
+                                    <div className="flex justify-center mb-6 group-hover:scale-110 transition-transform">
                                         {getWeatherIcon(day.icon)}
                                     </div>
-                                    <div className="text-3xl font-bold text-slate-900 mb-1">
+                                    <div className="text-4xl font-black text-slate-800 mb-2">
                                         {day.temp}°C
                                     </div>
-                                    <p className="text-slate-600">{day.condition}</p>
+                                    <p className="text-slate-500 font-medium">{day.condition}</p>
                                 </Card>
                             ))}
+                        </div>
+
+                        <div className="mt-12 p-6 bg-blue-50/50 rounded-2xl border border-blue-100 flex items-start gap-4">
+                            <Info className="w-6 h-6 text-[#0072C6] shrink-0 mt-1" />
+                            <div className="text-sm text-blue-900 leading-relaxed">
+                                <strong className="block mb-1">Agronomist Note:</strong>
+                                High humidity levels in <span className="italic">Freetown</span> and the <span className="italic">Western Area</span> suggest optimal moisture for young sprouts. Monitor for pests that thrive in humid tropical conditions.
+                            </div>
                         </div>
                     </Card>
                 </div>

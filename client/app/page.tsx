@@ -1,385 +1,670 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Navigation } from '@/components/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { MapPin, Cloud, Settings, Bug, Sprout, Building2, RefreshCw, Calendar, TrendingUp } from 'lucide-react'
+import {
+  MapPin, Cloud, Settings, Bug, Sprout, Building2, RefreshCw,
+  Calendar, TrendingUp, Users, Factory, ShieldCheck, Globe,
+  ArrowRight, CheckCircle2, DollarSign, Briefcase, Zap, Phone, Mail,
+  MessageCircle, Info // Added additional helpers just in case
+} from 'lucide-react'
 import { ChatWidget } from '@/components/chat-widget'
+import { Badge } from '@/components/ui/badge'
+
+// Official Homepage for Agri Connect Sierra Leone
 
 export default function HomePage() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Scroll animation effect - FIXED VERSION
+  useEffect(() => {
+    let observer: IntersectionObserver | null = null
+
+    const initAnimations = () => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-in')
+            }
+          })
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        }
+      )
+
+      const elements = document.querySelectorAll('.animate-on-scroll')
+      elements.forEach(el => observer?.observe(el))
+    }
+
+    const timer = setTimeout(initAnimations, 100)
+
+    return () => {
+      clearTimeout(timer)
+      observer?.disconnect()
+    }
+  }, [])
+
+  const pillars = [
+    {
+      title: "Improve Infrastructure",
+      desc: "Providing digital technologies, climate advisory, and physical infrastructure to enable agricultural businesses to thrive.",
+      icon: Zap,
+      color: "text-primary",
+      link: "/branches"
+    },
+    {
+      title: "Strengthen Policy",
+      desc: "Creating enabling policies, regulations, and institutional frameworks to support sustainable agricultural growth.",
+      icon: Building2,
+      color: "text-secondary",
+      link: "/government-schemes"
+    },
+    {
+      title: "Mobilize Capital",
+      desc: "Unlocking financing and investment to scale agricultural value chains and empower smallholder farmers.",
+      icon: DollarSign,
+      color: "text-accent",
+      link: "/financial-services"
+    }
+  ]
+
+  const stats = [
+    { label: "Smallholder Farmers", value: "500M+", sub: "Globally impactful" },
+    { label: "Food Production Needed", value: "30%", sub: "Increase by 2050" },
+    { label: "Investment Mobility", value: "$9B", sub: "Pledged by 2030" },
+    { label: "Jobs Created", value: "10K+", sub: "Local impact goal" }
+  ]
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-50/50">
       <Navigation />
 
       {/* Hero Section */}
-      <div className="relative h-[600px] w-full overflow-hidden flex items-center bg-slate-900">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero-drone.png')" }}
-        />
+      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-[#0072C6] border-b-4 border-primary">
+        <div className="absolute inset-0 z-0 flex flex-col h-[400%] animate-cycle-vertical-hero">
+          {/* Slide 1 - Drone View */}
+          <div className="h-[25%] w-full relative">
+            <div
+              className="absolute inset-0 bg-cover bg-center brightness-[0.3] scale-105"
+              style={{ backgroundImage: "url('/hero-drone.png')" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent"></div>
+          </div>
 
-        {/* Flag Gradient Overlay - Lighter/Clearer */}
-        <div className="absolute inset-0 bg-gradient-to-b from-green-600/30 via-transparent to-blue-600/30"></div>
+          {/* Slide 2 - Rubot AI branding - Split Screen White Background */}
+          <div className="h-[25%] w-full relative overflow-hidden bg-[#0072C6]">
+            {/* White background specifically for the Rubot side */}
+            <div className="absolute inset-y-0 right-0 w-1/2 bg-white"></div>
 
-        {/* Hero Content */}
-        <div className="relative h-full container mx-auto px-4 flex flex-col justify-center items-center text-center z-10 pt-20">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-md max-w-5xl tracking-tight">
-            Empowering Sierra Leone's Agriculture <br /> with AI & Technology
-          </h1>
-          <p className="text-xl md:text-2xl text-white font-medium mb-10 max-w-3xl drop-shadow-sm">
-            Everything you need to manage your farm efficiently, boost yields, and access markets.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white font-bold text-lg px-8 h-12 shadow-lg border-2 border-transparent">
-              <Link href="/auth/signup">Get Started</Link>
-            </Button>
-            <Button size="lg" variant="outline" className="bg-white/20 text-white border-2 border-white/60 hover:bg-white/30 hover:text-white backdrop-blur-md font-bold text-lg px-8 h-12 shadow-lg">
-              <Link href="/about">Learn More</Link>
-            </Button>
+            {/* National Color Accents shifted for the split view */}
+            <div className="absolute top-0 right-0 w-1/3 h-full bg-[#1EB53A]/10 blur-[120px] rounded-full translate-x-1/4"></div>
+            <div className="absolute bottom-0 right-1/4 w-1/4 h-full bg-[#0072C6]/10 blur-[100px] rounded-full"></div>
+
+            <div
+              className="absolute inset-y-0 right-[-5%] w-[100%] md:w-[60%] bg-cover bg-right bg-no-repeat transition-transform duration-[14s] scale-110 group-hover:scale-120 z-10"
+              style={{
+                backgroundImage: "url('/rubot-hero.jpg')",
+                maskImage: 'linear-gradient(to left, black 65%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to left, black 65%, transparent 100%)'
+              }}
+            />
+            {/* Fade transition from dark to white */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0072C6] via-[#0072C6] to-transparent z-20"></div>
+          </div>
+
+          {/* Slide 3 - PRESIDENTIAL VISION - Feed Salone Mandate */}
+          <div className="h-[25%] w-full relative overflow-hidden bg-[#0072C6]">
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-[14s] scale-105 group-hover:scale-115"
+              style={{
+                backgroundImage: "url('/hero-president.jpg')",
+                opacity: 1
+              }}
+            />
+            {/* Cinematic Overlay - Authoritative and Clear */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0072C6] via-[#0072C6]/90 to-transparent z-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0072C6]/60 z-10"></div>
+          </div>
+
+          {/* Slide 4 - Loop Duplicate of Slide 1 */}
+          <div className="h-[25%] w-full relative">
+            <div
+              className="absolute inset-0 bg-cover bg-center brightness-[0.3] scale-105"
+              style={{ backgroundImage: "url('/hero-drone.png')" }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent"></div>
           </div>
         </div>
-      </div>
 
-      {/* AI Tools Quick Access Section */}
-      <section className="py-16 px-4 bg-gradient-to-br from-[#1EB53A]/10 via-white to-[#0072C6]/10 border-y-4 border-[#1EB53A]">
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-[#1EB53A] to-[#0072C6] bg-clip-text text-transparent">🤖 AI-Powered Tools</span>
-            </h2>
-            <p className="text-lg text-slate-600">Get instant agricultural insights with our AI assistants</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Crop Recommendation */}
-            <Link href="/crop-recommendation">
-              <Card className="p-6 bg-white hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border-2 border-transparent hover:border-green-500 group">
-                <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Sprout className="w-7 h-7 text-green-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-2">Crop Recommendation</h3>
-                <p className="text-slate-600 text-sm mb-4">Get personalized crop suggestions based on your soil and climate</p>
-                <div className="flex items-center text-green-600 font-semibold text-sm group-hover:gap-2 transition-all">
-                  <span>Try Now</span>
-                  <span className="ml-1 group-hover:ml-2 transition-all">→</span>
-                </div>
-              </Card>
-            </Link>
-
-            {/* Disease Detection */}
-            <Link href="/disease-prediction">
-              <Card className="p-6 bg-white hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border-2 border-transparent hover:border-red-500 group">
-                <div className="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Bug className="w-7 h-7 text-red-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-2">Disease Detection</h3>
-                <p className="text-slate-600 text-sm mb-4">Upload plant images to identify diseases and get treatment advice</p>
-                <div className="flex items-center text-red-600 font-semibold text-sm group-hover:gap-2 transition-all">
-                  <span>Scan Now</span>
-                  <span className="ml-1 group-hover:ml-2 transition-all">→</span>
-                </div>
-              </Card>
-            </Link>
-
-            {/* Yield Prediction */}
-            <Link href="/agri-ai/yield-prediction">
-              <Card className="p-6 bg-white hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border-2 border-transparent hover:border-blue-500 group">
-                <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="w-7 h-7 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-2">Yield Prediction</h3>
-                <p className="text-slate-600 text-sm mb-4">Estimate your harvest based on conditions and farming practices</p>
-                <div className="flex items-center text-blue-600 font-semibold text-sm group-hover:gap-2 transition-all">
-                  <span>Predict Now</span>
-                  <span className="ml-1 group-hover:ml-2 transition-all">→</span>
-                </div>
-              </Card>
-            </Link>
-
-            {/* Fertilizer Guide */}
-            <Link href="/agri-ai/fertilizer-guide">
-              <Card className="p-6 bg-white hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer border-2 border-transparent hover:border-emerald-500 group">
-                <div className="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Sprout className="w-7 h-7 text-emerald-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-2">Fertilizer Guide</h3>
-                <p className="text-slate-600 text-sm mb-4">Get customized fertilizer schedules for your crops</p>
-                <div className="flex items-center text-emerald-600 font-semibold text-sm group-hover:gap-2 transition-all">
-                  <span>Get Guide</span>
-                  <span className="ml-1 group-hover:ml-2 transition-all">→</span>
-                </div>
-              </Card>
-            </Link>
-          </div>
-
-          {/* Chatbot CTA */}
-          <div className="mt-12 text-center">
-            <div className="inline-block bg-white rounded-2xl shadow-lg p-6 border-2 border-green-200">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
-                  <img src="/rubot-icon.png" alt="Agri Connect" className="w-full h-full object-cover" />
-                </div>
-                <div className="text-left">
-                  <h3 className="font-bold text-lg text-slate-800">Chat with Agri Connect</h3>
-                  <p className="text-slate-600 text-sm">Ask me anything about farming! Click the chat icon below →</p>
-                </div>
-              </div>
+        <div className="container relative z-10 mx-auto px-4">
+          <div className="max-w-4xl">
+            <Badge className="mb-6 bg-white/10 text-white border-white/20 py-1.5 px-6 text-sm backdrop-blur-md font-black uppercase tracking-widest shadow-lg">
+              <span className="text-patriotic">
+                The Future of Agriculture in Sierra Leone
+              </span>
+            </Badge>
+            <h1 className="text-6xl md:text-8xl font-black text-white mb-8 leading-[1.05] tracking-tighter">
+              Empowering <br />
+              <span className="text-branded drop-shadow-sm">
+                500 Million
+              </span> <br />
+              <span className="text-white">Smallholder Farmers</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl leading-relaxed font-medium">
+              Agri Connect is a <span className="text-branded font-bold">strategic flagship initiative</span> to shift small-scale agriculture into a <span className="text-branded font-bold italic">dynamic engine of sustainable growth</span> through technology and market access.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold text-lg px-10 h-14 rounded-full transition-all hover:scale-105">
+                <Link href="/auth/signup">Join the Initiative</Link>
+              </Button>
+              <Button size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-bold text-lg px-10 h-14 rounded-full backdrop-blur-sm">
+                <Link href="/about">View Mission</Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Platform Features Section */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto max-w-7xl">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center shadow-inner">
-                <Sprout className="w-10 h-10 text-green-600" />
-              </div>
+      {/* Impact Numbers */}
+      <section className="relative z-20 -mt-16 container mx-auto px-4 animate-on-scroll">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-1">
+          {stats.map((stat, i) => (
+            <div key={i} className="bg-white p-8 first:rounded-l-2xl last:rounded-r-2xl border-x border-slate-100 shadow-xl text-center group hover:bg-slate-50 transition-colors">
+              <div className="text-3xl md:text-4xl font-black text-primary mb-2">{stat.value}</div>
+              <div className="text-sm font-bold text-slate-800 uppercase tracking-wider mb-1">{stat.label}</div>
+              <div className="text-xs text-muted-foreground">{stat.sub}</div>
             </div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to manage your farm efficiently
+          ))}
+        </div>
+      </section>
+
+      {/* The Three Pillars Section */}
+      <section className="py-24 bg-white animate-on-scroll">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-5xl heading-flagship mb-6">Our Strategic Pillars</h2>
+            <p className="text-lg text-muted-foreground font-medium">
+              A <span className="text-branded font-bold">comprehensive approach</span> to transform agriculture through infrastructure, policy, and capital mobilization.
             </p>
           </div>
 
-          {/* Features Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Land Information */}
-            <Card className="bg-white shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mb-6">
-                  <MapPin className="w-8 h-8 text-green-600" />
+          <div className="grid md:grid-cols-3 gap-8">
+            {pillars.map((pillar, i) => (
+              <div key={i} className="group p-10 bg-slate-50 rounded-3xl hover:bg-white hover:shadow-2xl transition-all duration-300 border border-slate-100">
+                <div className={`w-16 h-16 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <pillar.icon className={`w-8 h-8 ${pillar.color}`} />
                 </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3">
-                  Land Information
-                </h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Track and manage your farmland parcels with detailed information about location, area, soil type, and current crops.
+                <h3 className="text-2xl font-black mb-4 text-slate-800 transition-colors group-hover:text-branded">{pillar.title}</h3>
+                <p className="text-slate-600 leading-relaxed mb-6">
+                  {pillar.desc}
                 </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-all"
-                >
-                  <Link href="/land-management">Manage Land</Link>
+                <Button asChild variant="ghost" className={`${pillar.color} hover:bg-slate-50 px-0 font-bold group-hover:gap-2 transition-all cursor-pointer`}>
+                  <Link href={pillar.link}>
+                    Learn more <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
                 </Button>
               </div>
-            </Card>
-
-            {/* Weather Information */}
-            <Card className="bg-white shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-6">
-                  <Cloud className="w-8 h-8 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3">
-                  Weather Information
-                </h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Get real-time weather updates and 5-day forecasts to plan your agricultural activities effectively.
-                </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-all"
-                >
-                  <Link href="/weather">Check Weather</Link>
-                </Button>
-              </div>
-            </Card>
-
-            {/* Land Preparation */}
-            <Card className="bg-white shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center mb-6">
-                  <Settings className="w-8 h-8 text-amber-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3">
-                  Land Preparation
-                </h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Get expert guidance on land preparation techniques based on your soil type and target crops.
-                </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white transition-all"
-                >
-                  <Link href="/land-preparation">View Guide</Link>
-                </Button>
-              </div>
-            </Card>
-
-            {/* Disease Detection */}
-            <Card className="bg-white shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mb-6">
-                  <Bug className="w-8 h-8 text-red-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3">
-                  Disease Detection
-                </h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Upload plant images to detect diseases using AI and get treatment recommendations instantly.
-                </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all"
-                >
-                  <Link href="/disease-prediction">Detect Disease</Link>
-                </Button>
-              </div>
-            </Card>
-
-            {/* Seed & Fertilizer */}
-            <Card className="bg-white shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mb-6">
-                  <Sprout className="w-8 h-8 text-emerald-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3">
-                  Seed & Fertilizer
-                </h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Get personalized recommendations for the best seeds and fertilizers for your crops and soil type.
-                </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all"
-                >
-                  <Link href="/crop-recommendation">Get Recommendations</Link>
-                </Button>
-              </div>
-            </Card>
-
-            {/* Government Schemes */}
-            <Card className="bg-white shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center mb-6">
-                  <Building2 className="w-8 h-8 text-purple-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3">
-                  Government Schemes
-                </h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Browse and search agricultural government schemes and subsidies available for farmers.
-                </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all"
-                >
-                  <Link href="/financial-services">View Schemes</Link>
-                </Button>
-              </div>
-            </Card>
-
-            {/* Crop Calendar */}
-            <Card className="bg-white shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-orange-50 flex items-center justify-center mb-6">
-                  <Calendar className="w-8 h-8 text-orange-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3">
-                  Crop Calendar
-                </h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  View planting and harvesting schedules for different crops throughout the year.
-                </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white transition-all"
-                >
-                  <Link href="/dashboard">View Calendar</Link>
-                </Button>
-              </div>
-            </Card>
-
-            {/* Market Analysis */}
-            <Card className="bg-white shadow-xl p-8 hover:shadow-2xl transition-all duration-300 border border-slate-100">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-cyan-50 flex items-center justify-center mb-6">
-                  <TrendingUp className="w-8 h-8 text-cyan-600" />
-                </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3">
-                  Market Analysis
-                </h3>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Stay updated with daily market prices and trends for various agricultural commodities.
-                </p>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white transition-all"
-                >
-                  <Link href="/marketplace">View Market</Link>
-                </Button>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Live Market Updates Section */}
-      <section className="py-16 bg-white border-t border-slate-100">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-slate-900">Live Market Prices</h2>
-            <Link href="/marketplace" className="text-green-600 font-semibold hover:underline flex items-center gap-1">
-              View All <TrendingUp className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-4 gap-6">
-            {/* Mock Data */}
-            {[
-              { name: 'Rice (50kg)', price: 'Le 850,000', change: '+2.5%', isUp: true },
-              { name: 'Cassava (100kg)', price: 'Le 450,000', change: '-1.2%', isUp: false },
-              { name: 'Cocoa (kg)', price: 'Le 35,000', change: '+5.0%', isUp: true },
-              { name: 'Palm Oil (5 Gal)', price: 'Le 600,000', change: '+0.5%', isUp: true },
-            ].map((item, i) => (
-              <Card key={i} className="p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                <div className="flex justify-between items-start mb-2">
-                  <span className="font-semibold text-slate-700">{item.name}</span>
-                  <span className={`text-xs font-bold px-2 py-1 rounded-full ${item.isUp ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                    {item.change}
-                  </span>
-                </div>
-                <div className="text-2xl font-bold text-slate-900">{item.price}</div>
-              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Latest Agricultural News Section */}
-      <section className="py-16 bg-slate-50">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">Latest Agricultural News</h2>
+      {/* Agri Platform Section */}
+      <section className="py-24 bg-slate-50 animate-on-scroll">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-4xl md:text-5xl heading-flagship mb-6">Agri Platform</h2>
+            <p className="text-lg text-muted-foreground font-medium">
+              <span className="text-branded font-bold">Integrated tools</span> and services designed to empower every player in the agricultural ecosystem.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="p-8 border-none shadow-xl hover:shadow-2xl transition-all group">
+              <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                <Factory className="w-8 h-8 text-emerald-600 group-hover:text-white" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Agri Industry</h3>
+              <p className="text-slate-600 mb-6">Advanced industrial processing solutions to add value to your harvests and reach global standards.</p>
+              <Button asChild variant="link" className="p-0 text-emerald-600 h-auto font-bold">
+                <Link href="/agri-industry">Explore Processing <ArrowRight className="w-4 h-4 ml-2" /></Link>
+              </Button>
+            </Card>
+
+            <Card className="p-8 border-none shadow-xl hover:shadow-2xl transition-all group">
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                <DollarSign className="w-8 h-8 text-blue-600 group-hover:text-white" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Financial Services</h3>
+              <p className="text-slate-600 mb-6">Seamless loans, banking, and insurance services tailored specifically for the agricultural sector.</p>
+              <Button asChild variant="link" className="p-0 text-blue-600 h-auto font-bold">
+                <Link href="/financial-services">Get Financed <ArrowRight className="w-4 h-4 ml-2" /></Link>
+              </Button>
+            </Card>
+
+            <Card className="p-8 border-none shadow-xl hover:shadow-2xl transition-all group">
+              <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                <Users className="w-8 h-8 text-orange-600 group-hover:text-white" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Extension Hub</h3>
+              <p className="text-slate-600 mb-6">Connect with experts for real-time advice and modern farming techniques to boost your productivity.</p>
+              <Button asChild variant="link" className="p-0 text-orange-600 h-auto font-bold">
+                <Link href="/agri-platform/extension">Consult Experts <ArrowRight className="w-4 h-4 ml-2" /></Link>
+              </Button>
+            </Card>
+
+            <Card className="p-8 border-none shadow-xl hover:shadow-2xl transition-all group">
+              <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                <Globe className="w-8 h-8 text-purple-600 group-hover:text-white" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Diaspora Investment</h3>
+              <p className="text-slate-600 mb-6">Connect Sierra Leonean diaspora investors with high-impact agricultural opportunities back home.</p>
+              <Button asChild variant="link" className="p-0 text-purple-600 h-auto font-bold">
+                <Link href="/diaspora-invest">Invest Now <ArrowRight className="w-4 h-4 ml-2" /></Link>
+              </Button>
+            </Card>
+
+            <Card className="p-8 border-none shadow-xl hover:shadow-2xl transition-all group">
+              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                <Sprout className="w-8 h-8 text-green-600 group-hover:text-white" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Feed Salone</h3>
+              <p className="text-slate-600 mb-6">National food security initiative driving local production and reducing import dependency.</p>
+              <Button asChild variant="link" className="p-0 text-green-600 h-auto font-bold">
+                <Link href="/feed-salone">Learn More <ArrowRight className="w-4 h-4 ml-2" /></Link>
+              </Button>
+            </Card>
+
+            <Card className="p-8 border-none shadow-xl hover:shadow-2xl transition-all group">
+              <div className="w-16 h-16 bg-rose-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-white transition-colors">
+                <ShieldCheck className="w-8 h-8 text-rose-600 group-hover:text-white" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Crop Insurance</h3>
+              <p className="text-slate-600 mb-6">Protect your crops against climate risks and unforeseen losses with affordable insurance coverage.</p>
+              <Button asChild variant="link" className="p-0 text-rose-600 h-auto font-bold">
+                <Link href="/crop-insurance">Get Protected <ArrowRight className="w-4 h-4 ml-2" /></Link>
+              </Button>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Agri Opportunity Portal - Replaces AI Resilience */}
+      <section className="py-24 bg-blue-900 text-white overflow-hidden relative animate-on-scroll">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-800/20 -skew-x-12 transform translate-x-1/2"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <h2 className="text-4xl font-extra-bold mb-8">Agri Opportunity Portal</h2>
+              <p className="text-lg text-blue-100/80 mb-10 leading-relaxed">
+                Unlock access to national and international agricultural growth. We centralize all government schemes, global grants, and private investment opportunities for every agriprenuer.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-6">
+                <Link href="/government-schemes" className="block p-6 bg-blue-800/40 rounded-2xl border border-blue-700/50 hover:border-primary transition-all group backdrop-blur-sm">
+                  <Building2 className="w-8 h-8 text-primary mb-4" />
+                  <h4 className="font-bold mb-2">Government Schemes</h4>
+                  <p className="text-sm text-blue-200/70">Access low-interest loans, grants, and subsidies from the ministry.</p>
+                </Link>
+                <Link href="/diaspora-invest" className="block p-6 bg-blue-800/40 rounded-2xl border border-blue-700/50 hover:border-secondary transition-all backdrop-blur-sm">
+                  <Globe className="w-8 h-8 text-secondary mb-4" />
+                  <h4 className="font-bold mb-2">Global Investment</h4>
+                  <p className="text-sm text-blue-200/70">Connect with international investors and export market opportunities.</p>
+                </Link>
+              </div>
+              <Button asChild className="mt-12 bg-white text-blue-900 hover:bg-slate-100 font-bold h-12 px-8 rounded-full">
+                <Link href="/agri-opp-portal">Explore All Opportunities</Link>
+              </Button>
+            </div>
+
+            <div className="relative">
+              <div className="bg-gradient-to-br from-primary to-secondary p-1 rounded-3xl shadow-2xl">
+                <div className="bg-blue-950 rounded-[22px] p-8">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="w-12 h-12 rounded-full bg-blue-900/50 flex items-center justify-center">
+                      <TrendingUp className="text-primary w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold">Market Intelligence</h4>
+                      <p className="text-xs text-blue-300">Live Price Index (Sierra Leone)</p>
+                    </div>
+                  </div>
+                  <div className="space-y-6">
+                    {[
+                      { name: "Local Rice", price: "Le 850", change: "+4.2%", color: "text-emerald-400" },
+                      { name: "Palm Oil", price: "Le 600", change: "+1.8%", color: "text-emerald-400" },
+                      { name: "Cassava", price: "Le 450", change: "-0.5%", color: "text-rose-400" }
+                    ].map((m, i) => (
+                      <div key={i} className="flex justify-between items-center border-b border-blue-900 pb-4 last:border-0 last:pb-0">
+                        <span className="font-medium">{m.name}</span>
+                        <div className="text-right">
+                          <div className="font-bold">{m.price}</div>
+                          <div className={`text-[10px] font-bold ${m.color}`}>{m.change}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <Button asChild variant="ghost" className="w-full mt-8 border border-white/10 hover:bg-white/5 text-blue-200 hover:text-white">
+                    <Link href="/marketplace">View Market Dashboard</Link>
+                  </Button>
+                </div>
+              </div>
+              {/* Decorative dots */}
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl -z-10"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Features in Action Section - Continues in next message due to length */}
+      <section className="py-24 bg-white animate-on-scroll">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mb-16 px-4">
+            <h2 className="text-4xl md:text-5xl heading-flagship mb-6">AI Features in Action</h2>
+            <p className="text-lg text-slate-600 font-medium">
+              See how our <span className="text-branded font-bold italic">Artificial Intelligence</span> tools are being used by farmers and agronomists across project sites globally.
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { title: 'Government Announces New Fertilizer Subsidy', date: 'Oct 15, 2023', category: 'Policy' },
-              { title: 'Sierra Leone Rice Production Hits Record High', date: 'Oct 12, 2023', category: 'Production' },
-              { title: 'New Irrigation Scheme Launched in Bo District', date: 'Oct 10, 2023', category: 'Development' },
-            ].map((news, i) => (
-              <Card key={i} className="bg-white p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group">
-                <div className="text-xs font-bold text-green-600 mb-2 uppercase tracking-wide">{news.category}</div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-green-700 transition-colors">{news.title}</h3>
-                <div className="text-slate-500 text-sm">{news.date}</div>
+              {
+                title: "Disease Diagnostic Scan",
+                feature: "Disease Sentinel",
+                desc: "Farmers in Kenema using AI to identify cocoa pod pathogens directly in the field.",
+                img: "/ai-disease-op.png",
+                icon: Bug,
+                color: "text-primary",
+                link: "/disease-detection"
+              },
+              {
+                title: "Real-time Soil Mapping",
+                feature: "Soil Advisor",
+                desc: "Project agronomists analyzing nutrient deficiencies in rice paddies in Bo District.",
+                img: "/ai-soil-op.png",
+                icon: Sprout,
+                color: "text-secondary",
+                link: "/branches/soil-science"
+              },
+              {
+                title: "Dynamic Price Analysis",
+                feature: "Market Intelligence",
+                desc: "Market traders in Freetown adjusting sourcing strategies based on live price insights.",
+                img: "/ai-market-op.png",
+                icon: TrendingUp,
+                color: "text-accent",
+                link: "/marketplace"
+              },
+              {
+                title: "Smart Weather Prediction",
+                feature: "Weather Intelligence",
+                desc: "Real-time climate monitoring and early warning systems for smallholder farms.",
+                img: "/ai-weather-op.png",
+                icon: Cloud,
+                color: "text-blue-500",
+                link: "/climate"
+              },
+              {
+                title: "AI Land Mapping",
+                feature: "Land Preparation",
+                desc: "Precision topographical mapping and moisture analysis for optimized land clearing.",
+                img: "/ai-land-op.png",
+                icon: MapPin,
+                color: "text-emerald-500",
+                link: "/farm-management"
+              },
+              {
+                title: "Crop Suitability Analysis",
+                feature: "Crop Recommendation",
+                desc: "AI-driven selection of optimal crops based on historical climate and soil data.",
+                img: "/ai-crop-op.png",
+                icon: ShieldCheck,
+                color: "text-orange-500",
+                link: "/crop-recommendation"
+              }
+            ].map((item, i) => (
+              <Card key={i} className="overflow-hidden border-none shadow-xl hover:shadow-2xl transition-all group">
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                  />
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-slate-900 shadow-sm">
+                    Field Operation
+                  </div>
+                </div>
+                <div className="p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    {item.icon && <item.icon className={`w-5 h-5 ${item.color}`} />}
+                    <span className="text-xs font-black uppercase tracking-widest text-slate-400">{item.feature}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-branded transition-all">{item.title}</h3>
+                  <p className="text-slate-600 mb-6 text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                  <Button asChild variant="outline" className="w-full rounded-full border-2 hover:bg-slate-50 cursor-pointer">
+                    <Link href={item.link}>
+                      View Case Study
+                    </Link>
+                  </Button>
+                </div>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Chat Widget */}
+      {/* Partnership Coalition - Natural & Interactive */}
+      <section className="py-24 bg-white border-y border-slate-100 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <h3 className="text-center text-sm font-black text-slate-400 uppercase tracking-[0.3em] mb-16 animate-on-scroll">
+            Powered by a global coalition
+          </h3>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 items-center">
+            {/* President / State House - Static */}
+            <div className="flex justify-center h-32 w-full animate-on-scroll" style={{ transitionDelay: '100ms' }}>
+              <img src="/state-house-logo.jpg" alt="Office of the President" className="h-full w-auto object-contain transition-transform hover:scale-105" />
+            </div>
+
+            <div className="flex justify-center animate-on-scroll" style={{ transitionDelay: '200ms' }}>
+              <img src="/mafs-feed-salone.png" alt="MAFS & Feed Salone" className="h-28 w-auto object-contain hover:scale-105 transition-transform" />
+            </div>
+
+            <div className="flex justify-center animate-on-scroll" style={{ transitionDelay: '300ms' }}>
+              <img src="/wfp-logo.jpg" alt="World Food Program" className="h-24 w-auto object-contain hover:scale-105 transition-transform" />
+            </div>
+
+            {/* World Bank Group - Static */}
+            <div className="flex justify-center h-32 w-full animate-on-scroll" style={{ transitionDelay: '400ms' }}>
+              <div className="flex items-center gap-2 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm transition-transform hover:scale-105">
+                <div className="w-12 h-12 rounded-full border-[3px] border-[#0072C6] flex items-center justify-center p-1">
+                  <Globe className="w-full h-full text-[#0072C6]" />
+                </div>
+                <div className="flex flex-col leading-none">
+                  <span className="text-[10px] font-bold text-[#0072C6] uppercase tracking-tighter">The</span>
+                  <span className="text-xl font-black text-[#0072C6] tracking-tight">WORLD BANK</span>
+                  <span className="text-[10px] font-bold text-[#555] uppercase tracking-widest border-t border-slate-200 mt-0.5 pt-0.5">GROUP</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style jsx global>{`
+        @keyframes cycle-vertical-hero {
+          0% { transform: translateY(0); }
+          28% { transform: translateY(0); }
+          33% { transform: translateY(-25%); }
+          61% { transform: translateY(-25%); }
+          66% { transform: translateY(-50%); }
+          94% { transform: translateY(-50%); }
+          100% { transform: translateY(-75%); }
+        }
+        @keyframes cycle-vertical-banner {
+          0% { transform: translateY(0); }
+          45% { transform: translateY(0); }
+          50% { transform: translateY(-33.33%); }
+          95% { transform: translateY(-33.33%); }
+          100% { transform: translateY(-66.66%); }
+        }
+        .animate-cycle-vertical-hero {
+          animation: cycle-vertical-hero 20s infinite cubic-bezier(0.85, 0, 0.15, 1);
+        }
+        .animate-cycle-vertical-banner {
+          animation: cycle-vertical-banner 12s infinite cubic-bezier(0.85, 0, 0.15, 1);
+        }
+      `}</style>
+
+      {/* Call to Action - Feed Salone Banner with Sliding Transition */}
+      <section className="relative h-[650px] w-full overflow-hidden animate-on-scroll border-t-8 border-primary">
+        <div className="absolute inset-0 flex flex-col h-[300%] animate-cycle-vertical-banner">
+          <div
+            className="h-[33.33%] w-full bg-cover bg-top bg-no-repeat"
+            style={{ backgroundImage: "url('/feed-salone-banner.jpg')" }}
+          />
+          <div
+            className="h-[33.33%] w-full bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/feed-salone-manifesto.jpg')" }}
+          />
+          <div
+            className="h-[33.33%] w-full bg-cover bg-top bg-no-repeat"
+            style={{ backgroundImage: "url('/feed-salone-banner.jpg')" }}
+          />
+        </div>
+
+        {/* Dark Overlay for bottom text visibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent pointer-events-none" />
+
+        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-end items-center pb-24">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-black px-12 h-16 text-xl rounded-full shadow-2xl transition-all hover:scale-105 active:scale-95">
+              Register Your Farm
+            </Button>
+            <Button size="lg" variant="outline" className="border-2 border-white bg-white/20 backdrop-blur-md text-white hover:bg-white/40 font-black px-12 h-16 text-xl rounded-full transition-all hover:scale-105 active:scale-95">
+              Explore Marketplace
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      {/* Footer - Sierra Leone Patriotic Design */}
+      <footer className="relative bg-[#004182] text-white">
+        {/* Flag Stripes Top */}
+        <div className="flex h-3 w-full">
+          <div className="flex-1 bg-[#1EB53A]"></div>
+          <div className="flex-1 bg-white"></div>
+          <div className="flex-1 bg-[#0072C6]"></div>
+        </div>
+
+        <div className="container mx-auto px-4 py-20">
+          <div className="grid md:grid-cols-4 gap-12 mb-16">
+            <div className="col-span-1">
+              <div className="flex flex-col items-start gap-6 mb-6">
+                <div className="bg-white p-3 rounded-2xl shadow-xl">
+                  <img src="/coat-of-arms.png" alt="Sierra Leone Coat of Arms" className="h-24 w-auto object-contain" />
+                </div>
+                <div className="flex items-center gap-3">
+                  <Globe className="w-12 h-12 text-[#1EB53A]" />
+                  <span
+                    className="text-5xl font-black tracking-tighter uppercase italic"
+                    style={{
+                      color: '#1EB53A',
+                      textShadow: `
+                        -1px -1px 0 #fff,  
+                         1px -1px 0 #fff,
+                        -1px  1px 0 #fff,
+                         1px  1px 0 #fff,
+                        -3px -3px 0 #0072C6,
+                         3px -3px 0 #0072C6,
+                        -3px  3px 0 #0072C6,
+                         3px  3px 0 #0072C6
+                      `
+                    }}
+                  >
+                    Agri-Connect.sl
+                  </span>
+                </div>
+              </div>
+              <p className="text-blue-100/70 leading-relaxed font-medium">
+                Driving national food security and economic prosperity through the <span className="text-[#1EB53A] font-bold">Feed Salone</span> initiative. 🇸🇱
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-black mb-8 text-xl uppercase tracking-widest border-b-2 border-[#1EB53A] w-fit pb-1">Platform</h4>
+              <ul className="space-y-4 text-blue-100/80">
+                <li><Link href="/marketplace" className="hover:text-[#1EB53A] font-bold transition-all flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Marketplace</Link></li>
+                <li><Link href="/agri-ai" className="hover:text-[#1EB53A] font-bold transition-all flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> AI Services</Link></li>
+                <li><Link href="/financial-services" className="hover:text-[#1EB53A] font-bold transition-all flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Financial Services</Link></li>
+                <li><Link href="/agri-industry" className="hover:text-[#1EB53A] font-bold transition-all flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Agri Industry</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-black mb-8 text-xl uppercase tracking-widest border-b-2 border-white w-fit pb-1">Resources</h4>
+              <ul className="space-y-4 text-blue-100/80">
+                <li><Link href="/about" className="hover:text-white font-bold transition-all">About Us</Link></li>
+                <li><Link href="/feed-salone" className="hover:text-white font-bold transition-all">Feed Salone</Link></li>
+                <li><Link href="/diaspora-invest" className="hover:text-white font-bold transition-all">Diaspora Investment</Link></li>
+                <li><Link href="/crop-insurance" className="hover:text-white font-bold transition-all">Crop Insurance</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-black mb-8 text-xl uppercase tracking-widest border-b-2 border-[#0072C6] w-fit pb-1">Connect</h4>
+              <div className="space-y-6 text-blue-100/80">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-[#1EB53A] shrink-0" />
+                  <p className="font-medium text-sm">Ministry of Agriculture & Food Security,<br />Youyi Building, Freetown</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-white shrink-0" />
+                  <p className="font-bold">+232 76 123 456</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail className="w-5 h-5 text-[#0072C6] shrink-0" />
+                  <p className="font-bold">info@agriconnect.sl</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Decorative Flag Stripe Bottom */}
+          <div className="flex h-1 w-full mb-8 opacity-50">
+            <div className="flex-1 bg-[#1EB53A]"></div>
+            <div className="flex-1 bg-white"></div>
+            <div className="flex-1 bg-[#0072C6]"></div>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-blue-200/50 text-xs font-bold uppercase tracking-widest">
+            <p>© 2024 Agri Connect. Official Government Portal.</p>
+            <div className="flex gap-8">
+              <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
+              <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
+              <span className="hover:text-white cursor-pointer transition-colors">Web Accessibility</span>
+            </div>
+            <p>Designed for Sierra Leone 🇸🇱</p>
+          </div>
+        </div>
+      </footer>
+
       <ChatWidget />
     </div>
   )

@@ -12,21 +12,21 @@ export default function SeedsInputsPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="bg-success/10 py-12 border-b border-success/20">
+      <section className="bg-primary/5 py-12 border-b border-primary/10">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-2xl">
               <div className="flex items-center gap-2 mb-4">
-                <Badge variant="outline" className="border-success text-success bg-success/10">Pillar 1</Badge>
+                <Badge variant="outline" className="border-primary/50 text-foreground bg-primary/20">Pillar 1</Badge>
                 <span className="text-sm font-medium text-muted-foreground">Feed Salone Strategy</span>
               </div>
               <h1 className="text-4xl font-bold mb-4 text-foreground">Seeds & Inputs System</h1>
               <p className="text-lg text-muted-foreground mb-6">
-                Access high-quality, certified seeds and fertilizers to boost your farm's productivity. 
+                Access high-quality, certified seeds and fertilizers to boost your farm's productivity.
                 Connect directly with authorized agro-dealers and research institutions.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button className="bg-success hover:bg-success/90">
+                <Button className="bg-primary hover:bg-primary/90">
                   <Search className="w-4 h-4 mr-2" />
                   Find Inputs
                 </Button>
@@ -72,16 +72,16 @@ export default function SeedsInputsPage() {
             <h2 className="text-2xl font-bold">Certified Seed Varieties</h2>
             <Link href="#" className="text-primary hover:underline font-medium">View All Catalog</Link>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="overflow-hidden hover:shadow-md transition-shadow">
-              <div className="h-40 bg-amber-100 flex items-center justify-center">
-                <Sprout className="w-16 h-16 text-amber-600" />
+              <div className="h-40 bg-warning/5 flex items-center justify-center border-b border-border">
+                <Sprout className="w-16 h-16 text-warning" />
               </div>
               <div className="p-4">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="font-bold text-lg">NERICA Rice L-19</h3>
-                  <Badge className="bg-success hover:bg-success/90">High Yield</Badge>
+                  <Badge className="bg-primary hover:bg-primary/90">High Yield</Badge>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   Early maturing variety (90-100 days). Resistant to drought and blast disease.
@@ -94,13 +94,13 @@ export default function SeedsInputsPage() {
             </Card>
 
             <Card className="overflow-hidden hover:shadow-md transition-shadow">
-              <div className="h-40 bg-green-100 flex items-center justify-center">
-                <Leaf className="w-16 h-16 text-green-600" />
+              <div className="h-40 bg-primary/10 flex items-center justify-center">
+                <Leaf className="w-16 h-16 text-primary" />
               </div>
               <div className="p-4">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="font-bold text-lg">SLICASS 6</h3>
-                  <Badge className="bg-info hover:bg-info/90">Disease Resistant</Badge>
+                  <Badge className="bg-secondary text-secondary-foreground hover:bg-secondary/90">Disease Resistant</Badge>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   High starch content cassava. Resistant to mosaic disease. Excellent for gari.
@@ -113,8 +113,8 @@ export default function SeedsInputsPage() {
             </Card>
 
             <Card className="overflow-hidden hover:shadow-md transition-shadow">
-              <div className="h-40 bg-yellow-100 flex items-center justify-center">
-                <Sprout className="w-16 h-16 text-yellow-600" />
+              <div className="h-40 bg-warning/10 flex items-center justify-center border-b border-border">
+                <Sprout className="w-16 h-16 text-warning" />
               </div>
               <div className="p-4">
                 <div className="flex justify-between items-start mb-2">
@@ -132,8 +132,8 @@ export default function SeedsInputsPage() {
             </Card>
 
             <Card className="overflow-hidden hover:shadow-md transition-shadow">
-              <div className="h-40 bg-orange-100 flex items-center justify-center">
-                <Leaf className="w-16 h-16 text-orange-600" />
+              <div className="h-40 bg-secondary/10 flex items-center justify-center border-b border-border">
+                <Leaf className="w-16 h-16 text-secondary" />
               </div>
               <div className="p-4">
                 <div className="flex justify-between items-start mb-2">
@@ -244,7 +244,7 @@ export default function SeedsInputsPage() {
                 </div>
                 <h2 className="text-3xl font-bold mb-4">Research-Backed Agriculture</h2>
                 <p className="text-lg text-primary-foreground/90 mb-6">
-                  Our seeds and inputs are validated by the Sierra Leone Agricultural Research Institute (SLARI). 
+                  Our seeds and inputs are validated by the Sierra Leone Agricultural Research Institute (SLARI).
                   We ensure that every variety is tested for local soil conditions and climate resilience.
                 </p>
                 <div className="space-y-3">

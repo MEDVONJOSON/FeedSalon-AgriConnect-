@@ -11,10 +11,10 @@ export default function FeedSalonePage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-success via-success/95 to-primary text-white py-16">
+      <section className="relative bg-gradient-to-br from-primary via-primary/95 to-secondary text-primary-foreground py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
-            <Badge className="mb-4 bg-white/20 text-white border-white/30">Sierra Leone Agricultural Transformation</Badge>
+            <Badge className="mb-4 bg-primary-foreground/20 text-primary-foreground border-primary-foreground/30">Sierra Leone Agricultural Transformation</Badge>
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-balance">
               Feed Salone Initiative
             </h1>
@@ -23,11 +23,11 @@ export default function FeedSalonePage() {
               Empowering farmers with tools for seeds & inputs, processing, export readiness, food security, and climate resilience.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-white text-success hover:bg-white/90">
+              <Button size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
                 <Target className="w-5 h-5 mr-2" />
                 Get Started
               </Button>
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+              <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
                 Learn About Feed Salone
               </Button>
             </div>
@@ -41,7 +41,7 @@ export default function FeedSalonePage() {
           <h2 className="text-2xl font-bold text-center mb-8">Feed Salone Strategic Objectives</h2>
           <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
             <Card className="p-4 text-center">
-              <div className="text-3xl font-bold text-success mb-1">-50%</div>
+              <div className="text-3xl font-bold text-primary mb-1">-50%</div>
               <p className="text-sm text-muted-foreground">Import Reduction</p>
             </Card>
             <Card className="p-4 text-center">
@@ -57,7 +57,7 @@ export default function FeedSalonePage() {
               <p className="text-sm text-muted-foreground">Hunger Goal</p>
             </Card>
             <Card className="p-4 text-center">
-              <div className="text-3xl font-bold text-success mb-1">100%</div>
+              <div className="text-3xl font-bold text-primary mb-1">100%</div>
               <p className="text-sm text-muted-foreground">Climate Ready</p>
             </Card>
             <Card className="p-4 text-center">
@@ -92,7 +92,7 @@ export default function FeedSalonePage() {
               <p className="text-muted-foreground mb-4">
                 Access high-quality seeds, fertilizers, and agricultural inputs. Connect with certified agro-dealers and SLARI seed production programs.
               </p>
-              <div className="flex items-center text-success font-medium group-hover:gap-2 transition-all">
+              <div className="flex items-center text-primary font-medium group-hover:gap-2 transition-all">
                 <span>Explore System</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
               </div>
@@ -156,14 +156,14 @@ export default function FeedSalonePage() {
             {/* Climate Resilience */}
             <Link href="/climate">
               <Card className="p-6 hover:shadow-lg transition-all cursor-pointer group h-full">
-                <div className="bg-success/10 p-3 rounded-lg w-fit mb-4 group-hover:bg-success/20 transition-colors">
-                  <CloudRain className="w-8 h-8 text-success" />
+                <div className="bg-primary/10 p-3 rounded-lg w-fit mb-4 group-hover:bg-primary/20 transition-colors">
+                  <CloudRain className="w-8 h-8 text-primary" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Climate Resilience Tools</h3>
                 <p className="text-muted-foreground mb-4">
                   Access climate-smart agriculture practices, weather adaptation strategies, and resilient crop varieties for changing conditions.
                 </p>
-                <div className="flex items-center text-success font-medium group-hover:gap-2 transition-all">
+                <div className="flex items-center text-primary font-medium group-hover:gap-2 transition-all">
                   <span>Access Tools</span>
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </div>
@@ -197,8 +197,8 @@ export default function FeedSalonePage() {
           <div className="grid md:grid-cols-3 gap-6">
             <Card className="p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="bg-success/10 p-2 rounded-full">
-                  <Sprout className="w-5 h-5 text-success" />
+                <div className="bg-primary/10 p-2 rounded-full">
+                  <Sprout className="w-5 h-5 text-primary" />
                 </div>
                 <div>
                   <p className="font-semibold">Mariama Kamara</p>
@@ -244,17 +244,17 @@ export default function FeedSalonePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-success to-primary text-white">
+      <section className="py-16 bg-gradient-to-br from-primary to-secondary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Join the Feed Salone Movement</h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             Be part of Sierra Leone's agricultural transformation. Access resources, connect with markets, and build a sustainable farming future.
           </p>
           <div className="flex gap-4 justify-center">
-            <Button size="lg" className="bg-white text-success hover:bg-white/90">
+            <Button size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
               Register as Farmer
             </Button>
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+            <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
               Partner with Us
             </Button>
           </div>

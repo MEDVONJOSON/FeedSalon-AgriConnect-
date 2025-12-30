@@ -12,7 +12,7 @@ export default function AggregationPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="bg-primary/5 py-12 border-b border-primary/10">
+      <section className="bg-primary/5 py-12 border-b border-primary/20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="max-w-2xl">
@@ -22,7 +22,7 @@ export default function AggregationPage() {
               </div>
               <h1 className="text-4xl font-bold mb-4 text-foreground">Aggregation & Processing</h1>
               <p className="text-lg text-muted-foreground mb-6">
-                Connect with certified aggregation centers and processing facilities. 
+                Connect with certified aggregation centers and processing facilities.
                 Reduce post-harvest losses and add value to your produce for better market prices.
               </p>
               <div className="flex flex-wrap gap-4">
@@ -67,7 +67,7 @@ export default function AggregationPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-8">Featured Processing Hubs</h2>
-          
+
           <div className="grid md:grid-cols-3 gap-6">
             <Card className="overflow-hidden flex flex-col">
               <div className="h-48 bg-muted flex items-center justify-center relative">
@@ -166,7 +166,7 @@ export default function AggregationPage() {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl font-bold mb-8 text-center">Integrated Value Chain Services</h2>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="p-6 text-center hover:shadow-lg transition-shadow cursor-pointer">
               <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">

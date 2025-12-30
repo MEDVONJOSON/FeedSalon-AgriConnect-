@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   generator: 'v0.app',
 }
 
+import { AuthGuard } from '@/components/auth-guard'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans antialiased`}>
-        {children}
+        <AuthGuard>
+          {children}
+        </AuthGuard>
       </body>
     </html>
   )
