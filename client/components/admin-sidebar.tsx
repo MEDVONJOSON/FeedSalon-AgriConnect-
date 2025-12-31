@@ -112,7 +112,7 @@ export function AdminSidebar() {
                     <div className="p-6 border-t border-white/10 bg-black/20">
                         <div className="flex items-center gap-3 mb-6 px-1">
                             <div className="w-11 h-11 rounded-full bg-branded p-0.5 shadow-lg">
-                                <div className="w-full h-full rounded-full bg-[#011627] flex items-center justify-center text-white font-black text-sm">
+                                <div className="w-full h-full rounded-full bg-[#0072C6] flex items-center justify-center text-white font-black text-sm">
                                     A
                                 </div>
                             </div>

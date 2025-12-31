@@ -119,7 +119,7 @@ export default function FisheriesPage() {
               </div>
             </Card>
 
-            <Card className="p-10 border-none shadow-2xl rounded-[2.5rem] bg-[#011627] text-white relative overflow-hidden group">
+            <Card className="p-10 border-none shadow-2xl rounded-[2.5rem] bg-[#0072C6] text-white relative overflow-hidden group">
               <div className="absolute inset-0 bg-gradient-to-br from-[#1EB53A]/10 to-[#0072C6]/10 opacity-50"></div>
               <div className="relative z-10">
                 <h3 className="text-2xl font-black mb-8 px-1">Projected Harvest Yield</h3>
