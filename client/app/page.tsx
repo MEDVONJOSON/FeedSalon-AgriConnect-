@@ -18,6 +18,22 @@ import { Badge } from '@/components/ui/badge'
 
 export default function HomePage() {
   const [scrolled, setScrolled] = useState(false)
+  const [liveStats, setLiveStats] = useState({
+    activeListings: '0',
+    totalUsers: '1,248'
+  })
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/admin/stats')
+      .then(res => res.json())
+      .then(data => {
+        setLiveStats({
+          activeListings: data.activeListings.toString(),
+          totalUsers: data.totalUsers.toLocaleString()
+        })
+      })
+      .catch(err => console.error("Failed to fetch live stats", err))
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,10 +99,10 @@ export default function HomePage() {
   ]
 
   const stats = [
-    { label: "Smallholder Farmers", value: "500M+", sub: "Globally impactful" },
-    { label: "Food Production Needed", value: "30%", sub: "Increase by 2050" },
+    { label: "Registered Farmers", value: liveStats.totalUsers, sub: "Growing community" },
+    { label: "Active Listings", value: liveStats.activeListings, sub: "Marketplace items" },
     { label: "Investment Mobility", value: "$9B", sub: "Pledged by 2030" },
-    { label: "Jobs Created", value: "10K+", sub: "Local impact goal" }
+    { label: "Production Goal", value: "30%", sub: "Increase by 2050" }
   ]
 
   return (

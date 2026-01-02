@@ -14,15 +14,25 @@ import {
 } from 'lucide-react'
 
 export default function AdminDashboard() {
-    const [activeListings, setActiveListings] = useState('0')
+    const [statsData, setStatsData] = useState({
+        totalUsers: '1,248',
+        activeListings: '0',
+        pendingReports: '0',
+        systemHealth: '98%',
+        recentActivities: []
+    })
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/marketplace/products')
+        fetch('http://localhost:5000/api/admin/stats')
             .then(res => res.json())
             .then(data => {
-                if (Array.isArray(data)) {
-                    setActiveListings(data.length.toString())
-                }
+                setStatsData({
+                    totalUsers: data.totalUsers.toLocaleString(),
+                    activeListings: data.activeListings.toString(),
+                    pendingReports: data.pendingReports.toString(),
+                    systemHealth: data.systemHealth,
+                    recentActivities: data.recentActivities || []
+                })
             })
             .catch(err => console.error("Failed to fetch system stats", err))
     }, [])
@@ -30,7 +40,7 @@ export default function AdminDashboard() {
     const stats = [
         {
             label: 'Total Users',
-            value: '1,248',
+            value: statsData.totalUsers,
             change: '+12%',
             icon: Users,
             color: 'text-[#0072C6]',
@@ -38,7 +48,7 @@ export default function AdminDashboard() {
         },
         {
             label: 'Active Listings',
-            value: activeListings,
+            value: statsData.activeListings,
             change: '+5%',
             icon: Building2,
             color: 'text-[#1EB53A]',
@@ -46,7 +56,7 @@ export default function AdminDashboard() {
         },
         {
             label: 'Pending Reports',
-            value: '14',
+            value: statsData.pendingReports,
             change: '-2%',
             icon: FileText,
             color: 'text-amber-500',
@@ -54,7 +64,7 @@ export default function AdminDashboard() {
         },
         {
             label: 'System Health',
-            value: '98%',
+            value: statsData.systemHealth,
             change: 'Stable',
             icon: Activity,
             color: 'text-slate-900',
@@ -126,33 +136,52 @@ export default function AdminDashboard() {
                                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Real-time Diagnostics</p>
                             </div>
                         </div>
-                        <Badge variant="outline" className="font-black text-[9px] uppercase tracking-widest border-slate-200 text-slate-400 px-3 py-1">2 Updates</Badge>
+                        <Badge variant="outline" className="font-black text-[9px] uppercase tracking-widest border-slate-200 text-slate-400 px-3 py-1">{statsData.recentActivities.length || 2} Updates</Badge>
                     </div>
                     <div className="space-y-6">
-                        <div className="flex w-full gap-6 p-6 border-l-4 border-amber-400 rounded-r-3xl bg-amber-50/50 hover:bg-amber-50 transition-colors cursor-default">
-                            <div className="mt-1">
-                                <div className="w-3 h-3 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)] animate-pulse" />
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex justify-between items-start mb-1">
-                                    <p className="font-black text-slate-900 text-sm uppercase tracking-tight">Warning: Server Load</p>
-                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">2h ago</span>
+                        {statsData.recentActivities.length > 0 ? (
+                            statsData.recentActivities.map((activity: any, idx: number) => (
+                                <div key={idx} className={`flex w-full gap-6 p-6 border-l-4 ${activity.type === 'success' ? 'border-[#1EB53A] bg-[#1EB53A]/5' : 'border-amber-400 bg-amber-50/50'} rounded-r-3xl hover:bg-opacity-80 transition-colors cursor-default`}>
+                                    <div className="mt-1">
+                                        <div className={`w-3 h-3 rounded-full ${activity.type === 'success' ? 'bg-[#1EB53A]' : 'bg-amber-500'} shadow-[0_0_10px_rgba(30,181,58,0.5)]`} />
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="flex justify-between items-start mb-1">
+                                            <p className="font-black text-slate-900 text-sm uppercase tracking-tight">{activity.title}</p>
+                                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{activity.time}</span>
+                                        </div>
+                                        <p className="text-xs text-slate-500 font-medium leading-relaxed">{activity.message}</p>
+                                    </div>
                                 </div>
-                                <p className="text-xs text-slate-500 font-medium leading-relaxed">Freetown primary node approaching capacity threshold (88%). Load balancer engaged.</p>
-                            </div>
-                        </div>
-                        <div className="flex w-full gap-6 p-6 border-l-4 border-[#1EB53A] rounded-r-3xl bg-[#1EB53A]/5 hover:bg-[#1EB53A]/10 transition-colors cursor-default">
-                            <div className="mt-1">
-                                <div className="w-3 h-3 rounded-full bg-[#1EB53A] shadow-[0_0_10px_rgba(30,181,58,0.5)]" />
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex justify-between items-start mb-1">
-                                    <p className="font-black text-slate-900 text-sm uppercase tracking-tight">Success: Backup Sync</p>
-                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">5h ago</span>
+                            ))
+                        ) : (
+                            <>
+                                <div className="flex w-full gap-6 p-6 border-l-4 border-amber-400 rounded-r-3xl bg-amber-50/50 hover:bg-amber-50 transition-colors cursor-default">
+                                    <div className="mt-1">
+                                        <div className="w-3 h-3 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)] animate-pulse" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="flex justify-between items-start mb-1">
+                                            <p className="font-black text-slate-900 text-sm uppercase tracking-tight">Warning: Server Load</p>
+                                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">2h ago</span>
+                                        </div>
+                                        <p className="text-xs text-slate-500 font-medium leading-relaxed">Freetown primary node approaching capacity threshold (88%). Load balancer engaged.</p>
+                                    </div>
                                 </div>
-                                <p className="text-xs text-slate-500 font-medium leading-relaxed">National agricultural database integrity verification complete. All shards synchronized.</p>
-                            </div>
-                        </div>
+                                <div className="flex w-full gap-6 p-6 border-l-4 border-[#1EB53A] rounded-r-3xl bg-[#1EB53A]/5 hover:bg-[#1EB53A]/10 transition-colors cursor-default">
+                                    <div className="mt-1">
+                                        <div className="w-3 h-3 rounded-full bg-[#1EB53A] shadow-[0_0_10px_rgba(30,181,58,0.5)]" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="flex justify-between items-start mb-1">
+                                            <p className="font-black text-slate-900 text-sm uppercase tracking-tight">Success: Backup Sync</p>
+                                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">5h ago</span>
+                                        </div>
+                                        <p className="text-xs text-slate-500 font-medium leading-relaxed">National agricultural database integrity verification complete. All shards synchronized.</p>
+                                    </div>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </Card>
 

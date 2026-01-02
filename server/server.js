@@ -130,6 +130,37 @@ app.post('/api/chat', (req, res) => {
       keywords: ['storage', 'store', 'preserve', 'warehouse'],
       answer: "Proper storage prevents losses. Dry grains to 12-14% moisture. Use airtight containers or improved storage bags. Keep storage area clean, dry, and cool. Check regularly for pests. Add neem leaves or ash as natural pest deterrent.",
       tips: ["Store different crops separately", "Raise bags off ground on pallets", "First in, first out - use older stock first"]
+    },
+    // APPLICATION FEATURES
+    marketplace: {
+      keywords: ['marketplace', 'buy', 'sell', 'trading', 'shop', 'store'],
+      answer: "Our Marketplace connects farmers directly with buyers. You can list your crops, livestock, or equipment for sale, and browse products from other farmers across Sierra Leone.",
+      tips: ["Take clear photos of your products", "Provide accurate descriptions and prices", "Respond quickly to buyer inquiries"]
+    },
+    ai: {
+      keywords: ['ai', 'robot', 'assistant', 'recommendation', 'detection', 'prediction', 'smart'],
+      answer: "Agri Connect uses advanced Artificial Intelligence to help you. Our tools include Crop Recommendation (based on soil), Disease Detection (via photos), and Yield Prediction to plan your harvest.",
+      tips: ["Use 'Crop Recommendation' before planting", "Scan plants early with 'Disease Detection'", "Check 'Yield Prediction' to estimate your profit"]
+    },
+    opportunity: {
+      keywords: ['opportunity', 'portal', 'scheme', 'grant', 'job', 'training', 'scholarship'],
+      answer: "The Agri-Opp Portal centralizes all agricultural opportunities including Government subsidies, private grants, jobs in the sector, and specialized training workshops.",
+      tips: ["Check the 'Grants' section weekly", "Apply for 'Training' to improve skills", "Look at 'Jobs' for career growth in agriculture"]
+    },
+    finance: {
+      keywords: ['finance', 'loan', 'credit', 'insurance', 'money', 'bank', 'payment'],
+      answer: "We offer tailored Financial Services including low-interest loans for inputs and equipment, and crop insurance to protect your investment against climate risks.",
+      tips: ["Apply for 'Input Credit' early in the season", "Get 'Crop Insurance' to mitigate weather risks", "Maintain good farm records for easier loan approval"]
+    },
+    traceability: {
+      keywords: ['traceability', 'track', 'origin', 'logistics', 'quality', 'export'],
+      answer: "Our Traceability system allows you to register products and track their journey from farm to market. This is essential for premium exports and building buyer trust.",
+      tips: ["Register your harvest immediately", "Use our QR system for easy tracking", "Track your produce to ensure quality during transport"]
+    },
+    climate: {
+      keywords: ['climate', 'weather', 'forecast', 'rain', 'alert', 'storm'],
+      answer: "The Climate & Weather section provides hyper-local forecasts and early warnings for extreme weather, helping you decide when to plant, spray, or harvest.",
+      tips: ["Check daily alerts for storm warnings", "Use the 7-day forecast for planning", "Provide feedback on local weather conditions"]
     }
   };
 
@@ -167,6 +198,60 @@ app.post('/api/chat', (req, res) => {
   setTimeout(() => {
     res.json(response);
   }, 800);
+});
+
+// Admin: Summary Stats Endpoint
+app.get('/api/admin/stats', (req, res) => {
+  const stats = {
+    totalUsers: 1248, // Mocked for now
+    activeListings: 0,
+    pendingReports: 0,
+    systemHealth: '98%',
+    recentActivities: []
+  };
+
+  // Count active listings
+  db.get('SELECT COUNT(*) as count FROM marketplace_products WHERE status = "available"', [], (err, row) => {
+    if (!err) stats.activeListings = row.count;
+
+    // Count pending items (applications, inquiries, etc.)
+    const queries = [
+      'SELECT COUNT(*) as count FROM job_applications WHERE status = "pending"',
+      'SELECT COUNT(*) as count FROM govt_applications WHERE status = "pending"',
+      'SELECT COUNT(*) as count FROM training_enrollments WHERE status = "pending"',
+      'SELECT COUNT(*) as count FROM grant_applications WHERE status = "pending"',
+      'SELECT COUNT(*) as count FROM marketplace_inquiries WHERE status = "pending"'
+    ];
+
+    let queryCount = 0;
+    let totalPending = 0;
+
+    queries.forEach(q => {
+      db.get(q, [], (err, row) => {
+        queryCount++;
+        if (!err) totalPending += row.count;
+
+        if (queryCount === queries.length) {
+          stats.pendingReports = totalPending;
+
+          // Add some mock recent activities based on actual data
+          db.all('SELECT * FROM marketplace_products ORDER BY created_date DESC LIMIT 2', [], (err, products) => {
+            if (!err && products) {
+              products.forEach(p => {
+                stats.recentActivities.push({
+                  type: 'success',
+                  title: 'New Listing',
+                  message: `${p.seller_name} listed ${p.product_name} in ${p.seller_location}`,
+                  time: 'Recently'
+                });
+              });
+            }
+            res.json(stats);
+          });
+        }
+      });
+    });
+  });
 });
 
 // Agri-Opp Portal API
