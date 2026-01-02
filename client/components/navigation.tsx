@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { Home, Menu, X, MapPin, Cloud, Settings, Bug, Sprout, Building2, RefreshCw, Calendar, TrendingUp, User, LogOut, LayoutDashboard, Factory, ShieldCheck, Globe, GraduationCap, Radio, DollarSign, ClipboardList, Target, Banknote, PieChart, Search, ShoppingCart, Briefcase, FileText, UserPlus, HeartHandshake, Calculator } from 'lucide-react'
+import { Home, Menu, X, MapPin, Cloud, Settings, Bug, Sprout, Building2, RefreshCw, Calendar, TrendingUp, User, LogOut, LayoutDashboard, Factory, ShieldCheck, Globe, GraduationCap, Radio, DollarSign, ClipboardList, Target, Banknote, PieChart, Search, ShoppingCart, Briefcase, FileText, UserPlus, HeartHandshake, Calculator, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -194,6 +194,17 @@ export function Navigation() {
 
               {/* User Account */}
               <div className="flex items-center gap-4">
+                {/* WhatsApp Support Link */}
+                <a
+                  href="https://wa.me/+232000000000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-2 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 group"
+                >
+                  <MessageCircle className="w-4 h-4 group-hover:animate-bounce" />
+                  <span className="hidden xl:inline">WhatsApp Support</span>
+                </a>
+
                 {/* Ministry Coat of Arms */}
                 <div className="h-12 w-12 relative hidden md:block" title="Ministry of Agriculture and Food Security">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Send, Loader2, Mic, MicOff, Image as ImageIcon, Volume2, VolumeX } from 'lucide-react'
+import { X, Send, Loader2, Mic, MicOff, Image as ImageIcon, Volume2, VolumeX, MessageCircle, Info, Sparkles, Sprout } from 'lucide-react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 
@@ -246,29 +246,39 @@ export function ChatWidget() {
                         className="mb-4 w-96 h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-200"
                     >
                         {/* Header */}
-                        <div className="bg-gradient-to-r from-[#1EB53A] via-[#0072C6] to-[#1EB53A] p-4 flex items-center justify-between text-white shadow-md">
-                            <div className="flex items-center gap-3">
-                                <div className="bg-white/20 p-1 rounded-full backdrop-blur-sm overflow-hidden w-10 h-10 flex items-center justify-center border-2 border-white/30">
+                        <div className="bg-gradient-to-r from-[#1EB53A] via-[#0072C6] to-[#1EB53A] p-4 flex items-center justify-between text-white shadow-md relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rotate-45 translate-x-12 -translate-y-8"></div>
+                            <div className="flex items-center gap-3 relative z-10">
+                                <div className="bg-white/20 p-1 rounded-full backdrop-blur-sm overflow-hidden w-10 h-10 flex items-center justify-center border-2 border-white/30 shadow-lg">
                                     <img src="/rubot-icon.png" alt="Agri Connect" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-lg">Agri Connect</h3>
+                                    <h3 className="font-bold text-lg leading-tight">Agri Connect</h3>
                                     <div className="flex items-center gap-1.5 opacity-90">
-                                        <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                                        <span className="text-xs font-medium">Online Support</span>
+                                        <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest">Live Agricultural Expert</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1 relative z-10">
+                                <a
+                                    href="https://wa.me/+232000000000" // Replace with real WhatsApp number
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="p-2 hover:bg-white/20 rounded-full transition-all hover:scale-110 text-white"
+                                    title="Chat on WhatsApp"
+                                >
+                                    <MessageCircle className="w-5 h-5" />
+                                </a>
                                 <button
                                     onClick={toggleSpeech}
-                                    className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                                    className="p-2 hover:bg-white/20 rounded-full transition-all hover:scale-110"
                                 >
                                     {isSpeaking ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
                                 </button>
                                 <button
                                     onClick={() => setIsOpen(false)}
-                                    className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                                    className="p-2 hover:bg-white/20 rounded-full transition-all"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
@@ -276,7 +286,39 @@ export function ChatWidget() {
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+                        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50">
+                            {/* Agricultural Quick Actions */}
+                            {messages.length === 1 && (
+                                <div className="grid grid-cols-2 gap-2 mb-4">
+                                    <button
+                                        onClick={() => { setInput('How do I grow rice efficiently?'); }}
+                                        className="flex items-center gap-2 p-2 bg-white border border-slate-100 rounded-xl text-[10px] font-black uppercase tracking-tight text-slate-500 hover:border-[#1EB53A] hover:text-[#1EB53A] transition-all"
+                                    >
+                                        <Sprout className="w-3 h-3" /> Rice Cultivation
+                                    </button>
+                                    <button
+                                        onClick={() => { setInput('Show me current market prices.'); }}
+                                        className="flex items-center gap-2 p-2 bg-white border border-slate-100 rounded-xl text-[10px] font-black uppercase tracking-tight text-slate-500 hover:border-[#0072C6] hover:text-[#0072C6] transition-all"
+                                    >
+                                        <TrendingUp className="w-3 h-3" /> Market Prices
+                                    </button>
+                                    <button
+                                        onClick={() => { setInput('How to use the Marketplace?'); }}
+                                        className="flex items-center gap-2 p-2 bg-white border border-slate-100 rounded-xl text-[10px] font-black uppercase tracking-tight text-slate-500 hover:border-amber-500 hover:text-amber-500 transition-all"
+                                    >
+                                        <Sparkles className="w-3 h-3" /> Marketplace Guide
+                                    </button>
+                                    <a
+                                        href="https://wa.me/+232000000000"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 p-2 bg-[#25D366]/10 border border-[#25D366]/20 rounded-xl text-[10px] font-black uppercase tracking-tight text-[#25D366] hover:bg-[#25D366]/20 transition-all"
+                                    >
+                                        <MessageCircle className="w-3 h-3" /> WhatsApp Support
+                                    </a>
+                                </div>
+                            )}
+
                             {messages.map((msg) => (
                                 <div
                                     key={msg.id}
