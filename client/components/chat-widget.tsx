@@ -262,7 +262,7 @@ export function ChatWidget() {
                             </div>
                             <div className="flex items-center gap-1 relative z-10">
                                 <a
-                                    href="https://wa.me/+232000000000" // Replace with real WhatsApp number
+                                    href="https://wa.me/23233013411" // Replace with real WhatsApp number
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="p-2 hover:bg-white/20 rounded-full transition-all hover:scale-110 text-white"
@@ -309,7 +309,7 @@ export function ChatWidget() {
                                         <Sparkles className="w-3 h-3" /> Marketplace Guide
                                     </button>
                                     <a
-                                        href="https://wa.me/+232000000000"
+                                        href="https://wa.me/23233013411"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-center gap-2 p-2 bg-[#25D366]/10 border border-[#25D366]/20 rounded-xl text-[10px] font-black uppercase tracking-tight text-[#25D366] hover:bg-[#25D366]/20 transition-all"

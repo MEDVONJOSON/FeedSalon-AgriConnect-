@@ -196,7 +196,7 @@ export function Navigation() {
               <div className="flex items-center gap-4">
                 {/* WhatsApp Support Link */}
                 <a
-                  href="https://wa.me/+232000000000"
+                  href="https://wa.me/23233013411"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-2 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 group"
