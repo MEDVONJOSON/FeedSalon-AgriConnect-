@@ -21,7 +21,7 @@ from app.core.config import settings
 from app.core.database import Base
 
 # Import all models here so Alembic can detect them
-# from app.modules.users.models import User
+from app.modules.users.models import User
 # from app.modules.academic.models import Student, Teacher, Class
 # from app.modules.grades.models import GradeEvent
 
