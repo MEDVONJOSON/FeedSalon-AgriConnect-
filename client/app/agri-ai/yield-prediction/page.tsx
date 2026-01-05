@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 import { useState } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Button } from '@/components/ui/button'
@@ -31,7 +33,7 @@ export default function YieldPredictionPage() {
         setResults(null)
 
         try {
-            const response = await fetch('http://localhost:5000/api/ai/yield-prediction', {
+            const response = await fetch(`${API_URL}/api/ai/yield-prediction`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

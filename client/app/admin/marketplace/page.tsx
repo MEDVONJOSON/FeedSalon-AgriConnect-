@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -26,8 +28,8 @@ export default function AdminMarketplacePage() {
         setLoading(true)
         try {
             const [productsRes, inquiriesRes] = await Promise.all([
-                fetch('http://localhost:5000/api/admin/marketplace/products'),
-                fetch('http://localhost:5000/api/admin/marketplace/inquiries')
+                fetch(`${API_URL}/api/admin/marketplace/products`),
+                fetch(`${API_URL}/api/admin/marketplace/inquiries`)
             ])
 
             if (productsRes.ok) {
@@ -57,7 +59,7 @@ export default function AdminMarketplacePage() {
 
     const updateProductStatus = async (id: number, newStatus: string) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/marketplace/products/${id}/status`, {
+            const res = await fetch(`${API_URL}/api/admin/marketplace/products/${id}/status`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })

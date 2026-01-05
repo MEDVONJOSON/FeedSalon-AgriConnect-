@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 import { useState, useEffect } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Card, CardContent } from '@/components/ui/card'
@@ -37,13 +39,13 @@ export default function ProductDetailPage() {
         setLoading(true)
         try {
             // Fetch product details
-            const res = await fetch(`http://localhost:5000/api/marketplace/products/${params.id}`)
+            const res = await fetch(`${API_URL}/api/marketplace/products/${params.id}`)
             if (res.ok) {
                 const data = await res.json()
                 setProduct(data)
 
                 // Fetch similar products (same category)
-                const similarRes = await fetch(`http://localhost:5000/api/marketplace/products?category=${data.category}`)
+                const similarRes = await fetch(`${API_URL}/api/marketplace/products?category=${data.category}`)
                 if (similarRes.ok) {
                     const similarData = await similarRes.json()
                     // Filter out the current product
@@ -62,7 +64,7 @@ export default function ProductDetailPage() {
         setSubmitting(true)
 
         try {
-            const res = await fetch('http://localhost:5000/api/marketplace/inquiries', {
+            const res = await fetch(`${API_URL}/api/marketplace/inquiries`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

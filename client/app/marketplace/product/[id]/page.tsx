@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { Navigation } from '@/components/navigation'
@@ -60,7 +62,7 @@ export default function ProductDetailPage() {
 
     const fetchProduct = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/marketplace/products/${params.id}`)
+            const res = await fetch(`${API_URL}/api/marketplace/products/${params.id}`)
             if (res.ok) {
                 const data = await res.json()
                 setProduct(data)
@@ -119,7 +121,7 @@ export default function ProductDetailPage() {
             status: 'pending'
         }
         try {
-            const res = await fetch('http://localhost:5000/api/marketplace/orders', {
+            const res = await fetch(`${API_URL}/api/marketplace/orders`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(orderData)

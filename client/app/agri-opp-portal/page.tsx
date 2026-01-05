@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 import { useState, useEffect } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Card, CardContent } from '@/components/ui/card'
@@ -84,7 +86,7 @@ export default function AgriOppPortalPage() {
             const fetchProducts = async () => {
                 setLoading(true)
                 try {
-                    const res = await fetch('http://localhost:5000/api/marketplace/products')
+                    const res = await fetch(`${API_URL}/api/marketplace/products`)
                     if (res.ok) {
                         const data = await res.json()
                         setProducts(data)
@@ -125,7 +127,7 @@ export default function AgriOppPortalPage() {
 
             setLoading(true)
             try {
-                const res = await fetch(`http://localhost:5000/api/agri-opp-portal/${activeTab}`)
+                const res = await fetch(`${API_URL}/api/agri-opp-portal/${activeTab}`)
                 if (res.ok) {
                     const result = await res.json()
                     setData(result)
@@ -171,7 +173,7 @@ export default function AgriOppPortalPage() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-            const res = await fetch('http://localhost:5000/api/job-applications', {
+            const res = await fetch(`${API_URL}/api/job-applications`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -216,7 +218,7 @@ export default function AgriOppPortalPage() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-            const res = await fetch('http://localhost:5000/api/govt-applications', {
+            const res = await fetch(`${API_URL}/api/govt-applications`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -270,7 +272,7 @@ export default function AgriOppPortalPage() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-            const res = await fetch('http://localhost:5000/api/training-enrollments', {
+            const res = await fetch(`${API_URL}/api/training-enrollments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -319,7 +321,7 @@ export default function AgriOppPortalPage() {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 4000);
 
-            const res = await fetch('http://localhost:5000/api/grant-applications', {
+            const res = await fetch(`${API_URL}/api/grant-applications`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

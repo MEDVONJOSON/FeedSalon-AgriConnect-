@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 import { useState } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Button } from '@/components/ui/button'
@@ -42,7 +44,7 @@ export default function DiseaseDetectionPage() {
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
 
-          const response = await fetch('http://localhost:5000/api/ai/disease-detection', {
+          const response = await fetch(`${API_URL}/api/ai/disease-detection`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 // Imports moved to top
 import { useState, useEffect } from 'react'
 import { Card } from '@/components/ui/card'
@@ -23,7 +25,7 @@ export default function AdminDashboard() {
     })
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/admin/stats')
+        fetch(`${API_URL}/api/admin/stats`)
             .then(res => res.json())
             .then(data => {
                 setStatsData({

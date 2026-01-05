@@ -12,6 +12,7 @@ import {
     Heart, MessageCircle, TrendingUp, Clock, Globe, ShieldCheck, Zap
 } from 'lucide-react'
 import Link from 'next/link'
+import { API_URL } from '@/lib/api-config'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -90,7 +91,7 @@ export default function MarketplacePage() {
 
     const fetchProducts = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/marketplace/products')
+            const res = await fetch(`${API_URL}/api/marketplace/products`)
             if (res.ok) {
                 const data = await res.json()
                 setProducts(data)
@@ -165,7 +166,7 @@ export default function MarketplacePage() {
         e.preventDefault()
         setSubmitting(true)
         try {
-            const res = await fetch('http://localhost:5000/api/marketplace/inquiries', {
+            const res = await fetch(`${API_URL}/api/marketplace/inquiries`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

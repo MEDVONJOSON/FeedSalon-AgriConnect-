@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { API_URL } from '@/lib/api-config'
 import { Navigation } from '@/components/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -24,7 +25,7 @@ export default function HomePage() {
   })
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/admin/stats')
+    fetch(`${API_URL}/api/admin/stats`)
       .then(res => res.json())
       .then(data => {
         setLiveStats({

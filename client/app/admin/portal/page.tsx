@@ -26,7 +26,7 @@ export default function AdminPortalPage() {
     const fetchData = async () => {
         setLoading(true)
         try {
-            const res = await fetch(`http://localhost:5000/api/agri-opp-portal/${activeTab}`)
+            const res = await fetch(`${API_URL}/api/agri-opp-portal/${activeTab}`)
             if (res.ok) {
                 const result = await res.json()
                 // Handle govt special case
@@ -77,7 +77,7 @@ export default function AdminPortalPage() {
         if (!confirm('Are you sure you want to delete this item?')) return
 
         try {
-            const res = await fetch(`http://localhost:5000/api/agri-opp-portal/${activeTab}/${id}`, {
+            const res = await fetch(`${API_URL}/api/agri-opp-portal/${activeTab}/${id}`, {
                 method: 'DELETE'
             })
             if (res.ok) {
@@ -93,7 +93,7 @@ export default function AdminPortalPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            const res = await fetch(`http://localhost:5000/api/agri-opp-portal/${activeTab}`, {
+            const res = await fetch(`${API_URL}/api/agri-opp-portal/${activeTab}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 import { useState, useRef, useEffect } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Card } from '@/components/ui/card'
@@ -55,7 +57,7 @@ export default function AgriAnalystPage() {
         setIsLoading(true)
 
         try {
-            const response = await fetch('http://localhost:5000/api/agri-analyst/chat', {
+            const response = await fetch(`${API_URL}/api/agri-analyst/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query: userMessage.content })

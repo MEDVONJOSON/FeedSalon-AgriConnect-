@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -24,8 +26,8 @@ export default function AdminApplicationsPage() {
         setLoading(true)
         try {
             const [jobRes, govtRes] = await Promise.all([
-                fetch('http://localhost:5000/api/admin/job-applications'),
-                fetch('http://localhost:5000/api/admin/govt-applications')
+                fetch(`${API_URL}/api/admin/job-applications`),
+                fetch(`${API_URL}/api/admin/govt-applications`)
             ])
 
             if (jobRes.ok) {
@@ -57,7 +59,7 @@ export default function AdminApplicationsPage() {
 
     const updateStatus = async (type: string, id: number, newStatus: string) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/applications/${type}/${id}/status`, {
+            const res = await fetch(`${API_URL}/api/admin/applications/${type}/${id}/status`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })

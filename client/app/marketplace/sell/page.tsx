@@ -1,5 +1,7 @@
 'use client'
 
+import { API_URL } from '@/lib/api-config'
+
 import { useState, useEffect } from 'react'
 import { Navigation } from '@/components/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -56,7 +58,7 @@ export default function SellProductPage() {
         e.preventDefault()
         setSubmitting(true)
         try {
-            const res = await fetch('http://localhost:5000/api/marketplace/products', {
+            const res = await fetch(`${API_URL}/api/marketplace/products`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

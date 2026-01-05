@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { API_URL } from '@/lib/api-config'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Send, Loader2, Mic, MicOff, Image as ImageIcon, Volume2, VolumeX, MessageCircle, Info, Sparkles, Sprout } from 'lucide-react'
 import { Button } from './ui/button'
@@ -108,7 +109,7 @@ export function ChatWidget() {
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), 2000); // 2s timeout for demo speed
 
-                    response = await fetch('http://localhost:5000/api/chat', {
+                    response = await fetch(`${API_URL}/api/chat`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ message: input }),
