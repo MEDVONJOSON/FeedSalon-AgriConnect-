@@ -21,9 +21,6 @@ services:
     startCommand: npm start
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        # This should be the URL of the backend service created above
-        # Render provides this automatically if you use the internal name, 
-        # but for Vercel/External access, you'll need the public URL.
         fromService:
           type: web
           name: feed-salon-backend
