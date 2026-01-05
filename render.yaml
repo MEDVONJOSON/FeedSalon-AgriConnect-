@@ -1,0 +1,30 @@
+services:
+  # Backend Server
+  - type: web
+    name: feed-salon-backend
+    env: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+
+  # Frontend Client
+  - type: web
+    name: feed-salon-frontend
+    env: node
+    rootDir: client
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        # This should be the URL of the backend service created above
+        # Render provides this automatically if you use the internal name, 
+        # but for Vercel/External access, you'll need the public URL.
+        fromService:
+          type: web
+          name: feed-salon-backend
+          property: host
