@@ -1,17 +1,19 @@
-# 🚀 Agri Connect - Platinum Deployment Guide
+# 🚀 Agri Connect - Free Deployment Guide
 
-This project is optimized for automated deployment on **Render** (Backend) and **Vercel** (Frontend).
+This project is optimized for deployment on **Render** (Backend) and **Vercel** (Frontend) using their free tiers.
 
-## 🛠️ Automated Render Deployment (Backend)
-I have created a `render.yaml` file in the root directory. To fix your path issues automatically:
+## 🛠️ Backend Deployment (Render - FREE TIER)
 1. Go to your **Render Dashboard**.
-2. Click **"New"** > **"Blueprint"**.
+2. Click **"New"** > **"Web Service"**.
 3. Select your `FeedSalon-AgriConnect-` repository.
-4. Render will automatically detect the settings in `render.yaml` and configure:
-   - **Root Directory**: `server`
+4. **Settings**:
+   - **Name**: `feedsalon-backend`
+   - **Root Directory**: `server` (CRITICAL: Do not leave blank)
+   - **Runtime**: `Node`
    - **Build Command**: `npm install`
    - **Start Command**: `node server.js`
-5. Click **"Apply"**.
+   - **Instance Type**: Select **Free**
+5. Click **"Create Web Service"**.
 
 ## 🌐 Frontend Deployment (Vercel)
 1. Go to [Vercel](https://vercel.com) and import your repo.
@@ -20,17 +22,11 @@ I have created a `render.yaml` file in the root directory. To fix your path issu
    - **Framework**: Next.js
 3. **Important: Environment Variables**:
    In Vercel Settings > Environment Variables, add:
-   - `NEXT_PUBLIC_API_URL`: `https://your-backend-name.onrender.com`
+   - `NEXT_PUBLIC_API_URL`: Your Render URL (e.g., `https://feedsalon-backend.onrender.com`)
 
 ---
 
-## 🔍 Troubleshooting the "Cannot find module" Error
-If you are doing manual setup on Render, ensure these settings:
-- **Root Directory**: `server`
-- **Start Command**: `node server.js`
-- **DO NOT** use `node server/server.js` if the Root Directory is set to `server`.
-
-## 📜 Regarding the String: `fc4551e7a2b2ae804e985d95827f03d0`
-If this is a Render Secret or Environment Variable provided to you, you can add it in the Render Dashboard under **Environment** > **Environment Variables** as a new key (e.g., `RENDER_INSTANCE_ID`). 
-
-The code has been pushed to GitHub. Simply "Apply" the Blueprint on Render and it will work!
+## 🔍 Troubleshooting "Cannot find module"
+If Render says it can't find `server.js`:
+- Check that **Root Directory** is set to `server`.
+- Check that **Start Command** is exactly `node server.js`.
