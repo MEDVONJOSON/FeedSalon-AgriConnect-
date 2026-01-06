@@ -37,7 +37,8 @@ class Settings(BaseSettings):
     # API Server
     # ==========================================
     api_host: str = "0.0.0.0"
-    api_port: int = 8002
+    # Pydantic will automatically check for an env var named PORT or API_PORT
+    api_port: int = Field(default=8002, alias="PORT")
     api_secret_key: str = Field(min_length=32)
 
     # ==========================================
@@ -79,13 +80,15 @@ class Settings(BaseSettings):
 
         direct_url = os.getenv("DATABASE_URL")
         if direct_url:
-            # Ensure it's postgresql:// not postgres://
+            # Force +psycopg2 for Alembic to avoid "ModuleNotFoundError: psycopg2"
             if direct_url.startswith("postgres://"):
-                return direct_url.replace("postgres://", "postgresql://", 1)
+                return direct_url.replace("postgres://", "postgresql+psycopg2://", 1)
+            if direct_url.startswith("postgresql://") and "+psycopg2" not in direct_url:
+                return direct_url.replace("postgresql://", "postgresql+psycopg2://", 1)
             return direct_url
 
         return (
-            f"postgresql://{self.postgres_user}:{self.postgres_password}"
+            f"postgresql+psycopg2://{self.postgres_user}:{self.postgres_password}"
             f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
         )
 
@@ -130,8 +133,8 @@ class Settings(BaseSettings):
     # ==========================================
     # Security
     # ==========================================
-    cors_origins: str = "http://localhost:3000"
-    allowed_hosts: str = "localhost,127.0.0.1"
+    cors_origins: str = Field(default="http://localhost:3000")
+    allowed_hosts: str = Field(default="localhost,127.0.0.1")
 
     @computed_field
     @property
