@@ -53,6 +53,19 @@ class Settings(BaseSettings):
     @property
     def database_url(self) -> str:
         """Construct async database URL."""
+        # Check if DATABASE_URL is provided directly (Railway/production)
+        import os
+
+        direct_url = os.getenv("DATABASE_URL")
+        if direct_url:
+            # Convert postgres:// to postgresql+asyncpg://
+            if direct_url.startswith("postgres://"):
+                return direct_url.replace("postgres://", "postgresql+asyncpg://", 1)
+            if direct_url.startswith("postgresql://"):
+                return direct_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+            return direct_url
+
+        # Construct from components (local development)
         return (
             f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}"
             f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
@@ -62,6 +75,15 @@ class Settings(BaseSettings):
     @property
     def database_url_sync(self) -> str:
         """Construct sync database URL (for Alembic migrations)."""
+        import os
+
+        direct_url = os.getenv("DATABASE_URL")
+        if direct_url:
+            # Ensure it's postgresql:// not postgres://
+            if direct_url.startswith("postgres://"):
+                return direct_url.replace("postgres://", "postgresql://", 1)
+            return direct_url
+
         return (
             f"postgresql://{self.postgres_user}:{self.postgres_password}"
             f"@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
