@@ -225,7 +225,7 @@ export function Navigation() {
                     {user ? (
                       <>
                         <div className="px-2 py-1.5 text-sm font-semibold text-muted-foreground flex items-center justify-between">
-                          <span>My Account</span>
+                          <span>{user.email === 'guest@agriconnect.sl' ? 'Guest Access' : 'My Account'}</span>
                           <Badge variant="outline" className="capitalize text-xs py-0 h-5">{user.role}</Badge>
                         </div>
                         <DropdownMenuItem asChild>
@@ -286,7 +286,7 @@ export function Navigation() {
           </div>
 
         </div>
-      </nav>
+      </nav >
 
       {/* Mobile Menu Overlay - Moved outside nav to escape containing block context */}
       {
@@ -399,7 +399,8 @@ export function Navigation() {
               })}
             </div>
           </div>
-        )}
+        )
+      }
     </>
   )
 }

@@ -79,7 +79,16 @@ export const auth = {
     getUser: (): User | null => {
         if (typeof window === 'undefined') return null
         try {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
+            const user = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
+            if (user) return user
+
+            // Return a default Guest user for "Public Access" mode
+            return {
+                name: 'Guest Farmer',
+                email: 'guest@agriconnect.sl',
+                role: 'farmer',
+                location: 'Freetown, Sierra Leone'
+            }
         } catch {
             return null
         }
