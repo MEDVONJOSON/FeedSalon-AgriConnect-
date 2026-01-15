@@ -1,0 +1,12 @@
+🌐 Agri Connect Mobile App - Web Version
+
+The app is now running in your browser!
+
+URL: http://localhost:8082
+
+If the browser didn't open automatically, copy and paste this URL into your browser:
+http://localhost:8082
+
+The app should load and you'll see the login screen.
+
+Note: Some mobile-specific features (camera, location) may work differently in the browser.

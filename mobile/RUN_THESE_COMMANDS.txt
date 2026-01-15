@@ -1,0 +1,31 @@
+🚀 DEPLOY TO VERCEL - COPY AND PASTE THESE COMMANDS
+
+Step 1: Login (opens browser)
+------------------------------
+cd mobile
+vercel login
+
+(Complete authentication in browser, then continue...)
+
+Step 2: Deploy
+--------------
+vercel --prod
+
+When asked:
+- Set up and deploy? → Press Enter (Yes)
+- Link to existing project? → Type "n" and press Enter (No)
+- Project name? → Type "agri-connect-mobile" and press Enter
+- Directory? → Press Enter
+- Override settings? → Press Enter (No)
+
+Step 3: Set Backend URL
+------------------------
+vercel env add EXPO_PUBLIC_API_URL production
+
+(Paste your backend URL when prompted, e.g., https://feedsalon-backend.onrender.com)
+
+Step 4: Redeploy
+----------------
+vercel --prod
+
+✅ DONE! Your app will be live at the URL shown!
