@@ -1,8 +1,10 @@
+const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  basePath: '/FeedSalon-AgriConnect-',
-  assetPrefix: '/FeedSalon-AgriConnect-/',
+  output: isGithubActions ? 'export' : undefined,
+  basePath: isGithubActions ? '/FeedSalon-AgriConnect-' : undefined,
+  assetPrefix: isGithubActions ? '/FeedSalon-AgriConnect-/' : undefined,
   typescript: {
     ignoreBuildErrors: true,
   },
