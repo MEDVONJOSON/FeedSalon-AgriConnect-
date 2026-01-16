@@ -668,6 +668,74 @@ app.get('/api/admin/marketplace/inquiries', (req, res) => {
 
 
 // ============================================
+// SOCIAL HUB (COMMUNITY) ENDPOINTS
+// ============================================
+
+// Get all posts
+app.get('/api/community/posts', (req, res) => {
+  db.all('SELECT * FROM posts ORDER BY timestamp DESC', [], (err, rows) => {
+    if (err) {
+      console.error('Error fetching posts:', err);
+      return res.status(500).json({ error: 'Failed to fetch posts' });
+    }
+    // Parse tags JSON
+    const posts = rows.map(post => ({
+      ...post,
+      tags: post.tags ? JSON.parse(post.tags) : [],
+      isSpecialist: post.is_specialist === 1,
+      liked: false // Default to false for now (no auth context)
+    }));
+    res.json(posts);
+  });
+});
+
+// Create a new post
+app.post('/api/community/posts', (req, res) => {
+  const { author, location, content, image, tags } = req.body;
+
+  if (!author || !content) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  const timestamp = new Date().toISOString();
+  // Mock specialist status randomly for demo or based on user role if available
+  const isSpecialist = 0;
+  const tagsJson = JSON.stringify(tags || []);
+
+  db.run(
+    `INSERT INTO posts (author_name, is_specialist, location, content, timestamp, likes_count, comments_count, image_url, tags) VALUES (?, ?, ?, ?, ?, 0, 0, ?, ?)`,
+    [author, isSpecialist, location, content, timestamp, image || '', tagsJson],
+    function (err) {
+      if (err) {
+        console.error('Error creating post:', err);
+        return res.status(500).json({ error: 'Failed to create post' });
+      }
+      res.json({
+        success: true,
+        message: 'Post created successfully!',
+        post: {
+          id: this.lastID,
+          author_name: author,
+          content,
+          timestamp,
+          likes_count: 0
+        }
+      });
+    }
+  );
+});
+
+// Like a post
+app.post('/api/community/posts/:id/like', (req, res) => {
+  const { id } = req.params;
+
+  db.run('UPDATE posts SET likes_count = likes_count + 1 WHERE id = ?', [id], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true, message: 'Post liked' });
+  });
+});
+
+// ============================================
 // AI SERVICES - KNOWLEDGE-BASED ENDPOINTS
 // ============================================
 

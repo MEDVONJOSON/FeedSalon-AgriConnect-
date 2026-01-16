@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { Home, Menu, X, MapPin, Cloud, Settings, Bug, Sprout, Building2, RefreshCw, Calendar, TrendingUp, User, LogOut, LayoutDashboard, Factory, ShieldCheck, Globe, GraduationCap, Radio, DollarSign, ClipboardList, Target, Banknote, PieChart, Search, ShoppingCart, Briefcase, FileText, UserPlus, HeartHandshake, Calculator, MessageCircle, Download } from 'lucide-react'
+import { Home, Menu, X, MapPin, Cloud, Settings, Bug, Sprout, Building2, RefreshCw, Calendar, TrendingUp, User, Users, LogOut, LayoutDashboard, Factory, ShieldCheck, Globe, GraduationCap, Radio, DollarSign, ClipboardList, Target, Banknote, PieChart, Search, ShoppingCart, Briefcase, FileText, UserPlus, HeartHandshake, Calculator, MessageCircle, Download } from 'lucide-react'
 import { usePWA } from '@/hooks/use-pwa'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -143,6 +143,13 @@ export function Navigation() {
               >
                 <ShoppingCart className="w-4 h-4 text-primary" />
                 <span className="uppercase tracking-widest text-[11px]">Marketplace</span>
+              </Link>
+              <Link
+                href="/community"
+                className="flex items-center gap-2 text-foreground hover:text-primary transition-all font-bold bg-primary/5 hover:bg-primary/10 px-4 py-2 rounded-full border border-primary/10"
+              >
+                <Users className="w-4 h-4 text-primary" />
+                <span className="uppercase tracking-widest text-[11px]">Community</span>
               </Link>
               {/* Agri-Opp Portal - Highlighted Dropdown */}
               <DropdownMenu>
@@ -438,6 +445,14 @@ export function Navigation() {
                 >
                   <ShoppingCart className="w-6 h-6" />
                   <span className="text-sm font-black uppercase tracking-widest">Marketplace</span>
+                </Link>
+                <Link
+                  href="/community"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="col-span-2 flex items-center justify-center gap-3 p-4 bg-white text-slate-900 border border-slate-200 hover:border-primary/50 shadow-sm rounded-2xl active:scale-95 transition-transform text-center"
+                >
+                  <Users className="w-6 h-6 text-primary" />
+                  <span className="text-sm font-black uppercase tracking-widest">Community Hub</span>
                 </Link>
               </div>
 

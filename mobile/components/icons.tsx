@@ -29,35 +29,35 @@ interface IconProps {
 }
 
 export const DashboardIcon = ({ size = 24, color = '#1EB53A', ...props }: IconProps) => (
-  <LayoutDashboard size={size} color={color} {...props} />
+  <LayoutDashboard {...(props as any)} size={size as any} color={color} />
 );
 
 export const MarketplaceIcon = ({ size = 24, color = '#1EB53A', ...props }: IconProps) => (
-  <ShoppingBag size={size} color={color} {...props} />
+  <ShoppingBag {...(props as any)} size={size as any} color={color} />
 );
 
 export const ChatIcon = ({ size = 24, color = '#1EB53A', ...props }: IconProps) => (
-  <MessageCircle size={size} color={color} {...props} />
+  <MessageCircle {...(props as any)} size={size as any} color={color} />
 );
 
 export const ProfileIcon = ({ size = 24, color = '#1EB53A', ...props }: IconProps) => (
-  <User size={size} color={color} {...props} />
+  <User {...(props as any)} size={size as any} color={color} />
 );
 
 export const CropIcon = ({ size = 24, color = '#1EB53A', ...props }: IconProps) => (
-  <Sprout size={size} color={color} {...props} />
+  <Sprout {...(props as any)} size={size as any} color={color} />
 );
 
 export const DiseaseIcon = ({ size = 24, color = '#1EB53A', ...props }: IconProps) => (
-  <ShieldAlert size={size} color={color} {...props} />
+  <ShieldAlert {...(props as any)} size={size as any} color={color} />
 );
 
 export const WeatherIcon = ({ size = 24, color = '#1EB53A', ...props }: IconProps) => (
-  <CloudSun size={size} color={color} {...props} />
+  <CloudSun {...(props as any)} size={size as any} color={color} />
 );
 
 export const CommunityIcon = ({ size = 24, color = '#1EB53A', ...props }: IconProps) => (
-  <Users size={size} color={color} {...props} />
+  <Users {...(props as any)} size={size as any} color={color} />
 );
 
 export {
@@ -97,6 +97,10 @@ export {
   LogOut,
   Edit2,
   TrendingUp,
-  Package
+  Package,
+  Clock,
+  Tag,
+  HelpCircle,
+  Filter,
+  Calendar
 } from 'lucide-react-native';
-

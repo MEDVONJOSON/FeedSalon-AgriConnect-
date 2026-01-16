@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#1EB53A"
+      "backgroundColor": "#0A0F1E"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -64,7 +64,8 @@
       },
       "eas": {
         "projectId": "your-project-id"
-      }
+      },
+      "EXPO_PUBLIC_API_URL": "https://agri-connect-backend.onrender.com"
     }
   }
 }

@@ -111,85 +111,64 @@ export default function HomePage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-[#0072C6] border-b-4 border-primary">
+      <section className="relative min-h-[95vh] flex items-center pt-24 overflow-hidden bg-[#0A0F1E]">
         <div className="absolute inset-0 z-0 flex flex-col h-[400%] animate-cycle-vertical-hero">
           {/* Slide 1 - Drone View */}
           <div className="h-[25%] w-full relative">
             <div
-              className="absolute inset-0 bg-cover bg-center brightness-[0.3] scale-105"
+              className="absolute inset-0 bg-cover bg-center brightness-[0.4] scale-105"
               style={{ backgroundImage: "url('/hero-drone.png')" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E] via-[#0A0F1E]/60 to-transparent"></div>
           </div>
 
-          {/* Slide 2 - Rubot AI branding - Split Screen White Background */}
-          <div className="h-[25%] w-full relative overflow-hidden bg-[#0072C6]">
-            {/* White background specifically for the Rubot side */}
-            <div className="absolute inset-y-0 right-0 w-1/2 bg-white"></div>
-
-            {/* National Color Accents shifted for the split view */}
-            <div className="absolute top-0 right-0 w-1/3 h-full bg-[#1EB53A]/10 blur-[120px] rounded-full translate-x-1/4"></div>
-            <div className="absolute bottom-0 right-1/4 w-1/4 h-full bg-[#0072C6]/10 blur-[100px] rounded-full"></div>
-
+          {/* Slide 2 - Rubot AI branding */}
+          <div className="h-[25%] w-full relative overflow-hidden bg-[#0A0F1E]">
+            <div className="absolute inset-y-0 right-0 w-1/2 bg-white/5 backdrop-blur-3xl"></div>
             <div
-              className="absolute inset-y-0 right-[-5%] w-[100%] md:w-[60%] bg-cover bg-right bg-no-repeat transition-transform duration-[14s] scale-110 group-hover:scale-120 z-10"
+              className="absolute inset-y-0 right-[-5%] w-[100%] md:w-[65%] bg-cover bg-right bg-no-repeat transition-transform duration-[14s] scale-110 z-10"
               style={{
                 backgroundImage: "url('/rubot-hero.jpg')",
-                maskImage: 'linear-gradient(to left, black 65%, transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to left, black 65%, transparent 100%)'
+                maskImage: 'linear-gradient(to left, black 70%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to left, black 70%, transparent 100%)'
               }}
             />
-            {/* Fade transition from dark to white */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0072C6] via-[#0072C6] to-transparent z-20"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E] via-[#0A0F1E] to-transparent z-20"></div>
           </div>
 
-          {/* Slide 3 - PRESIDENTIAL VISION - Feed Salone Mandate */}
-          <div className="h-[25%] w-full relative overflow-hidden bg-[#0072C6]">
+          {/* Slide 3 - PRESIDENTIAL VISION */}
+          <div className="h-[25%] w-full relative overflow-hidden">
             <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-[14s] scale-105 group-hover:scale-115"
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-[14s] scale-105"
               style={{
                 backgroundImage: "url('/hero-president.jpg')",
-                opacity: 1
+                opacity: 0.8
               }}
             />
-            {/* Cinematic Overlay - Authoritative and Clear */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0072C6] via-[#0072C6]/90 to-transparent z-10"></div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0072C6]/60 z-10"></div>
-          </div>
-
-          {/* Slide 4 - Loop Duplicate of Slide 1 */}
-          <div className="h-[25%] w-full relative">
-            <div
-              className="absolute inset-0 bg-cover bg-center brightness-[0.3] scale-105"
-              style={{ backgroundImage: "url('/hero-drone.png')" }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0F1E] via-[#0A0F1E]/90 to-transparent z-10"></div>
           </div>
         </div>
 
         <div className="container relative z-10 mx-auto px-4">
           <div className="max-w-4xl">
-            <Badge className="mb-6 bg-white/10 text-white border-white/20 py-1.5 px-6 text-sm backdrop-blur-md font-black uppercase tracking-widest shadow-lg">
-              <span className="text-patriotic">
-                The Future of Agriculture in Sierra Leone
+            <Badge className="mb-8 bg-white/10 text-white border-white/20 py-2 px-6 text-sm backdrop-blur-xl font-bold uppercase tracking-[0.2em] shadow-2xl">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1EB53A] via-white to-[#0072C6]">
+                Empowering the Future of Agriculture
               </span>
             </Badge>
-            <h1 className="text-6xl md:text-8xl font-black text-white mb-8 leading-[1.05] tracking-tighter">
-              Empowering <br />
-              <span className="text-branded drop-shadow-sm">
-                500 Million
-              </span> <br />
-              <span className="text-white">Smallholder Farmers</span>
+            <h1 className="text-7xl md:text-9xl font-black text-white mb-8 leading-[0.95] tracking-tighter">
+              Agri <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#1EB53A] to-[#0072C6]">Connect</span> <br />
+              <span className="text-slate-400">Sierra Leone</span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl leading-relaxed font-medium">
-              Agri Connect is a <span className="text-branded font-bold">strategic flagship initiative</span> to shift small-scale agriculture into a <span className="text-branded font-bold italic">dynamic engine of sustainable growth</span> through technology and market access.
+            <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl leading-relaxed font-medium opacity-90">
+              Transforming small-scale farming into a <span className="text-white font-bold border-b-2 border-primary">dynamic engine</span> of national prosperity through world-class technology.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-black text-lg px-10 h-14 rounded-full transition-all hover:scale-105 shadow-xl shadow-primary/20">
-                <Link href="/marketplace">🛒 Explore Marketplace</Link>
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-black text-lg px-12 h-16 rounded-2xl transition-all hover:scale-105 shadow-2xl shadow-primary/30">
+                <Link href="/marketplace">🛒 Market Portal</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-bold text-lg px-10 h-14 rounded-full backdrop-blur-sm">
-                <Link href="/about">View Mission</Link>
+              <Button asChild size="lg" variant="outline" className="border-2 border-white/20 text-white hover:bg-white/10 font-bold text-lg px-12 h-16 rounded-2xl backdrop-blur-md">
+                <Link href="/about">Strategic Vision</Link>
               </Button>
             </div>
           </div>

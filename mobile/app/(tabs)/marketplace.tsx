@@ -10,9 +10,11 @@ import {
   Alert,
   Modal,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { apiClient } from '../../lib/api';
+import { useMarketplaceStore } from '../../hooks/useMarketplaceStore';
 import { useAuth } from '../../contexts/AuthContext';
 import { Card } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
@@ -48,9 +50,8 @@ interface Product {
 export default function MarketplaceScreen() {
   const router = useRouter();
   const { user } = useAuth();
-  const [products, setProducts] = useState<Product[]>([]);
+  const { products, loading, fetchProducts, lastUpdated, error } = useMarketplaceStore();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -67,57 +68,14 @@ export default function MarketplaceScreen() {
   const categories = ['All', 'Crops', 'Livestock', 'Equipment', 'Inputs', 'Processed'];
 
   useEffect(() => {
-    fetchProducts();
+    if (products.length === 0) {
+      fetchProducts();
+    }
   }, []);
 
   useEffect(() => {
     filterProducts();
   }, [searchQuery, selectedCategory, products]);
-
-  const fetchProducts = async () => {
-    try {
-      const data = await apiClient.getProducts();
-      setProducts(data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      const demoProducts: Product[] = [
-        {
-          id: 101,
-          product_name: 'Premium Local Rice',
-          price: '850000',
-          category: 'Crops',
-          unit: '50kg bag',
-          quantity_available: '45',
-          seller_name: 'Sierra Farms',
-          seller_location: 'Bo',
-        },
-        {
-          id: 102,
-          product_name: 'Organic Palm Oil',
-          price: '600000',
-          category: 'Processed',
-          unit: '5 Gallon',
-          quantity_available: '12',
-          seller_name: 'Native Oils',
-          seller_location: 'Kenema',
-        },
-        {
-          id: 103,
-          product_name: 'Cassava Tubers',
-          price: '450000',
-          category: 'Crops',
-          unit: '100kg',
-          quantity_available: '80',
-          seller_name: 'Mende Roots',
-          seller_location: 'Makeni',
-        },
-      ];
-      setProducts(demoProducts);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  };
 
   const filterProducts = () => {
     let filtered = [...products];
@@ -135,14 +93,26 @@ export default function MarketplaceScreen() {
     setFilteredProducts(filtered);
   };
 
-  const onRefresh = () => {
+  const onRefresh = async () => {
     setRefreshing(true);
-    fetchProducts();
+    await fetchProducts();
+    setRefreshing(false);
   };
 
   const formatPrice = (price: string) => {
     const num = parseFloat(price);
     return `Le ${num.toLocaleString()}`;
+  };
+
+  const getTimeAgo = (timestamp: number | null) => {
+    if (!timestamp) return '';
+    const seconds = Math.floor((Date.now() - timestamp) / 1000);
+    if (seconds < 60) return 'Just now';
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    return new Date(timestamp).toLocaleDateString();
   };
 
   return (
@@ -152,7 +122,12 @@ export default function MarketplaceScreen() {
         style={styles.header}
       >
         <View style={styles.headerTop}>
-          <Text style={styles.headerTitle}>Agri Market</Text>
+          <View>
+            <Text style={styles.headerTitle}>Agri Market</Text>
+            {lastUpdated && (
+              <Text style={styles.lastUpdatedText}>Updated {getTimeAgo(lastUpdated)}</Text>
+            )}
+          </View>
           <View style={styles.headerActions}>
             <TouchableOpacity style={styles.headerIconBtn}>
               <ShoppingBag size={22} color={Colors.white} />
@@ -284,6 +259,12 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     borderBottomLeftRadius: 32,
     borderBottomRightRadius: 32,
+  },
+  lastUpdatedText: {
+    fontSize: 12,
+    color: 'rgba(255,255,255,0.7)',
+    marginTop: 2,
+    fontWeight: '500',
   },
   headerTop: {
     flexDirection: 'row',

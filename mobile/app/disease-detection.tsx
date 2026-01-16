@@ -11,13 +11,24 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
-import {
-  DiseaseIcon,
-  Camera,
-  ImageIcon,
-  ChevronRight
-} from '../components/icons';
+import { apiClient } from '../lib/api';
+import { Card } from '../components/ui/Card';
+import { Button } from '../components/ui/Button';
+import Colors from '../constants/Colors';
 import { LinearGradient } from 'expo-linear-gradient';
+import {
+  ShieldAlert,
+  Camera,
+  Image as ImageIcon,
+  ChevronRight,
+  ShieldCheck,
+  AlertCircle,
+  HelpCircle,
+  Sprout,
+  CheckCircle2
+} from '../components/icons';
+
+const CROP_TYPES = ['Rice', 'Cassava', 'Cocoa', 'Coffee', 'Corn', 'Other'];
 
 export default function DiseaseDetectionScreen() {
   const router = useRouter();
@@ -103,260 +114,425 @@ export default function DiseaseDetectionScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <LinearGradient
-        colors={[Colors.error, '#991b1b']}
-        style={styles.header}
-      >
-        <Text style={styles.title}>Disease Detection</Text>
-        <Text style={styles.subtitle}>AI-powered assistant to identify crop diseases</Text>
-      </LinearGradient>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <LinearGradient
+          colors={['#ef4444', '#b91c1c']}
+          style={styles.header}
+        >
+          <View style={styles.headerContent}>
+            <View>
+              <Text style={styles.headerTitle}>Plant Shield</Text>
+              <Text style={styles.headerSubtitle}>AI Disease Detection</Text>
+            </View>
+            <ShieldAlert size={40} color={Colors.white} style={{ opacity: 0.7 }} />
+          </View>
+        </LinearGradient>
 
-      <Card style={styles.card}>
-        <Text style={styles.label}>Select Crop Type</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.cropScroll}>
-          {CROP_TYPES.map((crop) => (
-            <TouchableOpacity
-              key={crop}
-              style={[styles.cropChip, cropType === crop && styles.cropChipActive]}
-              onPress={() => setCropType(crop)}
-            >
-              <Text
-                style={[styles.cropText, cropType === crop && styles.cropTextActive]}
-              >
-                {crop}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+        <View style={styles.content}>
+          <Card style={styles.mainCard}>
+            <Text style={styles.sectionLabel}>1. Choose Your Crop</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipScroll}>
+              {CROP_TYPES.map((crop) => (
+                <TouchableOpacity
+                  key={crop}
+                  style={[styles.chip, cropType === crop && styles.chipActive]}
+                  onPress={() => setCropType(crop)}
+                >
+                  <Text style={[styles.chipText, cropType === crop && styles.chipTextActive]}>
+                    {crop}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
 
-        <View style={styles.imageButtons}>
-          <Button
-            title="Take Photo"
-            onPress={takePhoto}
-            variant="outline"
-            style={styles.imageButton}
-          />
-          <Button
-            title="Choose from Gallery"
-            onPress={pickImage}
-            variant="outline"
-            style={styles.imageButton}
-          />
+            <Text style={styles.sectionLabel}>2. Upload or Capture Photo</Text>
+            <View style={styles.imageActionGrid}>
+              <TouchableOpacity style={styles.imageActionBtn} onPress={takePhoto}>
+                <View style={styles.iconCircle}>
+                  <Camera size={24} color={Colors.primary} />
+                </View>
+                <Text style={styles.imageActionText}>Camera</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={[styles.imageActionBtn, { backgroundColor: '#F0F9FF', borderColor: '#BAE6FD' }]} onPress={pickImage}>
+                <View style={[styles.iconCircle, { backgroundColor: '#E0F2FE' }]}>
+                  <ImageIcon size={24} color="#0284C7" />
+                </View>
+                <Text style={[styles.imageActionText, { color: '#0369A1' }]}>Gallery</Text>
+              </TouchableOpacity>
+            </View>
+
+            {imageUri && (
+              <View style={styles.previewContainer}>
+                <Image source={{ uri: imageUri }} style={styles.previewImage} />
+                <TouchableOpacity
+                  style={styles.removeBtn}
+                  onPress={() => {
+                    setImageUri(null);
+                    setImageBase64(null);
+                  }}
+                >
+                  <LinearGradient colors={['#ef4444', '#dc2626']} style={styles.removeIcon}>
+                    <Text style={{ color: '#fff', fontWeight: 'bold' }}>✕</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
+            )}
+
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+            <Button
+              title="Start AI Analysis"
+              onPress={handleAnalyze}
+              loading={loading}
+              disabled={!imageBase64 || !cropType}
+              style={styles.analyzeButton}
+            />
+          </Card>
+
+          {loading && (
+            <View style={styles.analyzingCard}>
+              <ActivityIndicator size="large" color={Colors.primary} />
+              <Text style={styles.analyzingText}>Scanning plant patterns...</Text>
+            </View>
+          )}
+
+          {results && (
+            <View style={styles.resultsWrapper}>
+              <View style={styles.resultHeaderRow}>
+                <ShieldCheck size={22} color={Colors.primary} />
+                <Text style={styles.resultsMainTitle}>Scan Results</Text>
+              </View>
+
+              <Card style={styles.diagnosisCard}>
+                <View style={styles.diagnosisTop}>
+                  <View>
+                    <Text style={styles.diagnosisLabel}>Detection</Text>
+                    <Text style={styles.diagnosisValue}>{results.diagnosis?.disease}</Text>
+                  </View>
+                  <View style={styles.severityTag}>
+                    <AlertCircle size={14} color="#92400e" />
+                    <Text style={styles.severityText}>{results.diagnosis?.severity}</Text>
+                  </View>
+                </View>
+
+                <View style={styles.confidenceBarContainer}>
+                  <View style={styles.confidenceHeader}>
+                    <Text style={styles.confidenceLabel}>Confidence</Text>
+                    <Text style={styles.confidenceValue}>{results.diagnosis?.confidence}</Text>
+                  </View>
+                  <View style={styles.progressBarBg}>
+                    <View style={[styles.progressBarFill, { width: results.diagnosis?.confidence }]} />
+                  </View>
+                </View>
+              </Card>
+
+              <View style={styles.detailGrid}>
+                <Card style={styles.detailCard}>
+                  <View style={styles.detailHeader}>
+                    <HelpCircle size={16} color="#4B5563" />
+                    <Text style={styles.detailTitle}>Symptoms</Text>
+                  </View>
+                  {results.symptoms?.map((s: string, i: number) => (
+                    <Text key={i} style={styles.bulletText}>• {s}</Text>
+                  ))}
+                </Card>
+
+                <Card style={styles.detailCard}>
+                  <View style={styles.detailHeader}>
+                    <Sprout size={16} color="#15803d" />
+                    <Text style={styles.detailTitle}>Treatment</Text>
+                  </View>
+                  <Text style={styles.treatmentText}>{results.treatment}</Text>
+                </Card>
+              </View>
+
+              <Card style={styles.preventionCard}>
+                <LinearGradient colors={['#F0FDF4', '#fff']} style={styles.preventionGradient}>
+                  <View style={styles.detailHeader}>
+                    <CheckCircle2 size={16} color="#15803d" />
+                    <Text style={[styles.detailTitle, { color: '#15803d' }]}>Prevention Plan</Text>
+                  </View>
+                  {results.prevention?.map((p: string, i: number) => (
+                    <Text key={i} style={styles.bulletText}>• {p}</Text>
+                  ))}
+                </LinearGradient>
+              </Card>
+            </View>
+          )}
         </View>
-
-        {imageUri && (
-          <View style={styles.imagePreview}>
-            <Image source={{ uri: imageUri }} style={styles.image} />
-            <TouchableOpacity
-              style={styles.removeImage}
-              onPress={() => {
-                setImageUri(null);
-                setImageBase64(null);
-              }}
-            >
-              <Text style={styles.removeImageText}>✕</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-
-        {error && <Text style={styles.errorText}>{error}</Text>}
-
-        <Button
-          title="Analyze Disease"
-          onPress={handleAnalyze}
-          loading={loading}
-          disabled={!imageBase64 || !cropType}
-          style={styles.analyzeButton}
-        />
-      </Card>
-
-      {loading && (
-        <Card style={styles.card}>
-          <ActivityIndicator size="large" color={Colors.primary} />
-          <Text style={styles.loadingText}>Analyzing image...</Text>
-        </Card>
-      )}
-
-      {results && (
-        <Card style={styles.card}>
-          <Text style={styles.resultsTitle}>Analysis Results</Text>
-          <View style={styles.resultSection}>
-            <Text style={styles.resultLabel}>Disease:</Text>
-            <Text style={styles.resultValue}>{results.diagnosis?.disease || 'Unknown'}</Text>
-          </View>
-          <View style={styles.resultSection}>
-            <Text style={styles.resultLabel}>Confidence:</Text>
-            <Text style={styles.resultValue}>{results.diagnosis?.confidence || 'N/A'}</Text>
-          </View>
-          <View style={styles.resultSection}>
-            <Text style={styles.resultLabel}>Severity:</Text>
-            <Text style={styles.resultValue}>{results.diagnosis?.severity || 'N/A'}</Text>
-          </View>
-
-          {results.symptoms && (
-            <View style={styles.resultSection}>
-              <Text style={styles.resultLabel}>Symptoms:</Text>
-              {results.symptoms.map((symptom: string, index: number) => (
-                <Text key={index} style={styles.resultBullet}>
-                  • {symptom}
-                </Text>
-              ))}
-            </View>
-          )}
-
-          {results.treatment && (
-            <View style={styles.resultSection}>
-              <Text style={styles.resultLabel}>Treatment:</Text>
-              <Text style={styles.resultText}>{results.treatment}</Text>
-            </View>
-          )}
-
-          {results.prevention && (
-            <View style={styles.resultSection}>
-              <Text style={styles.resultLabel}>Prevention:</Text>
-              {results.prevention.map((prevent: string, index: number) => (
-                <Text key={index} style={styles.resultBullet}>
-                  • {prevent}
-                </Text>
-              ))}
-            </View>
-          )}
-        </Card>
-      )}
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.background,
+    backgroundColor: '#F8FAF8',
+  },
+  scrollContent: {
+    paddingBottom: 40,
   },
   header: {
-    padding: 20,
+    padding: 24,
     paddingTop: 60,
-    backgroundColor: Colors.primary,
+    paddingBottom: 40,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
   },
-  title: {
+  headerContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerTitle: {
     fontSize: 28,
     fontWeight: 'bold',
     color: Colors.white,
-    marginBottom: 4,
+    letterSpacing: 0.5,
   },
-  subtitle: {
+  headerSubtitle: {
     fontSize: 14,
     color: Colors.white,
     opacity: 0.9,
+    marginTop: 4,
   },
-  card: {
-    margin: 16,
+  content: {
+    padding: 16,
+    marginTop: -20,
   },
-  label: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: Colors.text,
-    marginBottom: 12,
+  mainCard: {
+    padding: 24,
+    borderRadius: 24,
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
   },
-  cropScroll: {
-    marginBottom: 20,
+  sectionLabel: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#9CA3AF',
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    marginBottom: 16,
   },
-  cropChip: {
+  chipScroll: {
+    marginBottom: 24,
+  },
+  chip: {
     paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 20,
-    backgroundColor: Colors.background,
-    borderWidth: 1,
-    borderColor: Colors.border,
+    paddingVertical: 10,
+    borderRadius: 12,
+    backgroundColor: '#F3F4F6',
     marginRight: 8,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
   },
-  cropChipActive: {
+  chipActive: {
     backgroundColor: Colors.primary,
     borderColor: Colors.primary,
   },
-  cropText: {
+  chipText: {
     fontSize: 14,
-    color: Colors.text,
+    color: '#6B7280',
     fontWeight: '600',
   },
-  cropTextActive: {
+  chipTextActive: {
     color: Colors.white,
   },
-  imageButtons: {
+  imageActionGrid: {
     flexDirection: 'row',
     gap: 12,
-    marginBottom: 16,
+    marginBottom: 24,
   },
-  imageButton: {
+  imageActionBtn: {
     flex: 1,
+    backgroundColor: '#F0FDF4',
+    borderWidth: 1,
+    borderColor: '#DCFCE7',
+    borderRadius: 16,
+    padding: 16,
+    alignItems: 'center',
+    gap: 10,
   },
-  imagePreview: {
-    position: 'relative',
-    marginBottom: 16,
+  iconCircle: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#DCFCE7',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  image: {
-    width: '100%',
+  imageActionText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: Colors.primary,
+  },
+  previewContainer: {
+    marginBottom: 24,
+    borderRadius: 20,
+    overflow: 'hidden',
     height: 300,
-    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
   },
-  removeImage: {
+  previewImage: {
+    width: '100%',
+    height: '100%',
+  },
+  removeBtn: {
     position: 'absolute',
-    top: 8,
-    right: 8,
-    backgroundColor: Colors.error,
+    top: 12,
+    right: 12,
+  },
+  removeIcon: {
     width: 32,
     height: 32,
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  removeImageText: {
-    color: Colors.white,
-    fontSize: 18,
-    fontWeight: 'bold',
+  analyzeButton: {
+    height: 56,
+    borderRadius: 16,
+  },
+  analyzingCard: {
+    marginTop: 20,
+    alignItems: 'center',
+    padding: 24,
+  },
+  analyzingText: {
+    marginTop: 12,
+    color: '#6B7280',
+    fontSize: 15,
   },
   errorText: {
-    color: Colors.error,
-    fontSize: 12,
-    marginBottom: 12,
-  },
-  analyzeButton: {
-    marginTop: 8,
-  },
-  loadingText: {
+    color: '#ef4444',
+    fontSize: 13,
+    marginBottom: 16,
     textAlign: 'center',
-    marginTop: 12,
-    color: Colors.textSecondary,
   },
-  resultsTitle: {
+  resultsWrapper: {
+    marginTop: 24,
+  },
+  resultHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 16,
+    paddingLeft: 4,
+  },
+  resultsMainTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     color: Colors.text,
-    marginBottom: 16,
   },
-  resultSection: {
-    marginBottom: 16,
+  diagnosisCard: {
+    padding: 20,
+    borderRadius: 20,
+    marginBottom: 12,
   },
-  resultLabel: {
+  diagnosisTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 20,
+  },
+  diagnosisLabel: {
+    fontSize: 12,
+    color: '#9CA3AF',
+    fontWeight: '700',
+    textTransform: 'uppercase',
+  },
+  diagnosisValue: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: Colors.text,
+    marginTop: 4,
+  },
+  severityTag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FEF3C7',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 8,
+    gap: 4,
+  },
+  severityText: {
+    color: '#92400E',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  confidenceBarContainer: {
+    marginTop: 8,
+  },
+  confidenceHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 6,
+  },
+  confidenceLabel: {
+    fontSize: 13,
+    color: '#6B7280',
+  },
+  confidenceValue: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: Colors.primary,
+  },
+  progressBarBg: {
+    height: 8,
+    backgroundColor: '#F3F4F6',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: Colors.primary,
+    borderRadius: 4,
+  },
+  detailGrid: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 12,
+  },
+  detailCard: {
+    flex: 1,
+    padding: 16,
+    borderRadius: 16,
+  },
+  detailHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginBottom: 10,
+  },
+  detailTitle: {
     fontSize: 14,
-    fontWeight: '600',
-    color: Colors.textSecondary,
-    marginBottom: 4,
-  },
-  resultValue: {
-    fontSize: 16,
     fontWeight: 'bold',
     color: Colors.text,
   },
-  resultText: {
-    fontSize: 14,
-    color: Colors.text,
-    lineHeight: 20,
+  bulletText: {
+    fontSize: 12,
+    color: '#4B5563',
+    lineHeight: 18,
+    marginBottom: 4,
   },
-  resultBullet: {
-    fontSize: 14,
-    color: Colors.text,
-    marginTop: 4,
-    lineHeight: 20,
+  treatmentText: {
+    fontSize: 12,
+    color: '#4B5563',
+    lineHeight: 18,
+  },
+  preventionCard: {
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  preventionGradient: {
+    padding: 16,
   },
 });

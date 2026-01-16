@@ -24,24 +24,17 @@ import {
   ChevronRight,
   AlertCircle
 } from '../components/icons';
+import { useWeatherStore } from '../hooks/useWeatherStore';
+
+const iconMap: Record<string, any> = {
+  CloudSun: CloudSun,
+  Droplets: Droplets,
+};
 
 export default function WeatherScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
   const [loading, setLoading] = useState(true);
-  const [weatherData, setWeatherData] = useState({
-    temp: '28°C',
-    humidity: '65%',
-    wind: '12 km/h',
-    condition: 'Partly Cloudy',
-    feelsLike: '30°C',
-    uvIndex: 'Low',
-    forecast: [
-      { day: 'Today', high: '30°C', low: '24°C', condition: 'Partly Cloudy', icon: CloudSun },
-      { day: 'Tomorrow', high: '31°C', low: '25°C', condition: 'Sunny', icon: CloudSun },
-      { day: 'Friday', high: '29°C', low: '23°C', condition: 'Rainy', icon: Droplets },
-      { day: 'Saturday', high: '28°C', low: '22°C', condition: 'Showers', icon: Droplets },
-    ],
-  });
+  const { weatherData, setWeatherData, lastUpdated } = useWeatherStore();
 
   useEffect(() => {
     requestLocationPermission();
@@ -58,11 +51,26 @@ export default function WeatherScreen() {
 
       const currentLocation = await Location.getCurrentPositionAsync({});
       setLocation(currentLocation);
+
+      // In a real app, we would fetch fresh data here
+      // For now, we simulate a successful fetch that updates the persistent store
+      setWeatherData(weatherData);
       setLoading(false);
     } catch (error) {
       console.error('Error getting location:', error);
       setLoading(false);
     }
+  };
+
+  const getTimeAgo = (timestamp: number | null) => {
+    if (!timestamp) return '';
+    const seconds = Math.floor((Date.now() - timestamp) / 1000);
+    if (seconds < 60) return 'Just now';
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    return new Date(timestamp).toLocaleDateString();
   };
 
   return (
@@ -75,6 +83,9 @@ export default function WeatherScreen() {
           <View style={styles.headerTop}>
             <View>
               <Text style={styles.headerTitle}>Weather Forecast</Text>
+              {lastUpdated && (
+                <Text style={styles.lastUpdatedText}>Updated {getTimeAgo(lastUpdated)}</Text>
+              )}
               {location ? (
                 <View style={styles.locationWrapper}>
                   <Navigation size={14} color={Colors.white} />
@@ -130,19 +141,22 @@ export default function WeatherScreen() {
             </View>
 
             <View style={styles.forecastList}>
-              {weatherData.forecast.map((day, index) => (
-                <TouchableOpacity key={index} style={styles.forecastItem}>
-                  <Text style={styles.forecastDay}>{day.day}</Text>
-                  <View style={styles.forecastIconWrapper}>
-                    <day.icon size={22} color={index === 2 ? '#3b82f6' : '#f59e0b'} />
-                    <Text style={styles.forecastConditionText}>{day.condition}</Text>
-                  </View>
-                  <View style={styles.forecastTemps}>
-                    <Text style={styles.forecastHigh}>{day.high}</Text>
-                    <Text style={styles.forecastLow}>{day.low}</Text>
-                  </View>
-                </TouchableOpacity>
-              ))}
+              {weatherData.forecast.map((day, index) => {
+                const Icon = iconMap[day.iconName] || CloudSun;
+                return (
+                  <TouchableOpacity key={index} style={styles.forecastItem}>
+                    <Text style={styles.forecastDay}>{day.day}</Text>
+                    <View style={styles.forecastIconWrapper}>
+                      <Icon size={22} color={index === 2 ? '#3b82f6' : '#f59e0b'} />
+                      <Text style={styles.forecastConditionText}>{day.condition}</Text>
+                    </View>
+                    <View style={styles.forecastTemps}>
+                      <Text style={styles.forecastHigh}>{day.high}</Text>
+                      <Text style={styles.forecastLow}>{day.low}</Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              })}
             </View>
 
             <LinearGradient
@@ -225,6 +239,12 @@ const styles = StyleSheet.create({
   locationText: {
     color: Colors.white,
     fontSize: 13,
+    fontWeight: '500',
+  },
+  lastUpdatedText: {
+    fontSize: 12,
+    color: 'rgba(255,255,255,0.7)',
+    marginTop: 2,
     fontWeight: '500',
   },
   searchButton: {

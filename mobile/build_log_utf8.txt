@@ -1,0 +1,114 @@
+﻿env: load .env.local
+env: export VERCEL_OIDC_TOKEN
+Starting Metro Bundler
+node.exe : Error: Unable to resolve 
+module react-native-svg from 
+C:\Users\medvo\Desktop\FEED SALON PR
+OJECT\mobile\node_modules\lucide-rea
+ct-native\dist\esm\Icon.js: 
+react-native-svg could not be found 
+within the project or in these 
+directories:
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSp 
+   ecified: (Error: Unable t...se   
+  directories::String) [], Remote   
+ Exception
+    + FullyQualifiedErrorId : Nativ 
+   eCommandError
+ 
+  node_modules
+[0m [90m  7 |[39m
+ [90m  8 |[39m [36mimport[39m { 
+forwardRef[33m,[39m createElement 
+} [36mfrom[39m 
+[32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m  9 |[39m 
+[36mimport[39m [33m*[39m 
+[36mas[39m [33mNativeSvg[39m 
+[36mfrom[39m [32m'react-native-sv
+g'[39m[33m;[39m
+ [90m    |[39m                    
+         [31m[1m^[22m[39m
+ [90m 10 |[39m [36mimport[39m 
+defaultAttributes[33m,[39m { 
+childDefaultAttributes } 
+[36mfrom[39m [32m'./defaultAttrib
+utes.js'[39m[33m;[39m
+ [90m 11 |[39m
+ [90m 12 |[39m [36mconst[39m 
+[33mIcon[39m [33m=[39m 
+forwardRef([0m
+Error: Unable to resolve module 
+react-native-svg from 
+C:\Users\medvo\Desktop\FEED SALON PR
+OJECT\mobile\node_modules\lucide-rea
+ct-native\dist\esm\Icon.js: 
+react-native-svg could not be found 
+within the project or in these 
+directories:
+  node_modules
+[0m [90m  7 |[39m
+ [90m  8 |[39m [36mimport[39m { 
+forwardRef[33m,[39m createElement 
+} [36mfrom[39m 
+[32m'react'[39m[33m;[39m
+[31m[1m>[22m[39m[90m  9 |[39m 
+[36mimport[39m [33m*[39m 
+[36mas[39m [33mNativeSvg[39m 
+[36mfrom[39m [32m'react-native-sv
+g'[39m[33m;[39m
+ [90m    |[39m                    
+         [31m[1m^[22m[39m
+ [90m 10 |[39m [36mimport[39m 
+defaultAttributes[33m,[39m { 
+childDefaultAttributes } 
+[36mfrom[39m [32m'./defaultAttrib
+utes.js'[39m[33m;[39m
+ [90m 11 |[39m
+ [90m 12 |[39m [36mconst[39m 
+[33mIcon[39m [33m=[39m 
+forwardRef([0m
+    at 
+ModuleResolver.resolveDependency 
+(C:\Users\medvo\Desktop\FEED SALON P
+ROJECT\mobile\node_modules\metro\src
+\node-haste\DependencyGraph\ModuleRe
+solution.js:139:15)
+    at 
+DependencyGraph.resolveDependency 
+(C:\Users\medvo\Desktop\FEED SALON P
+ROJECT\mobile\node_modules\metro\src
+\node-haste\DependencyGraph.js:232:4
+3)
+    at C:\Users\medvo\Desktop\FEED 
+SALON PROJECT\mobile\node_modules\me
+tro\src\lib\transformHelpers.js:156:
+21
+    at resolveDependencies 
+(C:\Users\medvo\Desktop\FEED SALON P
+ROJECT\mobile\node_modules\metro\src
+\DeltaBundler\buildSubgraph.js:42:25
+)
+    at visit 
+(C:\Users\medvo\Desktop\FEED SALON P
+ROJECT\mobile\node_modules\metro\src
+\DeltaBundler\buildSubgraph.js:83:30
+)
+    at async Promise.all (index 
+1668)
+    at visit 
+(C:\Users\medvo\Desktop\FEED SALON P
+ROJECT\mobile\node_modules\metro\src
+\DeltaBundler\buildSubgraph.js:92:5)
+    at async Promise.all (index 3)
+    at visit 
+(C:\Users\medvo\Desktop\FEED SALON P
+ROJECT\mobile\node_modules\metro\src
+\DeltaBundler\buildSubgraph.js:92:5)
+    at async Promise.all (index 16)
