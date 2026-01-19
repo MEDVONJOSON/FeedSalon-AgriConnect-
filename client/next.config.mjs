@@ -1,4 +1,13 @@
+import withPWAInit from 'next-pwa';
+
 const isGithubActions = process.env.GITHUB_ACTIONS === 'true';
+
+const withPWA = withPWAInit({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -16,4 +25,4 @@ const nextConfig = {
   }
 }
 
-export default nextConfig
+export default withPWA(nextConfig);
