@@ -1,8 +1,8 @@
 {
-  "name": "ek-sms",
-  "version": "0.0.0",
+  "name": "agri-connect-sl",
+  "version": "0.1.0",
   "private": true,
-  "description": "EL-KENDEH Smart School Management System - A transparent, tamper-proof grade management system",
+  "description": "Agri Connect - Empowering Farmers, Connecting Markets",
   "keywords": [
     "school-management",
     "education",

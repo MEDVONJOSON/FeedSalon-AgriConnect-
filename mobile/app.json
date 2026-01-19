@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Agri Connect",
-    "slug": "agri-connect",
+    "name": "Agri-connect.sl",
+    "slug": "agri-connect-sl",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -57,7 +57,7 @@
         }
       ]
     ],
-    "scheme": "agri-connect",
+    "scheme": "agri-connect-sl",
     "extra": {
       "router": {
         "origin": false

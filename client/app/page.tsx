@@ -15,7 +15,7 @@ import {
 import { ChatWidget } from '@/components/chat-widget'
 import { Badge } from '@/components/ui/badge'
 
-// Official Homepage for Agri Connect Sierra Leone
+// Official Homepage for Agri-connect.sl
 
 export default function HomePage() {
   const [scrolled, setScrolled] = useState(false)
@@ -157,8 +157,7 @@ export default function HomePage() {
               </span>
             </Badge>
             <h1 className="text-7xl md:text-9xl font-black text-white mb-8 leading-[0.95] tracking-tighter">
-              Agri <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#1EB53A] to-[#0072C6]">Connect</span> <br />
-              <span className="text-slate-400">Sierra Leone</span>
+              Agri-connect <span className="text-transparent bg-clip-text bg-gradient-to-br from-[#1EB53A] to-[#0072C6]">.sl</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-2xl leading-relaxed font-medium opacity-90">
               Transforming small-scale farming into a <span className="text-white font-bold border-b-2 border-primary">dynamic engine</span> of national prosperity through world-class technology.
@@ -650,7 +649,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-blue-200/50 text-xs font-bold uppercase tracking-widest">
-            <p>© 2024 Agri Connect. Official Government Portal.</p>
+            <p>© 2024 Agri-connect.sl. Official Government Portal.</p>
             <div className="flex gap-8">
               <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
               <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>

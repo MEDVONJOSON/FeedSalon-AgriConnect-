@@ -3,10 +3,11 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin"] });
+// Force re-compile to pick up globals.css
 
 export const metadata: Metadata = {
-  title: 'Agri Connect - Smart Agriculture with AI',
-  description: 'Revolutionize your farming with Agri Connect. Get accurate crop yield predictions, disease alerts, fertilizer recommendations, and weather forecasts.',
+  title: 'Agri-connect.sl - Smart Agriculture with AI',
+  description: 'Revolutionize your farming with Agri-connect.sl. Get accurate crop yield predictions, disease alerts, fertilizer recommendations, and weather forecasts.',
   generator: 'v0.app',
   manifest: '/manifest.json',
   themeColor: '#1EB53A',
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Agri Connect',
+    title: 'Agri-connect.sl',
     startupImage: [
       {
         url: '/logo.png',

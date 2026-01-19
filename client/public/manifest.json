@@ -1,6 +1,6 @@
 {
-    "name": "Agri Connect Sierra Leone",
-    "short_name": "AgriConnect",
+    "name": "Agri-connect.sl",
+    "short_name": "Agri-connect.sl",
     "description": "Smart Agriculture Platform for Sierra Leone",
     "start_url": "/",
     "display": "standalone",

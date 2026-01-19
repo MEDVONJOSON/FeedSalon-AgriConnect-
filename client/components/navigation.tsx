@@ -115,7 +115,7 @@ export function Navigation() {
                 {/* Logo */}
                 <div className="relative w-12 h-12 md:w-16 md:h-16">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/logo.png" alt="Agri Connect Logo" className="object-contain w-full h-full" />
+                  <img src="/logo.png" alt="Agri-connect.sl Logo" className="object-contain w-full h-full" />
                 </div>
                 <div>
                   <h1
