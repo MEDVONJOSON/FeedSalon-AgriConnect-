@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Agri-connect.sl",
-    "slug": "agri-connect-sl",
+    "name": "Feed Salon",
+    "slug": "feed-salon",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -57,7 +57,7 @@
         }
       ]
     ],
-    "scheme": "agri-connect-sl",
+    "scheme": "feed-salon",
     "extra": {
       "router": {
         "origin": false

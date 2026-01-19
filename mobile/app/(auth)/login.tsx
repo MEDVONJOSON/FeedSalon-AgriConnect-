@@ -81,7 +81,7 @@ export default function LoginScreen() {
             <View style={styles.logoCircle}>
               <Sprout size={48} color={Colors.white} />
             </View>
-            <Text style={styles.title}>Agri Connect</Text>
+            <Text style={styles.title}>Feed Salon</Text>
             <Text style={styles.subtitle}>Empowering Farmers, Connecting Markets</Text>
           </View>
 
@@ -145,14 +145,14 @@ export default function LoginScreen() {
             />
 
             <View style={styles.footer}>
-              <Text style={styles.footerText}>New to Agri Connect? </Text>
+              <Text style={styles.footerText}>New to Feed Salon? </Text>
               <TouchableOpacity onPress={() => router.push('/(auth)/signup' as any)}>
                 <Text style={styles.linkText}>Create Account</Text>
               </TouchableOpacity>
             </View>
           </View>
 
-          <Text style={styles.copyright}>© 2026 Agri Connect Sierra Leone</Text>
+          <Text style={styles.copyright}>© 2026 Feed Salon</Text>
         </ScrollView>
       </KeyboardAvoidingView>
     </View>
