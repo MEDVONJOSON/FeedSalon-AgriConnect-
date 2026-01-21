@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts';
 
@@ -9,27 +9,43 @@ import { useAuth } from '@/contexts';
  * 
  * Protects admin routes. Redirects to /login if not authenticated
  * or if the user doesn't have the 'platform_admin' role.
+ * 
+ * Development Mode: Set DEV_ADMIN_MODE=true in localStorage to bypass auth
  */
 export function AdminGuard({ children }: { children: React.ReactNode }) {
     const { user, isAuthenticated, isLoading } = useAuth();
     const router = useRouter();
+    const [devMode, setDevMode] = useState(false);
 
     useEffect(() => {
-        if (!isLoading) {
+        // Check for development mode
+        if (typeof window !== 'undefined') {
+            const devModeEnabled = localStorage.getItem('DEV_ADMIN_MODE') === 'true';
+            setDevMode(devModeEnabled);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!isLoading && !devMode) {
             if (!isAuthenticated) {
                 router.push('/login');
             } else if (user?.role !== 'platform_admin') {
                 router.push('/'); // Redirect unauthorized users to home
             }
         }
-    }, [user, isAuthenticated, isLoading, router]);
+    }, [user, isAuthenticated, isLoading, router, devMode]);
 
-    if (isLoading) {
+    if (isLoading && !devMode) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1a365d]"></div>
             </div>
         );
+    }
+
+    // Allow access in dev mode
+    if (devMode) {
+        return <>{children}</>;
     }
 
     if (!isAuthenticated || user?.role !== 'platform_admin') {
